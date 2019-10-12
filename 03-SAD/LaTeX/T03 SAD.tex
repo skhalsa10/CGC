@@ -1,0 +1,862 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[numbers]{natbib}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{sectsty}
+\usepackage{float}
+\bibliographystyle{apalike}
+\setcitestyle{open={[},close={]}}
+\sectionfont{\color{DarkBlue}} 
+\subsectionfont{\color{LightBlue}}
+\subsubsectionfont{\color{LightBlue}}
+\paragraphfont{\color{LightBlue}}
+\subparagraphfont{\color{LightBlue}}
+\begin{document}
+\definecolor{DarkBlue}{HTML}{4a5a8a} 
+\definecolor{LightBlue}{HTML}{4f81bf}
+\begin{titlepage}
+	\begin{flushleft}
+		\vspace{1cm} \Huge  \textbf{Elevator Control System}\\
+		\vspace{1cm} \Huge  \textit{Software Architecture Design}\\
+		\vspace{1cm} \Large \textit{SAD Version 2.0}\\
+		\vspace{5cm} \LARGE         Team \#3\\ 
+		                            8 October 2019
+		\vfill       \Huge  \textbf{CS 460 Software Engineering}
+	\end{flushleft}
+\end{titlepage}
+\normalsize 
+\tableofcontents
+\pagebreak
+
+\section{Introduction} \label{intro}
+\paragraph{} Good software is identified by the end user for its features and functionality, by the client
+for its profitability and maintainability, and by the programmer for its legibility and clarity. It should be clear
+that all three pillars ultimately characterize good software, but more importantly that the three are interdependent.
+The developer must then guarantee all of the above for the sake of all entities involved. A top down approach has been
+taken up to this point. The feasibility study asked answered the fundamental question: Can it be done? The requirements
+definition document was then passed the baton and answered the next logical question: Within what parameters can it be done?
+The software specification document then answered: What is the desired behavior of the system? Now we may answer: 
+How will ensure the desired behavior?
+
+\paragraph{} The ultimate goal is to ensure an efficient, safe, and maintainable implementation of the 
+Elevator Control System software\footnote{ Introduction by Zeke.}. To that end, all objects are illustrated in their proper contexts, and
+their crucial functions have been been delineated as clearly as possible while simultaneously allowing 
+the programmer enough flexibility so as to not stifle his or her creative process. 
+
+\paragraph{} This is a road map for the eventual implementation of the system. It details the most relevant objects 
+and their relationships in the form of diagrams. Explanations accompany all diagrams for the sake of clarity.
+
+\section{Design Overview} \label{over} %design approach, design diagram with interfaces, diagram explanation
+	\paragraph{} \textit{The class architecture presented here \footnote{ Diagrams by Siri, Anas, Santi, and Zeke.}
+	aims t maximize efficiency, maintainability, and safety. Without an efficient system, its safety may be compromised 
+	due to unnecessary delays between components. Maintainability can impact a safe implementation of the system 
+	if the system is permeable to programmer errors. The decoupling of concerns and a solid hierarchy are paramount. 
+    The design has been color-coded to increase readability. The colors are only for the sake of distinguishing one 
+	component from another. The component specification diagrams in the following section inherit these colors. Small 
+	red arrows point to objects that may be triggered by an event. Said objects are virtual devices and iconifications
+	of their physical triggers have been connected to them with bidirectional blue arrows.} 
+
+	\paragraph{} Figure \ref{fig:EntireSystem} shows the entire system. The root object is the ECS component, 
+	communicates with all its children. Connected hardware and interfaces are are shown as well and are primarily leaf nodes.
+	The rest of the figures are snapshots at various levels of the tree.
+
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.75]{EntireSystem.png}}
+  		\caption{An overview of the Elevator Control System. Red arrows indicate that an object may be triggered by an event. The
+  		event is represented by the icon connected to the object.}
+  		\label{fig:EntireSystem}
+	\end{figure}	
+	
+	
+		\paragraph{} Figure \ref{fig:ecs} shows the root node of the whole system, the ECS component. Figures \ref{fig:bay} 
+		through \ref{fig:elevator} show the next level down, and the rest delve deeper into the structure. More detailed descriptions
+		of each the diagrams can be found in their captions.
+		\begin{figure}[H]
+  			\centerline{\includegraphics[scale=.70]{ECS.jpeg}}
+  			\caption{The Elevator Control System}
+  			\label{fig:ecs}
+		\end{figure}
+	
+		\paragraph{} Figure \ref{fig:bay} shows the \textit{Bay} virtual device and its child virtual devices, the \textit{Bay Button Panel}, 
+		a \textit{Door Sensor}. It also possesses a \textit{Safety Control} which is the software component that ensures the safe function
+		of the virtual devices. Figure \ref{fig:safetycontrol} shows a more detailed view of the \textit{Safety Control} for the bay.	
+		\begin{figure}[H]
+			\centerline{\includegraphics[scale=.70]{Bay.jpeg}}
+			\caption{The Bay}
+			\label{fig:bay}
+		\end{figure}
+			\begin{figure}[H]
+				\centerline{\includegraphics[scale=.70]{SafetyControl.jpeg}}
+				\caption{The Safety Control}
+				\label{fig:safetycontrol}
+			\end{figure}
+	
+		\paragraph{} Figure \ref{fig:elevator} shows the \textit{Elevator} component, which has many parts. The \textit{Key Panel} shown 
+		in Figure \ref{fig:keypanel} provides an interface for handling the use of emergency and executive keys. The \textit{Sound System} 
+		in Figure \ref{fig:soundsystem} controls the audio and intercom functionalities. The final components are the \textit{Cabin Button Panel} 
+		(Figure \ref{fig:cabinbuttonpanel}) and the \textit{Cabin Door} (Figure \ref{fig:cabindoor}). These last two are virtual devices.
+		\begin{figure}[H]
+			\centerline{\includegraphics[scale=.70]{Elevator.jpeg}}
+			\caption{The Elevator}
+			\label{fig:elevator}
+		\end{figure}
+			\begin{figure}[H]
+				\centerline{\includegraphics[scale=.70]{KeyPanel.jpeg}}
+				\caption{The Key Panel}
+				\label{fig:keypanel}
+			\end{figure}	
+			\begin{figure}[H]
+				\centerline{\includegraphics[scale=.65]{CabinSoundSystem.jpeg}}
+				\caption{The Cabin Sound System}
+				\label{fig:soundsystem}
+			\end{figure}
+			\begin{figure}[H]
+				\centerline{\includegraphics[scale=.65]{CabinButtonPanel.jpeg}}
+				\caption{The Cabin Button Panel}
+				\label{fig:cabinbuttonpanel}
+			\end{figure}
+			\begin{figure}[H]
+				\centerline{\includegraphics[scale=.70]{CabinDoor.jpeg}}
+				\caption{The Cabin Door}
+				\label{fig:cabindoor}
+			\end{figure}
+
+
+\section{Component Specifications}
+\paragraph{} \textit{Here are the class specifications \footnote{Component specifications by Anas and Siri} for objects 
+found in Section \ref{over}. The most important attributes and functions are given and, where appropriate, any expected 
+preconditions, parameters, return values, and post conditions are included. Explanations are given for each component, but 
+it should be noted that helper functions are not shown, as they are entrusted with the programmer. Important fields and helper
+fields are treated analogously.}
+
+
+	\subsection*{ECS Class}
+	\paragraph{} The ECS class controls all other classes in the system. All sub-component states are known to the ECS and it 
+	possesses the primary algorithms that coordinate all sub-components.
+	\begin{table}[H]
+		\begin{tabular}{lp{12cm}}
+			\textbf{Attributes} & \\ 
+			Elevators [0 .. 3]  & Instances of virtual devices that represent elevators \\
+		   	Bay[1 .. 20]        & Instances of virtual devices that represent bays \\
+			currentMode         & Indicates the mode of the system $\{$alarmMode, emergencyMode, custodialMode, maintenanceMode, normalMode$\}$ \\
+		\end{tabular}
+	\end{table}     
+	\begin{table}[H]
+		\begin{tabular}{lp{12cm}}
+			\textbf{Functions}                  & \\
+			selectElevator()                    & $\rightarrow$ selects best elevator upon request. \\
+			sendElevator(Elevator)        		& $\rightarrow$ sends the elevator to the target bay.\\
+			checkSafetyControl(Bay, BayNumber) 	& $\rightarrow$ performs a safety check on a bay.\\
+			checkSafetyControl(Elevator) 		& $\rightarrow$ performs a safety check on a cabin.\\
+			changeMode() 						& $\rightarrow$ toggles between normal mode and emergency mode.\\
+			openDoor() 							& $\rightarrow$ opens cabin door and requests the same of bay analog\\
+			closeDoor() 						& $\rightarrow$ closes cabin door and requests the same of bay analog\\
+			activateEmergencyMode() 			& $\rightarrow$ explicitly enters emergency mode.\\
+			initialize() 						& $\rightarrow$ initializes the system.\\
+			shutdown() 							& $\rightarrow$ shuts down the system.\\
+			reset() 							& $\rightarrow$ resets the system.\\
+		\end{tabular}
+	\end{table}
+	\begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{ECS_class.jpeg}}
+  		\caption{The Elevator Control System Class}
+  		\label{fig:ecs_class}
+	\end{figure}
+	\par\noindent\rule{\textwidth}{0.4pt}
+	
+	\subsection*{Alarm Class}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=1]{FireAlarm_class.jpeg}}
+  		\caption{The Fire Alarm Class}
+  		\label{fig:FireAlarm_class}
+	\end{figure}
+	\par\noindent\rule{\textwidth}{0.4pt}
+	
+	\subsection*{Bay Class}
+	\paragraph{}The Bay class is a virtual device that mitigates request flow between the physical bay and the ECS.
+	\begin{table}[H]
+        \begin{tabular}{lp{12cm}}
+        	\textbf{Attributes}    & \\
+        	Message System         & a data structure \\
+        	bayNum                 & number of the bay \\
+        	floorNum               & number of the floor \\
+        	bayButtons             & instance of Bay Button Panel \\
+        	Safety Control         & instance of Safety Control \\
+        	Bay Doors              & Instance of Bay Doors \\
+        \end{tabular}
+	\end{table}
+    \begin{table}[H]
+    	\begin{tabular}{lp{12cm}}
+    		\textbf{Functions}          & \\
+        	requestElevator(Direction)  & $\rightarrow$ requests an elevator specifying target floor direction.\\
+	        buttonPressed()             & $\rightarrow$ listens for button presses.\\
+	        openDoors()                 & $\rightarrow$ opens bay doors.\\
+	        closeDoors()                & $\rightarrow$ opens bay doors.\\
+		\end{tabular}
+	\end{table}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{Bay_class.jpeg}}
+  		\caption{The Bay Class}
+  		\label{fig:Bay_class}
+	\end{figure}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{BayButtonPanel_class.jpeg}}
+  		\caption{The Bay Button Panel Class}
+  		\label{fig:BayButtonPanel_class}
+	\end{figure}
+	\begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{BayDoors_class.jpeg}}
+  		\caption{The Bay Doors Class}
+  		\label{fig:BayDoors_class}
+	\end{figure}
+	\par\noindent\rule{\textwidth}{0.4pt}
+	
+	\subsection*{Elevator Class}
+	\paragraph{} The Elevator class encapsulates components that constitute the elevator,  
+	has communicates with physical components via virtual devices, and possesses some control logic
+	for the cabin.
+			
+	\begin{table}[H]
+        \begin{tabular}{lp{12cm}}
+        	\textbf{Attributes} & \\
+        	Cabin Number    	& an identifier \\
+		    Current Floor     	& the floor on which the cabin resides \\
+		    Direction           & the direction in which the cabin is currently moving\\
+		    Final Floor     	& the target floor\\
+		    Cabin Buttons     	& an instance of Cabin Buttons class\\
+		    Key Panel           & an instance of Key Panel class\\
+		    Safety Control    	& an instance of Safety Control class\\
+		    Emergency Brake 	& a virtual device to represent the elevator brake\\
+		    ElevatorMoving    	& indicates whether or not the cabin is in motion \\
+		    ExecutiveMode    	& indicates whether or not an executive key is detected \\
+		    SoundSystem         & instance of Sound System class \\
+	    \end{tabular}
+	\end{table}
+	\begin{table}[H] 
+	    \begin{tabular}{lp{12cm}}
+	    	\textbf{Functions}       & \\
+			validateEmergencyKey()   & $\rightarrow$ validates emergency key\\
+		    validateExecutiveKey()   & $\rightarrow$ validates executive key\\
+		    isJukeBoxPlaying()       & $\rightarrow$ indicates whether or not the jukebox is playing\\
+		    setSpeakerConfig(Volume) & $\rightarrow$ sets speaker volume\\
+		    isIntercomActivated()    & $\rightarrow$ indicates whether or not intercom is active\\
+		    changeIntercomStatus()   & $\rightarrow$ toggles intercom state\\
+		    isFloorArrived()         & $\rightarrow$ indicates whether or not a request has been fulfilled\\
+		    moveCabin(floor Number)  & $\rightarrow$ moves a cabin to the given floor\\
+		    modifyDoors()            & $\rightarrow$ toggle door state\\
+		    applyBrake()             & $\rightarrow$ activates the emergency brake\\
+		    buttonPressed()          & $\rightarrow$ listens for a button press\\
+		    emergencyCall()          & $\rightarrow$ sends emergency signal and starts the intercom\\
+	    \end{tabular}
+	\end{table}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{Elevator_class.jpeg}}
+  		\caption{The Elevator Class}
+  		\label{fig:Elevator_class}
+	\end{figure}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{FloorDisplay_class.jpeg}}
+  		\caption{The Floor Display Class}
+  		\label{fig:FloorDisplay_class}
+	\end{figure}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{EmergencyBrake_class.jpeg}}
+  		\caption{The Emergency Brake Class}
+  		\label{fig:EmergencyBrake_class}
+	\end{figure}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{CabinMotor_class.jpeg}}
+  		\caption{The Cabin Motor Class}
+  		\label{fig:CabinMotor_class}
+	\end{figure}
+	\begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{CabinDoor_class.jpeg}}
+  		\caption{The Cabin Door Class}
+  		\label{fig:CabinDoor_class}
+	\end{figure}
+	\par\noindent\rule{\textwidth}{0.4pt}
+
+	\subsection*{Cabin Sound System Class}
+	\paragraph{} The Cabin Sound System class is a virtual device that handles sound from the jukebox and intercom signals. 
+	\begin{table}[H]
+		\begin{tabular}{lp{12cm}}
+			\textbf{Attributes} & \\ 
+			Speaker   & instance of virtual device that represents the speaker \\
+		   	Intercom  & instance of virtual device that represents the intercom \\
+			JukeBox   & instance of virtual device that represents the jukebox \\
+		\end{tabular}
+	\end{table}     
+	\begin{table}[H]
+		\begin{tabular}{lp{12cm}}
+			\textbf{Functions}      & \\
+			isJukeBoxPlaying()      & $\rightarrow$ checks whether or not jukebox is playing\\
+			changeVolume(volume)    & $\rightarrow$ sets volume to the given value\\
+			isIntercomActivated() 	& $\rightarrow$ checks whether or not the intercom is active\\
+			setIntercomStatus() 	& $\rightarrow$ toggle intercom status\\
+			startPlaying()			& $\rightarrow$ play music\\
+		\end{tabular}
+	\end{table}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{CabinSoundSystem_class.jpeg}}
+  		\caption{The Cabin Sound System Class}
+  		\label{fig:CabinSoundSystem_class}
+	\end{figure}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{Speaker_class.jpeg}}
+  		\caption{The Speaker Class}
+  		\label{fig:Speaker_class}
+	\end{figure}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{Intercom_class.jpeg}}
+  		\caption{The Intercom Class}
+  		\label{fig:Intercom_class}
+	\end{figure}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{Jukebox_class.jpeg}}
+  		\caption{The Jukebox Class}
+  		\label{fig:Jukebox_class}
+	\end{figure}
+	\par\noindent\rule{\textwidth}{0.4pt}
+
+	\subsection*{Key Panel Class}
+	\paragraph{} The Key Panel class is virtual device to detect the presence of physical keys (emergency and executive).
+	\begin{table}[H]
+		\begin{tabular}{lp{12cm}}
+			\textbf{Attributes} & \\ 
+			RFID Control           & instance of virtual device that represents the RFID reader \\
+		   	Key Emergency Control  & instance of Key Emergency class\\
+		\end{tabular}
+	\end{table}     
+	\begin{table}[H]
+		\begin{tabular}{lp{12cm}}
+			\textbf{Functions}      & \\
+			isKeyDetected()         & $\rightarrow$ checks whether or not a key has been detected\\
+			getTypeKeyDetected()    & $\rightarrow$ returns the type of key detected\\
+		\end{tabular}
+	\end{table}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{KeyPanel_class.jpeg}}
+  		\caption{The Key Panel Class}
+  		\label{fig:KeyPanel_class.}
+	\end{figure}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{RFIDControl_class.jpeg}}
+  		\caption{The RFID Control Class}
+  		\label{fig:RFIDSensor_class}
+	\end{figure}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{EmergencyKey_class.jpeg}}
+  		\caption{The Emergency Key Class}
+  		\label{fig:EmergencyKey_class}
+	\end{figure}
+	\par\noindent\rule{\textwidth}{0.4pt}
+	
+	\subsection*{Cabin Button Panel Class}
+	\paragraph{} The Cabin Button Panel class is a virtual device to link the ECS with the physical button panel within the cabin.
+	\begin{table}[H]
+		\begin{tabular}{lp{12cm}}
+			\textbf{Attributes} & \\ 
+			Alarm Button        & instance of virtual device that represents the alarm button \\
+		   	Door Open Button    & instance of virtual device that represents the door open button \\
+			Door Close Button   & instance of virtual device that represents the door close button \\
+			Call Button         & instance of virtual device that represents the call button \\
+			Floor Button        & instance of virtual device that represents a floor button \\
+		\end{tabular}
+	\end{table}     
+	\begin{table}[H]
+		\begin{tabular}{lp{12cm}}
+			\textbf{Functions}      & \\
+			getButtonPressed()      & $\rightarrow$ returns the button pressed\\
+		\end{tabular}
+	\end{table}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{CabinButtonPanel_class.jpeg}}
+  		\caption{The Cabin Button Panel Class}
+  		\label{fig:CabinButtonPanel_class}
+	\end{figure}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{DoorMotor_class.jpeg}}
+  		\caption{The Door Motor Class}
+  		\label{fig:DoorMotor_class}
+	\end{figure}
+	\par\noindent\rule{\textwidth}{0.4pt}
+	
+	\subsection*{Safety Control Class Class}
+	\paragraph{} The Safety Control class communicates with all safety hardware (motors, sensors, brakes, etc.)
+	and holds the logic to meaningfully interpret signals from the hardware.
+	\begin{table}[H]
+		\begin{tabular}{lp{12cm}}
+			\textbf{Attributes}     & \\ 
+			Alignment Control       & controls alignment sensors via virtual devices \\
+		   	Accelerometer Control   & controls accelerometers via virtual devices \\
+			Weight Control          & controls weight sensors via virtual devices \\
+			Speed Control           & controls speedometers sensors via virtual devices \\
+			Light Curtain Control   & controls light curtains via virtual devices \\
+			Alignment Control   &
+		\end{tabular}
+	\end{table}     
+	\begin{table}[H]
+		\begin{tabular}{lp{12cm}}
+			\textbf{Functions}             & \\
+			checkElevatorSafetyControls()  & $\rightarrow$ performs a system wide device check\\
+		\end{tabular}
+	\end{table}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{SafetyControl_class.jpeg}}
+  		\caption{The Safety Control Class}
+  		\label{fig:SafetyControl_class}
+	\end{figure}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{SpeedControl_class.jpeg}}
+  		\caption{The Speed Sensor Class}
+  		\label{fig:speedSensor_class}
+	\end{figure}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{LightCurtainControl_class.jpeg}}
+  		\caption{The Light Curtain Class}
+  		\label{fig:LightCurtainSensor_class}
+	\end{figure}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{AlignmentControl_class.jpeg}}
+  		\caption{The Alignment Sensor Class}
+  		\label{fig:AlignmentSensor_class}
+	\end{figure}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{WeightControl_class.jpeg}}
+  		\caption{The Weight Sensor Class}
+  		\label{fig:WeightSensor_class}
+	\end{figure}
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.70]{AccelerationControl_class.jpeg}}
+  		\caption{The Weight Sensor Class}
+  		\label{fig:Accelerometer_class}
+	\end{figure}
+\pagebreak	
+
+\section{Sample Use Case} \label{samp}
+\paragraph{} \textit{A broad overview of use cases begins this section and it is followed by detailed case descriptions. Human actors
+are denoted by small stick figures and have the same color scheme as the box that contains their labels. Guests of the hotel are colored 
+green. An executive guest (denoted by a darker border than the one for the non-executive guest) subsumes the non-executive guest role.}
+\begin{figure}[H]
+	\centerline{\includegraphics[scale=.30]{ECSUseCaseUML.png}}
+	\caption{Shows the a general view of use cases as a diagram. The primary actors are color coded on the left, and exclusive
+	goals share the same color scheme. Secondary actors are shown on the right. Goals that may be had by various actors have a 
+	grey color scheme. The dashed lines indicate inclusions.}
+	\label{fig:usecasediagram}
+\end{figure}
+	\pagebreak
+	\subsection*{Typical Scenarios} This section contains textual descriptions of the most common use cases for the ECS in detail.
+	Travel from one floor to another is described for executive guests, non-executive guests. Guest communication with the front desk
+	is also given, as are a few custodial scenarios.
+		\par\noindent\rule{\textwidth}{0.4pt}
+		\begin{itemize} % go to another floor
+			\item[] \textbf{Use Case:} \textit{GoToAnotherFloor}
+			\item[] \textbf{Primary actor:} Non-Executive Guest (NEG)
+			\item[] \textbf{Goal in context:} To travel from the current floor to another, non-executive, floor.
+			\item[] \textbf{Preconditions:} System is not in maintenance, nor emergency mode, nor alarm mode. 
+			Elevators, bays, and all mechanical parts can be in any safe state (aligned, below weight capacity, 
+			no obstructions, etc.).
+			\item[] \textbf{Trigger:} The non-executive guest decides to travel to another floor.
+			\item[] { \textbf{Scenario:}
+		        \begin{enumerate}
+		        	\item NEG observes the elevator bays.
+		        	\item NEG presses one or more buttons to request an elevator.
+		        	\item NEG enters first elevator to open its doors.
+		        	\item NEG presses one or more buttons to indicate the target floor (one or more 
+		        	button presses may have been erroneous)
+		        	\item{NEG sees someone running toward the elevator
+		        		\begin{enumerate}
+		        			\item NEG presses the "open doors" button
+		        			\item NEG presses the  "close doors" button
+		        		\end{enumerate}}
+		        	\item NEG travels to target floor with zero or more stops in between.
+		        	\item NEG exits the elevator upon arrival to the target floor.
+		        \end{enumerate}}
+			\item[•]{\textbf{Exceptions:} 
+			    \begin{enumerate}
+		        	\item Alarm is triggered \textit{before} entering elevator: NEG is denied access to all elevators.
+		        	\item Alarm is triggered \textit{during} or \textit{after} entering elevator: The "open door" button is disabled.
+		        	ECS enters alarm mode. Emergency key must be inserted to put the ECS in emergency mode, from which normal mode may
+		        	be accessed.
+		        \end{enumerate}}
+			\item[•] \textbf{Priority:} Essential, must be implemented
+			\item[•] \textbf{When available:} Always
+			\item[•] \textbf{Frequency of use:} Many times per day
+			\item[•] \textbf{Channel to actor:} Via bay button panel, bay doors, elevator doors, cabin button panel
+			\item[•] \textbf{Secondary actors:} Mechanical technician, ECS technician, Emergency Personnel, another 
+			generic human actor		
+			\item[•]{\textbf{Channels to secondary actors:}
+			    \begin{itemize}
+					\item[] Mechanical Technician: cabin panel
+					\item[] ECS Technician: cabin panel
+					\item[] Emergency Personnel: alarm system, cabin panel, emergency key panel	    
+			    \end{itemize}}
+			\item[•]{\textbf{Open Issues:}
+				\begin{enumerate}
+					\item What happens if there is an obstruction while the ECS is in alarm mode?
+				\end{enumerate}} 
+		\end{itemize}
+	
+		\par\noindent\rule{\textwidth}{0.4pt}
+		\begin{itemize} % go to another floor
+			\item[] \textbf{Use Case:} \textit{GoToAnotherFloor}
+			\item[] \textbf{Primary actor:} Executive Guest (EG)
+			\item[] \textbf{Goal in context:} To travel from the current floor to the executive suite (top floor).
+			\item[] \textbf{Preconditions:} System is not in maintenance, nor emergency mode, nor alarm mode. 
+			Elevators, bays, and all mechanical parts can be in any safe state (aligned, below weight capacity, 
+			no obstructions, etc.).
+			\item[] \textbf{Trigger:} The EG decides to travel to his or her penthouse (the executive suite).
+			\item[] { \textbf{Scenario:}
+		        \begin{enumerate}
+		        	\item EG observes the elevator bays.
+		        	\item EG presses one or more buttons to request an elevator.
+		        	\item EG enters first elevator to open its doors.
+		        	\item EG inserts the executive key into the corresponding panel or scans the executive RFID card.
+		        	\item EG presses one or more buttons at least one of which is the newly activated penthouse button (one or more 
+		        	button presses may have been erroneous).
+		        	\item{EG sees someone running toward the elevator
+		        		\begin{enumerate}
+		        			\item EG presses the "open doors" button
+		        			\item EG presses the  "close doors" button
+		        		\end{enumerate}}
+		        	\item EG travels to target floor with zero or more stops in between.
+		        	\item EG exits the elevator upon arrival to the target floor.
+		        \end{enumerate}}
+			\item[•]{\textbf{Exceptions:} 
+			    \begin{enumerate}
+		        	\item Alarm is triggered \textit{before} entering elevator: EG is denied access to all elevators.
+		        	\item Alarm is triggered \textit{during} or \textit{after} entering elevator: The "open door" button is disabled.
+		        	ECS enters alarm mode. Emergency key must be inserted to put the ECS in emergency mode, from which normal mode may
+		        	be accessed.
+		        	\item invalid executive key or executive RFID card: EG must contact hotel staff to resolve the issue.
+		        \end{enumerate}}
+			\item[•] \textbf{Priority:} Essential, must be implemented
+			\item[•] \textbf{When available:} Always
+			\item[•] \textbf{Frequency of use:} Many times per day, but fewer than the analogous NEG scenario
+			\item[•] \textbf{Channel to actor:} Via bay button panel, bay doors, elevator doors, cabin button panel, key panel
+			\item[•] \textbf{Secondary actors:} Mechanical technician, ECS technician, Emergency Personnel, another 
+			generic human actor		
+			\item[•]{\textbf{Channels to secondary actors:}
+			    \begin{itemize}
+					\item[] Mechanical Technician: cabin panel
+					\item[] ECS Technician: cabin panel
+					\item[] Emergency Personnel: alarm system, cabin panel, emergency key panel	
+					\item[] Generic human actor: bay doors, cabin doors    
+			    \end{itemize}}
+			\item[•]{\textbf{Open Issues:}
+				\begin{enumerate}
+					\item How to deal with NEG that may "piggyback" on the EG's access?
+				\end{enumerate}} 
+		\end{itemize}	
+		
+		\par\noindent\rule{\textwidth}{0.4pt}
+		\begin{itemize} % call front desk
+			\item[•] \textbf{Use Case:} \textit{CallFrontDesk}
+			\item[•] \textbf{Primary actor:} Non-Executive Guest (NEG)
+			\item[•] \textbf{Goal in context:} To communicate with the front desk personnel.
+			\item[•] \textbf{Preconditions:} Intercom system is functioning properly.
+			\item[•] \textbf{Trigger:} The NEG has a question, comment or concern while inside an elevator cabin.
+			\item[•]{\textbf{Scenario:}
+		        \begin{enumerate}
+		        	\item NEG observes "call button."
+		        	\item NEG presses the button and waits for someone to answer.
+		        	\item NEG has a conversation that addresses the question, comment, or concern.
+		        	\item NEG ends the conversation.
+		        	\item NEG continues traveling in the cabin or exits at some floor.
+		        \end{enumerate}}
+			\item[•]{\textbf{Exceptions:} 
+			    \begin{enumerate}
+		        	\item Front Desk Personnel does not answer: intercom call times out. NEG may try again.
+		        	\item Alarm is triggered: alarm mode is entered, intercom remains functional.
+		        \end{enumerate}}
+			\item[•] \textbf{Priority:} Essential, must be implemented
+			\item[•] \textbf{When available:} Always
+			\item[•] \textbf{Frequency of use:} A moderate number of times per day
+			\item[•] \textbf{Channel to actor:} Via bay button panel, intercom system
+			\item[•] \textbf{Secondary actors:} Front desk personnel		
+			\item[•]{\textbf{Channels to secondary actors:} 
+			    \begin{itemize}
+			   		 \item[] Front Desk Personnel: intercom system
+                \end{itemize}}
+			\item[•]{\textbf{Open Issues:}
+				\begin{enumerate}
+					\item How are calls from multiple cabins handled?
+				\end{enumerate}}
+		\end{itemize}
+		
+		\par\noindent\rule{\textwidth}{0.4pt}
+		\begin{itemize} % clean cabin
+			\item[•] \textbf{Use Case:} \textit{CleanCabin}
+			\item[•] \textbf{Primary actor:} Custodial Personnel (CP)
+			\item[•] \textbf{Goal in context:} To perform cabin cleanliness upkeep or to clean spills.
+			\item[•] \textbf{Preconditions:} System is not in maintenance, nor emergency mode, nor alarm mode. 
+			Elevators, bays, and all mechanical parts are in a safe state (aligned, below weight capacity, 
+			no obstructions, etc.).
+			\item[•] \textbf{Trigger:} CP is scheduled to perform upkeep or a spill occurs within a cabin.
+			\item[•]{\textbf{Scenario:}
+		        \begin{enumerate}
+		        	\item CP is notified of the cabin in question.
+		        	\item CP presses button to request the specific elevator.
+		        	\item CP enters the cabin and waits for non-custodial personnel to exit the cabin.
+		        	\item CP inserts custodial key to enter custodial mode.
+		        	\item CP performs routine cleaning or spill.
+		        	\item CP removes custodial key.
+		        	\item CP exits a spotless cabin.
+		        \end{enumerate}}
+			\item[•]{\textbf{Exceptions:} 
+			    \begin{enumerate}
+		        	\item Maintenance key is invalid: custodial personnel must acquire a valid custodial key.
+			    	\item Alarm is triggered: alarm mode is entered and custodial key functions are overridden.
+		        \end{enumerate}}
+			\item[•] \textbf{Priority:} Essential, must be implemented
+			\item[•] \textbf{When available:} Always
+			\item[•] \textbf{Frequency of use:} On regularly scheduled intervals and on random occasion
+			\item[•] \textbf{Channel to actor:} Via bay button panel, bay doors, elevator doors, key panel, cabin button panel 
+			\item[•] \textbf{Secondary actors:} Mechanical technician, ECS technician, Emergency Personnel, another 
+			generic human actor.
+			\item[•]{\textbf{Channels to secondary actors:}
+			    \begin{itemize}
+			    	\item[] Mechanical Technician: cabin panel
+					\item[] ECS Technician: cabin panel
+					\item[] Emergency Personnel: alarm system, cabin panel, emergency key panel
+					\item[] Generic Human Actor: bay doors, cabin doors
+			    \end{itemize}}
+			\item[•]{\textbf{Open Issues:}
+				\begin{enumerate}
+					\item None known.
+				\end{enumerate}}
+		\end{itemize}
+
+		\par\noindent\rule{\textwidth}{0.4pt}
+		\begin{itemize} % move guest waste and laundry
+			\item[•] \textbf{Use Case:} \textit{MoveGuestWasteAndLaundry}
+			\item[•] \textbf{Primary actor:} Custodial Personnel (CP) 
+			\item[•] \textbf{Goal in context:} To transfer guest laundry and guest waste while minimizing visibility.
+			\item[•] \textbf{Preconditions:} System is not in maintenance, nor emergency mode, nor alarm mode. 
+			Elevators, bays, and all mechanical parts are in a safe state (aligned, below weight capacity, 
+			no obstructions, etc.).
+			\item[•] \textbf{Trigger:} Custodial waste basket is full and/or custodial laundry basket is full.
+			\item[•]{\textbf{Scenario:}
+		        \begin{enumerate}
+		        	\item CP runs out of space for guest waste and laundry in custodial cart.
+		        	\item CP observes elevator bays.
+		        	\item CP requests elevator and waits for one without guests.
+		        	\item CP inserts custodial key to enter custodial mode.
+		        	\item CP travels directly to the floor where the laundromat and waste disposal area are located.
+		        	\item CP removes custodial key.
+		        	\item CP exits cabin.
+		        \end{enumerate}}
+			\item[•]{\textbf{Exceptions:} 
+			    \begin{enumerate}
+		        	\item Maintenance key is invalid: custodial personnel must acquire a valid custodial key.
+			    	\item Alarm is triggered: alarm mode is entered and custodial key functions are overridden.
+		        \end{enumerate}}
+			\item[•] \textbf{Priority:} Optional, may be implemented
+			\item[•] \textbf{When available:} Always
+			\item[•] \textbf{Frequency of use:} Varies with guest volume. The more guests, the more often this is used.
+			\item[•] \textbf{Channel to actor:} Via bay button panel, bay doors, elevator doors, key panel, cabin button panel 
+			\item[•] \textbf{Secondary actors:} Mechanical technician, ECS technician, Emergency Personnel, another 
+			generic human actor
+			\item[•]{\textbf{Channels to secondary actors:}
+			    \begin{itemize}
+			    	\item[] Mechanical Technician: cabin panel
+					\item[] ECS Technician: cabin panel
+					\item[] Emergency Personnel: alarm system, cabin panel, key panel
+					\item[] Generic Human Actor: bay doors, cabin doors
+			    \end{itemize}}
+			\item[•]{\textbf{Open Issues:}
+				\begin{enumerate}
+					\item Should custodial personnel use separate elevators for this?
+				\end{enumerate}}
+		\end{itemize}
+	
+	
+	\subsection*{Rare Scenarios} This section features scenarios that may occur occasionally. This includes mechanical and technical
+	repair or maintenance and emergency situations. 
+	
+	\par\noindent\rule{\textwidth}{0.4pt}
+		\begin{itemize} % go to another floor
+			\item[] \textbf{Use Case:} \textit{RepairElevator}
+			\item[] \textbf{Primary actor:} Mechanical Technician (MT)
+			\item[] \textbf{Goal in context:} To fix mechanical problems along the shaft, within the bay, within the cabin, or among any
+			motors.
+			\item[] \textbf{Preconditions:} System is not in maintenance, nor emergency mode, nor alarm mode. 
+			Elevators, bays. Mechanical state may or may not be in a safe state.
+			\item[] \textbf{Trigger:} A mechanical failure occurs.
+			\item[] { \textbf{Scenario:}
+		        \begin{enumerate}
+		        	\item MT is informed of the location of the problem.
+		        	\item MT uses stairs to access entry point to the system.
+		        	\item MT inserts maintenance key.
+		        	\item MT fixes the issue.
+		        	\item MT calibrates and resets sensors if necessary.
+		        	\item MT tests the elevator by moving it through various floors.
+		        	\item MT removes maintenance key and restores it to its normal functioning mode.
+		        	\item MT exits the shaft, bay, or cabin where issue was found.
+		        \end{enumerate}}
+			\item[•]{\textbf{Exceptions:} 
+			    \begin{enumerate}
+		        	\item Alarm is triggered \textit{before} entering elevator: MT is denied access to all elevators.
+		        	\item Alarm is triggered \textit{during} or \textit{after} entering elevator: The "open door" button is disabled.
+		        	ECS enters alarm mode. Emergency key must be inserted to put the ECS in emergency mode, from which normal mode may
+		        	be accessed. MT inserts maintenance key so emergency personnel will be aware of the situation.
+		        	\item Maintenance key is invalid: Mechanical Technician must resolve the issue with hotel staff.
+		        \end{enumerate}}
+			\item[•] \textbf{Priority:} Essential, must be implemented
+			\item[•] \textbf{When available:} Always
+			\item[•] \textbf{Frequency of use:} A few times per month
+			\item[•] \textbf{Channel to actor:} Via bay button panel, bay doors, elevator doors, cabin button panel, key panel
+			\item[•] \textbf{Secondary actors:} Mechanical technician, Emergency Personnel, another 
+			generic human actor		
+			\item[•]{\textbf{Channels to secondary actors:}
+			    \begin{itemize}
+					\item[] Mechanical Technician: cabin panel
+					\item[] Emergency Personnel: alarm system, cabin panel, emergency key panel
+					\item[] Generic human actor: bay doors, cabin doors
+			    \end{itemize}}
+			\item[•]{\textbf{Open Issues:}
+				\begin{enumerate}
+					\item How to handle alarm mode that is triggered during mechanical maintenance?
+				\end{enumerate}} 
+		\end{itemize}
+	
+	\par\noindent\rule{\textwidth}{0.4pt}
+		\begin{itemize} % go to another floor
+			\item[] \textbf{Use Case:} \textit{RepairOrConfigureECS}
+			\item[] \textbf{Primary actor:} ECS Technician (ET)
+			\item[] \textbf{Goal in context:} To fix any issues related to the ECS or to configure it.
+			\item[] \textbf{Preconditions:} System is not in maintenance, nor emergency mode, nor alarm mode. 
+			Elevators, bays. Mechanical state is presumed to safe. ECS states may or may not be in a safe state.
+			\item[] \textbf{Trigger:} An ECS failure occurs or configuration is sought.
+			\item[] { \textbf{Scenario:}
+		        \begin{enumerate}
+		        	\item ET is informed of problem or prompted to configure the ECS.
+		        	\item ET accesses the ECS which is centralized somewhere in the building.
+		        	\item ET uses intercom to clear all cabins before disabling them and all bays.
+		        	\item ET fixes the issue or configures the system.
+		        	\item ET runs tests and performs any necessary calibration.
+		        	\item ET starts the system and leaves the hotel.
+		        \end{enumerate}}
+			\item[•]{\textbf{Exceptions:} 
+			    \begin{enumerate}
+		        	\item Alarm is triggered \textit{before} disabling the system: ET must evacuate with everyone else.
+		        	\item Alarm is triggered \textit{during} or \textit{after} disabling the system: ET must abort the 
+		        	operation and evacuate.
+		        	\item Access denied: ET must resolve the issue with the software company.
+		        \end{enumerate}}
+			\item[•] \textbf{Priority:} Essential, must be implemented
+			\item[•] \textbf{When available:} Always
+			\item[•] \textbf{Frequency of use:} A few times per month
+			\item[•] \textbf{Channel to actor:} Via direct access to the ECS
+			\item[•] \textbf{Secondary actors:} Generic human actor
+			\item[•]{\textbf{Channels to secondary actors:}
+			    \begin{itemize}
+					\item[] Emergency Personnel: alarm system
+					\item[] Generic human actor: intercom
+			    \end{itemize}}
+			\item[•]{\textbf{Open Issues:}
+				\begin{enumerate}
+					\item How to handle mechanical failure including ECS failure?
+				\end{enumerate}} 
+		\end{itemize}
+	
+	\par\noindent\rule{\textwidth}{0.4pt}
+		\begin{itemize} % go to another floor
+			\item[] \textbf{Use Case:} \textit{SearchAndRescue}
+			\item[] \textbf{Primary actor:} Emergency Personnel (EP)
+			\item[] \textbf{Goal in context:} Locate endangered human beings within the building as soon as possible.
+			\item[] \textbf{Preconditions:} System is alarm mode. Mechanical and ECS states may or may not be safe.
+			\item[] \textbf{Trigger:} The alarm system is triggered.
+			\item[] { \textbf{Scenario:}
+		        \begin{enumerate}
+		        	\item EP receives alarm signal.
+		        	\item EP rushes to to the building.
+		        	\item EP accesses first available elevator, if any.
+		        	\item EP inserts emergency key.
+		        	\item EP controls the elevator to minimize search and rescue time.
+		        	\item EP resolves endangerments after some indefinite repetition of the previous step.
+		        	\item EP removes the emergency key and restores the system to its normal functioning state.
+		        \end{enumerate}}
+			\item[•]{\textbf{Exceptions:} 
+			    \begin{enumerate}
+		        	\item Access denied: EP must use the stairs.
+		        \end{enumerate}}
+			\item[•] \textbf{Priority:} Essential, must be implemented
+			\item[•] \textbf{When available:} Always
+			\item[•] \textbf{Frequency of use:} A few times per year
+			\item[•] \textbf{Channel to actor:} Via cabin key panel
+			\item[•] \textbf{Secondary actors:} Generic human actor
+			\item[•]{\textbf{Channels to secondary actors:}
+			    \begin{itemize}
+					\item[] Generic human actor: bay doors, cabin doors
+			    \end{itemize}}
+			\item[•]{\textbf{Open Issues:}
+				\begin{enumerate}
+					\item How to handle mechanical failure or ECS failure during emergency operation?
+				\end{enumerate}} 
+		\end{itemize}
+
+\section{Design Constraints} \label{cons}
+\paragraph{} \textit{Due to the real-time nature of the system, there exist some additional constraints\footnote{Design Constraints by Anas.}. Namely, it must be
+the case that all data structures concerning the safety controls are as fast as possible but also that they are capable of 
+prioritizing all signals in the best way possible.}
+
+	\subsection{Safety}
+		\paragraph{} The safety is highly prioritized in our design of the ECS. We have 
+		considered associating the fire alarm directly with the ECS because in the case 
+		of the fire alarm triggering, this event has a very high priority and the ECS 
+		should immediately react to this event. When it comes to elevator and bay safety, 
+		each elevator and bay will have set of Safety Controls that they can communicate 
+		through and the ECS monitors the situation from the top. By ensuring safety for 
+		both bays and the elevators, the ECS operation will be carried smoothly without 
+		hurting the passengers.
+
+	\subsection{Implementation Guidelines}
+		\paragraph{} According to the design, we suggest programmers to use some sort of 
+		Concurrent safe Messaging Queue for the communication between sensing objects and 
+		their associated parent objects. We also recommend using concurrent safe Priority 
+		Queue for the ECS, so the ECS can react based on the certain given priority. The 
+		priority should be considered because in the case of an emergency, the priority 
+		for that event should be at the very top so that the ECS should immediately react 
+		to it by closing its doors and going to first floor if its not there already.
+
+
+\section{Definition of Terms} \label{defs}
+
+\paragraph{} \textit{The following is a list of definitions contain the most commonly used 
+technical terms within this document, whose meaning may not be immediately apparent to the 
+lay reader. Most definitions are defined by the authors for use within the context of this 
+document. Some may originate from vocabulary shared across the general references cited \nocite{*}. 
+In the event that a definition was taken directly from a source, it is followed by a citation.
+\footnote{This list is mostly a reduction of the term list found in the preceding Software 
+Design Specification document.}}
+
+\pagebreak	
+	\begin{list}{}{}
+		\item{\textbf{Action (Do:)} The step(s) taken by the ECS to get to the other state.}
+		\item{\textbf{Bay} The location of elevator access on a given floor.}
+		\item{\textbf{Cabin} The interior of the elevator; also used as a synonym for elevator.}
+		\item{\textbf{Call} To summon an elevator to a given floor or, from a controller’s perspective, a summon to a given floor.}
+		\item{\textbf{Capacity} Used in reference to weight capacity (see Load), or physical capacity(the amount of space in an elevator).}
+		\item{\textbf{Elevator Control System/Controller (ECS)} A system for regulating the movement of elevators as well as controlling the states (see State).}
+		\item{\textbf{Emergency Personnel} Personnel including firefighters, police, and paramedics.}
+		\item{\textbf{Event} It includes all signals, inputs, decisions, interrupts, transitions, and actions to or from users or external devices.}
+		\item{\textbf{Executive} In the context of passengers: Any passenger granted access to floors other inaccessible to the general public. In the context of floors: A floor accessible only by executive passengers.}
+		\item{\textbf{Incoming Events} The event(s) which the interface is taking as an input.}
+		\item{\textbf{Load} The physical weight being carried by an elevator.}
+        \item{\textbf{Message Queue} The process of sending and receiving messages to communicate between different objects.}
+		\item{\textbf{Obstruction} In the context of elevator operation, an obstruction is any entity that is present within the doorway of the elevator during closing of the doors.}
+		\item{\textbf{Outgoing Events} The event(s) which the interface is outputting to ECS.}
+		\item{\textbf{Passenger} Any person riding an elevator.}
+        \item{\textbf{Priority Queue} The data is transferred with a priority number for the ECS to react appropriately.}
+		\item{\textbf{Radio Frequency Identification (RFID)} Short range radio identification; typically used as a means of exchanging information (usually for validation) across short distances.}
+		\item{\textbf{Safely} Without causing harm to any person or thing.}
+		\item{\textbf{Shaft}  The physical enclosure within which the elevator travels, spanning the desired distance of travel.}
+		\item{\textbf{Sensor}  A device for detecting or measuring physical quantities.}
+	\end{list}
+
+\pagebreak
+\bibliography{../../ReferenceMaterial/BibTeX/references}
+% run latex, then bibtex, then quickbuild (on the tex file)
+\end{document}
