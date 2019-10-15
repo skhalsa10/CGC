@@ -180,7 +180,7 @@ the developers of the system.
 
 	\subsection{Emergency}
 	\paragraph{} \textit{subsection introduction}
-	\paragraph{} \textbf{body paragraph}
+	\paragraph{} \textit{body paragraph}
 	
 	\subsection{Maintenance}
 	\paragraph{} \textit{The maintainability of this system is extremely important. 
@@ -191,6 +191,30 @@ the developers of the system.
 	be technically feasible. The maintenance system will monitor and respond to all cars, 
 	the electric fence, the camera network, the kiosks and tokens.}
 	
+	\begin{table}[H]
+		\begin{tabular}{lp{10cm}}
+		\textbf{Cars} & The autonomous vehicle is a unique piece of equipment. It is fully 
+		aware of the sensors and parts that it controls. We will leave it up to the 
+		company that we contract out to build cars that can identify when they need 
+		maintenance. We will work with the vehicle manufacturers to make sure the cars 
+		follow specific maintenance protocols. We will build protocols that address how 
+		a car behaves if it needs maintenance while with passengers out on the island but 
+		can still drive, or if it is more serious and the car can not drive.\\
+		\textbf{Fence} & The fence is the most critical piece. we want to avoid the fence going down at all times.
+    	the fence will have redundant power coming in preferable there should be 4 redundant power uplinks. 
+    	if one goes down the fence will stay up without a hiccup. The redundant links should allow for 
+    	maintenance without disturbing the fence.\\
+		\textbf{Camera Systems} & The camera system will have cameras that are how swappable for ease maintenace. the network links will be redundent as Well.
+     	They will report when they are down so they can be maintained\\
+		\textbf{Tokens} & Since this will act as a locator device for the visitors 
+		it is critical to their safety. these may need to be replaced and upgraded periodically\\
+		\textbf{Kiosks} & these should notify the control station of need for maintanance or have a manual override to turn on maintenance mode\\
+		\textbf{CGC} & The main system should be able to test all other systems. When the CGC is 
+		put into maintenance mode it should be able to trigger a simulated fence down to see how 
+		the system will respond this will be done periodically to help isolate problems while 
+		there is not an emergency in progress.\\		
+		\end{tabular}
+	\end{table}
 	\paragraph{} \textit{body paragraph}
 
 	\subsection{Cars}
