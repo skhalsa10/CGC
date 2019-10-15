@@ -1,0 +1,9 @@
+*.bak
+*.swp
+*.aux
+*.log
+*.gz
+*.toc
+*.bbl
+*.blg
+*.dvi
