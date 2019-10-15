@@ -1,4 +1,4 @@
-In terms of safety findings for the Cretaceous Gardens Control System (CGCS, the Electric Fence status needs to be available for customers safety. When the
+In terms of safety findings for the Cretaceous Gardens Control System (CGCS), the Electric Fence status needs to be available for customers safety. When the
 electric fence fails, the Emergency mode must be activated to ensure customers safety. When it comes to self-driving cars, they will also have some safety
 features. These safety features are: making sure the door locks securely before it begins to drive. The self-driving cars should know what visitors they are
 carrying to the T-Rex pit by scanning their tokens first, and then letting the visitors in. One more important safety check is that the self-driving cars
