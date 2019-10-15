@@ -1,0 +1,13 @@
+(Italics)The maintenance of this system is an extremely important aspect of this syste. It is critical 
+that every device that communicates on this system stay maintained and in peek performance at all time. Well maintained
+equipment will fail less. Due to the intense need for safety we can not cut corners for the CGC and need for 
+a system that identifies the need for maintenance efficiently is critical. This project can be technically feasible identifieswe make this a focal point.
+the maintenance system will monitor and respond to the cars, electric fence, the camera network, the kiosks and tokens.
+
+Cars
+
+The autonomous vehicle is a unique piece of equipment. It is fully aware of the sensors and parts that it controls.
+We will leave it up to the company that we contract out to build cars that can identify when they need maintenance.
+We will work with the vehicle manufacturers to make sure the cars follow specific maintenance protocals. We will bbuild protocols that
+address how a car behaves if it needs maintenance while with passengers out on the islandbut can still drive, or 
+if it is more serious and the car can not drive.
