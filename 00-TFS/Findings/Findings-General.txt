@@ -2,10 +2,16 @@
 
 The general findings for this system are somewhat straight-forward. In order to be feasible, this system needs a working camera network.
 This Cretaceous Gardens Control System (CGCS) will manage all the cameras. There will also be self paying kiosk which will present tokens/tickets
-that are unique to each customer. These unique ID will act as a key and a locator(GPS) for each user. The kiosk's main functionality will be to give tickets to the user, accept credit/debit card or cash as the 
-payment option from the user. In addition to that, it is also feasible that the user should fill out the form with their names, emergency
+that are unique to each customer. There are some benefits to these, for example, these unique ID's will act as a key and a locator(GPS) for each user. 
+The kiosk's main functionality will be to give tokens/tickets to the customer, accept credit/debit card or cash as the payment option from the user. In addition to that, it is also feasible that the user should fill out the form with their names, emergency
 contact and a waiver so that the CGCS can easily manage people's records. 
 
 2nd Paragraph!!!!!!!!!!!!!!
 
-
+When we talk about each user getting an ID, another benefit of getting an ID is that the customers unlock the perk of having a self-driving car at
+their disposal. It is important to note here that the self-driving cars are contracted out. There are several features which a basic self-driving car
+has these days. These main features include: having a GPS device so that it can transfer customers from one place to another, have basic speakers and
+door sensors for customer's safety, and have an access to camera so that it can drive autonomously. In addition to that, to make it feasible to this project,
+the self-driving car must have a unique car ID for the CGCS to easily locate. The self-driving car must have a RFID reader so that it can let the customers in the car.
+The self-driving car must be able to switch modes such as normal mode and emergency mode. The self-driving car must have a call button to talk with the 
+Control Station.
