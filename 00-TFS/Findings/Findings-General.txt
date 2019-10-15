@@ -1,0 +1,11 @@
+1st Paragraph!!!!!!!!!!!!!!
+
+The general findings for this system are somewhat straight-forward. In order to be feasible, this system needs a working camera network.
+This Cretaceous Gardens Control System (CGCS) will manage all the cameras. There will also be self paying kiosk which will present tokens/tickets
+that are unique to each customer. These unique ID will act as a key and a locator(GPS) for each user. The kiosk's main functionality will be to give tickets to the user, accept credit/debit card or cash as the 
+payment option from the user. In addition to that, it is also feasible that the user should fill out the form with their names, emergency
+contact and a waiver so that the CGCS can easily manage people's records. 
+
+2nd Paragraph!!!!!!!!!!!!!!
+
+
