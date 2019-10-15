@@ -1,0 +1,17 @@
+Given Constraints
+ - Visitors arrive by port on south side of the island
+ - Automatic payment kiosk - provides a unique token/ticket
+ - The token will grant Vehicle access
+ - The token will provide Viewing access
+ - Self-Driving car will stop at the south-end and can drive at most 10 people(could be less)
+ - car will lock securely and drive passangers to north-end
+ - all cars position will be accounted for at all times
+ - Massive enclosure with electric fence will enclose T-rex
+ - There will be at LEAST one video camera
+ - the vehicle doors will unlock at the T-rex exhibit
+ - after allotted time vehicle will sound alarm to tell visitor it is time to leave
+ - The vehicle will NOT leave untill all guests are back on the vehicle
+ - doors lock securely and vehicle returns to south-end
+ - Emergency protocol exists very strict for when the electric fence fails
+    - Alarm will sound at north and south end
+    - the system must act quickly to get all visitors to the south-end of the island

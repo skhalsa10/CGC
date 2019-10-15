@@ -1,0 +1,77 @@
+Given Constraints
+ - Visitors arrive by port on south side of the island
+ - Automatic payment kiosk - provides a unique token/ticket
+ - The token will grant Vehicle access
+ - The token will provide Viewing access
+ - Self-Driving car will stop at the south-end and can drive at most 10 people(could be less)
+ - car will lock securely and drive passangers to north-end
+ - all cars position will be accounted for at all times
+ - Massive enclosure with electric fence will enclose T-rex
+ - There will be at LEAST one video camera
+ - the vehicle doors will unlock at the T-rex exhibit
+ - after allotted time vehicle will sound alarm to tell visitor it is time to leave
+ - The vehicle will NOT leave untill all guests are back on the vehicle
+ - doors lock securely and vehicle returns to south-end
+ - Emergency protocol exists very strict for when the electric fence fails
+    - Alarm will sound at north and south end
+    - the system must act quickly to get all visitors to the south-end of the island
+
+
+The following ideas are what I believe are needing to make this project technically feasable:
+
+
+Findings
+    - General
+        - We will need a working camera network. all cameras should be viewable from control system
+        - the self paying kiosk will present tokens(tickets) that are unique 
+            - form must be filled out with name, emergency contact, and waiver
+            - accept credit card
+            - accept cash
+            - upon acceptance the token with unique ID will be tied to 
+            must be able to configure the token and revuild RFID information
+        - (my opinion) I believe that these tokens should be devices that have:
+            - map (digital?) used to help guide
+            - ***NEEDED*** GPS - will be tracked
+            - ***NEEDED*** reprogrammable RFID ship
+            - Speaker - to help instruct 
+        - Self-Driving car (contracted out) (how many total cars do we have?)
+            - must work with out interface and logic for use in normal mode
+            - must work with out interface and logic for use in Emergency mode
+            - must include GPS
+            - must include loud Speaker
+            - must include a unique car ID
+            - Must include an RFID reader
+            - there must be a call button to talk with the Control Station
+            - door sensors
+    - Safety
+        - Electric Fence status needs to be available.
+        - When Electric fence fails emergency mode MUST be activated
+        - Cars will have a safety features
+            - they will lock securely when driving,
+            - they must know what visitors they drive over to T-Rex pit (using the tokens)
+            - they sound an alarm and send notifications to tokens that they are keeping track of after alloted time to bring back to south-end
+            - They will ONLY leave after all visitors that it drove over are inside the car
+            - there will be X amount of dedicated patrol cars used by employees that go back and forth from south to north end
+
+    - Emergency
+        - Emergency Mode triggered from the electric fence outage or from testing in maintanance mode
+        - Alarms triggered everywhere!
+        - There will be X amount of self driving cars that will always be located at the north-side only used for emergency mode
+        - Cars will loosen the requirements and will begin accepting  any passengers and will begin leaving every X minutes whether full or not
+        - all cars that are NOT currently in manual override or driving passengers back to the south end will be dispatched to the north-end
+        - after emergency mode is initiated - even if the fence comes back up, emergency mode should not exit until manually triggered by a human employee
+    - Maintanance
+        - Cars 
+            - will need to alert the Control station when they need maintanance if it can drive they should return to the south lot and taken out of production
+            - any passengers that were on this vehicle can board a new vehicle
+            - if a car breaks down on the island a maintanance crew will ride a new self-driving vehicle to the broken down one and help move visiters into new vehicle.
+            
+        - Fence
+            - the power to the fence should have extra redundencies which allows for seemless maintanance with absolutely NO power outage
+        - camera systems
+            - camera should be hot swapable and uplinks should be redundent
+        - tokens 
+            - these may need to be maintaned and upgraded and replaced over time.
+        - kiosks
+            - these should notify the control station of need for maintanance or have a manual override to turn on maintanance mode
+            
