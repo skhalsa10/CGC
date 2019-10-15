@@ -1,7 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage{xcolor}
 \usepackage{sectsty}
-
 \sectionfont{\color{DarkBlue}} 
 \subsectionfont{\color{LightBlue}}
 \begin{document}
@@ -11,7 +10,7 @@
 \begin{flushleft}
 \vspace*{1cm}
 \Huge
-\textbf{Elevator Control System}\\
+\textbf{Cretaceous Gardens Controller}\\
 \vspace{1cm}
 \Huge
 \textit{Technical Feasibility Study}\\
@@ -21,7 +20,7 @@
 \vspace{5cm}
 \LARGE
 Team \#3\\
-5 September 2019
+15 October 2019
 \vfill
 \Huge
 \textbf{CS 460 Software Engineering}
@@ -30,114 +29,166 @@ Team \#3\\
 \normalsize
 \tableofcontents
 \newpage
-\section{Introduction and Executive Summary}
-Herein are the fundamental aspects of realizing a successful elevator control system (ECS) for high-end hotel ABC in downtown Albuquerque, New Mexico. Material, labor, transportation and shipping, marketing, financial, and implementation considerations have been characterized. The culmination of this document contains a generalization of the findings and the resultant conclusions to which the team has arrived.
+%\section{Executive Summary}
+%\paragraph{}
+
+\section{Introduction}
+\paragraph{} \textit{With new technological advancements come new opportunities and new risks. It is important for
+ any entrepreneur to be able to conservatively calculate potential benefits, and to liberally
+ estimate potential liabilities. With that in mind, Cretaceous Gardens (CG) ought to expect a system
+ that delivers efficient service while minimizing the accumulation of loss and liability. It 
+ is understood that CG has in its hands the torch of bioengineering achievement, therefore the
+ feasibility of a controller (CGC) necessarily impacts the position of CG at the top of the field.
+ No great feat comes without risk, therefore an ideal controller shall prioritize the safety of
+ visitors to the island. Only after such a guarantee can be established, should the system then
+ prioritize efficiency and profitability. Without an impeccably safe system, a long-term influx 
+ of customers is unlikely and without that, there are simply no worthwhile profits to be collected.}
+ 
+\paragraph{} The island is understood to be overlaid with a vast network of agents and equipment to
+ensure the reliable connectedness of the resort. All nodes (whether it be the autonomous vehicles that are
+to transport precious visitors to and from the main attraction, the electric fence enclosure that will 
+house the mighty \textit{Tyrannosaurus Rex}, the system of security cameras, the reliable maintenance crew, 
+or the kiosks that are to dispense every single accounted-for token) will ultimately be under the wings
+of the ideal controller. Considerations should be made early with regard to broad organization of the system
+(i.e. centralized, with plenty of redundancy or a distributed in order to avoid a single point of failure?).
+Below is an outline of such considerations, some given by Cretaceous Gardens, and many others provided by
+the developers of the system.
+
+
 \section{Logistic Implications}
-\subsection{Given Constraints}
-This section is an attempt to clarify the constraints provided by ABC.
-\begin{enumerate}
-\item{\textbf{Elevator Characterization}
-\begin{enumerate}
-\item There shall be four (4) identical \textit{traction} elevators.
-\item All elevators shall be equipped with weight capacity sensors
-\item All elevators shall be equipped with obstruction sensors.
-\item All bays shall be equipped with alignment sensors.
-\item All elevators shall use double doors.
-\item The term \textit{double} has not been defined (layered-double, side-by-side, or top and bottom?).
-\end{enumerate}}
-
-\item{\textbf{ECS Characterization}
-\begin{enumerate}
-\item The ECS shall ensure all passenger-carrying elevators adhere to a maximum speed limit.
-\item The ECS shall ensure all passenger-carrying elevators adhere to a maximum acceleration limit.
-\item The ECS shall ensure all passengerless elevators adhere to a maximum speed limit.
-\item The ECS shall ensure all passengerless elevators adhere to a maximum acceleration limit.
-\item The values of \textit{maximum speed limit} and \textit{maximum acceleration limit} have not been specified in neither passenger-carrying nor passengerless contexts by ABC.
-\item The ECS shall adhere to an \textit{alarm protocol} when the building alarm is triggered.
-\item The ECS shall adhere to an \textit{alignment protocol}.
-\item The ECS shall adhere to an \textit{exceeded weight capacity protocol.}
-\item The ECS shall include a \textit{passenger control panel}.
-\end{enumerate}}
-
-% part of protocol: >= capacity disable feature (leave doors open, no move)
-
-% part of panel up and down arrows condidering no up at 20, no down at 1
-% panel
-%	buttons for every floor
-%	emergency key hole
-%	executive key hole
-
-%alarm protocol
- %  close doors if not on floor 1
-  % go to floor 1 if not on floor 1
-   %open doors until emergency key inserted
-%alignment protocol
-
-\item{\textbf{Infrastructure Characterization}
-\begin{enumerate}
-\item The building consists of twenty (20) floors.
-\item The lowest floor, floor one (1), is the lobby.
-\item The highest floor, floor twenty (20), is the executive suite (hereafter called \textit{penthouse}).
-\item There is no basement (floor zero (0) does not exist).
-\item There are identical elevator bays on each floor.
-\item All bays on each floor are adjacent.
-\item The term \textit{adjacent} has not been defined (radially adjacent or linearly adjacent?).
-\item The building is equipped with an alarm system that must integrate with the ECS.
-\item All bays shall be equipped with obstruction sensors.
-\item All bays shall be equipped with alignment sensors.
-\item All bays shall use double doors.
-\item The term \textit{double} has not been defined (layered-double, side-by-side, or top and bottom?).
-\end{enumerate}}
-
-\item{\textbf{Access Characterization}
-\begin{enumerate}
-\item All floors shall be accessible.
-\item The \textit{penthouse} is only accessible with an \textit{executive key}.
-\item The executive key functions mechanically.
-\item There is only one (1) executive key.
-\item There exists an emergency key.
-\item The emergency key functions mechanically.
-\end{enumerate}}
-\end{enumerate}
-
-%\subsection{Materials}
-%\paragraph{Hardware} We have a few options for the hardware that is to run our software. We may outsource the design, manufacturing, and testing, or we may do it all ourselves. To minimize cost, it may be best to procure the design, outsource to reliable but inexpensive manufacturer, and test it ourselves before delivering it to the client. \textit{The cost of such a process should be calculated.}
-%\paragraph{Repair Tools} To minimize maintenance and repair overhead, it is best for our designs to feature maintenance access points that are compatible with common repair tools (flat-head screwdrivers, common solder). The more we specialize our product, the more our client will depend on us, which in turn will consume more of our resources that could otherwise be used to expand our market share. 
-%\subsection{Labor}
-%\paragraph{Software and Hardware.} The bulk of labor resources will likely be consumed by the software design and development process, followed by the hardware design and development process. For the latter, it is important that the proper interface devices and their respective drivers are created in order to integrate with the in-house technology (namely the alarm system, all relevant sensors, and any audiovisual monitoring for which accommodations must be made).
-%\paragraph{Repair and Maintenance.} For the sake of portability and transparency, it is vital to create a product that may easily be serviced by typical technicians and all parts should be just as easily replaceable, the primary reason being that our product must have a minimal impact on the day-to-day operations of our client in the event that it fails. Preparing sufficient redundancy mechanisms and possibly even duplicate hardware readily available should be a priority.
-%\subsection{Transportation and Shipping}
-%\paragraph{Developmental Transportation Needs.} Toward the beginning of the project, the team should familiarize itself with the physical context in which our product will be operating. For liability and compatibility purposes, we should double check all in-house technology for any inconsistencies, malfunction, preexisting points of failure. The process of scouting and collecting all necessary data may involve multiple trips between our headquarters and the client location. After the first phase of acquisition, the team may primarily continue the development at the headquarters. Occasional check-ins may be necessary if our client experiences any significant changes that may affect our data-derived assumptions. 
-%\paragraph{Shipping.} It is in our best interest to develop with portability and reusability in mind. If a piece of hardware malfunctions and the client has no backups, it will benefit us to be able to provide more modules as soon as possible. Because we are only in the local market and we are small, the shipping may be carried out by a team member. This will also help strengthen our relationship with the client as a familiar face is superior to a long queue of automated call centers. For firmware updates, it would also benefit us to do it ourselves. This, too, may involve team members to travel to the client.
-%\subsection{Marketing Strategy}
-%\paragraph{First Impression and Presentation.} As previously stated, our team may be required to visit the client at any point during the development of the product, for maintenance (or for training their personnel on maintenance), or simply to receive updates and feedback. In all circumstances, it is incumbent that we simply show up on time, demonstrate humility but also assertiveness, and that we listen. If a team member does not feel up to the task, we must account for this ahead of time so as to ensure we have the appropriate representatives for the job. No amount of marketing will hide lack of professionalism on the ground.
-%\paragraph{Communication.} Clear, friendly, and assertive communication is fundamental to any marketing efforts. Our product will communicate something to its users ever time they use it. This must be kept in mind at every step of the development process. Whether it is error codes communicating to techs, drivers speaking to devices, or software developers clarifying details to the client, it is crucial to always do so with great diplomacy. No amount of marketing bandwidth will compensate for useless or harmful data transmission.
-%\paragraph{Word of Mouth.} Because we are a small company, and our client
-%\subsection{Financial Benefits}
-%\subsection{Implementation}
-%\section{Risk Assessment}
-%\subsection{Business Familiarity}
-%\subsection{Technical Familiarity}
-%\subsection{Project Size}
-%\subsection{Compatibility}
+\paragraph{}
+	\subsection{Given Constraints}
+	\paragraph{} Constraints provided by CG are presented as a foundation on which to build. It should be 
+	noted that it is not necessarily complete, as more may be provided in the near future. It is as likely 
+	that some may be deemed unnecessary if another constraint is found to subsume them. Questions pertaining 
+	to a given constraint are shown parenthetically.
+	\begin{itemize}
+		\item Visitors will arrive by port on the \textit{south side} of the island.
+		\\(At what rate?)
+		\item The main attraction will be located on the north side of the island. 
+		\\(Are there multiple routes?)
+		\item The main attraction will be a \textit{Tyrannosaurus Rex} within a massive electric fence enclosure. 
+		\\(Can it be monitored on a per-panel basis?)
+		\item An automatic payment kiosk will provide a unique token \textit{or} ticket to each visitor. 
+		\\(What if the item is damaged or lost?)
+		\item The token \textit{or} ticket will grant vehicle access \textit{and} exhibit viewing access.
+		\item Self-driving car(s) are to stop at the \textit{south end} in order to drive \textit{at most} 10 people. 
+		\\(How many cars at a time?)
+		\item All cars are to lock securely \textit{before} transporting visitors to the north-end.
+		\item All cars are to unlock \textit{after} arriving at the exhibit.
+		\item All cars are to alert visitors when their allotted time to be at the exhibit has run out. 
+		\\(Will this alert be different than an emergency alert?)
+		\\(What should happen if a visitor ignores the "time-up" alert?)
+		\\(Who or what will enforce this?)
+		\item The vehicle is not to leave until all visitors are inside the vehicle. 
+		\\(Even during an emergency?)
+		\item The positions of all cars are to be accounted for at all times. 
+		\\(To what precision?)
+		\item There will be \textit{at least} one video camera. 
+		\\(Will it be closed circuit?) 
+		\\(What kind of camera?)
+		\item Doors are to lock securely with all guests inside \textbf{before} returning the \textit{south end}.
+		\item There is to be a \textit{very strict} protocol in the event of an enclosure failure.
+		\item The emergency alarm is to sound at both ends of the island.
+		\item The system is to be responsible for the quick transport of all visitors to the south end in the event of such an emergency.
+		\\(What should be done if casualties occur?)
+		\\(Should an optional manual driving mode be made available to willing visitors in such an emergency?)
+		\\(What should happen in the event of path obstructions?)
+		\\(How resilient will the vehicles be in the local terrain?) 
+	\end{itemize}
+	\subsection{Additional Constraints}
+	\paragraph{} there is assumed to be employees
+	\begin{itemize}
+		\item[]
+		\item[]
+		\item[]
+		\item[]
+		\item[]
+		\item[]
+		\item[]
+		\item[]
+		\item[]
+		\item[]
+		\item[]
+		\item[]
+		\item[]
+		\item[]
+		\item[]
+		\item[]
+		\item[] 
+	\end{itemize}
 \section{Findings}
 \paragraph{}
-The entire elevator environment is a very complex system. It contains many hardware pieces that work together to build a system. The ECS will be a piece of software that communicates with, and controls, these facets of hardware. These subsystems all fall into a specific category. The findings will be identified and listed under these categories.
-\subsection{General}
-\paragraph{} The general findings for this system are straight forward. An elevator system consists of elevator cars. In the case of this project, there is a total of 4 cars. There will also be a total of 20 floors. The number of these are unique to this project but are important because they help highlight total of buttons that’s will need to be interfaced with. Generally, there are two types of elevators, a traction and a hydraulic elevator. We will only be working with traction elevators.
-\paragraph{} Traction elevators use electric motors. These are used in conjunction with geared traction or gearless traction. Gearless has many advantages. They are faster, take up less physical space, and are more energy efficient.
-\paragraph{} The most common elevator is the passenger class elevator. The is called a class A elevator and is also most common with traction. The dimensions and weight of the elevator are coded as ADA = 2000 lb. 5’8” X 4’-3". We can see other findings below
-\subsection{Safety}
-\paragraph{} In terms of safety findings for the elevator, there are some that we found. Many elevators have door safety requirement. In order to accomplish door safety, the doors are protected through three different types of door reopening devices. The first type of door reopening device is Infrared Safety Curtains, which are the devices that act as a scanner and scan the areas adjacent to elevator doors and if an object is detected, then it automatically opens the doors. The second type of door reopening device is Electronic Photo-eyes, which sends out two or more beams that will the door to reopen if some object breaks the beam. The third type of door reopening device is Mechanical Edges, which triggers reopening if there is a physical contact made with a person or an object. More often, the second and third types of door reopening devices are used together. However, the first type of door reopening device is the most common among the other two.
-\paragraph{} There is also a weight capacity safety limit for most of the passenger elevator systems. These passenger elevators are called Class A or “General Freight Loading” where the load is distributed. For the taller structure like the 20-floor hotel, it is found out that the freight elevators tend to have the most robust capacities and according to ASME A17.1 requirement 2.16.4, it does permit freight elevators to carry passengers if certain design elements are included in the elevator. Normally, the weight limits are dependent on the fact that how much each elevator itself weighs. For instance, the 20-floor midsize building, the elevators can hold 3000 – 4000 lbs. (1,361 - 1,814 kg)
-\subsection{Emergency}
-\paragraph{} There are emergency requirements that exist to help allow elevators to be operated or accessible during emergency situations. There are required emergency components. On all floor elevator lobbies, there will be a physical key switch that will recall the elevator to that floor. It can also act as a reset switch. The elevator environment requires all elevator cars to be connected to a phone line and contain an intercom inside the cabin. The cabins are required to have an alarm bell and help button. The entire ECS should be connected to the fire alarm. There is an emergency light that also must be available in case the lights go out. The last main thing that was discovered is that all elevator cars will require a physical emergency key that allows the elevators to be operated on in emergency situations. These are the common findings that were discovered across the research of these environments.
-\subsection{Maintenance}
-\paragraph{} This area of the elevator environment has been impacted the most by the advancements of technology. The most conventional approach is to offer a way to view all sensory data via the ECS with an interface. This data includes literally everything listed above and everything else. Everything else here includes data like the heat of the electric motor, the speed governor, the electric current feeding into the motor, and even the amount of door cycles. This data can be made available to the maintenance crew working on the system. This scenario will require a contracted crew to come and perform recommended hardware tune-ups and repairs based on periods of time. The maintenance crew would respond retroactively to broken equipment.
-\paragraph{} The modern approach is a proactive predictive approach that leverages machine learning and the power of the cloud and mobile computing. The sensor data that is collected is sent in real time to an analytic service that can analyze the sensor data in real time with machine learning and automate when to send out a maintenance crew out to perform repairs before the equipment breaks and becomes unusable.
-%\subsection{Executive Suite Access}
+	\subsection{General}
+	\paragraph{} 
+	- We will need a working camera network. all cameras should be viewable from control system
+	- the self payrobusting kiosk will present tokens(tickets) that are unique 
+            - form must be filled out with name, emergency contact, and waiver
+            - accept credit card
+            - accept cash
+            - upon acceptance the token with unique ID will be tied to 
+            must be able to configure the token and revuild RFID information
+        - (my opinion) I believe that these tokens should be devices that have:
+            - map (digital?) used to help guide
+            - ***NEEDED*** GPS - will be tracked
+            - ***NEEDED*** reprogrammable RFID ship
+            - Speaker - to help instruct 
+        - Self-Driving car (contracted out) (how many total cars do we have?)
+            - must work with out interface and logic for use in normal mode
+            - must work with out interface and logic for use in Emergency mode
+            - must include GPS
+            - must include loud Speaker
+            - must include a unique car ID
+            - Must include an RFID reader
+            - there must be a call button to talk with the Control Station
+            - door sensors
+
+	\paragraph{} 
+	\paragraph{}
+	
+	\subsection{Safety}
+	\paragraph{}
+	        - Electric Fence status needs to be available.
+        - When Electric fence fails emergency mode MUST be activated
+        - Cars will have a safety features
+            - they will lock securely when driving,
+            - they must know what visitors they drive over to T-Rex pit (using the tokens)
+            - they sound an alarm and send notifications to tokens that they are keeping track of after alloted time to bring back to south-end
+            - They will ONLY leave after all visitors that it drove over are inside the car
+            - there will be X amount of dedicated patrol cars used by employees that go back and forth from south to north end
+	\paragraph{}
+
+	\subsection{Emergency}
+	\paragraph{}
+	
+	\subsection{Maintenance}
+	\paragraph{}
+	- Emergency Mode triggered from the electric fence outage or from testing in maintanance mode
+        - Alarms triggered everywhere!
+        - There will be X amount of self driving cars that will always be located at the north-side only used for emergency mode
+        - Cars will loosen the requirements and will begin accepting  any passengers and will begin leaving every X minutes whether full or not
+        - all cars that are NOT currently in manual override or driving passengers back to the south end will be dispatched to the north-end
+        - after emergency mode is initiated - even if the fence comes back up, emergency mode should not exit until manually triggered by a human employee
+    - Maintanance
+        - Cars 
+            - will need to alert the Control station when they need maintanance if it can drive they should return to the south lot and taken out of production
+            - any passengers that were on this vehicle can board a new vehicle
+            - if a car breaks down on the island a maintanance crew will ride a new self-driving vehicle to the broken down one and help move visiters into new vehicle.
+            
+        - Fence
+            - the power to the fence should have extra redundencies which allows for seemless maintanance with absolutely NO power outage
+        - camera systems
+            - camera should be hot swapable and uplinks should be redundent
+        - tokens 
+            - these may need to be maintaned and upgraded and replaced over time.
+        - kiosks
+            - these should notify the control station of need for maintanance or have a manual override to turn on maintanance mode
+	\paragraph{}
+	
 \section{Conclusions}
-\paragraph{} The ECS is a huge project as outlined above. We have general sensors like buttons and locations like each car and the floor lobbies. There are also specifics to the traction system and cars as well as recommendations for the class of the elevator. We outlined the findings needed for a specific passenger class A elevator.
-\paragraph{} The rest of these findings are more universal in general and we broke them up in the safety section and the emergency section. These are found in all elevators and required for very important reasons. The maintenance is an evolving aspect of elevators and has the biggest rate of change.
-\paragraph{} ABC has made it clear that money will not be an issue, which will enable technical feasibility. We will be able to build a system that interfaces with any and all these subsystems and components.
+\paragraph{}
+\paragraph{}
+\paragraph{}
+
+\bibliography{../ReferenceMaterial/references}
 \end{document}
