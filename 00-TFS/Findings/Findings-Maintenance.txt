@@ -1,7 +1,7 @@
 (Italics)The maintenance of this system is an extremely important aspect of this syste. It is critical 
 that every device that communicates on this system stay maintained and in peek performance at all time. Well maintained
-equipment will fail less. Due to the intense need for safety we can not cut corners for the CGC and need for 
-a system that identifies the need for maintenance efficiently is critical. This project can be technically feasible identifieswe make this a focal point.
+equipment will fail less. Due to the intense need for safety we can not cut corners for the CGC and the need for 
+a system that identifies maintenance needs efficiently is critical. This project can be technically feasible if we make this a focal point.
 the maintenance system will monitor and respond to the cars, electric fence, the camera network, the kiosks and tokens.
 
 Cars
@@ -18,7 +18,7 @@ Fence
     without a hiccup. The redundent links should allow for maintanance without disturbing the fence. 
     
 Camera Systems
-     The camera system will have cameras that are how swappable for ease maintenace. the network links will be redundent as Well.
+     The camera system will have cameras that are hot swappable for easy maintenace. the network links will be redundent as well.
      They will report when they are down so they can be maintained
 Tokens 
     Since this will act as a locater device for the visitors it is critical to their safety. these may need to be replaced
