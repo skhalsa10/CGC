@@ -27,13 +27,11 @@ Findings
             - form must be filled out with name, emergency contact, and waiver
             - accept credit card
             - accept cash
-            - upon acceptance the token with unique ID will be tied to 
-            must be able to configure the token and revuild RFID information
-        - (my opinion) I believe that these tokens should be devices that have:
-            - map (digital?) used to help guide
-            - ***NEEDED*** GPS - will be tracked
-            - ***NEEDED*** reprogrammable RFID ship
-            - Speaker - to help instruct 
+            - upon acceptance the token with unique ID will be tied to user and produced
+        - token
+            - unique ID
+            - Acts as a key
+            - Acts as a locator
         - Self-Driving car (contracted out) (how many total cars do we have?)
             - must work with out interface and logic for use in normal mode
             - must work with out interface and logic for use in Emergency mode
@@ -43,6 +41,8 @@ Findings
             - Must include an RFID reader
             - there must be a call button to talk with the Control Station
             - door sensors
+            - ability to go into Manual mode
+            - Access to camera
     - Safety
         - Electric Fence status needs to be available.
         - When Electric fence fails emergency mode MUST be activated
@@ -64,8 +64,7 @@ Findings
         - Cars 
             - will need to alert the Control station when they need maintanance if it can drive they should return to the south lot and taken out of production
             - any passengers that were on this vehicle can board a new vehicle
-            - if a car breaks down on the island a maintanance crew will ride a new self-driving vehicle to the broken down one and help move visiters into new vehicle.
-            
+            - if a car breaks down on the island a maintanance crew will ride a new self-driving vehicle to the broken down one and help move visiters into new vehicle.   
         - Fence
             - the power to the fence should have extra redundencies which allows for seemless maintanance with absolutely NO power outage
         - camera systems
@@ -74,4 +73,4 @@ Findings
             - these may need to be maintaned and upgraded and replaced over time.
         - kiosks
             - these should notify the control station of need for maintanance or have a manual override to turn on maintanance mode
-            
+

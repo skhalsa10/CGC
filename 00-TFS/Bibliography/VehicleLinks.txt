@@ -1,0 +1,4 @@
+https://www.aitrends.com/ai-insider/apis-and-ai-self-driving-cars/
+https://developer.nvidia.com/drive
+https://spectrum.ieee.org/transportation/advanced-cars/6-key-connectivity-requirements-of-autonomous-driving
+https://appdevelopermagazine.com/sensor-fusion-annotation-autonomous-vehicle-api-launches/
