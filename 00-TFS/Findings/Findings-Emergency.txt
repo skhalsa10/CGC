@@ -1,0 +1,8 @@
+When it comes to emergency for the CGCS, the CGCS will go in Emergency Mode when either the electric fence goes off or whenever the maintenance personnel 
+tests the system and the alarm goes off. In the case of emergency, the alarms will be triggered everywhere. In the case of an emergency, there will be X
+amount of self-driving cars always be located at the north-side. The self-driving cars will not follow any protocol in the case of an emergency and will 
+accept any passengers and carry the passengers without the requirement of whether the vehicle has all the passengers or not. All the cars on the south end 
+who are not driving any passengers will be relocated to north end to ensure that all the visitors are safely carried back to south end without any 
+major damage. Note here that during the emergency mode, if the fence comes back up, the emergency mode will not exit until manually triggered by a
+human employee. 
+ 
