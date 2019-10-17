@@ -4,11 +4,14 @@
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{sectsty}
+\usepackage{float}
 \bibliographystyle{apalike}
 \setcitestyle{open={[},close={]}}
 \sectionfont{\color{DarkBlue}} 
 \subsectionfont{\color{LightBlue}}
 \subsubsectionfont{\color{LightBlue}}
+\paragraphfont{\color{LightBlue}}
+\subparagraphfont{\color{LightBlue}}
 \begin{document}
 \definecolor{DarkBlue}{HTML}{4a5a8a}
 \definecolor{LightBlue}{HTML}{4f81bf}
@@ -16,17 +19,17 @@
 \begin{flushleft}
 \vspace*{1cm}
 \Huge
-\textbf{Elevator Control System}\\
+\textbf{Cretaceous Gardens Controller}\\
 \vspace{1cm}
 \Huge
 \textit{Requirements Definition Document}\\
 \vspace{1cm}
 \Large
-\textit{RDD Version 2.0}\\
+\textit{RDD Version 1.0}\\
 \vspace{5cm}
 \LARGE
 Team \#3\\
-19 September 2019
+17 October 2019
 \vfill
 \Huge
 \textbf{CS 460 Software Engineering}
@@ -36,115 +39,69 @@ Team \#3\\
 \tableofcontents
 \newpage
 \section{Introduction} %Zeke
-\paragraph{} Elevators are everywhere. We expect them to exist in most buildings. They are evermore vital to modern buildings, and not only luxurious for variants. Elevators are complex amalgamations of mechanical parts, computer hardware, and computer software. All constituents of the system must work in harmony with each other in order to ensure the safety of multitudes of human and even animal lives. All in life is a balancing act. In the context of an elevator control system, we must find the perfect balance between safety and efficiency.
-\paragraph{} Safe and efficient travel via a set of elevators between many floors at a high-end hotel is sought after with the successful implementation of said Elevator Control System. Special software functionalities are required for regular passengers, \textit{emergency personnel} and \textit{executive users}. It follows that attention to detail is crucial for enforcing all safety and efficiency protocols.
-\paragraph{} Herein are found \textit{definitions} of key terms (section \ref{def}). Further clarification or disambiguation of any terms ought to be addressed upon their identification to maintain the integrity of the development trajectory. The section that follows covers the \textit{objectives} the project, then comes the \textit{overall organization} of the system (section \ref{sys}). Section \ref{int} details all expected \textit{interfaces} of the system. Section \ref{cap} shows the expected \textit{capabilities}. Afterward are all known \textit{design constraints} in section \ref{con}. Additional constraints will be reported upon discovery. The document concludes with the \textit{references} section.
 
 \section{Definition of Terms} %Zeke
 \label{def}
 \textit{This section details all terms used in the document for the sake of minimizing ambiguity as much as possible among team members, between teams, and between the client and the team. Remaining with the interest of preserving the integrity to our communication, the following terms may be altered, reduced, or augmented to better reflect what it is that everyone is attempting to say.}
 % the basis for accurate communication
 \pagebreak
-\subsection{Building}
-\begin{list}{•}{•}
-	\item \textbf{Adjacent:} A configuration of elevator bays in which one bay is to the right of another, which is to the right of another, which is also to the right of another. It is the contiguous arrangement of elevator bays.
-	\item \textbf{Alarm System:} A system independent of the ECS with which the ECS is to communicate in the event of an emergency.
-	\item \textbf{Bay:} A port that corresponds to a cabin. There is one bay for each elevator on each floor.
-	\item \textbf{Bay Double Doors:} Two doors that slide horizontally and toward the center of 
-	the bay opening when closing, and away from the center (toward the left and right of the 
-	elevator) when opening.
-	\item \textbf{Current Floor:} The floor to which an elevator happens to be nearest when the 
-	\textit{ECS} receives a request to go to the \textit{target floor}.
-	\item \textbf{Executive Suite:} The penthouse located on the 20th floor of the building. This is the topmost floor.
-	\item \textbf{Floor:} A level within the hotel.
-	\item \textbf{Lobby:} The first floor of the building.
-	\item \textbf{Target Floor:} The floor from which a request has been detected by the \textit{ECS}
-\end{list} 
-
-\subsection{Elevator Control System}
-\begin{list}{•}{•}
-	\item \textbf{Acceleration Sensor:} The device responsible for collecting data about the 
-	acceleration with which a \textit{cabin} is traveling at any given time.
-	\item \textbf{Alignment Sensor:} The device responsible for collecting data about physical 
-	alignment of an elevator \textit{cabin} relative to a \textit{bay}.
-	\item \textbf{Capacity Protocol:} The procedure which is to be followed in the event that the 
-	weight capacity of a cabin is met or exceeded.
-	\item \textbf{ECS:} An abbreviation for \textit{Elevator Control System}.
-	\item \textbf{Emergency Protocol:} The procedure which is to be followed in the event of a fire or 
-	any other type of emergency within the building that necessitates the use of the elevators on 
-	behalf of any emergency personnel.
-	\item \textbf{Obstruction Sensor:} The device responsible for collecting data about any physical 
-	obstructions between the sliding doors. These may be within a cabin or installed on bays.
-	\item \textbf{Speed Sensor:} The device responsible for collecting data about the speed at which 
-	a \textit{cabin} is traveling at any given time.
-	\item \textbf{Weight Sensor:} The device responsible for collecting the data about the current 
-	physical weight exerted on a \textit{cabin}.
 	
-\end{list}
-\subsection{Elevator}
-\begin{list}{•}{•}
-	\item \textbf{Aligned:} The state of an elevator in which the \textit{alignment sensor(s)} on the 
-	cabin detect the \textit{alignment sensor(s)} on the \textit{target floor}.  	
-  	\item \textbf{Cabin:} The part of an elevator system that contains passengers as they are moved 
-  	from one floor to another.
-	\item \textbf{Elevator Double Doors:} Two doors that slide horizontally and toward the center of 
-	the elevator opening when closing, and away from the center (toward the left and right of the 
-	elevator) when opening.
-	\item \textbf{Empty Elevator:} An elevator that is currently carrying zero (0) individuals.
-	\item \textbf{Floor Button Panel:} The physical component inside a \textit{cabin} that features 
-	enumerated buttons that may be pressed in order to request that the \textit{cabin} go to a 
-	specific floor.
-	\item \textbf{Non-Empty Elevator:} An elevator that is currently carrying at least one (1) 
-	individual.
-\end{list}
-\subsection{User}
-\begin{list}{•}{•}
-	\item \textbf{Emergency Crew:} Firefighters, paramedics, or law enforcement officials.
-	\item \textbf{Executive:} A guest that is staying in the topmost floor of the hotel.
-	\item \textbf{Guest:} An individual who is renting a hotel room from the hotel.
-	\item \textbf{Maintenance Crew:} Custodians or housekeepers of the hotel.
-	\item \textbf{Passenger:} The generic term for a user of the elevator. Someone who is currently 
-	inside an elevator cabin.
-	\item \textbf{Tech:} An individual responsible for diagnosing and fixing any ECS issues that may 
-	arise. May also be referred to as \textit{technical crew}.
-\end{list}
 
-\section{Objectives} %Siri
+\section{Objectives} 
 \label{obj}
-% the central issue
-The Elevator Control System’s objective is to service guests, emergency crew, and staff of our client’s high-end hotel in downtown Albuquerque, NM.
-\begin{enumerate}
-	\item It will do so by controlling four elevators and 20 floors.
-	\item It will do so safely and efficiently.
-\end{enumerate}
-\section{Overall System Organization} %Santi
-\label{sys}
-% the context, here should be a diagram so that we can visualize all interactions between the system and interfaces
-\paragraph{} The hotel will have four traction elevators that will cover the range of 20 floors, the last one is the penthouse, which is restricted to executive access. Every floor will have four corresponding elevator bays. Figure \ref{fig:bb} on the next page shows a black box diagram of the ECS.
+\paragraph{} \textit{We came up with four main objectives that we believe are critical to this specific system. We believe if we design the software around these objectives that it will produce the best  and most appropriate product.}
+\subsection{Safety}\label{saf}
+\paragraph{}The main objective of this product is to build a CGCS which focuses on safe and reliable experience to our customers. Whether we talk about the electric fences or self-driving cars, ensuring safety is the highest priority. We want the visitors to feel safe in every way possible and therefore, all these necessary measurements are taken into account by the CGCS.
+\subsection{User Experience}\label{use}
+\paragraph{}We want the user to have an amazing experience. Since this is a park to witness the amazing T-Rex, the user experience should be top notch. We will achieve this by focusing on the details of every interaction with the user. This involves easy token purchases and intuitive interaction with the vehicles. The user experience must be reliable. 
+\subsection{Maintainability}\label{mai}
+\paragraph{}The entire CGCS and all nodes that it controls will be designed with maintainability in mind. The system will understand the state of its health and report on it. Every node of the system will be designed this way and the CGCS will understand the health state of all systems. The system will have redundant infrastructure to maintain the system with minimal downtime specifically focus on the electric fence.
+\subsection{Efficiency}\label{eff}
+\paragraph{}When it comes to efficiency, the CGCS will make sure that both the software and hardware components are highly efficient and functional. Whether we talk about self-driving cars, pay kiosks, camera system, gps, or electric fences, the CGCS must be efficient in interacting with them. This will be possible when all the other objectives are met.  
 
-\paragraph{} The ECS will have a centralized architecture to permit knowing the position of each elevator and states of all the sensors. Figure \ref{fig:gearless} (shown below) is ample of a traction elevator. The central control room will exist somewhere convenient along the elevator shaft. This is where the main control unit will live.
-\pagebreak
-\begin{figure}[h!]
-	\centering
-  \includegraphics[scale=.40]{BlackBox.jpg}
-  \caption{A black box of high-level inputs and outputs of the \textit{ECS}}
-  \label{fig:bb}
-\end{figure}
+
+
+\section{Overall System Organization} 
+\label{sys}
+
+    \begin{figure}[H]
+  		\centerline{\includegraphics[scale=.25]{CGCBlackBox.png}}
+  		\caption{A black box of high-level inputs and outputsof the \textit{CGCS}}
+  		\label{fig:blackbox}
+	\end{figure}
+
+
 \vfill
-\begin{figure}[h!]
-	\centering
-  \includegraphics[scale=.25]{gearless.png}
-  \caption{An example of a traction-based elevator \cite{trac}.}
-  \label{fig:gearless}
-\end{figure}
 \pagebreak
+
+
+
 \section{Interfaces} %Anas
 \label{int}
 %written by anas
-\paragraph{} \textit{In order to make our Elevator Control System (ECS) robust, we have come up with eight important interfaces, keeping in mind the given constraints from our client. The core interface is the Elevator Control System (ECS) and all the other sub-interfaces are combined into two categories: System Interfaces and User Interfaces. These interfaces are described below.}
+\paragraph{} \textit{We have broken our interfaces up into main systems. these interfaces may be composes of their own sensors but they do not interface with the CGCS. The following list of interfaces list their sensors, hardware, and features.}
 
-\subsection{The Elevator Control System}
-\paragraph{} The ECS is the general interface and it interacts with all the other sub-interfaces. The ECS interface will provide options for elevator cars/cabins and bays. In our case, there will be four elevator cars, and for these four elevators, there will be four elevator bays on each floor. In total, there will be eighty identical bays consisting of an up and down button (except for 1st floor and 20th floor, which will only have an up button and down button respectively). All these options will be configured through the ECS. The ECS will also provide fire alarm sensing which will prevent both elevator cars and elevator bays from functioning if fire alarm is activated and this state will be valid until the Emergency key is detected.
+\subsection{Pay Kiosks}
+	\paragraph{} \textit{The purpose of the the Pay Kiosk interface is to connect the physical Pay Kiosks to the CGCS. It is composed of sensors and is designed to do specific feature}
+		\subparagraph{Sensors}
+			\begin{list}{•}{•}
+					\item \textbf{Touch Screen: }used to sense user interaction 
+					\item \textbf{Credit card: }accepts all major credit/debit cards 
+					\item \textbf{Cash receptacle: }accepts and analyzes cash 
+			\end{list}
+		\subparagraph{Hardware}
+			\begin{list}{•}{•}
+					\item \textbf{change dispenser: }dispenses appropriate change to the visitor buying a token
+					\item \textbf{Token dispenser: }dispenses token with unique ID to user
+			\end{list}
+		\subparagraph{Features}
+			\begin{list}{•}{•}
+					\item \textbf{Token builder: }this features will take the payment and the filled out user form and build a unique token for the visitor.
+					\item \textbf{Maintenance: }this feature will let the employees manage certain issues associated with the pay kiosks and also will let the employees see the health of the machine. 
+			\end{list}
+
+
+
 
 
 \subsection{System Interfaces}
@@ -173,72 +130,72 @@ They are meant to be simple, straight forward and easy to use.}
 \paragraph{} The keyhole panel interface will provide functionality to specific clients such as Executives and Firefighters. The 20th floor button will have a special status and it will only work if an executive key is detected. This interface will be very simple and straight-forward to use for our special clients as it will only require a key to unlock more features in the elevator.
 
 
-\section{Capabilities} %Zeke
-\label{cap}
-\textit{Herein is the outline of what the Elevator Control System will be capable and of what it will not be capable. Most of its capabilities may be described in terms of various protocols and its limitations may be described relative to the capabilities of external hardware that is to provide it data. For example, the \textit{ECS} should be expected to move cabins from floor to floor at safe speeds and accelerations but it cannot possibly account for speedometers and accelerometers that provide it inaccurate data. Sensors are assumed to not be faulty, as they are not part of the \textit{ECS} but are to provide it information.}
-% the outline for a solution
-\subsection{Capacity Protocol} The \textit{ECS}, under the assumption that all weight capacity sensors in the cabins are fully functional, may be expected to never provide service to a cabin whose weight capacity has been reached or exceeded. The cabin is to
-\begin{enumerate}
-\item Alert passengers of overcapacity issue.
-\item Notify passengers that it will not provide service until the issue has been resolved.
-\item Remain on the floor until the issue has been resolved.
-\item Continue regular functions after the issue has been resolved.
-\end{enumerate}
+% \section{Capabilities} %Zeke
+% \label{cap}
+% \textit{Herein is the outline of what the Elevator Control System will be capable and of what it will not be capable. Most of its capabilities may be described in terms of various protocols and its limitations may be described relative to the capabilities of external hardware that is to provide it data. For example, the \textit{ECS} should be expected to move cabins from floor to floor at safe speeds and accelerations but it cannot possibly account for speedometers and accelerometers that provide it inaccurate data. Sensors are assumed to not be faulty, as they are not part of the \textit{ECS} but are to provide it information.}
+% % the outline for a solution
+% \subsection{Capacity Protocol} The \textit{ECS}, under the assumption that all weight capacity sensors in the cabins are fully functional, may be expected to never provide service to a cabin whose weight capacity has been reached or exceeded. The cabin is to
+% \begin{enumerate}
+% \item Alert passengers of overcapacity issue.
+% \item Notify passengers that it will not provide service until the issue has been resolved.
+% \item Remain on the floor until the issue has been resolved.
+% \item Continue regular functions after the issue has been resolved.
+% \end{enumerate}
 
-\subsection{Emergency Protocol} The \textit{ECS}, under the assumption that the alarm system is fully functional, may be expected follow the correct protocol when presented with an emergency situation.
-\begin{enumerate}
-\item Close all doors (provided there are no obstructions).
-\item Move all cabins to the lobby floor without stopping at any floors between its initial floor and the lobby.
-\item Open all doors after having arrived to the lobby.
-\item Remain open until an emergency key is detected in the emergency keyhole.
-\end{enumerate}
+% \subsection{Emergency Protocol} The \textit{ECS}, under the assumption that the alarm system is fully functional, may be expected follow the correct protocol when presented with an emergency situation.
+% \begin{enumerate}
+% \item Close all doors (provided there are no obstructions).
+% \item Move all cabins to the lobby floor without stopping at any floors between its initial floor and the lobby.
+% \item Open all doors after having arrived to the lobby.
+% \item Remain open until an emergency key is detected in the emergency keyhole.
+% \end{enumerate}
 
-\subsection{Efficient Usage Protocol} The \textbf{ECS} may be expected to optimize resource usage in the following ways.
-\begin{enumerate}
-\item Any requests from floors between an elevator's \textit{current floor} and its most recent \textit{target floor} will be fulfilled so as to not waste time and energy by addressing requests in the order they were received.
-\item \label{mor} If more than one request is detected at the same time and the elevator is \textit{empty}, the \textit{ECS} will dispatch whichever elevator is closest to either \textit{target floor}.
-\item \label{eql} In the event that multiple requests are made simultaneously, that the elevator is \textit{empty} and that no \textit{target floor} is closer than another, the \textit{ECS} will arbitrarily break any ties by randomly choosing which elevator to dispatch to the floors.
-\item Any \textit{non-empty} elevators found to be in either situation \ref{mor} or \ref{eql} will ignore requests from floors located opposite of its direction.
-\item If a cabin is currently \textit{empty}, then the cabin will be allowed to travel at greater accelerations and speeds than when it is \textit{non-empty}.
-\end{enumerate}
+% \subsection{Efficient Usage Protocol} The \textbf{ECS} may be expected to optimize resource usage in the following ways.
+% \begin{enumerate}
+% \item Any requests from floors between an elevator's \textit{current floor} and its most recent \textit{target floor} will be fulfilled so as to not waste time and energy by addressing requests in the order they were received.
+% \item \label{mor} If more than one request is detected at the same time and the elevator is \textit{empty}, the \textit{ECS} will dispatch whichever elevator is closest to either \textit{target floor}.
+% \item \label{eql} In the event that multiple requests are made simultaneously, that the elevator is \textit{empty} and that no \textit{target floor} is closer than another, the \textit{ECS} will arbitrarily break any ties by randomly choosing which elevator to dispatch to the floors.
+% \item Any \textit{non-empty} elevators found to be in either situation \ref{mor} or \ref{eql} will ignore requests from floors located opposite of its direction.
+% \item If a cabin is currently \textit{empty}, then the cabin will be allowed to travel at greater accelerations and speeds than when it is \textit{non-empty}.
+% \end{enumerate}
 
-\subsection{Executive Usage Protocol} The \textit{ECS}, under the assumption that all \textit{executive keyholes} and \textit{executive keys} function properly, may be expected to only permit access to the penthouse when the correct key is inserted and detected in the correct keyhole by the ECS. The penthouse is also known as the topmost floor, floor 20, 20th floor, or executive suite.
+% \subsection{Executive Usage Protocol} The \textit{ECS}, under the assumption that all \textit{executive keyholes} and \textit{executive keys} function properly, may be expected to only permit access to the penthouse when the correct key is inserted and detected in the correct keyhole by the ECS. The penthouse is also known as the topmost floor, floor 20, 20th floor, or executive suite.
 
-\subsection{Obstruction Protocol} The \textit{ECS}, under the assumption that all \textit{obstruction sensors} function properly, within all cabins and all bays, may be expected to never close any cabin doors nor any bay doors that find themselves obstructed. In the event that an obstruction is found, the \textit{ECS} shall
-\begin{enumerate}
-\item Stop all door motion in the associated cabin(s) and bays(s).
-\item Slowly decelerate the associated cabin(s) to a halt if in motion upon detection.
-\item Slowly open both sets of doors (away from the center of the cabin and bay openings).
-\item Remain open until the obstruction has been cleared.
-\item Continue regular service.
-\end{enumerate}
+% \subsection{Obstruction Protocol} The \textit{ECS}, under the assumption that all \textit{obstruction sensors} function properly, within all cabins and all bays, may be expected to never close any cabin doors nor any bay doors that find themselves obstructed. In the event that an obstruction is found, the \textit{ECS} shall
+% \begin{enumerate}
+% \item Stop all door motion in the associated cabin(s) and bays(s).
+% \item Slowly decelerate the associated cabin(s) to a halt if in motion upon detection.
+% \item Slowly open both sets of doors (away from the center of the cabin and bay openings).
+% \item Remain open until the obstruction has been cleared.
+% \item Continue regular service.
+% \end{enumerate}
 
-\pagebreak
-\section{Design Constraints} %Matt
-\label{con}
-%restrictions placed on the solution space
-\paragraph{} \textit{The various requirements for the elevator control system are as follows}
-\subsection{General Constraints}
-\begin{itemize}
-	\item The \textit{ECS} will service 20 floors.
-	\item The \textit{ECS} will control four identical elevators.
-	\item Each elevator bay will have one set of directional buttons.
-	\item The bays on floor 20 will have only \textit{down} buttons.
-	\item The bays on floor one will have only \textit{up} buttons.
-	\item Each cabin will have one set of buttons, numbered for each floor.
-	\item Each cabin will have two keyholes: EMERGENCY and EXECUTIVE.
-	\item An elevator will only go to the top floor if an executive key is detected.	
-\end{itemize}
-\subsection{Safety Constraints}
-\begin{itemize}
-	\item A weight sensor will be used to ensure capacity is not exceeded.
-	\item The \textit{ECS} will have a two-phase emergency mode triggered by the fire alarm sensor.
-	\item Neither the floor nor the cabin door can close while obstructed. There are sensors built in to aid in this.
-	\item The elevator weight capacity will be 25\% of its cabin weight \citep{krupp}.
-	\item ASME A17.1, Section 2.27 Emergency Operation and Signaling Device regulation will be followed \citep{asme}.
-	\item No elevator will exceed a safe speeds nor acceleration.
-	\item Elevators can only open their doors if they are aligned with a floor.
-\end{itemize}
+% \pagebreak
+% \section{Design Constraints} %Matt
+% \label{con}
+% %restrictions placed on the solution space
+% \paragraph{} \textit{The various requirements for the elevator control system are as follows}
+% \subsection{General Constraints}
+% \begin{itemize}
+% 	\item The \textit{ECS} will service 20 floors.
+% 	\item The \textit{ECS} will control four identical elevators.
+% 	\item Each elevator bay will have one set of directional buttons.
+% 	\item The bays on floor 20 will have only \textit{down} buttons.
+% 	\item The bays on floor one will have only \textit{up} buttons.
+% 	\item Each cabin will have one set of buttons, numbered for each floor.
+% 	\item Each cabin will have two keyholes: EMERGENCY and EXECUTIVE.
+% 	\item An elevator will only go to the top floor if an executive key is detected.	
+% \end{itemize}
+% \subsection{Safety Constraints}
+% \begin{itemize}
+% 	\item A weight sensor will be used to ensure capacity is not exceeded.
+% 	\item The \textit{ECS} will have a two-phase emergency mode triggered by the fire alarm sensor.
+% 	\item Neither the floor nor the cabin door can close while obstructed. There are sensors built in to aid in this.
+% 	\item The elevator weight capacity will be 25\% of its cabin weight \citep{krupp}.
+% 	\item ASME A17.1, Section 2.27 Emergency Operation and Signaling Device regulation will be followed \citep{asme}.
+% 	\item No elevator will exceed a safe speeds nor acceleration.
+% 	\item Elevators can only open their doors if they are aligned with a floor.
+% \end{itemize}
 \bibliography{../../ReferenceMaterial/BibTeX/references}
 % run latex, then bibtex, then quickbuild all on the tex file
 \end{document}
