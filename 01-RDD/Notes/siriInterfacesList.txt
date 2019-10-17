@@ -1,0 +1,61 @@
+Here is a brainstorm of interfaces we may need to worry about:
+
+pay Kiosks
+    - Credit card 
+    - Touch Screen User interface
+    - Token builder
+    - Maintenance status
+    - Cash recepticle
+    - change dispenser
+    - ethernet connection
+
+Token
+    -GPS 
+    -RFID 
+    -Does the token have a speaker (for alarms and communications?
+    -Does the tracker have a digital screen for map and instructions?
+    -Wireless networking 
+
+Car (API that interfaces the following to the CGC)
+    - Alarm (loud external speaker)
+    - RFID reader that covers the proximity of the car.
+    - seat weight sensor?
+    - camera feed
+    - Intercom communication 
+    - Door Locks
+    - maintenance system status
+    - Wireless networking
+
+Camera network (API that provides the following)
+    - interface with monitoring system to view any camera
+    - interface with system to control specified camera
+    - interface with DVR system
+    - maintenance system status
+    - Hardwire Ethernet (redundent uplinks)
+
+Electric Fence
+    - active status
+    - Maintenance status
+    - Electrical input status
+    - Hardwire Ethernet (redundent uplinks)
+
+Global Alarm system
+    - Speaker access
+    - Maintenance status
+    - Hardwire Ethernet (redundent uplinks)
+
+CGC Station (to monitor system and respond to nodes)
+    - speaker
+    - microphone
+    - monitor
+    - touch screen recognition
+    - Hardwire Ethernet (redundent uplinks)
+
+GPS server (provides locations of all relative nodes)
+    - keeps track of all GPS devices and their longitude and latitude
+    - third party service to privide GPS services
+     
+Island Infrastructure
+    - Wireless network infrastructure for communication of all networked devices
+    - hard wire Ethernet network infrastructure for a fast LAN 
+    - Power and backup generator
