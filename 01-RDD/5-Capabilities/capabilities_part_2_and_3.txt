@@ -1,0 +1,15 @@
+Emergency capabilities:
+Alarm – distinct and able to hear everywhere 
+Cars Emergency Mode – cars will not gather the assigned passengers, instead it will gather until full, or after a timer, and then depart for the south side of the island
+Surplus of Cars – Extra cars will be stored up both the north and south side of the island so as to ensure full evacuation
+Car Dispatching – in case of emergency all south side cars without passengers will be dispatched north in order to gather all guests as quickly as possible
+
+
+
+Safety Capabilities:
+Electric fence – will monitored through several sensors
+Backup generator – to ensure the fence stays electrified
+Camera network – to keep track of both the t-rex and all the guests
+Redundant Uplinks on the network(s) – to ensure that the system(s) stays up
+Patrol of cars – A slap portion of cars will patrol with staff to keep track of and ensure the functionality of the park
+Maintenance mode – The enclosure will have a maintenance mode to perform maintenance without risking employees
