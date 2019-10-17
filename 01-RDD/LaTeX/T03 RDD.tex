@@ -264,27 +264,69 @@ list their sensors, hardware, and features.}
 
 \section{Capabilities}
 \label{cap}
-\paragraph{}\textit{The capabilites\footnote {Capabilities by Matt.}}
+\paragraph{}\textit{The capabilities of the system are significantly expansive due to its central role
+in the operation of the resort. Thus, the complexity of the system naturally leads to a description
+of the broad topography of its capabilities. First is the overview of protocol-related capabilities, then
+emergency-supporting capabilities, followed by capabilities that reinforce safety features, and finally an 
+overview of its monitoring capabilities.\footnote {Capabilities by Matt and Zeke.}}
 % the outline for a solution
-	\subsection{Emergency Capabilities}
+	\subsection{Protocols}
 	\begin{enumerate}
-		\item Alarm – distinct and able to hear everywhere.
-		\item Cars Emergency Mode – cars will not gather the assigned passengers, instead it will gather until full, or after a timer, and then depart for the south side of the island.
-		\item Surplus of Cars – extra cars will be stored up both the north and south side of the island so as to ensure full evacuation.
-		\item Car Dispatching – in the case of emergency all south side cars without passengers will be dispatched north in order to gather all guests as quickly as possible.
+		\item The CGS will have a set of specified protocols for directing the network of
+		autonomous vehicles. The protocols will vary among sets of vehicles. For example, a protocol for the 
+		visitor vehicles will be executed in the case of an enclosure breach, another for preparation before
+		arrival of visitors and after their departure (outside business hours), another for maintenance, etc.
+		\item The CGS will provide configurability of processes through straightforward interactions.
+		\begin{enumerate}
+			\item The creation of new protocols.
+			\item The addition of pre-made protocols.
+			\item The removal or extraction of protocols.
+			\item The modification of existing protocols.
+		\end{enumerate}
+		\item The CGS will allow for the simulation of any given protocol.
+	\end{enumerate}
+	
+	\subsection{Emergency}
+	\begin{enumerate}
+		\item The CGC will be able to receive distress or failure signals and propagate
+		through the siren and alarm network of the island. 
+		\item The CGC will be able to communicate with external authorities and emergency personnel.
+		\item It will also (through human intervention) be capable of disarming the alarm system after 
+		the issue has been addressed.
+		\item The CGC will will be able to dynamically account for new nodes in the network or for nodes that are
+		taken out for whatever reason. An extension may be that nodes may be used to triangulate the location of missing
+		nodes.
 	\end{enumerate}
 
-	\subsection{Safety Capabilities} 
+	\subsection{Safety} 
 	\begin{enumerate}
-		\item Electric Fence – will monitored through several sensors.
-		\item Backup Generator – to ensure the fence stays electrified.
-		\item Camera Network – to keep track of both the t-rex and all the guests.
-		\item Redundant Uplinks on the Network(s) – to ensure that the system(s) stays up
-		\item Patrol of Cars – A slap portion of cars will patrol with staff to keep track of and ensure the functionality of the park.
-		\item Maintenance Mode – The enclosure will have a maintenance mode to perform maintenance without risking employees.
+		\item The CGC will allow the monitoring of every panel of the enclosure.
+		\item The CGC will allow the monitoring of every camera.
+		\item The CGC will reinforce power backup measures.
+		\item The CGC will maintain redundant uplinks on the network(s).
+		\item The CGC will command a fleet of patrol vehicles around the island.
+		\item The CGC will support a maintenance mode for real-time repair of any node.
+	\end{enumerate}
+	
+	\subsection{Monitoring}
+	\begin{enumerate}
+		\item The CGC will be able to track all guests at all times.
+		\item The CGC will be able to track all vehicles at all times.
+		\item The CGC will be able to track the location of the T.Rex at all times.
+		\item The CGC will be able to process live video stream of various locations on the island.
+		\item The CGC will be able to process live video stream of the enclosure.
+		\item The CGC will be able to process live video stream at kiosks.
+		\item The CGC will be able to perform regular or on-demand audits of the network state.
+	\end{enumerate}
+	
+	\subsection{Financial Analysis}
+	\begin{enumerate}
+		\item The CGC will be able to provide financial information and basic summary statistics.
+		\item The CGC will be able to identify any striking patterns of cash flow.
+		\item The CGC will be able to maintain long term financial records.
 	\end{enumerate}
 
-\section{Design Constraints} %Matt
+\section{Design Constraints} %Zeke
 \label{con}
 %restrictions placed on the solution space
 \paragraph{} \textit{//section introduction}
