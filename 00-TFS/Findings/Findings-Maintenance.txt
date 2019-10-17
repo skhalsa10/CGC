@@ -27,6 +27,6 @@ kiosks
     these should notify the control station of need for maintanance or have a manual override to turn on maintanance mode
 CGC
     The main system should be able to test all other systems. When the CGC is put into maintanance mode it should be able
-    to trigger a simulated fence down to see how the system will respond this will be done periodically to help isolate problems while there is not an emergecy in progress.
+    to trigger a simulated fence down to see how the system will respond. This will be done periodically to help isolate problems while there is not an emergecy in progress.
 
 
