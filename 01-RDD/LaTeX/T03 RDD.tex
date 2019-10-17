@@ -76,7 +76,7 @@ optimal implementation of a \textit{Cretaceous Gardens Controller} are identifie
 
 \section{Overall System Organization} 
 \label{sys}
-\paragraph{} The CGC will be centralized \footnote{System Organization 
+\paragraph{} The CGC will be centralized\footnote{System Organization 
 by Anas and Siri.} and will manage all relevant components. Figure 
 \ref{fig:blackbox} shows a black box diagram of the CGC. The CGC receives inputs 
 from sensors, user interfaces, and emergency systems like the \textit{Global 
@@ -105,20 +105,20 @@ list their sensors, hardware, and features.}
 	\paragraph{Sensors}
 	\begin{list}{}{}
 		\item \textbf{Touch Screen: }used to sense user interaction. 
-		\item \textbf{Credit card: }accepts all major credit/debit cards. 
-		\item \textbf{Cash receptacle: }accepts and analyzes cash. 
+		\item \textbf{Credit Card: }accepts all major credit/debit cards. 
+		\item \textbf{Cash Receptacle: }accepts and analyzes cash. 
 	\end{list}
 		
 	\paragraph{Hardware}
 	\begin{list}{}{}
-		\item \textbf{Change dispenser:} dispenses appropriate change to the 
+		\item \textbf{Change Dispenser:} dispenses appropriate change to the 
 		visitor buying a token.
-		\item \textbf{Token dispenser: } dispenses token with unique ID to user.
+		\item \textbf{Token Dispenser: } dispenses token with unique ID to user.
 	\end{list}
 
 	\paragraph{Features}
 	\begin{list}{}{}
-		\item \textbf{Token builder:} Takes payment and the out user form and builds
+		\item \textbf{Token Builder:} Takes payment and the out user form and builds
 		a unique token for the visitor.
 		\item \textbf{Maintenance: } Enables employees to manage issues with kiosks 
 		and provides machine health information. 
@@ -137,9 +137,9 @@ list their sensors, hardware, and features.}
 		
 	\paragraph{Hardware}
 	\begin{list}{}{}
-		\item \textbf{RFID: } the RFID chip will be programmed with a unique ID and 
+		\item \textbf{RFID: }the RFID chip will be programmed with a unique ID and 
 		used for multiple purposes included access to various systems and areas.
-		\item \textbf{Speaker: } the token contains speakers as hardware for alerts 
+		\item \textbf{Speaker: }the token contains speakers as hardware for alerts 
 		and instructions.
 	\end{list}
 
@@ -155,13 +155,13 @@ list their sensors, hardware, and features.}
 	
 	\paragraph{Sensors}
 	\begin{list}{}{}
-		\item \textbf{RFID reader: }that covers the proximity of the car and is used 
+		\item \textbf{RFID reader: }covers the proximity of the car and is used 
 		to grant access and count how many tokens are currently in the car. 
 		\item \textbf{Seat Weight Sensor: }used to determine if there is someone 
-		sitting in the seat. 
+		sitting on the seat. 
 		\item \textbf{Camera: }used by the car for autonomous driving and also 
 		connects to CGC for a needed scenario. 
-		\item \textbf{Mic: }used to sense voice for use in an intercom.
+		\item \textbf{Microphone: }used to sense voice for use in an intercom.
 	\end{list}
 		
 	\paragraph{Hardware}
@@ -177,6 +177,89 @@ list their sensors, hardware, and features.}
 	\begin{list}{}{}
 		\item \textbf{Maintenance System: }allows for health checks and health status 
 		communication of the car.  
+	\end{list}
+
+	\subsection{Camera Network}
+	\paragraph{} \textit{The camera network interface is incharge of communicating with every camera, the redundant network links to each camera, and the DVR system that keeps recording of all cameras per retention policy. It will report on its health.}		
+	
+	\paragraph{Sensors}
+	\begin{list}{}{}
+		\item \textbf{Cameras: }records video. 
+	\end{list}
+		
+	\paragraph{Hardware}
+	\begin{list}{}{}
+		\item \textbf{DVR: }stores and retains video.
+		\item \textbf{Hardwire Ethernet: }used for network communication with CGC. 
+	\end{list}
+	
+	\paragraph{Features}
+	\begin{list}{}{}
+		\item \textbf{Maintenance System: }allows for health checks and health status communication of the camera network.
+        \item \textbf{Viewing: }ability to view any camera feed.
+	\end{list}
+
+	\subsection{Electric Fence}
+	\paragraph{} \textit{The electric fence interface will ensure that the visitors are safe from the attack of T-Rex. It will provide features for maintainability, and sensing options to reduce the risk of any damage.}		
+	
+	\paragraph{Sensors}
+	\begin{list}{}{}
+		\item \textbf{Electrical Conduction Sensor: }senses for electricity going through electric fence. It has the ability to trigger when there is no electricity. 
+	\end{list}
+		
+	\paragraph{Hardware}
+	\begin{list}{}{}
+		\item \textbf{Electrical Fence Panels: }special kind of physical panels that allows conductance of electricity going through it.
+		\item \textbf{Hardwire Ethernet: }used for network communication with CGC. 
+	\end{list}
+	
+	\paragraph{Features}
+	\begin{list}{}{}
+		\item \textbf{Maintenance System: }allows for health checks and health status communication of the electric fence.
+	\end{list}
+
+	\subsection{Global Alarm System}
+	\paragraph{} \textit{The global alarm system controls what gets played on a network of speakers for emergency related or informative needs.}		
+
+	\paragraph{Hardware}
+	\begin{list}{}{}
+		\item \textbf{Speaker: }the global alarm system communicates with a network of PA speakers.
+		\item \textbf{Hardwire Ethernet: }used for network communication with CGC. 
+	\end{list}
+	
+	\paragraph{Features}
+	\begin{list}{}{}
+		\item \textbf{Maintenance System: }allows for health checks and health status communication of the Global Alarm System.  
+	\end{list}
+
+
+	\subsection{CGC Station}
+	\paragraph{} \textit{The CGC station is a device and interface that interacts with employees. It contains a user interface to analyze and interact with the components that the CGC can communicate with or can monitor. }		
+	
+	\paragraph{Sensors}
+	\begin{list}{}{}
+		\item \textbf{Microphone: }used to pick up voice to interact on the intercom. It can also be used to send announcements out to the Global Speaker System.
+		\item \textbf{Touch Screen: }used to interact with employee with a provided GUI interface.
+	\end{list}
+		
+	\paragraph{Hardware}
+	\begin{list}{}{}
+		\item \textbf{Speaker: }can be used with the intercom.
+		\item \textbf{Hardwire Ethernet: }used for network communication with CGC. 
+	\end{list}
+	
+	\paragraph{Features}
+	\begin{list}{}{}
+		\item \textbf{Maintenance System: }This one is unique in the sense that it can communicate with all other maintenance systems and initiate system checks. 
+	\end{list}
+
+	\subsection{GPS Server}
+	\paragraph{} \textit{The GPS server interface provides locations of all the active and surrounded GPS devices that it needs to interact with. }		
+	
+	\paragraph{Features}
+	\begin{list}{}{}
+		\item \textbf{Tracking: }keeps track of all GPS devices and their longitude and latitude.
+        \item \textbf{Services: }third party service to provide GPS services. 
 	\end{list}
 
 \section{Capabilities}
