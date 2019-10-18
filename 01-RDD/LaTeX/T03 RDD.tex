@@ -39,8 +39,16 @@ Team \#3\\
 \tableofcontents
 \newpage
 \section{Introduction}
-\paragraph{} The purpose of this document is to define the requirements for the development of Cretaceous Gardens Controller (CGC) for our billionaire philantrophists customers in their new theme park on the Isla Trueno island near Costa Rica. The CGC is the main controller which controls the required components like the pay kiosks, cars, and electric fence. The CGC must meet the safety requirements, overall user experience, and be efficient in its operations. The safety requirements include electric fences and autonomous vehicle safety such as door locking.
-\paragraph{}  In this document, we have included objectives which will guide us to succeed in this project, we have included system organization of our CGC,  we have listed interfaces which the CGC will interact with, we have also listed the capabilities the CGC can handle keeping in mind of the giving constraints. Lastly, the definition of terms used in the document\footnote{Introduction by Anas.}.  
+\paragraph{} The purpose of this document is to define the requirements for the development of Cretaceous Gardens 
+Controller (CGC) for our billionaire philantrophists customers in their new theme park on Isla Trueno near Costa Rica. 
+The CGC is the main controller which controls the required components like the pay kiosks, cars, and electric fence. 
+The CGC must meet the safety requirements, overall user experience, and be efficient in its operations. The safety 
+requirements include electric fences and autonomous vehicle safety such as door locking.
+
+\paragraph{}  In this document, we have included objectives which will guide us to succeed in this project, we have 
+included system organization of our CGC,  we have listed interfaces which the CGC will interact with, we have also 
+listed the capabilities the CGC can handle keeping in mind of the giving constraints. Lastly, the definition of terms
+used in the document\footnote{Introduction by Anas.}.  
 
 \section{Objectives} 
 \label{obj}
@@ -77,11 +85,24 @@ optimal implementation of a \textit{Cretaceous Gardens Controller} are identifie
 \section{Overall System Organization} 
 \label{sys}
 \paragraph{} The CGC will be centralized\footnote{System Organization 
-by Anas and Siri.} and will manage all relevant components. Figure 
+by Anas, Santi, and Siri.} and will manage all relevant components. Figure 
 \ref{fig:blackbox} shows a black box diagram of the CGC. The CGC receives inputs 
 from sensors, user interfaces, and emergency systems like the \textit{Global 
 Alarm System} and responds through appropriate output actions as described 
-below. 
+below.
+
+\paragraph{} The Cretaceous Garden Controller will have 5 self-driving cars, transporting people from 
+south to the Exhibit Area (North of the Island). In the south of the Island
+is allocated a Kiosk where the clients can buy their tickets giving them access 
+to the cars and the Exhibition. The Kiosk will record the sales and provide to 
+the guest a token device.
+
+\paragraph{} The CGC will control the position the T-Rex via GPS and
+cameras. In case of one electric feces fails the emergency plan will be activated,
+making sound the alarms and the cars picking people and going to the south,
+there will be available 5 more self-driving cars in case of emergency in the 
+North.
+
 \begin{figure}[H]
 	\centerline{\includegraphics[scale=.20]{CGCBlackBox.png}}
 	\caption{A black box of high-level inputs and outputs of the \textit{CGC}.}
@@ -347,21 +368,42 @@ overview of its monitoring capabilities.\footnote {Capabilities by Matt and Zeke
 		\item The CGC will be able to maintain long term financial records.
 	\end{enumerate}
 
-\section{Design Constraints} %Zeke
+\section{Design Constraints}
 \label{con}
 %restrictions placed on the solution space
-\paragraph{} \textit{//section introduction}
+\paragraph{} The various constraints \footnote{Constraints by Santi} for the Cretaceous Garden Control are as follows.
 	\subsection{General}
 	\begin{itemize}
-		\item item
+		\item The Cretaceous garden is located in Isla Trueno.
+		\item The Cretaceous garden will count with a dinosaur.
+		\item In the north of the Island will be allocated the Exhibition Area.
+		\item The Kiosk will be allocated in the south of the Island, where the guest arrive.
+		\item The Kiosk will provide the guest the tokens.
+		\item The CGC will control the functioning of the whole park (cars, kiosk, tokens,	financial and emergency).
+		\item The CGC will know the exactly position of all cars, guest and T-Rex.
+		\item Each car (self-driving) will have a total of 10 seats and only leaves when it is full.
+		\item There is only one path from the south of the island to the north.
+		\item Each car will have an alarm to tell the guest the remaining time.
+		\item The token device will let the guest to know the remaining time and will perform as a GPS of the guest.
+		\item There will be only one token per guest.
+		\item The CGC will control the camera networking, showing images on real time of the park.
+		\item At the exit of the park each guest has to return his token device.
 	\end{itemize}
 	
 	\subsection{Safety}
 	\begin{itemize}
-		\item item
+		\item In case of a electric fences fail the emergency plan will be activated.
+		\item The CGC if the emergency plan is activated will activate the alarm system and will communicate the cars to evacuate.
+		\item The Alarm System will activate the alarm from the south to the north.
+		\item The cars will drive to the south (maybe they are not full) in case of evacuation.
+		\item There will be also some cars parked in the north to help in case of evacuation.
+		\item The tokens in case of emergency will explain the emergency steps.
+		\item The cars will drive with a secure speed.
+		\item The cars will lock and unlock safely before start.
+		\item The CGC will contact directly with the Emergency from Costa Rica, in case of emergency.
 	\end{itemize}
 
-\section{Definition of Terms} %Zeke
+\section{Definition of Terms}
 \label{def}
 \textit{Here we have some definitions to terms used in the document. This section will help clarify meanings for different areas of the document.\footnote {Definition of Terms by Siri.}}
 \begin{list}{}{}
