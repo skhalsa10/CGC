@@ -7,6 +7,6 @@ DONE 3. redo Blackbox diagram using the interfaces we described (interfaces can 
 DONE 7. Define Node in the definition of terms
 8. Capabilities: subdivide Monitoring into at least three sections: guests, vehicles, zones of park, and maybe t-rex
 9. Capabilities: Distinguish between what is being monitored and what is doing the monitoring 
-10. Interface: Explain how the pay kiosk also generates a receipt for visitor and keeps track of sales
+DONE 10. Interface: Explain how the pay kiosk also generates a receipt for visitor and keeps track of sales
 11. CONSTRAINTS SECTION MUST BE PRESENT BY TUESDAY OCT 22.
 DONE 12. redefine token in def of terms
