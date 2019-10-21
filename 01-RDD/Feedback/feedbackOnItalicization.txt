@@ -1,0 +1,19 @@
+Hi Zeke,
+
+ 
+
+Sorry for the delay, I’ve looked over the current pdf in your repository.  The introduction and constraints are looking good.  I think there are a few issues with the overall system design, think carefully about which interfaces provide input and which require output from the CGC.  Also, be sure they match the interfaces in section 5.  There was also one missing; the T-Rex monitor. 
+
+ 
+
+Regarding italicized sections; they are only meant to be directly after a heading (Section 2, Section 3, etc.)  They should only be in-between headings and subheadings, i.e. there shouldn’t be regular text after an italicized section.  They aren’t needed after every section, and never needed in the introduction.  They should also be constrained to only a few sentences. 
+
+ 
+
+Hopefully that helps clear it up.  Let me know if there are any further questions.
+
+ 
+
+Best,
+
+Cat 
