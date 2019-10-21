@@ -126,8 +126,7 @@ list their sensors, hardware, and features.}
 
 	\subsection{Pay Kiosk}
 	\paragraph{} \textit{The purpose of the the Pay Kiosk interface is to connect 
-	the physical Pay Kiosks to the CGC. It is composed of sensors and is designed 
-	to do specific feature.}
+	the physical Pay Kiosks to the CGC. It is composed of sensors and hardware.}
 			
 	\paragraph{Sensors}
 	\begin{list}{}{}
@@ -147,6 +146,7 @@ list their sensors, hardware, and features.}
 	\begin{list}{}{}
 		\item \textbf{Token Builder:} Takes payment and the out user form and builds
 		a unique token for the visitor.
+		\item \textbf{Transaction logger:} Will provide receipt to visitors upon purchase and logs transactions in the CGC.
 		\item \textbf{Maintenance: } Enables employees to manage issues with kiosks 
 		and provides machine health information. 
 	\end{list}
@@ -418,7 +418,8 @@ overview of its monitoring capabilities.\footnote {Capabilities by Matt and Zeke
 	\item \textbf{CGC: }Cretaceous Gardens Controller 
 	\item \textbf{Electrical Conduction: }the movement of electrically charged particles through a transmission medium.
 	\item \textbf{DVR: }Digital Video Recorder
-	\item \textbf{Token: }Purchase receipt and access key. Also device that interacts with Visitor. We use token to represent this.
+	\item \textbf{Token: }An interactive device used by the visitor that grants access to locations.
+	\item \textbf{node: }This represents any device connected to the CGC. This includes car, token, and t-rex monitor.
 \end{list}
 % the basis for accurate communication
 \bibliography{../../ReferenceMaterial/BibTeX/references}
