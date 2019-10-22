@@ -1,0 +1,19 @@
+	1. This can happen any time of day but we will assume at that there is 	peak activity in the garden. There are MANY visitors on the north end of  	the island viewingg the T-Rex. 
+	
+	2. The elctric fence interface reports the elctric fence is down and  	triggers Emergency protocal
+
+	3. the Alarms begin sounding the Emergency protocol sounds and 	Instructions using the Global Alarm System. 
+
+	4. emergency instructions are sent to all active Tokens 
+
+	5. All current cars driving visitors begin to drive towards the south end if 	not already doing so.
+
+	6. all current cars that are not active begin to drive to the north end if not 	already there.
+
+	7. all current cars located at the north end and inactive will wait for for 	visitors or employees. before they drive them to the south end. 
+
+	8. 5, 6, and 7 will be repeated until all visitors and employees are all 	safely registered in the south end of the island.
+
+	9. cars will divide themselves evenly and park at  either the south or 	north end of the island until the emergency mode is deactivated
+
+	10. Emergency mode is deactivated by employee

@@ -39,16 +39,22 @@ Team \#3\\
 \tableofcontents
 \newpage
 \section{Introduction}
+\paragraph{} The Tyrannosaurus Rex lives among us once again. The time for an incredible experience is now. 
+The world will be able to experience something only dreamt of. It will all be possible at the Cretaceous Gardens.
+The experience will begin the second the visitor steps off the boat. The visitor will become engulfed in Cretaceous Gardens' unique, technologically advance, and one of a kind luxurious experience.
+by the time they leave they will be already planning their next visit. 
+
 \paragraph{} The purpose of this document is to define the requirements for the development of Cretaceous Gardens 
-Controller (CGC) for our billionaire philantrophists customers in their new theme park on Isla Trueno near Costa Rica. 
+Controller (CGC) for our billionaire philanthropists customers in their new theme park on Isla Trueno near Costa Rica. 
 The CGC is the main controller which controls the required components like the pay kiosks, cars, and electric fence. 
 The CGC must meet the safety requirements, overall user experience, and be efficient in its operations. The safety 
 requirements include electric fences and autonomous vehicle safety such as door locking.
 
-\paragraph{}  In this document, we have included objectives which will guide us to succeed in this project, we have 
-included system organization of our CGC,  we have listed interfaces which the CGC will interact with, we have also 
-listed the capabilities the CGC can handle keeping in mind of the giving constraints. Lastly, the definition of terms
-used in the document\footnote{Introduction by Anas.}.  
+\paragraph{}  The rest of this document has five major sections. Section 2 outline the main objectives that will be used to make all decisions moving forward with the project. 
+Section 3 describes the overall system organization. This is a fairly high level description of how all pieces will be organized as a whole. Section 4 describes interfaces that are 
+ critical for the CGC controller software. They interfaces describe in detail what hardware makes up the interface as well as the features that can be expected from the software aspect. 
+ Section 5 describes specific capabilities that the CGC will be able to accomplish. Section 6 will outline all the constraints that are forced upon the CGC system  either by the client or via physical limitations.
+ the last section to round out the document is section 7, the definition of terms. Here we find clarification to document specific language that is not immediately clear.\footnote{Introduction by Anas. Feedback updates by Siri.}.  
 
 \section{Objectives} 
 \label{obj}
@@ -120,8 +126,7 @@ list their sensors, hardware, and features.}
 
 	\subsection{Pay Kiosk}
 	\paragraph{} \textit{The purpose of the the Pay Kiosk interface is to connect 
-	the physical Pay Kiosks to the CGC. It is composed of sensors and is designed 
-	to do specific feature.}
+	the physical Pay Kiosks to the CGC. It is composed of sensors and hardware.}
 			
 	\paragraph{Sensors}
 	\begin{list}{}{}
@@ -141,6 +146,7 @@ list their sensors, hardware, and features.}
 	\begin{list}{}{}
 		\item \textbf{Token Builder:} Takes payment and the out user form and builds
 		a unique token for the visitor.
+		\item \textbf{Transaction logger:} Will provide receipt to visitors upon purchase and logs transactions in the CGC.
 		\item \textbf{Maintenance: } Enables employees to manage issues with kiosks 
 		and provides machine health information. 
 	\end{list}
@@ -412,7 +418,8 @@ overview of its monitoring capabilities.\footnote {Capabilities by Matt and Zeke
 	\item \textbf{CGC: }Cretaceous Gardens Controller 
 	\item \textbf{Electrical Conduction: }the movement of electrically charged particles through a transmission medium.
 	\item \textbf{DVR: }Digital Video Recorder
-	\item \textbf{Token: }Purchase receipt and access key. Also device that interacts with Visitor. We use token to represent this.
+	\item \textbf{Token: }An interactive device used by the visitor that grants access to locations.
+	\item \textbf{node: }This represents any device connected to the CGC. This includes car, token, and t-rex monitor.
 \end{list}
 % the basis for accurate communication
 \bibliography{../../ReferenceMaterial/BibTeX/references}
