@@ -29,7 +29,7 @@
 \vspace{5cm}
 \LARGE
 Team \#3\\
-17 October 2019
+22 October 2019
 \vfill
 \Huge
 \textbf{CS 460 Software Engineering}
@@ -39,27 +39,27 @@ Team \#3\\
 \tableofcontents
 \newpage
 \section{Introduction}
-\paragraph{} The Tyrannosaurus Rex lives among us once again. The time for an incredible experience is now. 
-The world will be able to experience something only dreamt of. It will all be possible at the Cretaceous Gardens.
-The experience will begin the second the visitor steps off the boat. The visitor will become engulfed in Cretaceous Gardens' unique, technologically advance, and one of a kind luxurious experience.
-by the time they leave they will be already planning their next visit. 
+\paragraph{} The Tyrannosaurus Rex lives among us once again and the opportunity to provide an incredible experience 
+has become a reality. The world will be able to experience that of which, until now, has only been dreamt. The Cretaceous Gardens
+experience will begin the second a visitor steps off the boat and onto the Isla Trueno. The visitor will be immersed in Cretaceous 
+Gardens' unique, technological advancements: a truly one-of-a-kind luxurious experience. By the time they leave they will be already 
+planning their next visit. 
 
 \paragraph{} The purpose of this document is to define the requirements for the development of Cretaceous Gardens 
 Controller (CGC) for our billionaire philanthropists customers in their new theme park on Isla Trueno near Costa Rica. 
-The CGC is the main controller which controls the required components like the pay kiosks, cars, and electric fence. 
-The CGC must meet the safety requirements, overall user experience, and be efficient in its operations. The safety 
-requirements include electric fences and autonomous vehicle safety such as door locking.
+The CGC is the main controller for components like the pay kiosks, cars, and electric fence. The CGC must provide
+sufficient safety, a great user experience, and ought to efficient.
 
-\paragraph{}  The rest of this document has five major sections. Section 2 outline the main objectives that will be used to make all decisions moving forward with the project. 
-Section 3 describes the overall system organization. This is a fairly high level description of how all pieces will be organized as a whole. Section 4 describes interfaces that are 
- critical for the CGC controller software. They interfaces describe in detail what hardware makes up the interface as well as the features that can be expected from the software aspect. 
- Section 5 describes specific capabilities that the CGC will be able to accomplish. Section 6 will outline all the constraints that are forced upon the CGC system  either by the client or via physical limitations.
- the last section to round out the document is section 7, the definition of terms. Here we find clarification to document specific language that is not immediately clear.\footnote{Introduction by Anas. Feedback updates by Siri.}.  
+\paragraph{}  Section \ref{obj} outlines the main objectives of the project, section \ref{sys} the overall system 
+organization through a high level depiction, section \ref{int} outlines interfaces, section \ref{cap} contains the capabilities 
+of the system, section \ref{con} provides all known design constraints, and the final section provides a reference for potentially
+unknown terms within the document \footnote{Introduction by Anas and Siri.}.  
 
 \section{Objectives} 
 \label{obj}
 \paragraph{} \textit{Four objectives believed to be critical for an 
-optimal implementation of a \textit{Cretaceous Gardens Controller} are identified here\footnote{Objectives by Anas and Siri.}.}
+optimal implementation of a \textit{Cretaceous Gardens Controller} are identified 
+here\footnote{Objectives by Anas and Siri.}.}
  
 	\subsection{Safety}\label{saf}
 	\paragraph{}The main objective of the CGC is to provide a safe and reliable 
@@ -110,7 +110,7 @@ there will be available 5 more self-driving cars in case of emergency in the
 North.
 
 \begin{figure}[H]
-	\centerline{\includegraphics[scale=.20]{CGCBlackBox.png}}
+	\centerline{\includegraphics[scale=.17]{CGCBlackBox.png}}
 	\caption{A black box of high-level inputs and outputs of the \textit{CGC}.}
 	\label{fig:blackbox}
 \end{figure}
@@ -126,7 +126,7 @@ list their sensors, hardware, and features.}
 
 	\subsection{Pay Kiosk}
 	\paragraph{} \textit{The purpose of the the Pay Kiosk interface is to connect 
-	the physical Pay Kiosks to the CGC. It is composed of sensors and hardware.}
+	the physical Pay Kiosks to the CGC,which is composed of sensors and other hardware.}
 			
 	\paragraph{Sensors}
 	\begin{list}{}{}
@@ -146,7 +146,8 @@ list their sensors, hardware, and features.}
 	\begin{list}{}{}
 		\item \textbf{Token Builder:} Takes payment and the out user form and builds
 		a unique token for the visitor.
-		\item \textbf{Transaction logger:} Will provide receipt to visitors upon purchase and logs transactions in the CGC.
+		\item \textbf{Transaction Logger:} Will provide receipts to visitors upon purchase and 
+		reports transactions with the CGC.
 		\item \textbf{Maintenance: } Enables employees to manage issues with kiosks 
 		and provides machine health information. 
 	\end{list}
@@ -164,7 +165,7 @@ list their sensors, hardware, and features.}
 		
 	\paragraph{Hardware}
 	\begin{list}{}{}
-		\item \textbf{RFID: }the RFID chip will be programmed with a unique ID and 
+		\item \textbf{RFID: } The RFID chip will be programmed with a unique ID and 
 		used for multiple purposes included access to various systems and areas.
 		\item \textbf{Speaker: }the token contains speakers as hardware for alerts 
 		and instructions.
@@ -316,7 +317,7 @@ list their sensors, hardware, and features.}
 in the operation of the resort. Thus, the complexity of the system naturally leads to a description
 of the broad topography of its capabilities. First is the overview of protocol-related capabilities, then
 emergency-supporting capabilities, followed by capabilities that reinforce safety features, and finally an 
-overview of its monitoring capabilities.\footnote {Capabilities by Matt and Zeke.}}
+overview of its monitoring capabilities.\footnote {Capabilities by Zeke and Matt.}}
 % the outline for a solution
 	\subsection{Protocols}
 	\begin{enumerate}
@@ -341,10 +342,32 @@ overview of its monitoring capabilities.\footnote {Capabilities by Matt and Zeke
 		\item The CGC will be able to communicate with external authorities and emergency personnel.
 		\item It will also (through human intervention) be capable of disarming the alarm system after 
 		the issue has been addressed.
-		\item The CGC will will be able to dynamically account for new nodes in the network or for nodes that are
+		\item The CGC will be able to dynamically account for new nodes in the network or for \textit{nodes} that are
 		taken out for whatever reason. An extension may be that nodes may be used to triangulate the location of missing
 		nodes.
+		\item The CGC will have the following protocol as a fallback. It should be noted that This can happen 
+		any time of day and, for the sake of argument, it will be assumed at that there is peak activity in the garden. 
+		In other words, it is assumed that there are \textit{many} visitors at the north end of the island (viewing the T-Rex). 
+			\begin{enumerate}
+				\item The electric fence interface reports a breach which triggers this \textit{Emergency Protocol}.
+				\item The T.Rex monitor interface triggers the device to administer the tranquilizing agent to the subject
+				and the subject's heart rate is reported to the CGC every second, as is the subject's location.
+				\item Through the Global Alarm System,
+					\begin{enumerate}
+						\item \textit{All speakers} emit the alarm (protocol-specific) sounds.
+						\item Instructions to find and enter the nearest vehicle are propagated through the speakers. 
+						\item Instructions are also sent to all active token devices.
+						\item Interleaved reassurances that more available vehicles are headed north are also transmitted. 
+					\end{enumerate}
+				\item{\label{activecars} All \textit{safely occupied} vehicles begin to shuttle people (guests and staff) southward.}
+				\item{\label{inactivecars} All \textit{safely inactive} vehicles are dispatched northward.}
+				\item{\label{northendcars} Once there, the {safely inactive} vehicles will receive people until \textit{safely occupied}.} 
+				\item \ref{activecars}, \ref{inactivecars}, and \ref{northendcars} will be repeated emergency mode is deactivated or until
+				all vehicles run out of energy.
+			\end{enumerate}
 	\end{enumerate}
+	
+	
 
 	\subsection{Safety} 
 	\begin{enumerate}
@@ -358,7 +381,13 @@ overview of its monitoring capabilities.\footnote {Capabilities by Matt and Zeke
 	
 	\subsection{Monitoring}
 	\begin{enumerate}
-		\item The CGC will be able to track all guests at all times.
+		\item The CGC will be able to track all guests at all times in the following ways:
+			\begin{enumerate}
+				\item Relative to others in their groups.
+				\item Relative to their assigned vehicles.
+				\item Relative to the whole island.
+				\item Relative to their current zone within the island.
+			\end{enumerate}
 		\item The CGC will be able to track all vehicles at all times.
 		\item The CGC will be able to track the location of the T.Rex at all times.
 		\item The CGC will be able to process live video stream of various locations on the island.
@@ -377,7 +406,7 @@ overview of its monitoring capabilities.\footnote {Capabilities by Matt and Zeke
 \section{Design Constraints}
 \label{con}
 %restrictions placed on the solution space
-\paragraph{} The various constraints \footnote{Constraints by Santi} for the Cretaceous Garden Control are as follows.
+\paragraph{} \textit{The various constraints \footnote{Constraints by Santi} for the Cretaceous Garden Control are as follows.}
 	\subsection{General}
 	\begin{itemize}
 		\item The Cretaceous garden is located in Isla Trueno.
@@ -411,15 +440,21 @@ overview of its monitoring capabilities.\footnote {Capabilities by Matt and Zeke
 
 \section{Definition of Terms}
 \label{def}
-\textit{Here we have some definitions to terms used in the document. This section will help clarify meanings for different areas of the document.\footnote {Definition of Terms by Siri.}}
+\textit{Here we have some definitions to terms used in the document. This section will help clarify meanings for different 
+areas of the document.\footnote {Definition of Terms by Siri and Zeke.}}
 \begin{list}{}{}
-	\item \textbf{Hardwire Ethernet: }This references the latest IEEE standard for Ethernet utilizing physical cables.
-	\item \textbf{GPS: }Global Positioning System 
-	\item \textbf{CGC: }Cretaceous Gardens Controller 
-	\item \textbf{Electrical Conduction: }the movement of electrically charged particles through a transmission medium.
-	\item \textbf{DVR: }Digital Video Recorder
-	\item \textbf{Token: }An interactive device used by the visitor that grants access to locations.
-	\item \textbf{node: }This represents any device connected to the CGC. This includes car, token, and t-rex monitor.
+	\item \textbf{CGC:} Cretaceous Gardens Controller 
+	\item \textbf{DVR:} Digital Video Recorder
+	\item \textbf{Electrical Conduction:} The movement of electrically charged particles through a transmission medium.
+	\item \textbf{GPS:} Global Positioning System 
+	\item \textbf{Hardwire Ethernet:} This references the latest IEEE standard for Ethernet utilizing physical cables.
+	\item \textbf{Network:} All nodes with which the CGC interacts, the links that connect them to each other and to the
+	CGC, the CGC itself, and all related databases.
+	\item \textbf{Node:} The generic term that refers to any device connected to the CGC in any way. This includes 
+	autonomous vehicles, tokens, the T.Rex monitor, all electric fence panels, all kiosks, and all cameras.
+	\item \textbf{Safely Inactive:} A state in which a vehicle is fully functional and ready to be dispatched.
+	\item \textbf{Safely Occupied:} A state in which a vehicle contains at least one person, is locked, and is ready to depart.
+	\item \textbf{Token:} An interactive device used by the visitor that grants access to locations.
 \end{list}
 % the basis for accurate communication
 \bibliography{../../ReferenceMaterial/BibTeX/references}
