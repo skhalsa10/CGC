@@ -1,12 +1,19 @@
-1. Need to decide and outline EXACTLY what our emergency protocol is. What does every system do?
+DONE 1. Need to decide and outline EXACTLY what our emergency protocol is. What does every system do?
 DONE 2. rewrite second paragraph of introduction. include section numbers. 
 DONE 3. redo Blackbox diagram using the interfaces we described (interfaces can and should be both inputs and outputs)
 4. Capabilities: Some capabilities border on constraints, move to constraints.
-5. Capabilities: Emergency is technically a protocol?
+DONE 5. Capabilities: Emergency is technically a protocol?
 6. Capabilities: clear sections on normal operation and emergency operation
 DONE 7. Define Node in the definition of terms
-8. Capabilities: subdivide Monitoring into at least three sections: guests, vehicles, zones of park, and maybe t-rex
+DONE 8. Capabilities: subdivide Monitoring into at least three sections: guests, vehicles, zones of park, and maybe t-rex
 9. Capabilities: Distinguish between what is being monitored and what is doing the monitoring 
 DONE 10. Interface: Explain how the pay kiosk also generates a receipt for visitor and keeps track of sales
-11. CONSTRAINTS SECTION MUST BE PRESENT BY TUESDAY OCT 22.
+DONE 11. CONSTRAINTS SECTION MUST BE PRESENT BY TUESDAY OCT 22.
 DONE 12. redefine token in def of terms
+
+Suggestions from Team 04
+- change any numbers into their word representations (e.g. 2 vs two)
+- larger text for blackbox diagram
+- output/inputs don't all make sense (e.g., what is the CGC outputting to the camera?)
+- tracking all users may be difficult to implement so might wanna drop it
+- section 5.1 protocols is not well defined and is not mentioned in definition of terms

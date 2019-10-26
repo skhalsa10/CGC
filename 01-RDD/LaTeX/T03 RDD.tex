@@ -12,9 +12,10 @@
 \subsubsectionfont{\color{LightBlue}}
 \paragraphfont{\color{LightBlue}}
 \subparagraphfont{\color{LightBlue}}
-\begin{document}
 \definecolor{DarkBlue}{HTML}{4a5a8a}
 \definecolor{LightBlue}{HTML}{4f81bf}
+
+\begin{document}
 \begin{titlepage}
 \begin{flushleft}
 \vspace*{1cm}
@@ -25,11 +26,11 @@
 \textit{Requirements Definition Document}\\
 \vspace{1cm}
 \Large
-\textit{RDD Version 2.0}\\
+\textit{RDD Version 3.0}\\
 \vspace{5cm}
 \LARGE
 Team \#3\\
-22 October 2019
+29 October 2019
 \vfill
 \Huge
 \textbf{CS 460 Software Engineering}
@@ -39,52 +40,61 @@ Team \#3\\
 \tableofcontents
 \newpage
 \section{Introduction}
-\paragraph{} The Tyrannosaurus Rex lives among us once again and the opportunity to provide an incredible experience 
-has become a reality. The world will be able to experience that of which, until now, has only been dreamt. The Cretaceous Gardens
-experience will begin the second a visitor steps off the boat and onto the Isla Trueno. The visitor will be immersed in Cretaceous 
-Gardens' unique, technological advancements: a truly one-of-a-kind luxurious experience. By the time they leave they will be already 
-planning their next visit. 
+\paragraph{} The Tyrannosaurus Rex lives among us once again and the opportunity 
+to provide an incredible experience has become a reality. The world will be able 
+to experience that of which, until now, has only been dreamt. The Cretaceous Gardens
+experience will begin the second a visitor steps off the boat and onto the Isla 
+Trueno. The visitor will be immersed in Cretaceous Gardens' unique, technological 
+advancements: a truly one-of-a-kind luxurious experience. By the time they leave 
+they will be already planning their next visit. 
 
-\paragraph{} The purpose of this document is to define the requirements for the development of Cretaceous Gardens 
-Controller (CGC) for our billionaire philanthropists customers in their new theme park on Isla Trueno near Costa Rica. 
-The CGC is the main controller for components like the pay kiosks, cars, and electric fence. The CGC must provide
-sufficient safety, a great user experience, and ought to efficient.
+\paragraph{} The purpose of this document is to define the requirements for the 
+development of Cretaceous Gardens Controller (CGC) for our billionaire philanthropists 
+customers in their new theme park on Isla Trueno near Costa Rica. The CGC is the main 
+controller for components like the pay kiosks, cars, and electric fence. The CGC must 
+provide sufficient safety, a great user experience, and ought to efficient.
 
-\paragraph{}  Section \ref{obj} outlines the main objectives of the project, section \ref{sys} the overall system 
-organization through a high level depiction, section \ref{int} outlines interfaces, section \ref{cap} contains the capabilities 
-of the system, section \ref{con} provides all known design constraints, and the final section provides a reference for potentially
-unknown terms within the document \footnote{Introduction by Anas and Siri.}.  
+\paragraph{}  Section \ref{obj} outlines the main objectives of the project, 
+section \ref{sys} the overall system organization through a high level depiction, 
+section \ref{int} outlines interfaces, section \ref{cap} contains the capabilities 
+of the system, section \ref{con} provides all known design constraints, and the 
+final section provides a reference for potentially unknown terms within the document 
+\footnote{Introduction by Anas and Siri.}.  
 
-\section{Objectives} 
+\section{Objectives}
 \label{obj}
 \paragraph{} \textit{Four objectives believed to be critical for an 
 optimal implementation of a \textit{Cretaceous Gardens Controller} are identified 
-here\footnote{Objectives by Anas and Siri.}.}
+here\footnote{Objectives by Anas, Siri and Zeke.}.}
  
 	\subsection{Safety}\label{saf}
-	\paragraph{}The main objective of the CGC is to provide a safe and reliable 
-	experience for the client and the end users. Whether it be electric fences 
+	\paragraph{} The main objective of the CGC is to provide safe and reliable 
+	experiences for the client and its end users. Whether it be electric fences 
 	or autonomous vehicles, ensuring safety is of highest priority. The end user
 	ought to feel completely safe as should the client whose liability depends on
 	this aspect.
 
-	\subsection{User Experience}\label{use}
-	\paragraph{} In order to fully realize an amazing experience for the end user,
-	the CGC must facilitate token purchases and foster intuitive and seamless interactions
-	with the vehicles. 
+	\subsection{Positive User Experience}\label{use}
+	\paragraph{} The realization of positive user experiences, in large part, 
+	depends on the seamlessness between subsequent interactions with each component
+	of a system. For guests, the CGC should be as unimposing as possible in order
+	to permit them the fullest immersion offered by Cretaceous Gardens. For the client,
+	the system should provide peace of mind that the investment is worthwhile.
 
 	\subsection{Maintainability}\label{mai}
-	\paragraph{} For the sake of maintainability, the state the CGC should be easily
-	accessible and it should be understandable. All nodes should inherit this feature. 
-	The system should also be maintainable in real-time, so it should be prepared for
-	any redundancies that support this aim.
+	\paragraph{} The states of the CGC and all \textit{nodes} with which it is to
+	communicate should be readily accessible and intelligible. The availability  
+	of this information will directly impact the diagnostic and repair speeds 
+	anywhere within the system.
 	
 	\subsection{Efficiency}\label{eff}
-	\paragraph{}When it comes to efficiency, the CGC will make sure that both 
-	the software and hardware components are highly efficient and functional. 
-	Whether we talk about self-driving cars, pay kiosks, camera system, GPS, 
-	or electric fences, the CGC must be efficient in interacting with them. 
-	This will be possible when all the other objectives are met.  
+	\paragraph{} The CGC is to engender high efficiency and robust functionality. 
+	Self-driving cars, pay kiosks, camera system, the global positioning system, 
+	electric fence panels, and all other nodes with which the CGC is to interact 
+	must not be burdened by inefficiencies of the CGC. On the contrary, the system
+	should be expected to gracefully handle nodal malfunctions, failures, or
+	inefficiencies.
+
 
 
 
@@ -97,17 +107,20 @@ from sensors, user interfaces, and emergency systems like the \textit{Global
 Alarm System} and responds through appropriate output actions as described 
 below.
 
-\paragraph{} The Cretaceous Garden Controller will have 5 self-driving cars, transporting people from 
-south to the Exhibit Area (North of the Island). In the south of the Island
-is allocated a Kiosk where the clients can buy their tickets giving them access 
-to the cars and the Exhibition. The Kiosk will record the sales and provide to 
-the guest a token device.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{} The Cretaceous Garden Controller will have 5 self-driving cars, 
+transporting people from south to the Exhibit Area (North of the Island). In 
+the south of the Island is allocated a Kiosk where the clients can buy their tickets 
+giving them access  to the cars and the Exhibition. The Kiosk will record the sales 
+and provide to the guest a token device.
+%%%%%%%%%%%%%%%%%%%%
 
 \paragraph{} The CGC will control the position the T-Rex via GPS and
 cameras. In case of one electric feces fails the emergency plan will be activated,
 making sound the alarms and the cars picking people and going to the south,
 there will be available 5 more self-driving cars in case of emergency in the 
 North.
+
 
 \begin{figure}[H]
 	\centerline{\includegraphics[scale=.17]{CGCBlackBox.png}}
@@ -214,22 +227,28 @@ list their sensors, hardware, and features.}
 	\paragraph{Sensors}
 	\begin{list}{}{}
 		\item \textbf{GPS: } senses the location of all tokens.
-		\item \textbf{Heart Rate Sensor: } Specifically designed to monitor the heart rate in BPM of the T-Rex. can be used to monitor stress, hungar and possible aggression
+		\item \textbf{Heart Rate Sensor: } Specifically designed to monitor the heart 
+		rate in BPM of the T-Rex. can be used to monitor stress, hunger and possible 
+		aggression
 	\end{list}
 		
 	\paragraph{Hardware}
 	\begin{list}{}{}
-		\item \textbf{Tranquilizer Injector: } This can be triggered to inect the tranquilizer cartridge stored on the monitoring system.
+		\item \textbf{Tranquilizer Injector: } This can be triggered to inject the 
+		tranquilizer cartridge stored on the monitoring system.
 	\end{list}
 
 	\paragraph{Features}
 	\begin{list}{}{}
-		\item \textbf{Maintenance System: }allows for health checks and health status communication of the T-Rex Monitor.  
+		\item \textbf{Maintenance System: }allows for health checks and health status 
+		communication of the T-Rex Monitor.  
 		\item \textbf{Health Monitor: }allows for health monitoring of the T-Rex.
 	\end{list}
 
 	\subsection{Camera Network}
-	\paragraph{} \textit{The camera network interface is in charge of communicating with every camera, the redundant network links to each camera, and the DVR system that keeps recording of all cameras per retention policy. It will report on its health.}		
+	\paragraph{} \textit{The camera network interface is in charge of communicating with 
+	every camera, the redundant network links to each camera, and the DVR system that keeps 
+	recording of all cameras per retention policy. It will report on its health.}		
 	
 	\paragraph{Sensors}
 	\begin{list}{}{}
@@ -239,75 +258,91 @@ list their sensors, hardware, and features.}
 	\paragraph{Hardware}
 	\begin{list}{}{}
 		\item \textbf{DVR: }stores and retains video.
-		\item \textbf{Hardwire Ethernet: }used for network communication with CGC. 
+		\item \textbf{Hardwired Ethernet: }used for network communication with CGC. 
 	\end{list}
 	
 	\paragraph{Features}
 	\begin{list}{}{}
-		\item \textbf{Maintenance System: }allows for health checks and health status communication of the camera network.
-        \item \textbf{Viewing: }ability to view any camera feed.
+		\item \textbf{Maintenance System: }allows for health checks and health status 
+		communication of the camera network.
+        \item \textbf{Viewing:} ability to view any camera feed.
 	\end{list}
 
 	\subsection{Electric Fence}
-	\paragraph{} \textit{The electric fence interface will ensure that the visitors are safe from the attack of T-Rex. It will provide features for maintainability, and sensing options to reduce the risk of any damage.}		
+	\paragraph{} \textit{The electric fence interface will ensure that the visitors are 
+	safe from the attack of T-Rex. 	It will provide features for maintainability, and 
+	sensing options to reduce the risk of any damage.}		
 	
 	\paragraph{Sensors}
 	\begin{list}{}{}
-		\item \textbf{Electrical Conduction Sensor: }senses for electricity going through electric fence. It has the ability to trigger when there is no electricity. 
+		\item \textbf{Electrical Conduction Sensor: }senses for electricity going through 
+		electric fence. It has the ability to trigger when there is no electricity. 
 	\end{list}
 		
 	\paragraph{Hardware}
 	\begin{list}{}{}
-		\item \textbf{Electrical Fence Panels: }special kind of physical panels that allows conductance of electricity going through it.
-		\item \textbf{Hardwire Ethernet: }used for network communication with CGC. 
+		\item \textbf{Electrical Fence Panels: }special kind of physical panels that 
+		allows conductance of electricity going through it. 
+		\item \textbf{Hardwired Ethernet: }used for network communication with CGC. 
 	\end{list}
 	
 	\paragraph{Features}
 	\begin{list}{}{}
-		\item \textbf{Maintenance System: }allows for health checks and health status communication of the electric fence.
+		\item \textbf{Maintenance System: }allows for health checks and health status
+		 communication of the electric fence.
 	\end{list}
 
 	\subsection{Global Alarm System}
-	\paragraph{} \textit{The global alarm system controls what gets played on a network of speakers for emergency related or informative needs.}		
+	\paragraph{} \textit{The global alarm system controls what gets played on a network 
+	of speakers for emergency related or informative needs.}		
 
 	\paragraph{Hardware}
 	\begin{list}{}{}
-		\item \textbf{Speaker: }the global alarm system communicates with a network of PA speakers.
-		\item \textbf{Hardwire Ethernet: }used for network communication with CGC. 
+		\item \textbf{Speaker: }the global alarm system communicates with a network of 
+		PA speakers.
+		\item \textbf{Hardwired Ethernet: }used for network communication with CGC. 
 	\end{list}
 	
 	\paragraph{Features}
 	\begin{list}{}{}
-		\item \textbf{Maintenance System: }allows for health checks and health status communication of the Global Alarm System.  
+		\item \textbf{Maintenance System: }allows for health checks and health status
+		 communication of the Global Alarm System.  
 	\end{list}
 
 
 	\subsection{CGC Station}
-	\paragraph{} \textit{The CGC station is a device and interface that interacts with employees. It contains a user interface to analyze and interact with the components that the CGC can communicate with or can monitor. }		
+	\paragraph{} \textit{The CGC station is a device and interface that interacts with 
+	employees. It contains a user interface to analyze and interact with the components 
+	that the CGC can communicate with or can monitor. }		
 	
 	\paragraph{Sensors}
 	\begin{list}{}{}
-		\item \textbf{Microphone: }used to pick up voice to interact on the intercom. It can also be used to send announcements out to the Global Speaker System.
-		\item \textbf{Touch Screen: }used to interact with employee with a provided GUI interface.
+		\item \textbf{Microphone: }used to pick up voice to interact on the intercom. 
+		It can also be used to send announcements out to the Global Speaker System.
+		\item \textbf{Touch Screen: }used to interact with employee with a provided 
+		GUI interface.
 	\end{list}
 		
 	\paragraph{Hardware}
 	\begin{list}{}{}
 		\item \textbf{Speaker: }can be used with the intercom.
-		\item \textbf{Hardwire Ethernet: }used for network communication with CGC. 
+		\item \textbf{Hardwired Ethernet: }used for network communication with CGC. 
 	\end{list}
 	
 	\paragraph{Features}
 	\begin{list}{}{}
-		\item \textbf{Maintenance System: }This one is unique in the sense that it can communicate with all other maintenance systems and initiate system checks. 
+		\item \textbf{Maintenance System: }This one is unique in the sense that it can
+		communicate with all other maintenance systems and initiate system checks. 
 	\end{list}
 
 	\subsection{GPS Server}
-	\paragraph{} \textit{The GPS server interface provides locations of all the active and surrounded GPS devices that it needs to interact with. }		
+	\paragraph{} \textit{The GPS server interface provides locations of all the active 
+	and surrounded GPS devices that it needs to interact with. }		
 	
 	\paragraph{Features}
 	\begin{list}{}{}
-		\item \textbf{Tracking: }keeps track of all GPS devices and their longitude and latitude.
+		\item \textbf{Tracking: }keeps track of all GPS devices and their longitude 
+		and latitude.
         \item \textbf{Services: }third party service to provide GPS services. 
 	\end{list}
 
@@ -315,36 +350,35 @@ list their sensors, hardware, and features.}
 \label{cap}
 \paragraph{}\textit{The capabilities of the system are significantly expansive due to its central role
 in the operation of the resort. Thus, the complexity of the system naturally leads to a description
-of the broad topography of its capabilities. First is the overview of protocol-related capabilities, then
+of the broad topography of its capabilities. First is an overview of protocol-related capabilities, then
 emergency-supporting capabilities, followed by capabilities that reinforce safety features, and finally an 
 overview of its monitoring capabilities.\footnote {Capabilities by Zeke and Matt.}}
-% the outline for a solution
-	\subsection{Protocols}
+	\subsection{Dynamic Protocol Configuration}
 	\begin{enumerate}
-		\item The CGS will have a set of specified protocols for directing the network of
-		autonomous vehicles. The protocols will vary among sets of vehicles. For example, a protocol for the 
-		visitor vehicles will be executed in the case of an enclosure breach, another for preparation before
-		arrival of visitors and after their departure (outside business hours), another for maintenance, etc.
-		\item The CGS will provide configurability of processes through straightforward interactions.
+		\item The CGC will have a set of specified protocols for directing the collection 
+		of autonomous vehicles. The protocols will vary among sets of vehicles. For example, 
+		a protocol for the visitor vehicles will be executed in the case of an enclosure 
+		breach, another for preparation before the arrival of visitors, after their departure 
+		(outside business hours), and yet another for scheduled maintenance of the island.
+		\item The CGC will enable the configurability of protocols through straightforward 
+		interactions with a graphical user interface. This configurability can be thought of
+		as functionality for:
 		\begin{enumerate}
-			\item The creation of new protocols.
-			\item The addition of pre-made protocols.
-			\item The removal or extraction of protocols.
-			\item The modification of existing protocols.
+			\item creation of new protocols.
+			\item addition of premade protocols.
+			\item removal or extraction of protocols.
+			\item modification of existing protocols.
 		\end{enumerate}
-		\item The CGS will allow for the simulation of any given protocol.
+		\item The CGC will allow for the simulation of any given protocol.
 	\end{enumerate}
 	
-	\subsection{Emergency}
+	\subsection{Emergency Features}
+	With respect to its emergency mode(s), the CGC will be capable of doing the following:
 	\begin{enumerate}
-		\item The CGC will be able to receive distress or failure signals and propagate
-		through the siren and alarm network of the island. 
-		\item The CGC will be able to communicate with external authorities and emergency personnel.
-		\item It will also (through human intervention) be capable of disarming the alarm system after 
-		the issue has been addressed.
-		\item The CGC will be able to dynamically account for new nodes in the network or for \textit{nodes} that are
-		taken out for whatever reason. An extension may be that nodes may be used to triangulate the location of missing
-		nodes.
+		\item Receive distress or failure signals and propagate responses through the siren and 
+		alarm network of the island. 
+		\item Communicate with external authorities and emergency personnel.
+		\item Be disarmable only through human intervention or complete physical destruction.
 		\item The CGC will have the following protocol as a fallback. It should be noted that This can happen 
 		any time of day and, for the sake of argument, it will be assumed at that there is peak activity in the garden. 
 		In other words, it is assumed that there are \textit{many} visitors at the north end of the island (viewing the T-Rex). 
@@ -367,40 +401,46 @@ overview of its monitoring capabilities.\footnote {Capabilities by Zeke and Matt
 			\end{enumerate}
 	\end{enumerate}
 	
-	
-
-	\subsection{Safety} 
+	\subsection{Safety Features} The CGC will possess the following features that 
+	serve to fortify safety measures. The CGC will:
 	\begin{enumerate}
-		\item The CGC will allow the monitoring of every panel of the enclosure.
-		\item The CGC will allow the monitoring of every camera.
-		\item The CGC will reinforce power backup measures.
-		\item The CGC will maintain redundant uplinks on the network(s).
-		\item The CGC will command a fleet of patrol vehicles around the island.
-		\item The CGC will support a maintenance mode for real-time repair of any node.
+		\item allow the monitoring of every panel of the enclosure.
+		\item allow the monitoring of every camera.
+		\item reinforce power backup measures.
+		\item maintain redundant uplinks on the network(s).
+		\item command a fleet of patrol vehicles around the island.
+		\item support a maintenance mode for the real-time repair of any node.
 	\end{enumerate}
 	
-	\subsection{Monitoring}
+	\subsection{Surveillance and Monitoring Features} With respect to the acquisition of 
+	data, the CGC will be able to:
 	\begin{enumerate}
-		\item The CGC will be able to track all guests at all times in the following ways:
+		\item track all guests at all times, relative to:
 			\begin{enumerate}
-				\item Relative to others in their groups.
-				\item Relative to their assigned vehicles.
-				\item Relative to the whole island.
-				\item Relative to their current zone within the island.
+				\item others in their groups.
+				\item their assigned vehicles.
+				\item the whole island.
+				\item their current zone within the island.
 			\end{enumerate}
-		\item The CGC will be able to track all vehicles at all times.
-		\item The CGC will be able to track the location of the T.Rex at all times.
-		\item The CGC will be able to process live video stream of various locations on the island.
-		\item The CGC will be able to process live video stream of the enclosure.
-		\item The CGC will be able to process live video stream at kiosks.
-		\item The CGC will be able to perform regular or on-demand audits of the network state.
+		\item track all vehicles at all times.
+		\item track the location and biometrics of the T.Rex at all times.
+		\item process live video streams of:
+		    \begin{enumerate}
+		        \item various locations on the island
+		        \item the enclosure
+		        \item the kiosks
+		    \end{enumerate}
+		\item perform regular or on-demand audits of the network state.
+		\item dynamically account for new nodes or for nodes that are
+		taken out for any reason.
 	\end{enumerate}
 	
-	\subsection{Financial Analysis}
+	\subsection{Financial Analytics} The CGC will have basic financial functionality as it will
+	be able to:
 	\begin{enumerate}
-		\item The CGC will be able to provide financial information and basic summary statistics.
-		\item The CGC will be able to identify any striking patterns of cash flow.
-		\item The CGC will be able to maintain long term financial records.
+		\item provide financial information and basic summary statistics.
+		\item identify any striking patterns of cash flow.
+		\item maintain long term financial records.
 	\end{enumerate}
 
 \section{Design Constraints}
@@ -414,7 +454,7 @@ overview of its monitoring capabilities.\footnote {Capabilities by Zeke and Matt
 		\item In the north of the Island will be allocated the Exhibition Area.
 		\item The Kiosk will be allocated in the south of the Island, where the guest arrive.
 		\item The Kiosk will provide the guest the tokens.
-		\item The CGC will control the functioning of the whole park (cars, kiosk, tokens,	financial and emergency).
+		\item The CGC will control the functioning of the whole park (cars, kiosk, tokens, financial and emergency).
 		\item The CGC will know the exactly position of all cars, guest and T-Rex.
 		\item Each car (self-driving) will have a total of 10 seats and only leaves when it is full.
 		\item There is only one path from the south of the island to the north.
@@ -447,7 +487,7 @@ areas of the document.\footnote {Definition of Terms by Siri and Zeke.}}
 	\item \textbf{DVR:} Digital Video Recorder
 	\item \textbf{Electrical Conduction:} The movement of electrically charged particles through a transmission medium.
 	\item \textbf{GPS:} Global Positioning System 
-	\item \textbf{Hardwire Ethernet:} This references the latest IEEE standard for Ethernet utilizing physical cables.
+	\item \textbf{Hardwired Ethernet:} This references the latest IEEE standard for Ethernet utilizing physical cables.
 	\item \textbf{Network:} All nodes with which the CGC interacts, the links that connect them to each other and to the
 	CGC, the CGC itself, and all related databases.
 	\item \textbf{Node:} The generic term that refers to any device connected to the CGC in any way. This includes 
@@ -456,7 +496,7 @@ areas of the document.\footnote {Definition of Terms by Siri and Zeke.}}
 	\item \textbf{Safely Occupied:} A state in which a vehicle contains at least one person, is locked, and is ready to depart.
 	\item \textbf{Token:} An interactive device used by the visitor that grants access to locations.
 \end{list}
-% the basis for accurate communication
+
 \bibliography{../../ReferenceMaterial/BibTeX/references}
 % run latex, then bibtex, then quickbuild all on the tex file
 \end{document}
