@@ -12,8 +12,8 @@ DONE 11. CONSTRAINTS SECTION MUST BE PRESENT BY TUESDAY OCT 22.
 DONE 12. redefine token in def of terms
 
 Suggestions from Team 04
-- change any numbers into their word representations (e.g. 2 vs two)
-- larger text for blackbox diagram
-- output/inputs don't all make sense (e.g., what is the CGC outputting to the camera?)
-- tracking all users may be difficult to implement so might wanna drop it
+DONE - change any numbers into their word representations (e.g. 2 vs two)
+DONE - larger text for blackbox diagram
+DONE (not changing anything this is supposed to be highlevel. the CGC does not output to a camera but the Camera network system. this system includes a DVR the CGC may be giving instructions to archive or delete video footage)- output/inputs don't all make sense (e.g., what is the CGC outputting to the camera?)
+DONE (this is critical to simulating our program I think we should leave it)- tracking all users may be difficult to implement so might wanna drop it
 - section 5.1 protocols is not well defined and is not mentioned in definition of terms
