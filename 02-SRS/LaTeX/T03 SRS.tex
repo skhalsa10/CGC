@@ -4,6 +4,7 @@
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{sectsty}
+\usepackage{float}
 \bibliographystyle{apalike}
 \setcitestyle{open={[},close={]}}
 \sectionfont{\color{DarkBlue}} 
@@ -16,11 +17,11 @@
 \definecolor{LightBlue}{HTML}{4f81bf}
 \begin{titlepage}
 	\begin{flushleft}
-		\vspace{1cm} \Huge  \textbf{Elevator Control System}\\
+		\vspace{1cm} \Huge  \textbf{Cretaceous Gardens Controller}\\
 		\vspace{1cm} \Huge  \textit{Software Requirements Specification}\\
-		\vspace{1cm} \Large \textit{SRS Version 3.0}\\
+		\vspace{1cm} \Large \textit{SRS Version 1.0}\\
 		\vspace{5cm} \LARGE         Team \#3\\ 
-		                            1 October 2019
+		                            29 October 2019
 		\vfill       \Huge  \textbf{CS 460 Software Engineering}
 	\end{flushleft}
 \end{titlepage}
@@ -30,25 +31,12 @@
 \section{Introduction} \label{intro} % Zeke
 % project goals and the purpose of this document
 	\paragraph{} The purpose of this document is to \textit{specify} the requirements for the
-	 development of an Elevator Control System (ECS) for the Downtown Hotel of Albuquerque 
-	 (DHA). The specification is formalized and diagrammed in order to guide the eventual
+	 development of the Cretaceous Gardens Controller (CGC) for our billionaire philanthropist clients. 
+	 The specification is formalized and diagrammed in order to guide the eventual
 	 implementation of the system. Information encountered in the corresponding \textit{Requirements 
 	 Definition Document} is reiterated and restated here where relevant.
 	 
-	 \paragraph{} An Elevator Control System (ECS) must simultaneously control multiple 
-	 elevators in multiple states, in a manner fashioned to the specific characteristics 
-	 of the given elevator, while enforcing safety requirements. Such safety requirements 
-	 include speed, acceleration, and weight limits, properly aligning the doors of 
-	 an elevator to the floor, checking for obstructions within the doors, allowing 
-	 emergency access, and shutting down in the case of a fire. Basic requirements 
-	 include controlling elevator functionality, like moving between floors, opening 
-	 and closing doors, and answering calls. The functionality of the ECS must also 
-	 be tailored to each instance of its implementation, in terms of the number of 
-	 floors being serviced (20 for the DHA), or special access for executive clients. 
-	 Lastly, all functionality falls under the purview of regulating bodies, which 
-	 enforce specific requirements, such as weight or speed limits, or disability 
-	 access. This document provides a closer look at how all of these functions will be
-	 provided.
+	 \paragraph{} The CGC must 
 	 
 	 \paragraph{} After this introduction \footnote{Introduction and document aesthetics by Ezequiel Ramos}, 
 	 Section \ref{gen} gives an overview of the system. Section \ref{spec} delves into more 
@@ -64,16 +52,9 @@
 	assumptions for the system will be presented.}
 	
 	\subsection{Product Perspective}
-		\paragraph{} The system will be formed by two modules: Elevator Management and 
-		Emergency Control. The elevator management will be in charge of the normal use 
-		of elevators and safety features. The emergency control will be used for managing 
-		emergency situations.
+		\paragraph{} 
 
-		\paragraph{} The Elevator Management will control the movement of the 4 elevators, 
-		controlling the position of the elevator and sending them to cover the requests. 
-		In order to achieve this, it will count with an algorithm that will choose the most 
-		efficient elevator, covering like this the efficiency features. It will communicate 
-		with the software of each elevator, see \ref{fig:block}.
+		\paragraph{} 
 		
 		\begin{figure}[h!]
   			\centerline{\includegraphics[scale=.52]{Block_Diagram.png}}
@@ -81,59 +62,33 @@
   			\label{fig:block}
 		\end{figure}
 		
-		\paragraph{} The Elevator Software will recollect the data provided from the Elevator 
-		Hardware (speed, weight, executive/normal user, alignment, etc) in order to achieve the 
-		safety and use features. The Elevator Software will permit that elevator to use the 
-		Executive Mode, permitting it to reach the floor 20th.
-		
-		\paragraph{} The Emergency Control will communicate with the Elevator Management when 
-		the Emergency Hardware is activated (Emergency Key or Fire Alarm), it will activate 
-		the emergency mode where the elevators will stop they normal work and will proceed 
-		with the emergency plan.
-		
-		\paragraph{} This system will use a centralized architecture based on wireless communication 
-		between the elevators and the two principal modules, elevators management, and emergency control.
+		\paragraph{} 
+		\paragraph{} 	
+		\paragraph{} 
 
 	\subsection{Product Functions}
-		\paragraph{} Using this Elevator Control System, the users will be able to travel between 
-		floors. The result will depend on the inputs provided from the users, the elevator management 
-		will count with a FIFO queue in order to reply to the elevator request. This module will 
-		choose the most affordable elevator to cover that request.
+		\paragraph{} 
 		
-		\paragraph{} The elevator will comply with the safety features in order to permit the 
-		movement of the elevator if any of the safety features its not cover it will provide 
-		feedback to the users. The executive mode will be activated using the RFID key.
+		\paragraph{} 
 		
-		\paragraph{} The users could request and an elevator using the buttons available in 
-		each elevator bay and choose the destiny floor using the cabin buttons. Also, they 
-		can use other functions (emergency call, door management, etc).
+		\paragraph{} 
 		
-		\paragraph{} In case of emergency, the emergency plan will be activated, moving the 
-		elevator to the first floor with a constant and safe speed and opening their door on 
-		the first floor. In order to recover the normal use of the elevator would be needed 
-		the emergency key.
+		\paragraph{} 
 
 	\subsection{User Features}
-		\paragraph{} There are two types of users that interact with the system: normal users 
-		and executive users. Each of these two types of users has a different use of the system 
-		so each of them has their own requirements.
+		\paragraph{} 
 		
-		\paragraph{} The normal users can use the elevator in a range of floors from the first 
-		to the tenth ninth, they can use all the other features available in the elevator.
+		\paragraph{} 
 		
-		\paragraph{} The executive users can use the same features as a normal user but they 
-		can reach the twentieth floor.
+		\paragraph{} 
 	
 	\subsection{Constraints}
-		\paragraph{}The elevator not would be able to overcome the weight limit or speed 
-		limits in order to maintain safety. The weight limit will be shown in each elevator. 
-		The doors will not be able to close if they detect an obstruction, so the elevator 
-		will not able to move.
+		\paragraph{}
 
 	\subsection{Assumptions}
-		\paragraph{} One assumption about our product is that the communication between 
-		the elevators and the modules will never fail and they are in real-time. So the 
-		messages sent will achieve destiny in real-time.
+		\paragraph{} We assume that the infrastructure is all redundent. The CGC is installed on redundent servers. 
+		the network backbone has physical redundent links to appropriate devices like the cameras, the PA speakers, and the electric fence. We will also
+		program redundency into the logic. Like the ability to have another car available in case of an emergency or if the car breaks down.
 		
 		\paragraph{} Another assumption is that messages would be encrypted in order 
 		to provide the security needed, so the messages can not be intercepted and 
@@ -141,212 +96,123 @@
 
 \section{Specific Requirements} \label{spec} % Siri and Anas
 % logical diagram
-	\subsection{External Interfaces} \label{inter}% Anas
-		\paragraph{} \textit{External interfaces \footnote{External Interfaces by Anas Gauba} 
-		are intended for providing the detailed interactions between the ECS and how 
-		the ECS should react based on the events and actions it receives from the 
-		interfaces. External interfaces also receive inputs which prompts the interfaces 
-		to trigger an event. There are three modes of operation for ECS to react to 
-		and those are: Normal mode, Emergency mode, and Executive mode. There are 
-		incoming and outgoing events listed for all these modes below.}
+	\subsection{Interfaces} \label{inter}% Anas
+		\paragraph{} \textit{The Interfaces \footnote{External Interfaces by Anas Gauba} 
+		make up all the pieces that the CGC communicates with. The CGC itself must communicate with everything, 
+		but a lot of interfaces can function on their own. The car interface is an example of one that needs to be able to funtion on it's own.}
 		
-		\subsubsection{User Interfaces}
-		\textit{This addresses interfaces particular to the user.}
-			\paragraph{Elevator Bay Buttons}
-			\textit{The events that the elevator bay buttons triggers are specifically 
-			related to user pressing bay buttons.}
-				\subparagraph{Incoming Events}
-					\begin{enumerate}
-						\item There are no incoming events for bay buttons because naturally, 
-						it makes sense that the elevator bay button triggers an outgoing event 
-						when the user presses the button.
-					\end{enumerate}
+		\paragraph{Pay Kiosk}
+		\textit{}
+			\subparagraph{Incoming Events}
+				\begin{enumerate}
+					\item 
+				\end{enumerate}
 				
-				\subparagraph{Outgoing Events}
-					\begin{enumerate}
-						\item Press button(\textit{floor number, direction}).
-					\end{enumerate}
-				
-		
-			\paragraph{Cabin Button and Display}		
-			\textit{The cabin button and display interface are intended for triggering 
-			events in situations where the user presses cabin buttons or inserts key. }
-				\subparagraph{Incoming Events}
-					\begin{enumerate}
-						\item Executive key inserted(\textit{cabin number}), unlock 20th floor button.
-						\item Emergency key inserted(\textit{cabin number}).
-					\end{enumerate}
-				
-				\subparagraph{Outgoing Events}
-					\begin{enumerate}
-						\item Go to floor(\textit{cabin number, floor number}).
-						\item Door open button.
-					\end{enumerate}
-		
-			\paragraph{Emergency Key}
-			\textit{The emergency key interface triggers events in situations where 
-			the emergency key is detected inside the cabin.}
-				\subparagraph{Incoming Events}
-					\begin{enumerate}
-						\item There are no incoming events for the emergency key, the user simply inserts 
-						the key which should be in the outgoing event to let the ECS know about an emergency 
-						key insertion.
-					\end{enumerate}
-				
-				\subparagraph{Outgoing Events}
-					\begin{enumerate}
-						\item Emergency key inserted(\textit{cabin number})
-						\item Normal mode reset.
-					\end{enumerate}
-				
-			
-			\paragraph{Executive RFID Key}
-			\textit{The executive RFID interface triggers events for special passengers, 
-			unlocking the 20th floor option.}	
-				\subparagraph{Incoming Events}
-					\begin{enumerate}
-						\item Like emergency key interface, this interface also does 
-						not have an incoming event.
-					\end{enumerate}
-				
-				\subparagraph{Outgoing Events}
-					\begin{enumerate}
-						\item Executive key inserted(\textit{cabin number}).
-					\end{enumerate}
-				
-			
-			\paragraph{Jukebox}
-			\textit{The jukebox interface triggers events in situations where the elevator 
-			cabin is moving and let the ECS inform to play which type of music to play.}
-				\subparagraph{Incoming Events}
-					\begin{enumerate}
-						\item Play Music(\textit{cabin number}).
-					\end{enumerate}
-				\subparagraph{Outgoing Events}
-					\begin{enumerate}
-						\item Music to play(\textit{name}).
-					\end{enumerate}
-				
-				
-			\paragraph{Two Way Communication}
-			\textit{The two-way communication interface is a special interface of cabin 
-			buttons interface. It triggers special events such as detecting whether the 
-			intercom button is pressed or not.}
-				\subparagraph{Incoming Events}
-					\begin{enumerate}
-						\item Emergency button pressed(\textit{cabin number}).
-					\end{enumerate}
-				\subparagraph{Outgoing Events}
-					\begin{enumerate}
-						\item Dial Emergency/hotel staff(\textit{cabin number}).
-					\end{enumerate}
-			
-		
-		\subsubsection{Sensor Interfaces}
-		\textit{This sub section addresses interfaces particular to the all sensors involved
-		in the system. As in the above, any incoming and outgoing events are detailed.}
-		
-			\paragraph{Weight, Velocity, and Acceleration Sensor}
-			\textit{The weight, velocity and acceleration interface is intended for 
-			detecting safety events}
-				
-				\subparagraph{Incoming Events}
-					\begin{enumerate}
-						\item There are no incoming events for this interface as it 
-						simply triggers an outgoing event and letting ECS know about 
-						the speed for the cabins.
-					\end{enumerate}
-				
-				\subparagraph{Outgoing Events}
-						\begin{enumerate}
-						\item Too heavy(cabin number).
- 						\item For safety purposes, Change speed(\textit{cabin number}).
-					\end{enumerate}
-			
-			\paragraph{Fire Alarm System}
-			\textit{The fire alarm system triggers events in emergency situations 
-			and ECS responds to these events}
-				\subparagraph{Incoming Events}
-					\begin{enumerate}
-						\item Emergency mode triggered.
-					\end{enumerate}
-				\subparagraph{Outgoing Events}
-					\begin{enumerate}
-						\item Enter safety mode.
-					\end{enumerate}
+			\subparagraph{Outgoing Events}
+				\begin{enumerate}
+					\item 
+				\end{enumerate}
 
-			
-			\paragraph{Door Alignment}
-			\textit{The door alignment sensor interface triggers events in situations 
-			when the cabin doors and bay doors are properly aligned.}
-				\subparagraph{Incoming Events}
-					\begin{enumerate}
-						\item Open door (\textit{cabin number, floor number}).
-						\item Elevator arrives(\textit{cabin number, floor number}).
-					\end{enumerate}
-				\subparagraph{Outgoing Events}
-					\begin{enumerate}
-						\item Door not aligned(\textit{cabin number , floor number}).
-						\item Door aligned(\textit{cabin number, floor number}).
-					\end{enumerate}
-							
-			
-			\paragraph{Light Curtain}
-			\textit{The light curtain sensor interface triggers events in 
-			the case of door obstruction.}
-				\subparagraph{Incoming Events}
-					\begin{enumerate}
-						\item There are no incoming events for light curtain sensor as it only 
-						detects door obstruction and let the ECS know about it (which is 
-						considered an outgoing events).
-					\end{enumerate}
+		\paragraph{Token}
+		\textit{}
+			\subparagraph{Incoming Events}
+				\begin{enumerate}
+					\item 
+				\end{enumerate}
 				
-				\subparagraph{Outgoing Events}
-					\begin{enumerate}
-						\item Door Obstructed(\textit{cabin number, floor number}).
-					\end{enumerate}
+			\subparagraph{Outgoing Events}
+				\begin{enumerate}
+					\item 
+				\end{enumerate}
+
+		\paragraph{Car}
+		\textit{}
+			\subparagraph{Incoming Events}
+				\begin{enumerate}
+					\item 
+				\end{enumerate}
+				
+			\subparagraph{Outgoing Events}
+				\begin{enumerate}
+					\item 
+				\end{enumerate}
+
+		\paragraph{T-Rex Monitor}
+		\textit{}
+			\subparagraph{Incoming Events}
+				\begin{enumerate}
+					\item 
+				\end{enumerate}
+				
+			\subparagraph{Outgoing Events}
+				\begin{enumerate}
+					\item 
+				\end{enumerate}
+
+		\paragraph{Camera Network}
+		\textit{}
+			\subparagraph{Incoming Events}
+				\begin{enumerate}
+					\item 
+				\end{enumerate}
+				
+			\subparagraph{Outgoing Events}
+				\begin{enumerate}
+					\item 
+				\end{enumerate}
+
+		\paragraph{Electric Fence}
+		\textit{}
+			\subparagraph{Incoming Events}
+				\begin{enumerate}
+					\item 
+				\end{enumerate}
+				
+			\subparagraph{Outgoing Events}
+				\begin{enumerate}
+					\item 
+				\end{enumerate}
+
+		\paragraph{Global Alarm System}
+		\textit{}
+			\subparagraph{Incoming Events}
+				\begin{enumerate}
+					\item 
+				\end{enumerate}
+				
+			\subparagraph{Outgoing Events}
+				\begin{enumerate}
+					\item 
+				\end{enumerate}
+
+		\paragraph{CGC Station}
+		\textit{}
+			\subparagraph{Incoming Events}
+				\begin{enumerate}
+					\item 
+				\end{enumerate}
+				
+			\subparagraph{Outgoing Events}
+				\begin{enumerate}
+					\item 
+				\end{enumerate}
+
+		\paragraph{GPS Server}
+		\textit{}
+			\subparagraph{Incoming Events}
+				\begin{enumerate}
+					\item 
+				\end{enumerate}
+				
+			\subparagraph{Outgoing Events}
+				\begin{enumerate}
+					\item 
+				\end{enumerate}
+				
 		
-		
-		
-		\subsubsection{Mechanical Component Interfaces}
-		\textit{This addresses interfaces necessary for the safe interaction
-		between the \textit{ECS} and all relevant mechanical components.}
-		
-			\paragraph{Cabin Movement and Motor}
-			\textit{The cabin and bay door interface triggers events to ensure
-			that both cabin and bay doors are properly aligned.}
-				\subparagraph{Incoming Events}
-					\begin{enumerate}
-						\item User floor request(\textit{floor number, cabin number})
-						\item Update speed(cabin number, speed factor)
-					\end{enumerate}
-				\subparagraph{Outgoing Events}
-					\begin{enumerate}
-						\item Elevator arrives(\textit{floor number, cabin number})
-					\end{enumerate}
-					
-			\paragraph{Cabin and Bay Door}	
-			\textit{The cabin and bay door interface triggers events to ensure that 
-			both cabin and bay doors are properly aligned to the floor.}		
-				\subparagraph{Incoming Events}
-					\begin{enumerate}
-						\item Door aligned(\textit{floor number, cabin number})
-					\end{enumerate}
-				\subparagraph{Outgoing Events}
-					\begin{enumerate}
-						\item Open door(\textit{floor number, cabin number})
-					\end{enumerate}
 		
 		\subsection{Control Logic} \label{logic}%siri
-		\paragraph{} \textit{This section \footnote{Control Logic by Siri Khalsa} outlines the control logic for the ECS system. 
-		The first diagram (shown in figure \ref{fig:normal}) illustrates the normal mode 
-		of the system. States of the system are found inside of the ovals. 
-		The arrows will have labels, maybe more than one, that contain events that trigger 
-		the state change or lack thereof. The second diagram (shown in figure \ref{fig:emerg})
-		looks very similar but demonstrates how the ECS system works when it has entered emergency mode. 
-		Both diagrams contain some events in different colors. The green color symbolizes 
-		that this event can only take place with an executive key. The red color symbolizes 
-		that these events can only take place with an emergency key.}
+		\paragraph{} \textit{ \footnote{Control Logic by Siri Khalsa}}
 
 		\begin{figure}[ht]
   			\centerline{\includegraphics[scale=.52]{ECSModes.jpg}}
@@ -373,29 +239,22 @@
 
 	\subsection{Client}
 	\begin{itemize}
-		\item There will only be one call button per elevator bay
-		\item There are four elevators that are adjacent.
+		\item 
 	\end{itemize}
 
 	\subsection{Safety}
 	\begin{itemize}
-		\item There will be a sensor to detect weight that will be used to determine if the elevator is over the weight capacity.
-		\item There will be a sensor to prevent the door from closing while obstructed. 
-		\item The elevator will accelerate and decelerate at safe rates. The elevator’s top speed will be around 20 meters per second with an acceleration/deceleration rates of approximately 1 meter per second per second.
-		\item The doors will only be allowed to open while properly aligned with the landing. The alignment sensors will be employed for this.
-		\item The built in fire alarm in the building will send the elevator into emergency procedures.
+		\item 
 	\end{itemize}
 
 	\subsection{Regulations}
 	\begin{itemize}
-		\item The elevator will have a connection to a 24 hour monitoring service via the built in speaker and microphone.
-		\item There will be an encryption on the network used by the elevator so as to prevent outside tampering with the elevators and their signals.
-		\item From my researching into SRS papers. The constraints section is usually short and sometimes included in other sections. On top of all that it seems to only pertain to software so I attempted to only include constraints that would pertain to the software. Feel free to add or subtract if you can think of more/better ones.
+		\item 
 	\end{itemize}
 
 	\subsection{Security}
 	\begin{itemize}
-		\item There will be an encryption on the network used by the elevator so as to prevent outside tampering with the elevators and their signals.
+		\item 
 	\end{itemize}
 
 	% From my researching into SRS papers. The constraints section is usually short and sometimes included in other sections. On top of all that it seems to only pertain to software so I attempted to only include constraints that would pertain to the software. Feel free to add or subtract if you can think of more/better ones.
@@ -410,27 +269,18 @@
 	citation}
 	
 	\begin{list}{}{}
-		\item{\textbf{Action (Do:)} The step(s) taken by the ECS to get to the other state.}
-		\item{\textbf{Bay} The location of elevator access on a given floor.}
-		\item{\textbf{Cabin} The interior of the elevator; also used as a synonym for elevator.}
-		\item{\textbf{Call} To summon an elevator to a given floor or, from a controller’s perspective, a summon to a given floor.}
-		\item{\textbf{Capacity} Used in reference to weight capacity (see Load), or physical capacity(the amount of space in an elevator).}
-		\item{\textbf{Drive System} The primary mechanical system responsible for generating the movement of an elevator.}
-		\item{\textbf{Elevator Control System/Controller (ECS)} A system for regulating the movement of elevators as well as controlling the states (see State).}
-		\item{\textbf{Emergency Personnel} Personnel including firefighters, police, and paramedics.}
-		\item{\textbf{Event} It includes all signals, inputs, decisions, interrupts, transitions, and actions to or from users or external devices.}
-		\item{\textbf{Executive} In the context of passengers: Any passenger granted access to floors other inaccessible to the general public. In the context of floors: A floor accessible only by executive passengers.}
-		\item{\textbf{Incoming Events} The event(s) which the interface is taking as an input.}
-		\item{\textbf{Landing} The space immediately in front of the elevator bay doors.}
-		\item{\textbf{Load} The physical weight being carried by an elevator.}
-		\item{\textbf{Obstruction} In the context of elevator operation, an obstruction is any entity that is present within the doorway of the elevator during closing of the doors.}
-		\item{\textbf{Outgoing Events} The event(s) which the interface is outputting to ECS.}
-		\item{\textbf{Passenger} Any person riding an elevator.}
-		\item{\textbf{Radio Frequency Identification (RFID)} Short range radio identification; typically used as a means of exchanging information (usually for validation) across short distances.}
-		\item{\textbf{Safely} Without causing harm to any person or thing.}
-		\item{\textbf{Shaft}  The physical enclosure within which the elevator travels, spanning the desired distance of travel.}
-		\item{\textbf{Sensor}  A device for detecting or measuring physical quantities.}
-		\item{\textbf{State}  The condition in which the ECS is currently in.}
+	\item \textbf{CGC:} Acronym for Cretaceous Gardens Controller 
+	\item \textbf{DVR:} Acronym for Digital Video Recorder
+	\item \textbf{Electrical Conduction:} The movement of electrically charged particles through a transmission medium.
+	\item \textbf{GPS:} Acronym forGlobal Positioning System 
+	\item \textbf{Hardwired Ethernet:} This references the latest IEEE standard for Ethernet utilizing physical cables.
+	\item \textbf{Network:} All nodes with which the CGC interacts, the links that connect them to each other and to the
+	CGC, the CGC itself, and all related databases.
+	\item \textbf{Node:} The generic term that refers to any device connected to the CGC in any way. This includes 
+	autonomous vehicles, tokens, the T.Rex monitor, all electric fence panels, all kiosks, and all cameras.
+	\item \textbf{Safely Inactive:} A state in which a vehicle is fully functional and ready to be dispatched.
+	\item \textbf{Safely Occupied:} A state in which a vehicle contains at least one person, is locked, and is ready to depart.
+	\item \textbf{Token:} An interactive device used by the visitor that grants access to locations.
 	\end{list}
 
 
