@@ -31,32 +31,32 @@
 \section{Introduction} \label{intro} % Zeke
 % project goals and the purpose of this document
 	\paragraph{} The purpose of this document is to \textit{specify} the requirements for the
-	 development of the Cretaceous Gardens Controller (CGC) for our billionaire philanthropist clients. 
-	 The specification is formalized and diagrammed in order to guide the eventual
-	 implementation of the system. Information encountered in the corresponding \textit{Requirements 
-	 Definition Document} is reiterated and restated here where relevant.
-	 
-	 \paragraph{} The CGC must 
-	 
-	 \paragraph{} After this introduction \footnote{Introduction and document aesthetics by Ezequiel Ramos}, 
+	 development of the Cretaceous Gardens Controller (CGC). The specification is formalized and 
+	 diagrammed in order to guide the eventual implementation of the system. Information 
+	 encountered in the corresponding \textit{Requirements Definition Document} is reiterated 
+	 and restated here where relevant.
+	  
+	 \paragraph{} After this introduction \footnote{Introduction by Ezequiel Ramos}, 
 	 Section \ref{gen} gives an overview of the system. Section \ref{spec} delves into more 
 	 detail with subsections \ref{logic} and \ref{inter} that feature a more granular view 
 	 of the \textit{Control Logic} and the \textit{External Interfaces}. Section \ref{defs} 
 	 provides the definition of technical terms that will be commonly used.
 \pagebreak
-\section{General Description} \label{gen} %Santi
-	\paragraph{}\textit{This section \footnote{General Description by Santiago Marin Cejas} will provide a general overview of the whole system. 
-	Providing how the system interacts with the hardware interfaces and introduce the 
-	basic functionality of it. It will also describe what parts will be used in the system 
-	and what functionality is available for each type. Moreover, the constraints and 
-	assumptions for the system will be presented.}
+\section{General Description} \label{gen} %Zeke
+	\paragraph{}\textit{This section \footnote{General Description by Ezequiel Ramos and 
+	Santiago Cejas} provides a general overview of the whole system. How the system interacts with 
+	the hardware interfaces and its basic functionality are introduced here. A description of
+	parts to be used in the system and the available functionalities for each type are also 
+	provided. Some high level constraints and assumptions for the system will be also be presented.
+	It should be noted that a more detailed specification of constraints is covered in its 
+	own section.}
 	
 	\subsection{Product Perspective}
 		\paragraph{} 
 
 		\paragraph{} 
 		
-		\begin{figure}[h!]
+		\begin{figure}[H]
   			\centerline{\includegraphics[scale=.52]{Block_Diagram.png}}
   			\caption{Block Diagram}
   			\label{fig:block}
@@ -82,13 +82,13 @@
 		
 		\paragraph{} 
 	
-	\subsection{Constraints}
+	\subsection{High Level Constraints}
 		\paragraph{}
 
 	\subsection{Assumptions}
-		\paragraph{} We assume that the infrastructure is all redundent. The CGC is installed on redundent servers. 
-		the network backbone has physical redundent links to appropriate devices like the cameras, the PA speakers, and the electric fence. We will also
-		program redundency into the logic. Like the ability to have another car available in case of an emergency or if the car breaks down.
+		\paragraph{} We assume that the infrastructure is all redundant. The CGC is installed on redundant servers. 
+		the network backbone has physical redundant links to appropriate devices like the cameras, the PA speakers, and the electric fence. We will also
+		program redundancy into the logic. Like the ability to have another car available in case of an emergency or if the car breaks down.
 		
 		\paragraph{} Another assumption is that messages would be encrypted in order 
 		to provide the security needed, so the messages can not be intercepted and 
@@ -214,20 +214,20 @@
 		\subsection{Control Logic} \label{logic}%siri
 		\paragraph{} \textit{ \footnote{Control Logic by Siri Khalsa}}
 
-		\begin{figure}[ht]
-  			\centerline{\includegraphics[scale=.52]{ECSModes.jpg}}
+		\begin{figure}[H]
+  			\centerline{\includegraphics[scale=1]{ECSModes.jpg}}
   			\caption{Elevator Control System Normal Function Model }
   			\label{fig:normal}
 		\end{figure}
 
-		\begin{figure}[ht]
-  			\centerline{\includegraphics[scale=.52]{ECS-Normal.jpg}}
+		\begin{figure}[H]
+  			\centerline{\includegraphics[scale=1]{ECS-Normal.jpg}}
   			\caption{Elevator Control System Normal Function Model }
   			\label{fig:normal}
 		\end{figure}
 	
-		\begin{figure}[ht]
-  			\centerline{\includegraphics[scale=.6]{EmergencyPhase1.jpg}}
+		\begin{figure}[H]
+  			\centerline{\includegraphics[scale=1]{EmergencyPhase1.jpg}}
   			\caption{Elevator Control System Normal Function Model }
   			\label{fig:emerg}
 		\end{figure}
@@ -282,8 +282,7 @@
 	\item \textbf{Safely Occupied:} A state in which a vehicle contains at least one person, is locked, and is ready to depart.
 	\item \textbf{Token:} An interactive device used by the visitor that grants access to locations.
 	\end{list}
-
-
+	
 \pagebreak
 \bibliography{../../ReferenceMaterial/BibTeX/references} % Zeke
 % run latex, then bibtex, then quickbuild (on the tex file)
