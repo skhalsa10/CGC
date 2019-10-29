@@ -142,6 +142,7 @@
                     \item Arrived(Destination)[Emergency Mode]/pick up or drop off visitors following the conditioned the protocol.
 					\item Weight detected.
                     \item Change driving mode(modeName).
+                    \item Activate intercom.
 				\end{enumerate}
 				
 			\subparagraph{Outgoing Events}
@@ -198,36 +199,40 @@
 		\textit{}
 			\subparagraph{Incoming Events}
 				\begin{enumerate}
-					\item 
+					\item Trigger alarms[Emergency Mode]/play emergency alarm sound.
+                    \item Trigger alarms[Normal Mode]/play Public Service Annoucement (PSA).
+                    \item Disable alarms.
 				\end{enumerate}
 				
 			\subparagraph{Outgoing Events}
 				\begin{enumerate}
-					\item 
+                    \item Report health status to CGC. 
 				\end{enumerate}
 
 		\paragraph{CGC Station}
 		\textit{}
 			\subparagraph{Incoming Events}
 				\begin{enumerate}
-					\item 
+                    \item Review health status of all the associated devices.
 				\end{enumerate}
 				
 			\subparagraph{Outgoing Events}
 				\begin{enumerate}
-					\item 
+					\item Activate tranquilizer. 
+                    \item Deactivate emergency mode.
+                    \item Activate intercom. 
 				\end{enumerate}
 
 		\paragraph{GPS Server}
 		\textit{}
 			\subparagraph{Incoming Events}
 				\begin{enumerate}
-					\item 
+					\item Track location(gpsID).
 				\end{enumerate}
 				
 			\subparagraph{Outgoing Events}
 				\begin{enumerate}
-					\item 
+					\item Report location(gpsID).
 				\end{enumerate}
 				
 		
