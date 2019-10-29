@@ -89,7 +89,7 @@ here\footnote{Objectives by Anas, Siri and Zeke.}.}
 	
 	\subsection{Efficiency}\label{eff}
 	\paragraph{} The CGC is to engender high efficiency and robust functionality. 
-	Self-driving cars, pay kiosks, camera system, the global positioning system, 
+	Self-driving cars, pay kiosks, camera system, the global positioning system (GPS), 
 	electric fence panels, and all other nodes with which the CGC is to interact 
 	must not be burdened by inefficiencies of the CGC. On the contrary, the system
 	should be expected to gracefully handle nodal malfunctions, failures, or
@@ -98,29 +98,24 @@ here\footnote{Objectives by Anas, Siri and Zeke.}.}
 
 
 
-\section{Overall System Organization} 
-\label{sys}
+\section{Overall System Organization} \label{sys}
 \paragraph{} The CGC will be centralized\footnote{System Organization 
-by Anas, Santi, and Siri.} and will manage all relevant components. Figure 
-\ref{fig:blackbox} shows a black box diagram of the CGC. The CGC receives inputs 
+by Anas, Santi, Siri, and Zeke.} and will manage all relevant components. Figure 
+\ref{fig:blackbox} shows a black box diagram of the CGC. The CGC receives input 
 from sensors, user interfaces, and emergency systems like the \textit{Global 
 Alarm System} and responds through appropriate output actions as described 
 below.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{} The Cretaceous Garden Controller will have self-driving cars, 
-transporting people from south to the Exhibit Area (North of the Island). In 
-the south of the island are Pay Kiosks where the clients can buy their tickets which
-give them access to the cars and the Exhibition. The Pay Kiosks will record the sales 
-and provide to the guest a token device.
-%%%%%%%%%%%%%%%%%%%%
+\paragraph{} The Cretaceous Garden Controller will manage self-driving cars whose primary
+function will be to transport guests to and from the main exhibit. Pay kiosks, where guests 
+are to buy admission tickets, will be locate in the southern region of the island. The admission 
+tickets will be in the form of devices called \textit{tokens}, which will grant guests 
+access to their assigned vehicles as well.
 
 \paragraph{} The CGC will monitor the position of the T-Rex via GPS and
-cameras. If the electric fence fails the emergency plan will be activated 
-sounding the alarms. the cars will pick up people and going to the south,
-there will some spare self-driving cars in case of emergency in the 
-North.
-
+cameras. In the event of enclosure failure, an emergency mode will be activated;
+island-wide alarm sounds will be transmitted, and the autonomous vehicles will
+prioritize transporting guests to safety.
 
 \begin{figure}[H]
 	\centerline{\includegraphics[scale=.17]{CGCBlackBox.png}}
@@ -130,221 +125,203 @@ North.
 \vfill
 \pagebreak
 
-\section{Interfaces}
-\label{int}
-\paragraph{} \textit{The interfaces are broken\footnote{Interfaces by Siri 
-and Anas.} up into main systems. They may be composed of their own 
-sensors but said sensors do not interface with the CGC. The following list of interfaces 
-list their sensors, hardware, and features.}
+\section{Interfaces}\label{int}
+\paragraph{} \textit{The system interfaces\footnote{Interfaces by Siri, Anas, 
+and Zeke} have been grouped into several subsystems. The following list is composed
+of devices with which the CGC will interface, and includes the devices' sensors, 
+hardware, and features.}
 
 	\subsection{Pay Kiosk}
 	\paragraph{} \textit{The purpose of the the Pay Kiosk interface is to connect 
-	the physical Pay Kiosks to the CGC,which is composed of sensors and other hardware.}
-			
+	the physical Pay Kiosks to the CGC, the former of which possesses the following.}
 	\paragraph{Sensors}
 	\begin{list}{}{}
-		\item \textbf{Touch Screen: }used to sense user interaction. 
-		\item \textbf{Credit Card: }accepts all major credit/debit cards. 
-		\item \textbf{Cash Receptacle: }accepts and analyzes cash. 
+		\item \textbf{Touch Screen:} senses user interaction. 
+		\item \textbf{Credit Card:} accepts all major credit and debit cards. 
+		\item \textbf{Cash Receptacle:} accepts cash. 
 	\end{list}
 		
 	\paragraph{Hardware}
 	\begin{list}{}{}
-		\item \textbf{Change Dispenser:} dispenses appropriate change to the 
-		visitor buying a token.
-		\item \textbf{Token Dispenser: } dispenses token with unique ID to user.
+		\item \textbf{Change Dispenser:} dispenses change after the purchase of a token.
+		\item \textbf{Token Dispenser:} dispenses unique token to guest.
 	\end{list}
 
 	\paragraph{Features}
 	\begin{list}{}{}
-		\item \textbf{Token Builder:} Takes payment and the out user form and builds
-		a unique token for the visitor.
-		\item \textbf{Transaction Logger:} Will provide receipts to visitors upon purchase and 
-		reports transactions with the CGC.
-		\item \textbf{Maintenance: } Enables employees to manage issues with kiosks 
-		and provides machine health information. 
+		\item \textbf{Token Builder:} generates unique token from given information (liability waver, name, etc.)
+		\item \textbf{Transaction Logger:} provides purchase receipts and stores transactions.
+		\item \textbf{Maintenance System:} enables staff to manage issues with the device	
+		and maintains device health information. 
 	\end{list}
 
 	\subsection{Token}
 	\paragraph{} \textit{The Token will act as an interface to multiple systems. 
 	It will provide valuable information about the visitor and also interact with 
-	the visitor. }
+	the visitor.}
 		
 	\paragraph{Sensors}
 	\begin{list}{}{}
-		\item \textbf{Touch Screen: } interacts with the users. 
-		\item \textbf{GPS: } senses the location of all tokens.
+		\item \textbf{Touch Screen:} interacts with the users. 
+		\item \textbf{GPS Tracker:} transmits location. 
 	\end{list}
 		
 	\paragraph{Hardware}
 	\begin{list}{}{}
-		\item \textbf{RFID: } The RFID chip will be programmed with a unique ID and 
-		used for multiple purposes included access to various systems and areas.
-		\item \textbf{Speaker: }the token contains speakers as hardware for alerts 
-		and instructions.
+		\item \textbf{RFID Chip:} maintains a unique ID and is used for access to 
+		multiple systems and areas.
+		\item \textbf{Speaker:} transmits alerts and instructions to the guest.
 	\end{list}
 
 	\paragraph{Features}
 	\begin{list}{}{}
-		\item \textbf{Location/Map: }utilizes the GPS to provide location services.
+		\item \textbf{Localization:} locatable via GPS.
 	\end{list}
 
 	\subsection{Car}
-	\paragraph{} \textit{There will be an interface with all the cars. The autonomous 
-	car will be built utilizing a partner. We will work closely with them to provide 
-	access to specific sensors and features.}		
+	\paragraph{} \textit{The autonomous car interface is that through which the CGC will
+	manage all vehicles, and many of the functions of each vehicle.}
 	
 	\paragraph{Sensors}
 	\begin{list}{}{}
-		\item \textbf{RFID reader: }covers the proximity of the car and is used 
-		to grant access and count how many tokens are currently in the car. 
-		\item \textbf{Seat Weight Sensor: }used to determine if there is someone 
-		sitting on the seat. 
-		\item \textbf{Camera: }used by the car for autonomous driving and also 
-		connects to CGC for a needed scenario. 
-		\item \textbf{Microphone: }used to sense voice for use in an intercom.
-		\item \textbf{Sensor: }USed to track location of car.
+		\item \textbf{RFID Reader:} senses tokens within a defined radius relative 
+		to the car, and counts guest tokens within the car.
+		\item \textbf{Weight Sensor:} measures weight on each seat, helps determine. 
+		\item \textbf{Camera:} used by the car for autonomous driving and also 
+		is accessible by CGC.
+		\item \textbf{Microphone:} receives guest voice for use in an intercom.
+		\item \textbf{GPS Tracker:} transmits location of the car.
 	\end{list}
 		
 	\paragraph{Hardware}
 	\begin{list}{}{}
-		\item \textbf{Speaker: }used to alert guests.
-		\item \textbf{Automatic Door Locks: }this will be initiated when the car 
-		is determined to be moving.
-		\item \textbf{Wireless networking: }for communication purposes to communicate 
-		with the CGC.
+		\item \textbf{Speaker:} transmits alerts, instructions or general audio data.
+		\item \textbf{Automatic Door Locks:} engaged upon detection of movement. %% 
+		\item \textbf{Wireless Networking:} communicate with the CGC.
 	\end{list}
 	
 	\paragraph{Features}
 	\begin{list}{}{}
-		\item \textbf{Maintenance System: }allows for health checks and health status 
-		communication of the car.  
+		\item \textbf{Maintenance:} enables staff to manage issues with the car 
+		and 	maintains car health information.
 	\end{list}
 
 	\subsection{T-Rex Monitor}
-	\paragraph{} \textit{ The T-Rex Monitor is the interface to the system that controls 
-	and monitors the T-Rex. It is critical to the safety of employees and visitors. }
-		
+	\paragraph{} \textit{The T-Rex Monitor interface tracks and monitors the T-Rex. It is 
+	critical for employee and visitor safety.}
 	\paragraph{Sensors}
 	\begin{list}{}{}
-		\item \textbf{GPS: } senses the location of all tokens.
-		\item \textbf{Heart Rate Sensor: } Specifically designed to monitor the heart 
-		rate in BPM of the T-Rex. can be used to monitor stress, hunger and possible 
-		aggression
+		\item \textbf{GPS Tracker:} transmits location of the subject.
+		\item \textbf{Heart Rate Sensor:} monitors heart rate (beats per minute) of the T-Rex
+		and may be used to gauge stress, hunger, or aggression.
 	\end{list}
 		
 	\paragraph{Hardware}
 	\begin{list}{}{}
-		\item \textbf{Tranquilizer Injector: } This can be triggered to inject the 
-		tranquilizer cartridge stored on the monitoring system.
+		\item \textbf{Tranquilizer Injector:} administrates tranquilizer to the subject.
 	\end{list}
 
 	\paragraph{Features}
 	\begin{list}{}{}
-		\item \textbf{Maintenance System: }allows for health checks and health status 
-		communication of the T-Rex Monitor.  
-		\item \textbf{Health Monitor: }allows for health monitoring of the T-Rex.
+		\item \textbf{Biometrics Monitor:} collects T-Rex biometrics.
+		\item \textbf{Maintenance System:} enables staff to manage issues with the device	
+		and maintains device health information.
 	\end{list}
 
 	\subsection{Camera Network}
-	\paragraph{} \textit{The camera network interface is in charge of communicating with 
-	every camera, the redundant network links to each camera, and the DVR system that keeps 
-	recording of all cameras per retention policy. It will report on its health.}		
+	\paragraph{} \textit{The camera network interface communicates with every camera, to 
+    all redundant network camera links, and to the digital video recorder (DVR) system 
+    that is to record all cameras per retention policy.}		
 	
 	\paragraph{Sensors}
 	\begin{list}{}{}
-		\item \textbf{Cameras: }records video. 
+		\item \textbf{Cameras:} stream video.
 	\end{list}
 		
 	\paragraph{Hardware}
 	\begin{list}{}{}
-		\item \textbf{DVR: }stores and retains video.
-		\item \textbf{Hardwired Ethernet: }used for network communication with CGC. 
+		\item \textbf{DVR:} stores and retains video streams.
+		\item \textbf{Hardwired Ethernet:} used for network communication with CGC. 
 	\end{list}
 	
 	\paragraph{Features}
 	\begin{list}{}{}
-		\item \textbf{Maintenance System: }allows for health checks and health status 
-		communication of the camera network.
-        \item \textbf{Viewing:} ability to view any camera feed.
+        \item \textbf{Viewing:} ability to view any stream.
+        \item \textbf{Maintenance System:} enables staff to manage issues with the device	
+		and maintains device health information.
 	\end{list}
 
 	\subsection{Electric Fence}
-	\paragraph{} \textit{The electric fence interface will ensure that the visitors are 
-	safe from the attack of T-Rex. 	It will provide features for maintainability, and 
-	sensing options to reduce the risk of any damage.}		
+	\paragraph{} \textit{The electric fence interface is that through which the enclosure
+	panels are to communicate with the CGC.}
 	
 	\paragraph{Sensors}
 	\begin{list}{}{}
-		\item \textbf{Electrical Conduction Sensor: }senses for electricity going through 
-		electric fence. It has the ability to trigger when there is no electricity. 
+		\item \textbf{Electrical Conduction Sensor:} measures electricity going through 
+		electric fence and has the ability to trigger the alarm system in the absence of 
+		current. 
 	\end{list}
 		
 	\paragraph{Hardware}
 	\begin{list}{}{}
-		\item \textbf{Electrical Fence Panels: }special kind of physical panels that 
-		allows conductance of electricity going through it. 
-		\item \textbf{Hardwired Ethernet: }used for network communication with CGC. 
+		\item \textbf{Electrical Fence Panels:} electrically conductive enclosure panels.
+		\item \textbf{Hardwired Ethernet:} used for network communication with the CGC. 
 	\end{list}
 	
 	\paragraph{Features}
 	\begin{list}{}{}
-		\item \textbf{Maintenance System: }allows for health checks and health status
-		 communication of the electric fence.
+		\item \textbf{Maintenance:} enables staff to manage issues with the device	and 
+		maintains device health information.
 	\end{list}
 
 	\subsection{Global Alarm System}
-	\paragraph{} \textit{The global alarm system controls what gets played on a network 
-	of speakers for emergency related or informative needs.}		
+	\paragraph{} \textit{The global alarm system propagates alarm signals throughout the island.}
 
 	\paragraph{Hardware}
 	\begin{list}{}{}
-		\item \textbf{Speaker: }the global alarm system communicates with a network of 
-		PA speakers.
-		\item \textbf{Hardwired Ethernet: }used for network communication with CGC. 
+		\item \textbf{Speaker:} communicates with a network of public address (PA) speakers.
+		\item \textbf{Hardwired Ethernet:} used for network communication with CGC. 
 	\end{list}
 	
 	\paragraph{Features}
 	\begin{list}{}{}
-		\item \textbf{Maintenance System: }allows for health checks and health status
-		 communication of the Global Alarm System.  
+		\item \textbf{Maintenance:} enables staff to manage issues with the device	and 
+		maintains device health information.
 	\end{list}
 
 
 	\subsection{CGC Station}
-	\paragraph{} \textit{The CGC station is a device and interface that interacts with 
-	employees. It contains a user interface to analyze and interact with the components 
-	that the CGC can communicate with or can monitor. }		
+	\paragraph{} \textit{The CGC station interface interacts with staff and features a 
+	graphical user interface to analyze and interact with components managed and monitored
+	by the CGC.}		
 	
 	\paragraph{Sensors}
 	\begin{list}{}{}
-		\item \textbf{Microphone: }used to pick up voice to interact on the intercom. 
-		It can also be used to send announcements out to the Global Speaker System.
-		\item \textbf{Touch Screen: }used to interact with employee with a provided 
-		GUI interface.
+		\item \textbf{Microphone:} receives speech for the intercom and may be used 
+		for announcements through the Global Alarm System.
+		\item \textbf{Touch Screen:} provides access to the system.
 	\end{list}
 		
 	\paragraph{Hardware}
 	\begin{list}{}{}
-		\item \textbf{Speaker: }can be used with the intercom.
-		\item \textbf{Hardwired Ethernet: }used for network communication with CGC. 
+		\item \textbf{Speaker:} transmits sounds to the station.
+		\item \textbf{Hardwired Ethernet:} used for network communication with CGC. 
 	\end{list}
 	
 	\paragraph{Features}
 	\begin{list}{}{}
-		\item \textbf{Maintenance System: }This one is unique in the sense that it can
-		communicate with all other maintenance systems and initiate system checks. 
+		\item \textbf{Maintenance System:} communicates with all other maintenance systems,
+		and may initiate system checks. 
 	\end{list}
 
 	\subsection{GPS Server}
-	\paragraph{} \textit{The GPS server interface provides locations of all the active 
-	and surrounded GPS devices that it needs to interact with. }		
+	\paragraph{} \textit{The GPS server interface acquires and maintains locations of all 
+	active GPS devices (e.g. cars, or tokens)}		
 	
 	\paragraph{Features}
 	\begin{list}{}{}
-		\item \textbf{Tracking: }keeps track of all GPS devices and their longitude 
-		and latitude.
-        \item \textbf{Services: }third party service to provide GPS services. 
+		\item \textbf{Tracking:} tracks all GPS devices via longitude and latitude coordinates.
+        \item \textbf{Services:} third party service to provide GPS services.
 	\end{list}
 
 \section{Capabilities}
@@ -450,20 +427,19 @@ overview of its monitoring capabilities.\footnote {Capabilities by Zeke and Matt
 \paragraph{} \textit{The various constraints \footnote{Constraints by Santi} for the Cretaceous Garden Control are as follows.}
 	\subsection{General}
 	\begin{itemize}
-		\item The Cretaceous garden is located in Isla Trueno.
-		\item The Cretaceous garden will count with a dinosaur.
-		\item In the north of the Island will be allocated the Exhibition Area.
-		\item The Kiosk will be allocated in the south of the Island, where the guest arrive.
-		\item The Kiosk will provide the guest the tokens.
-		\item The CGC will control the functioning of the whole park (cars, kiosk, tokens, financial and emergency).
-		\item The CGC will know the exactly position of all cars, guest and T-Rex.
-		\item Each car (self-driving) will have a total of 10 seats and only leaves when it is full.
-		\item There is only one path from the south of the island to the north.
-		\item Each car will have an alarm to tell the guest the remaining time.
-		\item The token device will let the guest to know the remaining time and will perform as a GPS of the guest.
-		\item There will be only one token per guest.
-		\item The CGC will control the camera networking, showing images on real time of the park.
-		\item At the exit of the park each guest has to return his token device.
+		\item The Cretaceous Gardens is located on an island.
+		\item The Cretaceous Gardens exhibit is dangerous.
+		\item The exhibit will be in the northern of the island.
+		\item Guests will arrive at the southern end of the island.
+		\item Pay Kiosks will be in the southern end of the island.
+		\item The T-Rex location must always be known.
+		\item Vehicles may accommodate up to 10 guests.
+		\item Vehicles must alert guests when their time at the exhibit is up.
+		\item Vehicles must alert and instruct guests in the event of an emergency.
+		\item Tokens must function as GPS devices.
+		\item There must only be one token device per guest.
+		\item Live camera streams around the island must be available at all times.
+		\item Token devices must be returned upon guest departure.
 	\end{itemize}
 	
 	\subsection{Safety}
