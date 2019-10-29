@@ -111,111 +111,135 @@
 	\textit{}
 	    \subparagraph{Incoming Events}
 		\begin{enumerate}
-			\item 
+		    \item Register visitor(demographics)/request money.
+		    \item Accept money(type)/build token.
 		\end{enumerate}
 				
 	    \subparagraph{Outgoing Events}
 		\begin{enumerate}
-			\item 
+            \item Activate token(id).
+            \item Dispense token(id). 
+            \item Dispense change(money, receipt).
+            \item Log transaction. 
+            \item Report health status to CGC. 
 		\end{enumerate}
 
 	\paragraph{Token}
 	\textit{}
 	    \subparagraph{Incoming Events}
 		\begin{enumerate}
-	        	\item 
+            \item Trigger Alarm. 
+            \item Return to car(carID). 
 		\end{enumerate}
 				
 	    \subparagraph{Outgoing Events}
 		\begin{enumerate}
-			\item 
+			\item Report location to GPS Server(gpsID).
 		\end{enumerate}
 
 	\paragraph{Car}
 	\textit{}
 	    \subparagraph{Incoming Events}
 		\begin{enumerate}
-			\item 
+            \item Read token(tokenID)/Unlock doors or deny access. 
+            \item Activate car()[Normal Mode]/Go to south end to pick up visitors.
+            \item Activate car()[Emergency Mode]/Go to north end to pick up visitors.
+            \item Arrived(Destination)[Normal Mode]/pick up or drop off visitors following the conditioned the protocol.
+            \item Arrived(Destination)[Emergency Mode]/pick up or drop off visitors following the conditioned the protocol.
+            \item Weight detected.
+            \item Change driving mode(modeName).
+            \item Activate intercom.
 		\end{enumerate}
 				
 	    \subparagraph{Outgoing Events}
 		\begin{enumerate}
-			\item 
+		    \item The GPS current location(id).
+		    \item Alert visitors(carID).
+		    \item Trigger alarm.
+		    \item Report health status to CGC.
 		\end{enumerate}
 
     \paragraph{T-Rex Monitor}
 	\textit{}
 	    \subparagraph{Incoming Events}
 		\begin{enumerate}
-			\item 
+			\item Inject tranquilizer. 
 		\end{enumerate}
 				
 	    \subparagraph{Outgoing Events}
 		\begin{enumerate}
-			\item 
+			\item Report T-Rex health.
+			\item Report health status to CGC.
+			\item Report location to GPS Server(gpsID).
 		\end{enumerate}
 
 	\paragraph{Camera Network}
 	\textit{}
 	    \subparagraph{Incoming Events}
 		\begin{enumerate}
-			\item 
+			\item Delete recording(cameraID, date range).
+			\item Activate recording(cameraID).
+			\item Monitor streaming(cameraID).
 		\end{enumerate}
 		
 	    \subparagraph{Outgoing Events}
 		\begin{enumerate}
-			\item 
+			\item Camera outage(cameraID).
+			\item Report health status to CGC. 
 		\end{enumerate}
 
 	\paragraph{Electric Fence}
 	\textit{}
 	    \subparagraph{Incoming Events}
 		\begin{enumerate}
-			\item 
+			\item Null.
 		\end{enumerate}
 				
 	    \subparagraph{Outgoing Events}
 		\begin{enumerate}
-			\item 
+		    \item Electricity distortion/trigger an emergency mode.
+		    \item Report health status to CGC. 
 		\end{enumerate}
 
 	\paragraph{Global Alarm System}
 	\textit{}
 	    \subparagraph{Incoming Events}
 		\begin{enumerate}
-			\item 
+			\item Trigger alarms[Emergency Mode]/play emergency alarm sound.
+			\item Trigger alarms[Normal Mode]/play Public Service Annoucement (PSA).
+			\item Disable alarms.
 		\end{enumerate}
 				
 	    \subparagraph{Outgoing Events}
 		\begin{enumerate}
-			\item 
+			\item Report health status to CGC.
 		\end{enumerate}
 
 	\paragraph{CGC Station}
 	\textit{}
 	    \subparagraph{Incoming Events}
 		\begin{enumerate}
-			\item 
+			\item Review health status of all the associated devices.
 		\end{enumerate}
 				
 	    \subparagraph{Outgoing Events}
 		\begin{enumerate}
-			\item 
+			\item Activate tranquilizer.
+			\item Deactivate emergency mode.
+			\item Activate intercom. 
 		\end{enumerate}
 
 	\paragraph{GPS Server}
 	\textit{}
 	    \subparagraph{Incoming Events}
 		\begin{enumerate}
-			\item 
+			\item Track location(gpsID).
 		\end{enumerate}
 				
 	    \subparagraph{Outgoing Events}
 		\begin{enumerate}
-			\item 
-		\end{enumerate}
-				
-		
+			\item Report location(gpsID).
+		\end{enumerate}						
 		
     \subsection{Control Logic} \label{logic}%siri
 	\paragraph{} \textit{ \footnote{Control Logic by Siri Khalsa}}
