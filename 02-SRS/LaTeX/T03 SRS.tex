@@ -56,11 +56,11 @@
 
 		\paragraph{} 
 		
-		\begin{figure}[H]
-  			\centerline{\includegraphics[scale=.52]{Block_Diagram.png}}
-  			\caption{Block Diagram}
-  			\label{fig:block}
-		\end{figure}
+%		\begin{figure}[H]
+%  			\centerline{\includegraphics[scale=.52]{Block_Diagram.png}}
+%  			\caption{Block Diagram}
+%  			\label{fig:block}
+%		\end{figure}
 		
 		\paragraph{} 
 		\paragraph{} 	
@@ -244,23 +244,23 @@
     \subsection{Control Logic} \label{logic}%siri
 	\paragraph{} \textit{ \footnote{Control Logic by Siri Khalsa}}
 
-    \begin{figure}[H]
-  		\centerline{\includegraphics[scale=1]{ECSModes.jpg}}
-  		\caption{Elevator Control System Normal Function Model }
-  		\label{fig:normal}
-	\end{figure}
-
-	\begin{figure}[H]
-  	    \centerline{\includegraphics[scale=1]{ECS-Normal.jpg}}
-  		\caption{Elevator Control System Normal Function Model }
-  		\label{fig:normal}
-	\end{figure}
-	
-	\begin{figure}[H]
-  		\centerline{\includegraphics[scale=1]{EmergencyPhase1.jpg}}
-  		\caption{Elevator Control System Normal Function Model }
-  		\label{fig:emerg}
-	\end{figure}
+%    \begin{figure}[H]
+%  		\centerline{\includegraphics[scale=1]{ECSModes.jpg}}
+%  		\caption{Elevator Control System Normal Function Model }
+%  		\label{fig:normal}
+%	\end{figure}
+%
+%	\begin{figure}[H]
+%  	    \centerline{\includegraphics[scale=1]{ECS-Normal.jpg}}
+%  		\caption{Elevator Control System Normal Function Model }
+%  		\label{fig:normal}
+%	\end{figure}
+%	
+%	\begin{figure}[H]
+%  		\centerline{\includegraphics[scale=1]{EmergencyPhase1.jpg}}
+%  		\caption{Elevator Control System Normal Function Model }
+%  		\label{fig:emerg}
+%	\end{figure}
 
 \section{Design Constraints} \label{cons} %
 % error handling, exceptions, hazards, 
@@ -286,7 +286,1110 @@
 		\item 
 	\end{itemize}
 
-	% From my researching into SRS papers. The constraints section is usually short and sometimes included in other sections. On top of all that it seems to only pertain to software so I attempted to only include constraints that would pertain to the software. Feel free to add or subtract if you can think of more/better ones.
+\section{Sample Use Cases}
+\paragraph{} \textit{intro saying categorized by actor with diagrams blah blah blah these uses are just samples}
+
+%%%%% Anas %%%%%
+    \subsection{Bookkeeper}
+    \paragraph{} \textit{brief description of actor}
+    \begin{table}[H]
+    \begin{tabular}{lp{9.9cm}}
+        \hline
+        \textbf{Use Case:}                     & *DoSomething (the name of the action to be executed by actor)* \\
+
+        \textbf{Primary Actor:}                & *ThatWhichWishesToDoSomething (name of actor)*\\
+
+        \textbf{Goal in Context:}              & *that which is to be accomplished by the action* \\
+
+        \textbf{Preconditions:}                & *states of the actor and system prior to the action* \\
+
+        \textbf{Trigger:}                      & *that which initiates the action (e.g. actor breaks out of enclosure)*\\
+
+        \textbf{Scenario:}                     & *sequence of actions from trigger to goal*
+                                                 \begin{enumerate}
+                                                     \item first event
+                                                     \item second event
+                                                     \item ...
+                                                 \end{enumerate} \\
+
+        \textbf{Exceptions:}                   & *edge cases, potential hazards, errors, etc*
+                                                 \begin{itemize}
+                                                     \item[] some exception
+                                                     \item[] some other exception
+                                                     \item[] ...
+                                                 \end{itemize}\\
+
+        \textbf{Priority:}                     & *level of implementation importance (e.g. correct change is a must)*\\
+
+        \textbf{When Available:}               & *when or during which interval of time the action is to supported by the system*\\
+
+        \textbf{Frequency of Use:}             & *number of uses per unit of time (e.g. annually, billions per second, etc)*\\
+
+        \textbf{Channel to Primary Actor:}     & *means through which the system interacts with actor*\\
+
+        \textbf{Channels to Secondary Actors:} & *means through which the primary and secondary actors interact*
+                                                 \begin{itemize}
+                                                     \item[] some channel
+                                                     \item[] some other channel
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \textbf{Secondary Actors:}             & *intermediary or auxillary actors required to complete the goal*\\
+
+        \textbf{Open Issues:}                  & *itemization of current problems with any of the above*
+                                                 \begin{itemize}
+                                                     \item[] some issue
+                                                     \item[] some other issue
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \hline
+    \end{tabular}
+    \end{table}
+    
+    \subsection{CGC Station Operator}
+    \begin{table}[H]
+    \begin{tabular}{lp{9.9cm}}
+        \hline
+        \textbf{Use Case:}                     & *DoSomething (the name of the action to be executed by actor)* \\
+
+        \textbf{Primary Actor:}                & *ThatWhichWishesToDoSomething (name of actor)*\\
+
+        \textbf{Goal in Context:}              & *that which is to be accomplished by the action* \\
+
+        \textbf{Preconditions:}                & *states of the actor and system prior to the action* \\
+
+        \textbf{Trigger:}                      & *that which initiates the action (e.g. actor breaks out of enclosure)*\\
+
+        \textbf{Scenario:}                     & *sequence of actions from trigger to goal*
+                                                 \begin{enumerate}
+                                                     \item first event
+                                                     \item second event
+                                                     \item ...
+                                                 \end{enumerate} \\
+
+        \textbf{Exceptions:}                   & *edge cases, potential hazards, errors, etc*
+                                                 \begin{itemize}
+                                                     \item[] some exception
+                                                     \item[] some other exception
+                                                     \item[] ...
+                                                 \end{itemize}\\
+
+        \textbf{Priority:}                     & *level of implementation importance (e.g. correct change is a must)*\\
+
+        \textbf{When Available:}               & *when or during which interval of time the action is to supported by the system*\\
+
+        \textbf{Frequency of Use:}             & *number of uses per unit of time (e.g. annually, billions per second, etc)*\\
+
+        \textbf{Channel to Primary Actor:}     & *means through which the system interacts with actor*\\
+
+        \textbf{Channels to Secondary Actors:} & *means through which the primary and secondary actors interact*
+                                                 \begin{itemize}
+                                                     \item[] some channel
+                                                     \item[] some other channel
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \textbf{Secondary Actors:}             & *intermediary or auxillary actors required to complete the goal*\\
+
+        \textbf{Open Issues:}                  & *itemization of current problems with any of the above*
+                                                 \begin{itemize}
+                                                     \item[] some issue
+                                                     \item[] some other issue
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \hline
+    \end{tabular}
+    \end{table}
+     
+    \subsection{Emergency Personnel}
+    \begin{table}[H]
+    \begin{tabular}{lp{9.9cm}}
+        \hline
+        \textbf{Use Case:}                     & *DoSomething (the name of the action to be executed by actor)* \\
+
+        \textbf{Primary Actor:}                & *ThatWhichWishesToDoSomething (name of actor)*\\
+
+        \textbf{Goal in Context:}              & *that which is to be accomplished by the action* \\
+
+        \textbf{Preconditions:}                & *states of the actor and system prior to the action* \\
+
+        \textbf{Trigger:}                      & *that which initiates the action (e.g. actor breaks out of enclosure)*\\
+
+        \textbf{Scenario:}                     & *sequence of actions from trigger to goal*
+                                                 \begin{enumerate}
+                                                     \item first event
+                                                     \item second event
+                                                     \item ...
+                                                 \end{enumerate} \\
+
+        \textbf{Exceptions:}                   & *edge cases, potential hazards, errors, etc*
+                                                 \begin{itemize}
+                                                     \item[] some exception
+                                                     \item[] some other exception
+                                                     \item[] ...
+                                                 \end{itemize}\\
+
+        \textbf{Priority:}                     & *level of implementation importance (e.g. correct change is a must)*\\
+
+        \textbf{When Available:}               & *when or during which interval of time the action is to supported by the system*\\
+
+        \textbf{Frequency of Use:}             & *number of uses per unit of time (e.g. annually, billions per second, etc)*\\
+
+        \textbf{Channel to Primary Actor:}     & *means through which the system interacts with actor*\\
+
+        \textbf{Channels to Secondary Actors:} & *means through which the primary and secondary actors interact*
+                                                 \begin{itemize}
+                                                     \item[] some channel
+                                                     \item[] some other channel
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \textbf{Secondary Actors:}             & *intermediary or auxillary actors required to complete the goal*\\
+
+        \textbf{Open Issues:}                  & *itemization of current problems with any of the above*
+                                                 \begin{itemize}
+                                                     \item[] some issue
+                                                     \item[] some other issue
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \hline
+    \end{tabular}
+    \end{table}
+     
+%%%%% Matt %%%%%
+    \subsection{Enclosure Maintenance Personnel}
+    \begin{table}[H]
+    \begin{tabular}{lp{9.9cm}}
+        \hline
+        \textbf{Use Case:}                     & *DoSomething (the name of the action to be executed by actor)* \\
+
+        \textbf{Primary Actor:}                & *ThatWhichWishesToDoSomething (name of actor)*\\
+
+        \textbf{Goal in Context:}              & *that which is to be accomplished by the action* \\
+
+        \textbf{Preconditions:}                & *states of the actor and system prior to the action* \\
+
+        \textbf{Trigger:}                      & *that which initiates the action (e.g. actor breaks out of enclosure)*\\
+
+        \textbf{Scenario:}                     & *sequence of actions from trigger to goal*
+                                                 \begin{enumerate}
+                                                     \item first event
+                                                     \item second event
+                                                     \item ...
+                                                 \end{enumerate} \\
+
+        \textbf{Exceptions:}                   & *edge cases, potential hazards, errors, etc*
+                                                 \begin{itemize}
+                                                     \item[] some exception
+                                                     \item[] some other exception
+                                                     \item[] ...
+                                                 \end{itemize}\\
+
+        \textbf{Priority:}                     & *level of implementation importance (e.g. correct change is a must)*\\
+
+        \textbf{When Available:}               & *when or during which interval of time the action is to supported by the system*\\
+
+        \textbf{Frequency of Use:}             & *number of uses per unit of time (e.g. annually, billions per second, etc)*\\
+
+        \textbf{Channel to Primary Actor:}     & *means through which the system interacts with actor*\\
+
+        \textbf{Channels to Secondary Actors:} & *means through which the primary and secondary actors interact*
+                                                 \begin{itemize}
+                                                     \item[] some channel
+                                                     \item[] some other channel
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \textbf{Secondary Actors:}             & *intermediary or auxillary actors required to complete the goal*\\
+
+        \textbf{Open Issues:}                  & *itemization of current problems with any of the above*
+                                                 \begin{itemize}
+                                                     \item[] some issue
+                                                     \item[] some other issue
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \hline
+    \end{tabular}
+    \end{table}
+     
+    \subsection{Guest}
+    \begin{table}[H]
+    \begin{tabular}{lp{9.9cm}}
+        \hline
+        \textbf{Use Case:}                     & ViewTRex \\
+
+        \textbf{Primary Actor:}                & *ThatWhichWishesToDoSomething (name of actor)*\\
+
+        \textbf{Goal in Context:}              & *that which is to be accomplished by the action* \\
+
+        \textbf{Preconditions:}                & *states of the actor and system prior to the action* \\
+
+        \textbf{Trigger:}                      & *that which initiates the action (e.g. actor breaks out of enclosure)*\\
+
+        \textbf{Scenario:}                     & *sequence of actions from trigger to goal*
+                                                 \begin{enumerate}
+                                                     \item first event
+                                                     \item second event
+                                                     \item ...
+                                                 \end{enumerate} \\
+
+        \textbf{Exceptions:}                   & *edge cases, potential hazards, errors, etc*
+                                                 \begin{itemize}
+                                                     \item[] some exception
+                                                     \item[] some other exception
+                                                     \item[] ...
+                                                 \end{itemize}\\
+
+        \textbf{Priority:}                     & *level of implementation importance (e.g. correct change is a must)*\\
+
+        \textbf{When Available:}               & *when or during which interval of time the action is to supported by the system*\\
+
+        \textbf{Frequency of Use:}             & *number of uses per unit of time (e.g. annually, billions per second, etc)*\\
+
+        \textbf{Channel to Primary Actor:}     & *means through which the system interacts with actor*\\
+
+        \textbf{Channels to Secondary Actors:} & *means through which the primary and secondary actors interact*
+                                                 \begin{itemize}
+                                                     \item[] some channel
+                                                     \item[] some other channel
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \textbf{Secondary Actors:}             & *intermediary or auxillary actors required to complete the goal*\\
+
+        \textbf{Open Issues:}                  & *itemization of current problems with any of the above*
+                                                 \begin{itemize}
+                                                     \item[] some issue
+                                                     \item[] some other issue
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \hline
+    \end{tabular}
+    \end{table}
+     
+    \begin{table}[H]
+    \begin{tabular}{lp{9.9cm}}
+        \hline
+        \textbf{Use Case:}                     & LeaveResort \\
+
+        \textbf{Primary Actor:}                & *ThatWhichWishesToDoSomething (name of actor)*\\
+
+        \textbf{Goal in Context:}              & *that which is to be accomplished by the action* \\
+
+        \textbf{Preconditions:}                & *states of the actor and system prior to the action* \\
+
+        \textbf{Trigger:}                      & *that which initiates the action (e.g. actor breaks out of enclosure)*\\
+
+        \textbf{Scenario:}                     & *sequence of actions from trigger to goal*
+                                                 \begin{enumerate}
+                                                     \item first event
+                                                     \item second event
+                                                     \item ...
+                                                 \end{enumerate} \\
+
+        \textbf{Exceptions:}                   & *edge cases, potential hazards, errors, etc*
+                                                 \begin{itemize}
+                                                     \item[] some exception
+                                                     \item[] some other exception
+                                                     \item[] ...
+                                                 \end{itemize}\\
+
+        \textbf{Priority:}                     & *level of implementation importance (e.g. correct change is a must)*\\
+
+        \textbf{When Available:}               & *when or during which interval of time the action is to supported by the system*\\
+
+        \textbf{Frequency of Use:}             & *number of uses per unit of time (e.g. annually, billions per second, etc)*\\
+
+        \textbf{Channel to Primary Actor:}     & *means through which the system interacts with actor*\\
+
+        \textbf{Channels to Secondary Actors:} & *means through which the primary and secondary actors interact*
+                                                 \begin{itemize}
+                                                     \item[] some channel
+                                                     \item[] some other channel
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \textbf{Secondary Actors:}             & *intermediary or auxillary actors required to complete the goal*\\
+
+        \textbf{Open Issues:}                  & *itemization of current problems with any of the above*
+                                                 \begin{itemize}
+                                                     \item[] some issue
+                                                     \item[] some other issue
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \hline
+    \end{tabular}
+    \end{table}
+     
+    \begin{table}[H]
+    \begin{tabular}{lp{9.9cm}}
+        \hline
+        \textbf{Use Case:}                     & PurchaseToken \\
+
+        \textbf{Primary Actor:}                & *ThatWhichWishesToDoSomething (name of actor)*\\
+
+        \textbf{Goal in Context:}              & *that which is to be accomplished by the action* \\
+
+        \textbf{Preconditions:}                & *states of the actor and system prior to the action* \\
+
+        \textbf{Trigger:}                      & *that which initiates the action (e.g. actor breaks out of enclosure)*\\
+
+        \textbf{Scenario:}                     & *sequence of actions from trigger to goal*
+                                                 \begin{enumerate}
+                                                     \item first event
+                                                     \item second event
+                                                     \item ...
+                                                 \end{enumerate} \\
+
+        \textbf{Exceptions:}                   & *edge cases, potential hazards, errors, etc*
+                                                 \begin{itemize}
+                                                     \item[] some exception
+                                                     \item[] some other exception
+                                                     \item[] ...
+                                                 \end{itemize}\\
+
+        \textbf{Priority:}                     & *level of implementation importance (e.g. correct change is a must)*\\
+
+        \textbf{When Available:}               & *when or during which interval of time the action is to supported by the system*\\
+
+        \textbf{Frequency of Use:}             & *number of uses per unit of time (e.g. annually, billions per second, etc)*\\
+
+        \textbf{Channel to Primary Actor:}     & *means through which the system interacts with actor*\\
+
+        \textbf{Channels to Secondary Actors:} & *means through which the primary and secondary actors interact*
+                                                 \begin{itemize}
+                                                     \item[] some channel
+                                                     \item[] some other channel
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \textbf{Secondary Actors:}             & *intermediary or auxillary actors required to complete the goal*\\
+
+        \textbf{Open Issues:}                  & *itemization of current problems with any of the above*
+                                                 \begin{itemize}
+                                                     \item[] some issue
+                                                     \item[] some other issue
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \hline
+    \end{tabular}
+    \end{table}
+
+    \begin{table}[H]
+    \begin{tabular}{lp{9.9cm}}
+        \hline
+        \textbf{Use Case:}                     & Evacuate \\
+
+        \textbf{Primary Actor:}                & *ThatWhichWishesToDoSomething (name of actor)*\\
+
+        \textbf{Goal in Context:}              & *that which is to be accomplished by the action* \\
+
+        \textbf{Preconditions:}                & *states of the actor and system prior to the action* \\
+
+        \textbf{Trigger:}                      & *that which initiates the action (e.g. actor breaks out of enclosure)*\\
+
+        \textbf{Scenario:}                     & *sequence of actions from trigger to goal*
+                                                 \begin{enumerate}
+                                                     \item first event
+                                                     \item second event
+                                                     \item ...
+                                                 \end{enumerate} \\
+
+        \textbf{Exceptions:}                   & *edge cases, potential hazards, errors, etc*
+                                                 \begin{itemize}
+                                                     \item[] some exception
+                                                     \item[] some other exception
+                                                     \item[] ...
+                                                 \end{itemize}\\
+
+        \textbf{Priority:}                     & *level of implementation importance (e.g. correct change is a must)*\\
+
+        \textbf{When Available:}               & *when or during which interval of time the action is to supported by the system*\\
+
+        \textbf{Frequency of Use:}             & *number of uses per unit of time (e.g. annually, billions per second, etc)*\\
+
+        \textbf{Channel to Primary Actor:}     & *means through which the system interacts with actor*\\
+
+        \textbf{Channels to Secondary Actors:} & *means through which the primary and secondary actors interact*
+                                                 \begin{itemize}
+                                                     \item[] some channel
+                                                     \item[] some other channel
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \textbf{Secondary Actors:}             & *intermediary or auxillary actors required to complete the goal*\\
+
+        \textbf{Open Issues:}                  & *itemization of current problems with any of the above*
+                                                 \begin{itemize}
+                                                     \item[] some issue
+                                                     \item[] some other issue
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \hline
+    \end{tabular}
+    \end{table}
+    
+    % another use case
+    
+    % another use case
+    
+    % ...
+    
+    \subsection{Guest Vehicle}
+    \begin{table}[H]
+    \begin{tabular}{lp{9.9cm}}
+        \hline
+        \textbf{Use Case:}                     & ShuttleGuestsToExhibit \\
+
+        \textbf{Primary Actor:}                & *ThatWhichWishesToDoSomething (name of actor)*\\
+
+        \textbf{Goal in Context:}              & *that which is to be accomplished by the action* \\
+
+        \textbf{Preconditions:}                & *states of the actor and system prior to the action* \\
+
+        \textbf{Trigger:}                      & *that which initiates the action (e.g. actor breaks out of enclosure)*\\
+
+        \textbf{Scenario:}                     & *sequence of actions from trigger to goal*
+                                                 \begin{enumerate}
+                                                     \item first event
+                                                     \item second event
+                                                     \item ...
+                                                 \end{enumerate} \\
+
+        \textbf{Exceptions:}                   & *edge cases, potential hazards, errors, etc*
+                                                 \begin{itemize}
+                                                     \item[] some exception
+                                                     \item[] some other exception
+                                                     \item[] ...
+                                                 \end{itemize}\\
+
+        \textbf{Priority:}                     & *level of implementation importance (e.g. correct change is a must)*\\
+
+        \textbf{When Available:}               & *when or during which interval of time the action is to supported by the system*\\
+
+        \textbf{Frequency of Use:}             & *number of uses per unit of time (e.g. annually, billions per second, etc)*\\
+
+        \textbf{Channel to Primary Actor:}     & *means through which the system interacts with actor*\\
+
+        \textbf{Channels to Secondary Actors:} & *means through which the primary and secondary actors interact*
+                                                 \begin{itemize}
+                                                     \item[] some channel
+                                                     \item[] some other channel
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \textbf{Secondary Actors:}             & *intermediary or auxillary actors required to complete the goal*\\
+
+        \textbf{Open Issues:}                  & *itemization of current problems with any of the above*
+                                                 \begin{itemize}
+                                                     \item[] some issue
+                                                     \item[] some other issue
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \hline
+    \end{tabular}
+    \end{table}
+
+    \begin{table}[H]
+    \begin{tabular}{lp{9.9cm}}
+        \hline
+        \textbf{Use Case:}                     & ShuttleGuestsFromExhibit \\
+
+        \textbf{Primary Actor:}                & *ThatWhichWishesToDoSomething (name of actor)*\\
+
+        \textbf{Goal in Context:}              & *that which is to be accomplished by the action* \\
+
+        \textbf{Preconditions:}                & *states of the actor and system prior to the action* \\
+
+        \textbf{Trigger:}                      & *that which initiates the action (e.g. actor breaks out of enclosure)*\\
+
+        \textbf{Scenario:}                     & *sequence of actions from trigger to goal*
+                                                 \begin{enumerate}
+                                                     \item first event
+                                                     \item second event
+                                                     \item ...
+                                                 \end{enumerate} \\
+
+        \textbf{Exceptions:}                   & *edge cases, potential hazards, errors, etc*
+                                                 \begin{itemize}
+                                                     \item[] some exception
+                                                     \item[] some other exception
+                                                     \item[] ...
+                                                 \end{itemize}\\
+
+        \textbf{Priority:}                     & *level of implementation importance (e.g. correct change is a must)*\\
+
+        \textbf{When Available:}               & *when or during which interval of time the action is to supported by the system*\\
+
+        \textbf{Frequency of Use:}             & *number of uses per unit of time (e.g. annually, billions per second, etc)*\\
+
+        \textbf{Channel to Primary Actor:}     & *means through which the system interacts with actor*\\
+
+        \textbf{Channels to Secondary Actors:} & *means through which the primary and secondary actors interact*
+                                                 \begin{itemize}
+                                                     \item[] some channel
+                                                     \item[] some other channel
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \textbf{Secondary Actors:}             & *intermediary or auxillary actors required to complete the goal*\\
+
+        \textbf{Open Issues:}                  & *itemization of current problems with any of the above*
+                                                 \begin{itemize}
+                                                     \item[] some issue
+                                                     \item[] some other issue
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \hline
+    \end{tabular}
+    \end{table}
+    
+    % another use case
+    
+    % another use case
+    
+    % ...
+%%%%% Santi %%%%%
+    \subsection{Network Maintenance Personnel}
+    \begin{table}[H]
+    \begin{tabular}{lp{9.9cm}}
+        \hline
+        \textbf{Use Case:}                     & *DoSomething (the name of the action to be executed by actor)* \\
+
+        \textbf{Primary Actor:}                & *ThatWhichWishesToDoSomething (name of actor)*\\
+
+        \textbf{Goal in Context:}              & *that which is to be accomplished by the action* \\
+
+        \textbf{Preconditions:}                & *states of the actor and system prior to the action* \\
+
+        \textbf{Trigger:}                      & *that which initiates the action (e.g. actor breaks out of enclosure)*\\
+
+        \textbf{Scenario:}                     & *sequence of actions from trigger to goal*
+                                                 \begin{enumerate}
+                                                     \item first event
+                                                     \item second event
+                                                     \item ...
+                                                 \end{enumerate} \\
+
+        \textbf{Exceptions:}                   & *edge cases, potential hazards, errors, etc*
+                                                 \begin{itemize}
+                                                     \item[] some exception
+                                                     \item[] some other exception
+                                                     \item[] ...
+                                                 \end{itemize}\\
+
+        \textbf{Priority:}                     & *level of implementation importance (e.g. correct change is a must)*\\
+
+        \textbf{When Available:}               & *when or during which interval of time the action is to supported by the system*\\
+
+        \textbf{Frequency of Use:}             & *number of uses per unit of time (e.g. annually, billions per second, etc)*\\
+
+        \textbf{Channel to Primary Actor:}     & *means through which the system interacts with actor*\\
+
+        \textbf{Channels to Secondary Actors:} & *means through which the primary and secondary actors interact*
+                                                 \begin{itemize}
+                                                     \item[] some channel
+                                                     \item[] some other channel
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \textbf{Secondary Actors:}             & *intermediary or auxillary actors required to complete the goal*\\
+
+        \textbf{Open Issues:}                  & *itemization of current problems with any of the above*
+                                                 \begin{itemize}
+                                                     \item[] some issue
+                                                     \item[] some other issue
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \hline
+    \end{tabular}
+    \end{table}
+    
+    % another use case
+    
+    % another use case
+    
+    % ...
+    
+    \subsection{Patrol Vehicle}
+    \begin{table}[H]
+    \begin{tabular}{lp{9.9cm}}
+        \hline
+        \textbf{Use Case:}                     & *DoSomething (the name of the action to be executed by actor)* \\
+
+        \textbf{Primary Actor:}                & *ThatWhichWishesToDoSomething (name of actor)*\\
+
+        \textbf{Goal in Context:}              & *that which is to be accomplished by the action* \\
+
+        \textbf{Preconditions:}                & *states of the actor and system prior to the action* \\
+
+        \textbf{Trigger:}                      & *that which initiates the action (e.g. actor breaks out of enclosure)*\\
+
+        \textbf{Scenario:}                     & *sequence of actions from trigger to goal*
+                                                 \begin{enumerate}
+                                                     \item first event
+                                                     \item second event
+                                                     \item ...
+                                                 \end{enumerate} \\
+
+        \textbf{Exceptions:}                   & *edge cases, potential hazards, errors, etc*
+                                                 \begin{itemize}
+                                                     \item[] some exception
+                                                     \item[] some other exception
+                                                     \item[] ...
+                                                 \end{itemize}\\
+
+        \textbf{Priority:}                     & *level of implementation importance (e.g. correct change is a must)*\\
+
+        \textbf{When Available:}               & *when or during which interval of time the action is to supported by the system*\\
+
+        \textbf{Frequency of Use:}             & *number of uses per unit of time (e.g. annually, billions per second, etc)*\\
+
+        \textbf{Channel to Primary Actor:}     & *means through which the system interacts with actor*\\
+
+        \textbf{Channels to Secondary Actors:} & *means through which the primary and secondary actors interact*
+                                                 \begin{itemize}
+                                                     \item[] some channel
+                                                     \item[] some other channel
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \textbf{Secondary Actors:}             & *intermediary or auxillary actors required to complete the goal*\\
+
+        \textbf{Open Issues:}                  & *itemization of current problems with any of the above*
+                                                 \begin{itemize}
+                                                     \item[] some issue
+                                                     \item[] some other issue
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \hline
+        \hline
+    \end{tabular}
+    \end{table}
+    
+    % another use case
+    
+    % another use case
+    
+    % ...
+    
+    \subsection{Sales department}
+    \begin{table}[H]
+    \begin{tabular}{lp{9.9cm}}
+        \hline
+        \textbf{Use Case:}                     & *DoSomething (the name of the action to be executed by actor)* \\
+
+        \textbf{Primary Actor:}                & *ThatWhichWishesToDoSomething (name of actor)*\\
+
+        \textbf{Goal in Context:}              & *that which is to be accomplished by the action* \\
+
+        \textbf{Preconditions:}                & *states of the actor and system prior to the action* \\
+
+        \textbf{Trigger:}                      & *that which initiates the action (e.g. actor breaks out of enclosure)*\\
+
+        \textbf{Scenario:}                     & *sequence of actions from trigger to goal*
+                                                 \begin{enumerate}
+                                                     \item first event
+                                                     \item second event
+                                                     \item ...
+                                                 \end{enumerate} \\
+
+        \textbf{Exceptions:}                   & *edge cases, potential hazards, errors, etc*
+                                                 \begin{itemize}
+                                                     \item[] some exception
+                                                     \item[] some other exception
+                                                     \item[] ...
+                                                 \end{itemize}\\
+
+        \textbf{Priority:}                     & *level of implementation importance (e.g. correct change is a must)*\\
+
+        \textbf{When Available:}               & *when or during which interval of time the action is to supported by the system*\\
+
+        \textbf{Frequency of Use:}             & *number of uses per unit of time (e.g. annually, billions per second, etc)*\\
+
+        \textbf{Channel to Primary Actor:}     & *means through which the system interacts with actor*\\
+
+        \textbf{Channels to Secondary Actors:} & *means through which the primary and secondary actors interact*
+                                                 \begin{itemize}
+                                                     \item[] some channel
+                                                     \item[] some other channel
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \textbf{Secondary Actors:}             & *intermediary or auxillary actors required to complete the goal*\\
+
+        \textbf{Open Issues:}                  & *itemization of current problems with any of the above*
+                                                 \begin{itemize}
+                                                     \item[] some issue
+                                                     \item[] some other issue
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \hline
+    \end{tabular}
+    \end{table}
+    
+    % another use case
+    
+    % another use case
+    
+    % ...
+
+%%%%% Siri %%%%%
+    \subsection{System Administrator}
+    \begin{table}[H]
+    \begin{tabular}{lp{9.9cm}}
+        \hline
+        \textbf{Use Case:}                     & *DoSomething (the name of the action to be executed by actor)* \\
+
+        \textbf{Primary Actor:}                & *ThatWhichWishesToDoSomething (name of actor)*\\
+
+        \textbf{Goal in Context:}              & *that which is to be accomplished by the action* \\
+
+        \textbf{Preconditions:}                & *states of the actor and system prior to the action* \\
+
+        \textbf{Trigger:}                      & *that which initiates the action (e.g. actor breaks out of enclosure)*\\
+
+        \textbf{Scenario:}                     & *sequence of actions from trigger to goal*
+                                                 \begin{enumerate}
+                                                     \item first event
+                                                     \item second event
+                                                     \item ...
+                                                 \end{enumerate} \\
+
+        \textbf{Exceptions:}                   & *edge cases, potential hazards, errors, etc*
+                                                 \begin{itemize}
+                                                     \item[] some exception
+                                                     \item[] some other exception
+                                                     \item[] ...
+                                                 \end{itemize}\\
+
+        \textbf{Priority:}                     & *level of implementation importance (e.g. correct change is a must)*\\
+
+        \textbf{When Available:}               & *when or during which interval of time the action is to supported by the system*\\
+
+        \textbf{Frequency of Use:}             & *number of uses per unit of time (e.g. annually, billions per second, etc)*\\
+
+        \textbf{Channel to Primary Actor:}     & *means through which the system interacts with actor*\\
+
+        \textbf{Channels to Secondary Actors:} & *means through which the primary and secondary actors interact*
+                                                 \begin{itemize}
+                                                     \item[] some channel
+                                                     \item[] some other channel
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \textbf{Secondary Actors:}             & *intermediary or auxillary actors required to complete the goal*\\
+
+        \textbf{Open Issues:}                  & *itemization of current problems with any of the above*
+                                                 \begin{itemize}
+                                                     \item[] some issue
+                                                     \item[] some other issue
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \hline
+    \end{tabular}
+    \end{table}
+    
+    % another use case
+    
+    % another use case
+    
+    % ...
+    
+    \subsection{System Auditor}
+    \begin{table}[H]
+    \begin{tabular}{lp{9.9cm}}
+        \hline
+        \textbf{Use Case:}                     & *DoSomething (the name of the action to be executed by actor)* \\
+
+        \textbf{Primary Actor:}                & *ThatWhichWishesToDoSomething (name of actor)*\\
+
+        \textbf{Goal in Context:}              & *that which is to be accomplished by the action* \\
+
+        \textbf{Preconditions:}                & *states of the actor and system prior to the action* \\
+
+        \textbf{Trigger:}                      & *that which initiates the action (e.g. actor breaks out of enclosure)*\\
+
+        \textbf{Scenario:}                     & *sequence of actions from trigger to goal*
+                                                 \begin{enumerate}
+                                                     \item first event
+                                                     \item second event
+                                                     \item ...
+                                                 \end{enumerate} \\
+
+        \textbf{Exceptions:}                   & *edge cases, potential hazards, errors, etc*
+                                                 \begin{itemize}
+                                                     \item[] some exception
+                                                     \item[] some other exception
+                                                     \item[] ...
+                                                 \end{itemize}\\
+
+        \textbf{Priority:}                     & *level of implementation importance (e.g. correct change is a must)*\\
+
+        \textbf{When Available:}               & *when or during which interval of time the action is to supported by the system*\\
+
+        \textbf{Frequency of Use:}             & *number of uses per unit of time (e.g. annually, billions per second, etc)*\\
+
+        \textbf{Channel to Primary Actor:}     & *means through which the system interacts with actor*\\
+
+        \textbf{Channels to Secondary Actors:} & *means through which the primary and secondary actors interact*
+                                                 \begin{itemize}
+                                                     \item[] some channel
+                                                     \item[] some other channel
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \textbf{Secondary Actors:}             & *intermediary or auxillary actors required to complete the goal*\\
+
+        \textbf{Open Issues:}                  & *itemization of current problems with any of the above*
+                                                 \begin{itemize}
+                                                     \item[] some issue
+                                                     \item[] some other issue
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \hline
+    \end{tabular}
+    \end{table}
+    
+    % another use case
+    
+    % another use case
+    
+    % ...
+    
+    
+    \subsection{System Technician}
+    \begin{table}[H]
+    \begin{tabular}{lp{9.9cm}}
+        \hline
+        \textbf{Use Case:}                     & *DoSomething (the name of the action to be executed by actor)* \\
+
+        \textbf{Primary Actor:}                & *ThatWhichWishesToDoSomething (name of actor)*\\
+
+        \textbf{Goal in Context:}              & *that which is to be accomplished by the action* \\
+
+        \textbf{Preconditions:}                & *states of the actor and system prior to the action* \\
+
+        \textbf{Trigger:}                      & *that which initiates the action (e.g. actor breaks out of enclosure)*\\
+
+        \textbf{Scenario:}                     & *sequence of actions from trigger to goal*
+                                                 \begin{enumerate}
+                                                     \item first event
+                                                     \item second event
+                                                     \item ...
+                                                 \end{enumerate} \\
+
+        \textbf{Exceptions:}                   & *edge cases, potential hazards, errors, etc*
+                                                 \begin{itemize}
+                                                     \item[] some exception
+                                                     \item[] some other exception
+                                                     \item[] ...
+                                                 \end{itemize}\\
+
+        \textbf{Priority:}                     & *level of implementation importance (e.g. correct change is a must)*\\
+
+        \textbf{When Available:}               & *when or during which interval of time the action is to supported by the system*\\
+
+        \textbf{Frequency of Use:}             & *number of uses per unit of time (e.g. annually, billions per second, etc)*\\
+
+        \textbf{Channel to Primary Actor:}     & *means through which the system interacts with actor*\\
+
+        \textbf{Channels to Secondary Actors:} & *means through which the primary and secondary actors interact*
+                                                 \begin{itemize}
+                                                     \item[] some channel
+                                                     \item[] some other channel
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \textbf{Secondary Actors:}             & *intermediary or auxillary actors required to complete the goal*\\
+
+        \textbf{Open Issues:}                  & *itemization of current problems with any of the above*
+                                                 \begin{itemize}
+                                                     \item[] some issue
+                                                     \item[] some other issue
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \hline
+    \end{tabular}
+    \end{table}
+    
+    % another use case
+    
+    % another use case
+    
+    % ...
+    
+
+%%%%% Zeke %%%%%
+    \subsection{Tyrannosaurus Rex}
+    \begin{table}[H]
+    \begin{tabular}{lp{9.9cm}}
+        \hline
+        \textbf{Use Case:}                     & *DoSomething (the name of the action to be executed by actor)* \\
+
+        \textbf{Primary Actor:}                & *ThatWhichWishesToDoSomething (name of actor)*\\
+
+        \textbf{Goal in Context:}              & *that which is to be accomplished by the action* \\
+
+        \textbf{Preconditions:}                & *states of the actor and system prior to the action* \\
+
+        \textbf{Trigger:}                      & *that which initiates the action (e.g. actor breaks out of enclosure)*\\
+
+        \textbf{Scenario:}                     & *sequence of actions from trigger to goal*
+                                                 \begin{enumerate}
+                                                     \item first event
+                                                     \item second event
+                                                     \item ...
+                                                 \end{enumerate} \\
+
+        \textbf{Exceptions:}                   & *edge cases, potential hazards, errors, etc*
+                                                 \begin{itemize}
+                                                     \item[] some exception
+                                                     \item[] some other exception
+                                                     \item[] ...
+                                                 \end{itemize}\\
+
+        \textbf{Priority:}                     & *level of implementation importance (e.g. correct change is a must)*\\
+
+        \textbf{When Available:}               & *when or during which interval of time the action is to supported by the system*\\
+
+        \textbf{Frequency of Use:}             & *number of uses per unit of time (e.g. annually, billions per second, etc)*\\
+
+        \textbf{Channel to Primary Actor:}     & *means through which the system interacts with actor*\\
+
+        \textbf{Channels to Secondary Actors:} & *means through which the primary and secondary actors interact*
+                                                 \begin{itemize}
+                                                     \item[] some channel
+                                                     \item[] some other channel
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \textbf{Secondary Actors:}             & *intermediary or auxillary actors required to complete the goal*\\
+
+        \textbf{Open Issues:}                  & *itemization of current problems with any of the above*
+                                                 \begin{itemize}
+                                                     \item[] some issue
+                                                     \item[] some other issue
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \hline
+    \end{tabular}
+    \end{table}
+    
+    % another use case
+    
+    % another use case
+    
+    % ...
+    
+    \subsection{Veterinarian}
+    \begin{table}[H]
+    \begin{tabular}{lp{9.9cm}}
+        \hline
+        \textbf{Use Case:}                     & *DoSomething (the name of the action to be executed by actor)* \\
+
+        \textbf{Primary Actor:}                & *ThatWhichWishesToDoSomething (name of actor)*\\
+
+        \textbf{Goal in Context:}              & *that which is to be accomplished by the action* \\
+
+        \textbf{Preconditions:}                & *states of the actor and system prior to the action* \\
+
+        \textbf{Trigger:}                      & *that which initiates the action (e.g. actor breaks out of enclosure)*\\
+
+        \textbf{Scenario:}                     & *sequence of actions from trigger to goal*
+                                                 \begin{enumerate}
+                                                     \item first event
+                                                     \item second event
+                                                     \item ...
+                                                 \end{enumerate} \\
+
+        \textbf{Exceptions:}                   & *edge cases, potential hazards, errors, etc*
+                                                 \begin{itemize}
+                                                     \item[] some exception
+                                                     \item[] some other exception
+                                                     \item[] ...
+                                                 \end{itemize}\\
+
+        \textbf{Priority:}                     & *level of implementation importance (e.g. correct change is a must)*\\
+
+        \textbf{When Available:}               & *when or during which interval of time the action is to supported by the system*\\
+
+        \textbf{Frequency of Use:}             & *number of uses per unit of time (e.g. annually, billions per second, etc)*\\
+
+        \textbf{Channel to Primary Actor:}     & *means through which the system interacts with actor*\\
+
+        \textbf{Channels to Secondary Actors:} & *means through which the primary and secondary actors interact*
+                                                 \begin{itemize}
+                                                     \item[] some channel
+                                                     \item[] some other channel
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \textbf{Secondary Actors:}             & *intermediary or auxillary actors required to complete the goal*\\
+
+        \textbf{Open Issues:}                  & *itemization of current problems with any of the above*
+                                                 \begin{itemize}
+                                                     \item[] some issue
+                                                     \item[] some other issue
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \hline
+    \end{tabular}
+    \end{table}
+    
+    % another use case
+    
+    % another use case
+    
+    % ...
+    
+    \subsection{Zookeeper}
+    \begin{table}[H]
+    \begin{tabular}{lp{9.9cm}}
+        \hline
+        \textbf{Use Case:}                     & *DoSomething (the name of the action to be executed by actor)* \\
+
+        \textbf{Primary Actor:}                & *ThatWhichWishesToDoSomething (name of actor)*\\
+
+        \textbf{Goal in Context:}              & *that which is to be accomplished by the action* \\
+
+        \textbf{Preconditions:}                & *states of the actor and system prior to the action* \\
+
+        \textbf{Trigger:}                      & *that which initiates the action (e.g. actor breaks out of enclosure)*\\
+
+        \textbf{Scenario:}                     & *sequence of actions from trigger to goal*
+                                                 \begin{enumerate}
+                                                     \item first event
+                                                     \item second event
+                                                     \item ...
+                                                 \end{enumerate} \\
+
+        \textbf{Exceptions:}                   & *edge cases, potential hazards, errors, etc*
+                                                 \begin{itemize}
+                                                     \item[] some exception
+                                                     \item[] some other exception
+                                                     \item[] ...
+                                                 \end{itemize}\\
+
+        \textbf{Priority:}                     & *level of implementation importance (e.g. correct change is a must)*\\
+
+        \textbf{When Available:}               & *when or during which interval of time the action is to supported by the system*\\
+
+        \textbf{Frequency of Use:}             & *number of uses per unit of time (e.g. annually, billions per second, etc)*\\
+
+        \textbf{Channel to Primary Actor:}     & *means through which the system interacts with actor*\\
+
+        \textbf{Channels to Secondary Actors:} & *means through which the primary and secondary actors interact*
+                                                 \begin{itemize}
+                                                     \item[] some channel
+                                                     \item[] some other channel
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \textbf{Secondary Actors:}             & *intermediary or auxillary actors required to complete the goal*\\
+
+        \textbf{Open Issues:}                  & *itemization of current problems with any of the above*
+                                                 \begin{itemize}
+                                                     \item[] some issue
+                                                     \item[] some other issue
+                                                     \item[] ...
+                                                 \end{itemize}\\
+        \hline
+    \end{tabular}
+    \end{table}
+    
+    % another use case
+    
+    % another use case
+    
+    % ...
+    
+
+% secondary actors (note that primary actors above may be secondary in some contexts)
+% any devices not mentioned above
+% any humans not mentioned above
+
 
 \section{Definition of Terms} \label{defs} %Anas
 	\paragraph{} \textit{The following is a list of definitions \footnote{Definition of 
