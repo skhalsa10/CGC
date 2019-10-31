@@ -43,8 +43,7 @@
 	 provides the definition of technical terms that will be commonly used.
 \pagebreak
 \section{General Description} \label{gen} %Zeke
-	\paragraph{}\textit{This section \footnote{General Description by Ezequiel Ramos and 
-	Santiago Cejas} provides a general overview of the whole system. How the system interacts with 
+	\paragraph{}\textit{This section \footnote{General Description by Siri Khalsa} provides a general overview of the whole system. How the system interacts with 
 	the hardware interfaces and its basic functionality are introduced here. A description of
 	parts to be used in the system and the available functionalities for each type are also 
 	provided. Some high level constraints and assumptions for the system will be also be presented.
@@ -52,38 +51,31 @@
 	own section.}
 	
 	\subsection{Product Perspective}
-		\paragraph{} 
+        \paragraph{} The CGC system as a whole is made up of many smaller subsystems. These systems include cars, T-Rex Monitor, GPS Server, Pay Kiosk, etc. These are clearly defined later
+        in this document primarily in the interfaces section. The CGC is the system that can communicate with everything. The analogy can be used that the CGC is the central nervous system of the entire CGC system. most of the sub-systems will work independent of each other.
+        This is by design. ever system should be able to perform their duties without being affected by the state of another system unless two subsystems are directly interacting.
+        The CGC will get informed that an emergency mode should be triggered from the Electric Fence sub-system. It is the responsibility of the CGC to inform all other sub-systems that we are now in an emergency mode.
+        It is also up to the CGC with the help of an employee to reset everything back into a normal mode of operation.
 
-		\paragraph{} 
-		
-%		\begin{figure}[H]
-%  			\centerline{\includegraphics[scale=.52]{Block_Diagram.png}}
-%  			\caption{Block Diagram}
-%  			\label{fig:block}
-%		\end{figure}
-		
-		\paragraph{} 
-		\paragraph{} 	
-		\paragraph{} 
-
+        \paragraph{} 
 	\subsection{Product Functions}
-		\paragraph{} 
-		
-		\paragraph{} 
-		
-		\paragraph{} 
-		
-		\paragraph{} 
+		\paragraph{} The system needs to be maintainable and the redundancy is a central design decision. The cgc itself should be installed on two separate pieces of hardware. Ideally this hardware is located in different physical locations. The secondary location should be located not on the island. This is the recommendation but is not required.
+        The CGC understand the health and status of every subsystem. With the help of human intervention, all components can be be maintained. an example is that the cars can report of their health. If one goes down for whatever reason, the CGC already understand this and helps communicate this information to an employee.  
+        The system will automatically deploy a new car (Redundant) to help mitigate the problem while the employees work on permanently fixing the broken car. All sub-systems will have this capability.
+	
+        \paragraph{} The product will focus on safety. Every decision that is made leads to the safest possible outcome for the visitors and employees. The system is redundant for safety. There are emergency protocols built into every sub-system to guarantee the safest experience possible for all that interact with the CGC system 
+        
+		\paragraph{} the product will push the limits on the latest technology. The entire system is close to being fully autonomous. The product should feel futuristic and high end. This is a feature designed throughout the components.
 
 	\subsection{User Features}
-		\paragraph{} 
+		\paragraph{}  one user feature is the ability to monitor then entire network of nodes as a whole from the CGC Station. The CGC station is a primary interface for employees. It allows employees to help control the system.
 		
-		\paragraph{} 
+        \paragraph{} Another feature also available to employees is the ability to interact with the financial aspects of the entire system. This is again performed at the CGC Station where there is a direct connection to the data collected by the CGC System.
 		
-		\paragraph{} 
+        \paragraph{} A huge feature of the system is the autonomous behavior of most of the CGC system. The cars pretty much function on their own and most of the other systems do as well.
+        This is a technological advancement that increases the user experience, both visitor and an employee.
 	
-	\subsection{High Level Constraints}
-		\paragraph{}
+
 
 	\subsection{Assumptions}
 	\paragraph{} We assume that the infrastructure is all redundant. The CGC is 
