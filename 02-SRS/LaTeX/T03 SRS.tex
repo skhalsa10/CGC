@@ -242,64 +242,66 @@
 		\end{enumerate}						
 		
     \subsection{Control Logic} \label{logic}%siri
-	\paragraph{} \textit{ \footnote{Control Logic by Siri Khalsa, Anas Gauba and Santi}}
+	\paragraph{} Because the CGC consists of various subsystems, it is important to understand 
+	the system within various scopes and from all subsystems' perspectives. \footnote{Control 
+	Logic by Siri Khalsa, Anas Gauba and Santiago Cejas}}
 
     \begin{figure}[H]
- 		\centerline{\includegraphics[scale=0.15]{PayKiosk.png}}
+ 		\centerline{\includegraphics[scale=0.30]{PayKiosk.png}}
  		\caption{Pay Kiosk Dynamic Control Model}
   		\label{fig:normal}
     \end{figure}
 
     \begin{figure}[H]
- 		{\includegraphics[scale=0.15]{Token.png}}
+ 		{\includegraphics[scale=0.30]{Token.png}}
  		\caption{Token Dynamic Control Model}
   		\label{fig:normal}
     \end{figure}
 
     \begin{figure}[H]
- 		\centerline{\includegraphics[scale=0.15]{CGCStation.png}}
+ 		\centerline{\includegraphics[scale=0.20]{CGCStation.png}}
  		\caption{CGC Station Dynamic Control Model}
   		\label{fig:normal}
     \end{figure}
 
     \begin{figure}[H]
- 		\centerline{\includegraphics[scale=0.15]{CarNormalMode.png}}
+ 		\centerline{\includegraphics[scale=0.18]{CarNormalMode.png}}
  		\caption{Car Normal Mode Dynamic Control Model}
   		\label{fig:normal}
     \end{figure}
 
     \begin{figure}[H]
- 		\centerline{\includegraphics[scale=0.15]{CarEmergencyMode.png}}
+ 		\centerline{\includegraphics[scale=0.25]{CarEmergencyMode.png}}
  		\caption{Car Emergency Mode Dynamic Control Model}
   		\label{fig:normal}
     \end{figure}
 
     \begin{figure}[H]
- 		\centerline{\includegraphics[scale=0.15]{GPSServer.png}}
+ 		\centerline{\includegraphics[scale=0.25]{GPSServer.png}}
  		\caption{GPS Server Dynamic Control Model}
   		\label{fig:normal}
     \end{figure}
 
     \begin{figure}[H]
- 		\centerline{\includegraphics[scale=0.15]{GlobalAlarmSystem.png}}
+ 		\centerline{\includegraphics[scale=0.30]{GlobalAlarmSystem.png}}
  		\caption{Global Alarm System Dynamic Control Model}
   		\label{fig:normal}
     \end{figure}
 
     \begin{figure}[H]
- 		\centerline{\includegraphics[scale=0.15]{CameraNetwork.png}}
+ 		\centerline{\includegraphics[scale=0.17]{CameraNetwork.png}}
  		\caption{Camera Network System Dynamic Control Model}
   		\label{fig:normal}
     \end{figure}
 
     \begin{figure}[H]
- 		\centerline{\includegraphics[scale=0.15]{ElectricFence.png}}
+ 		\centerline{\includegraphics[scale=0.25]{ElectricFence.png}}
  		\caption{Electric Fence Dynamic Control Model}
   		\label{fig:normal}
     \end{figure}
 
     \begin{figure}[H]
- 		\centerline{\includegraphics[scale=0.15]{T-RexMonitor.png}}
+ 		\centerline{\includegraphics[scale=0.25]{T-RexMonitor.png}}
  		\caption{T-Rex Monitor Dynamic Control Model}
   		\label{fig:normal}
     \end{figure}
@@ -998,68 +1000,75 @@
     % ...
 %%%%% Santi %%%%%
     \subsection{Network Maintenance Personnel}
-    \textit{brief description of actor}
+    \textit{The Network Maintenance Personnel (NMP) is responsible for the physical connections 
+    and addressing any issues with the physical components used with by the CGC (e.g cameras, 
+    kiosks, cars, etc.). This individual would be in charge of responding to nodal failures.}
     \par\noindent\rule{\textwidth}{0.4pt}    
     \begin{itemize}
         \item[]\textbf{Use Case:}                                
-            *DoSomething (the name of the action to be executed by actor)*
+            RepairExtraEnclosureCamera
 
         \item[]\textbf{Primary Actor:}
-            *ThatWhichWishesToDoSomething (name of actor)*
+            Network Maintenance Personnel
 
         \item[]\textbf{Goal in Context:}
-            *that which is to be accomplished by the action*
+            To fix or replace a malfunctioning or broken camera that has been detected to
+            be in such a state by the CGC. The camera in question resides outside the exhibit
+            enclosure.
 
         \item[]\textbf{Preconditions:}
-            *states of the actor and system prior to the action*
+            The CGC is not in emergency mode but may be in either normal or maintenance mode, and
+            the issue has already been diagnosed (i.e. it is known with certainty that the problem
+            is the camera and not the link to the camera).
 
         \item[]\textbf{Trigger:}
-            *that which initiates the action (e.g. actor breaks out of enclosure)*
+            The CGC reports an error in some camera within the Camera Network after 
+            failing to make contact via alternate paths.
 
         \item[]\textbf{Scenario:}
-            *sequence of actions from trigger to goal*
             \begin{enumerate}
-                \item first event
-                \item second event
-                \item ...
+                \item NMP is dispatched and transported in an self-driving car to the 
+                location of the problem by the CGC Station Operator (CSO).
+                \item NMP arrives and performs a repair, exchanges the broken camera
+                for a new one, or attaches a new one if it happens to be gone all together.
+                \item The CSO and NMP perform tests to ensure proper function.
+                \item The maintenance is concluded.
+                \item The NMP is dispatched to any other components that may need servicing.
+                \item [OR]
+                \item The NMP returns any removed parts (e.g. the broken camera) to a stock room.
             \end{enumerate}
 
         \item[]\textbf{Exceptions:}
-            *edge cases, potential hazards, errors, etc*
             \begin{itemize}
-                \item[] some exception
-                \item[] some other exception                
-                \item[] ...
+                \item[] Maintenance materials are out of stock.
+                \item[] Emergency mode interrupts the procedure.
             \end{itemize}
 
         \item[]\textbf{Priority:}
-            *level of implementation importance (e.g. correct change is a must)*
+            Moderate, should be implemented.
 
         \item[]\textbf{When Available:}
-            *when or during which interval of time the action is to supported by the system*
+            On Demand.
 
         \item[]\textbf{Frequency of Use:}
-            *number of uses per unit of time (e.g. annually, billions per second, etc)*
+            It may vary with respect to the average lifetime of the cameras in the network.
 
         \item[]\textbf{Channel to Primary Actor:}
-            *means through which the system interacts with actor*
+            CGC Station, Car, Camera, Camera Network
 
+        \item[]\textbf{Secondary Actors:}
+            CGC Station Operator, Camera Network
+            
         \item[]\textbf{Channels to Secondary Actors:}
             *means through which the primary and secondary actors interact*
             \begin{itemize}
-                \item[] some channel
-                \item[] some other channel
-                \item[] ...
+                \item[] CGC Station Operator: Car Intercom
+                \item[] Camera Network: Camera
             \end{itemize}
-        \item[]\textbf{Secondary Actors:}
-            *intermediary or auxillary actors required to complete the goal*
 
         \item[]\textbf{Open Issues:}
-            *itemization of current problems with any of the above*
             \begin{itemize}
-                \item[] some issue
-                \item[] some other issue
-                \item[] ...
+                \item[] None known
             \end{itemize}
     \end{itemize}
     
@@ -1070,14 +1079,15 @@
     % ...
     
     \subsection{Patrol Vehicle}
-    \textit{brief description of actor}
+    \textit{This actor is a special type of autonomous vehicle that patrols the island for an 
+    added layer of protection and in the interest of guest welfare.}
     \par\noindent\rule{\textwidth}{0.4pt}    
     \begin{itemize}
         \item[]\textbf{Use Case:}                                
-            *DoSomething (the name of the action to be executed by actor)*
+            PatrolIsland
 
         \item[]\textbf{Primary Actor:}
-            *ThatWhichWishesToDoSomething (name of actor)*
+            
 
         \item[]\textbf{Goal in Context:}
             *that which is to be accomplished by the action*
@@ -1359,62 +1369,68 @@
     % ...
     
     
-    \subsection{System Technician}
-    \textit{brief description of actor}
+    \subsection{CGC System Technician}
+    \textit{The this actor (CST) specializes in addressing hardware issues with the CGC Station. This
+    individual is responsible for repairing disk drives, monitors, redundancy elements within the
+    station, etc.}
     \par\noindent\rule{\textwidth}{0.4pt}    
     \begin{itemize}
         \item[]\textbf{Use Case:}                                
-            *DoSomething (the name of the action to be executed by actor)*
+            UpgradeSystemMemory
 
         \item[]\textbf{Primary Actor:}
-            *ThatWhichWishesToDoSomething (name of actor)*
+            CGC System Technician
 
         \item[]\textbf{Goal in Context:}
-            *that which is to be accomplished by the action*
+            To upgrade the memory of the machines within at CGC Control Station (e.g. add 16 GB RAM).
 
         \item[]\textbf{Preconditions:}
-            *states of the actor and system prior to the action*
+            The CGC is not in emergency mode but may be in either maintenance or normal mode.
 
         \item[]\textbf{Trigger:}
-            *that which initiates the action (e.g. actor breaks out of enclosure)*
+            Cretaceous Gardens experiences an increase in demand, which (if the trend continues) will
+            require more computational resources to handle more guests, more efficiently.
 
         \item[]\textbf{Scenario:}
-            *sequence of actions from trigger to goal*
             \begin{enumerate}
-                \item first event
-                \item second event
-                \item ...
+                \item The Sales Department notices a distinct upward trend in sales.
+                \item The findings percolate through the relevant business entities within the company.
+                \item The CST is dispatched to the Control Station.
+                \item The CST enables maintenance mode.
+                \item The CST upgrades machines that are currently being used for redundancy.
+                \item The CST enables maintenance mode on the redundant machines.
+                \item The redundant machines and active machines, switch roles.
+                \item The CST upgrades the now-redundant machines.
+                \item The CST performs tests.
+                \item The CST disables maintenance mode in both active, and redundant machines.
             \end{enumerate}
 
         \item[]\textbf{Exceptions:}
-            *edge cases, potential hazards, errors, etc*
             \begin{itemize}
-                \item[] some exception
-                \item[] some other exception                
-                \item[] ...
+                \item[] The trend is ignored by management.
             \end{itemize}
 
         \item[]\textbf{Priority:}
-            *level of implementation importance (e.g. correct change is a must)*
+            Moderate, should be implemented.
 
         \item[]\textbf{When Available:}
-            *when or during which interval of time the action is to supported by the system*
+            On demand.
 
         \item[]\textbf{Frequency of Use:}
-            *number of uses per unit of time (e.g. annually, billions per second, etc)*
+            Every two or three fiscal years.
 
         \item[]\textbf{Channel to Primary Actor:}
-            *means through which the system interacts with actor*
-
-        \item[]\textbf{Channels to Secondary Actors:}
-            *means through which the primary and secondary actors interact*
-            \begin{itemize}
-                \item[] some channel
-                \item[] some other channel
-                \item[] ...
-            \end{itemize}
+            Control station hardware.
+        
         \item[]\textbf{Secondary Actors:}
-            *intermediary or auxillary actors required to complete the goal*
+            Sales Department, CGC Control Station, Pay Kiosk
+                
+        \item[]\textbf{Channels to Secondary Actors:}
+            \begin{itemize}
+                \item[] Sales Department: 
+                \item[] CGC Control Station:
+                \item[] Pay Kiosk:
+            \end{itemize}
 
         \item[]\textbf{Open Issues:}
             *itemization of current problems with any of the above*
