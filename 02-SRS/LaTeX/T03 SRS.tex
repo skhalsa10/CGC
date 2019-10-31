@@ -1555,68 +1555,79 @@
     % ...
     
     \subsection{Zookeeper}
-    \textit{brief description of actor}
+    \textit{A zookeeper may interact with the CGC in a variety of ways, but some of the
+    major roles of such an actor (as with any zookeeper) are to prepare the diet of the T-Rex, 
+    feed the T.Rex, to observe its behavior, or groom it.}
     \par\noindent\rule{\textwidth}{0.4pt}    
     \begin{itemize}
-        \item[]\textbf{Use Case:}                                
-            *DoSomething (the name of the action to be executed by actor)*
+        \item[]\textbf{Use Case:} 
+            FeedTRex                                
 
         \item[]\textbf{Primary Actor:}
-            *ThatWhichWishesToDoSomething (name of actor)*
+            Zookeeper
 
         \item[]\textbf{Goal in Context:}
-            *that which is to be accomplished by the action*
+            To safely provide food for the T.Rex, whether it be live, frozen, thawed, or prepared
+            prey.
 
         \item[]\textbf{Preconditions:}
-            *states of the actor and system prior to the action*
+            The CGC is not in emergency mode, and all components are fully functional.
 
         \item[]\textbf{Trigger:}
-            *that which initiates the action (e.g. actor breaks out of enclosure)*
+            It is time to feed the T.Rex.
 
         \item[]\textbf{Scenario:}
-            *sequence of actions from trigger to goal*
             \begin{enumerate}
-                \item first event
-                \item second event
-                \item ...
+                \item The scheduled feeding time arrives.
+                \item The CGC Station Operator dispatches the zookeeper in a self driving car
+                to the edge of the enclosure furthest from the current location of the T.Rex.
+                \item The Zookeeper requests an all-clear confirmation from the operator.
+                \item The operator disengages the electricity of the panel to provide access.
+                \item The Zookeeper enters and travels a significant distance into the enclosure.
+                \item The Zookeeper drops off the food.
+                \item The Zookeeper travels back the point of entry.
+                \item The Zookeeper exits the enclosure.
+                \item The Operator confirms successful exit.
+                \item The Operator reengages the electricity of the panel. 
             \end{enumerate}
 
         \item[]\textbf{Exceptions:}
-            *edge cases, potential hazards, errors, etc*
             \begin{itemize}
-                \item[] some exception
-                \item[] some other exception                
-                \item[] ...
+                \item[] There is a shortage of food on the island.
+                \item[] The T.Rex is sick or injured and does not want to eat.
+                \item[] The T.Rex reaches the zookeeper before the zookeeper exits the enclosure.
             \end{itemize}
 
         \item[]\textbf{Priority:}
-            *level of implementation importance (e.g. correct change is a must)*
+            Essential, must be implemented
 
         \item[]\textbf{When Available:}
-            *when or during which interval of time the action is to supported by the system*
+            On demand and via operator-zookeeper protocol
 
         \item[]\textbf{Frequency of Use:}
-            *number of uses per unit of time (e.g. annually, billions per second, etc)*
+            Periodically (it can be daily, weekly, or monthly for example)
 
         \item[]\textbf{Channel to Primary Actor:}
-            *means through which the system interacts with actor*
-
-        \item[]\textbf{Channels to Secondary Actors:}
-            *means through which the primary and secondary actors interact*
             \begin{itemize}
-                \item[] some channel
-                \item[] some other channel
-                \item[] ...
+                \item[] Enclosure Panel
             \end{itemize}
+
         \item[]\textbf{Secondary Actors:}
-            *intermediary or auxillary actors required to complete the goal*
+            CGC Station Operator, T.Rex, Car
+        
+        \item[]\textbf{Channels to Secondary Actors:}
+            \begin{itemize}
+                \item[] Car Intercom
+                \item[] Enclosure Panel
+                \item[] Camera Network
+            \end{itemize}
 
         \item[]\textbf{Open Issues:}
-            *itemization of current problems with any of the above*
             \begin{itemize}
-                \item[] some issue
-                \item[] some other issue
-                \item[] ...
+                \item[] Should the panel remain inactive while 
+                the zookeeper is inside?
+                \item[] Should the zookeeper simply wear an electric 
+                safety suit to avoid disengagement all together?
             \end{itemize}
     \end{itemize}
     
