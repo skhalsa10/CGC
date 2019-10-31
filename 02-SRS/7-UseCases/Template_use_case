@@ -1,0 +1,173 @@
+--------------------------------------------------------------------------------
+Use Case:  Check System Network
+
+Primary actor: Network Maintenance Personel
+
+Goal in context: Check that the comunications in the system are functioning.
+
+Preconditions: The park must be running in normal mode.
+
+Trigger: The Network Maintenance Personel
+
+Scenario:
+	
+	1. The Network Maintenance Personel check the comunication with the devices
+       or system.
+
+	2. If he detects that some device or system is not working, It will procced 
+	   to Repair the device/system.
+
+	2.1. He will procced with the maintenance protocol.
+
+Exceptions:
+
+Priority: ESSENTIAL to the functioning of the park.
+
+When available: Needs to be available always.
+
+Frequency of use: Daily.
+
+Channel to actor: CGC.
+
+Secondary actors: 
+
+Open Issues:
+
+--------------------------------------------------------------------------------
+Use Case:  Set/Repair System Network
+
+Primary actor: he Network Maintenance Personel
+
+Goal in context: Set or repair the comunications between the device or system with
+the CGC.
+
+Preconditions: The park must be running in normal mode.
+
+Trigger: The Network Maintenance Personel
+
+Scenario:
+	1. The Network Maintenance Personel will register the device or system in the
+	CGC.
+
+	2. He will procced to set up the comunication protocols between the 
+	device/system with the CGC.
+
+	3. He will check that the comunications are well setted with the GCC.
+
+
+Exceptions:
+
+Priority: ESSENTIAL to the functioning of the park.
+
+When available: Needs to be available always.
+
+Frequency of use: Daily.
+
+Channel to actor: CGC.
+
+Secondary actors: 
+
+Open Issues:
+
+--------------------------------------------------------------------------------
+Use Case: Check Token
+
+Primary actor: Patrol Vehicle
+
+Goal in context: Check the vercity and validity of the token.
+
+Preconditions: The park must be running in normal mode.
+
+Trigger: The client.
+
+Scenario:
+	1. The clients of the park will aproach to the car.
+	
+	2. They will aproach the token to the rifd lector.
+
+	3. It will comunicate with the CGC validating it.
+
+	4. If the token its not valid, the access to the car will not be permitted.
+
+Exceptions: 
+
+Priority: ESSENTIAL to the functioning of the park.
+
+When available: Needs to be available always.
+
+Frequency of use: Daily.
+
+Channel to actor: CGC.
+
+Secondary actors: 
+
+Open Issues:
+
+--------------------------------------------------------------------------------
+Use Case: RegisterSale
+
+Primary actor: Payment Kiosk
+
+Goal in context: Register the access of a guest to a park.
+
+Preconditions: The park must be open and running normal.
+
+Trigger: The client who buys a tocken.
+
+Scenario:
+	1. The Client logins to pay a ticket.
+
+	2. The Client pay the ticket.
+	
+	3. When the payment is confirmed and the payment Kiosk procced to 
+	register the sale.
+
+Exceptions: 
+
+Priority: ESSENTIAL to the functioning of the park.
+
+When available: Needed always the park is open.
+
+Frequency of use: Daily.
+
+Channel to actor: CGC.
+
+Secondary actors: Sales Departament
+
+Open Issues:
+
+--------------------------------------------------------------------------------
+Use Case: GetBalance
+
+Primary actor: Sales Departament Employee
+
+Goal in context: Get the balance monthly/annualy of the park.
+
+Preconditions: There has to be Sales registered in that period of time.
+
+Trigger: Sales Departament Employee
+
+Scenario:
+	
+	1. The Sales Departament Employee select to get the Balance of the park.
+
+	2. He introduce the type of balance monthly or annualy and the date.
+
+	3. He will get the balance of that query.
+
+
+Exceptions: 
+
+Priority: ESSENTIAL to reach the goal of maximize the profit.
+
+When available: Needed while the park is functioning.
+
+Frequency of use: Daily.
+
+Channel to actor: CGC.
+
+Secondary actors: 
+
+Open Issues:
+
+--------------------------------------------------------------------------------
