@@ -1075,80 +1075,82 @@ official, managerial, medical, and technical connotations.}
 %    % another use case
 %    
 %    % ...
-%    
-%    \subsection{Patrol Vehicle}
-%    \textit{This actor is a special type of autonomous vehicle that patrols the island for an 
-%    added layer of protection and in the interest of guest welfare.}
-%    \par\noindent\rule{\textwidth}{0.4pt}    
-%    \begin{itemize}
-%        \item[]\textbf{Use Case:}                                
-%            PatrolIsland
-%
-%        \item[]\textbf{Primary Actor:}
-%            
-%
-%        \item[]\textbf{Goal in Context:}
-%            *that which is to be accomplished by the action*
-%
-%        \item[]\textbf{Preconditions:}
-%            *states of the actor and system prior to the action*
-%
-%        \item[]\textbf{Trigger:}
-%            *that which initiates the action (e.g. actor breaks out of enclosure)*
-%
-%        \item[]\textbf{Scenario:}
-%            *sequence of actions from trigger to goal*
-%            \begin{enumerate}
-%                \item first event
-%                \item second event
-%                \item ...
-%            \end{enumerate}
-%
-%        \item[]\textbf{Exceptions:}
-%            *edge cases, potential hazards, errors, etc*
-%            \begin{itemize}
-%                \item[] some exception
-%                \item[] some other exception                
-%                \item[] ...
-%            \end{itemize}
-%
-%        \item[]\textbf{Priority:}
-%            *level of implementation importance (e.g. correct change is a must)*
-%
-%        \item[]\textbf{When Available:}
-%            *when or during which interval of time the action is to supported by the system*
-%
-%        \item[]\textbf{Frequency of Use:}
-%            *number of uses per unit of time (e.g. annually, billions per second, etc)*
-%
-%        \item[]\textbf{Channel to Primary Actor:}
-%            *means through which the system interacts with actor*
-%
-%        \item[]\textbf{Channels to Secondary Actors:}
-%            *means through which the primary and secondary actors interact*
-%            \begin{itemize}
-%                \item[] some channel
-%                \item[] some other channel
-%                \item[] ...
-%            \end{itemize}
-%        \item[]\textbf{Secondary Actors:}
-%            *intermediary or auxillary actors required to complete the goal*
-%
-%        \item[]\textbf{Open Issues:}
-%            *itemization of current problems with any of the above*
-%            \begin{itemize}
-%                \item[] some issue
-%                \item[] some other issue
-%                \item[] ...
-%            \end{itemize}
-%    \end{itemize}
+    
+    \subsection{Patrol Vehicle}
+    \textit{This actor is a special type of autonomous vehicle that patrols the island for an 
+    added layer of protection and in the interest of guest welfare.}
+    \par\noindent\rule{\textwidth}{0.4pt}    
+    \begin{itemize}
+        \item[]\textbf{Use Case:}                                
+            PatrolIsland
+
+        \item[]\textbf{Primary Actor:}
+            Patrol Vehicle
+
+        \item[]\textbf{Goal in Context:}
+            To provide a means via which security personnel may patrol the island. The vehicles
+            are to be on a mostly predetermined route, so the security guards (in this context)
+            are mostly passive agents.
+
+        \item[]\textbf{Preconditions:}
+            The system is in normal mode and all components are functioning properly.
+
+        \item[]\textbf{Trigger:}
+            The resort opens for business.
+
+        \item[]\textbf{Scenario:}
+            \begin{enumerate}
+                \item Cretaceous Gardens opens to employees before opening for the business day.
+                \item The Patrol Vehicle (PV) is dispatched via a routine protocol.
+                \item The PV performs a test run around the island before picking up the security guard
+                of the shift.
+                \item The security guard enters the PV, after which the PV performs another test trip.
+                \item The security guard double checks state of the route.
+                \item Anything out of the ordinary is reported to the relevant parties (maintenance for example).
+                \item The PV returns to the southern part of the island.
+                \item The security guard confirms an all clear with other employees.
+                \item The rest of the employees continue their setup as the security guard enters the PV.
+                \item The PV begins its daily patrolling routine (one or more simple circuits around the island).
+            \end{enumerate}
+
+        \item[]\textbf{Exceptions:}
+            \begin{itemize}
+                \item[] The system is triggered into emergency mode.
+            \end{itemize}
+
+        \item[]\textbf{Priority:}
+            Low, not necessary but may be useful.
+
+        \item[]\textbf{When Available:}
+            During business hours.
+
+        \item[]\textbf{Frequency of Use:}
+            Daily.
+
+        \item[]\textbf{Channel to Primary Actor:}
+            Direct.
+
+        \item[]\textbf{Secondary Actors:}
+            CGC Station Operator, Security Guard
+            
+        \item[]\textbf{Channels to Secondary Actors:}
+            \begin{itemize}
+                \item[] Security Guard: Car door, inner components of car 
+                \item[] CGC Station Operator: CGC station interface
+            \end{itemize}
+
+        \item[]\textbf{Open Issues:}
+            \begin{itemize}
+                \item[] None known.
+            \end{itemize}
+    \end{itemize}
 %    
 %    % another use case
 %    
 %    % another use case
 %    
 %    % ...
-%    
+
     \subsection{Sales department}
     \textit{The sales department (SD) is, for the sake of simplicity, is the actor interested 
     in maximizing ticket sales and profits. The SD is interested in any financial trends
@@ -1174,9 +1176,13 @@ official, managerial, medical, and technical connotations.}
 
         \item[]\textbf{Scenario:}
             \begin{enumerate}
-                \item first event
-                \item second event
-                \item ...
+                \item A meeting is scheduled in order to plan for the next quarter.
+                \item The SD gathers all sales data provided by the CGC.
+                \item The SD uses a provided interface to organize the data into meaningful visualizations.
+                \item The SD exports the visualizations for a presentation at the meeting.
+                \item The meeting is held and the SD presents their findings.
+                \item The SD contribution helps guide the conversation for what to do next.
+                \item The meeting concludes. 
             \end{enumerate}
 
         \item[]\textbf{Exceptions:}
