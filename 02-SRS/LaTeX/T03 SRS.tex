@@ -16,123 +16,113 @@
 \definecolor{DarkBlue}{HTML}{4a5a8a} 
 \definecolor{LightBlue}{HTML}{4f81bf}
 \begin{titlepage}
-	\begin{flushleft}
-		\vspace{1cm} \Huge  \textbf{Cretaceous Gardens Controller}\\
-		\vspace{1cm} \Huge  \textit{Software Requirements Specification}\\
-		\vspace{1cm} \Large \textit{SRS Version 1.0}\\
-		\vspace{5cm} \LARGE         Team \#3\\ 
-		                            29 October 2019
-		\vfill       \Huge  \textbf{CS 460 Software Engineering}
-	\end{flushleft}
+    \begin{flushleft}
+        \vspace{1cm} \Huge  \textbf{Cretaceous Gardens Controller}\\
+        \vspace{1cm} \Huge  \textit{Software Requirements Specification}\\
+        \vspace{1cm} \Large \textit{SRS Version 1.0}\\
+        \vspace{5cm} \LARGE         Team \#3\\ 
+                                    29 October 2019
+        \vfill       \Huge  \textbf{CS 460 Software Engineering}
+    \end{flushleft}
 \end{titlepage}
 \normalsize \tableofcontents
 \pagebreak
 
-\section{Introduction} \label{intro} % Zeke
-% project goals and the purpose of this document
-	\paragraph{} The purpose of this document is to \textit{specify} the requirements for the
-	 development of the Cretaceous Gardens Controller (CGC). The specification is formalized and 
-	 diagrammed in order to guide the eventual implementation of the system. Information 
-	 encountered in the corresponding \textit{Requirements Definition Document} is reiterated 
-	 and restated here where relevant.
-	  
-	 \paragraph{} After this introduction \footnote{Introduction by Ezequiel Ramos}, 
-	 Section \ref{gen} gives an overview of the system. Section \ref{spec} delves into more 
-	 detail with subsections \ref{logic} and \ref{inter} that feature a more granular view 
-	 of the \textit{Control Logic} and the \textit{External Interfaces}. Section \ref{defs} 
-	 provides the definition of technical terms that will be commonly used.
+\section{Introduction} \label{intro}
+\paragraph{} The purpose of this document is to \textit{specify} the requirements for the
+development of the Cretaceous Gardens Controller (CGC). The specification is formalized and 
+diagrammed in order to guide the eventual implementation of the system. Information 
+encountered in the corresponding \textit{Requirements Definition Document} is reiterated 
+and restated here where relevant.
+      
+\paragraph{} After this introduction \footnote{Introduction by Ezequiel Ramos}, 
+Section \ref{gen} gives an overview of the system. Section \ref{spec} delves into more 
+detail with subsections \ref{logic} and \ref{inter} that feature a more granular view 
+of the \textit{Control Logic} and the \textit{External Interfaces}. Section \ref{defs} 
+provides the definition of technical terms that will be commonly used.
 \pagebreak
-\section{General Description} \label{gen} %Zeke
-	\paragraph{}\textit{This section \footnote{General Description by Siri Khalsa} provides a general overview of the whole system. How the system interacts with 
-	the hardware interfaces and its basic functionality are introduced here. A description of
-	parts to be used in the system and the available functionalities for each type are also 
-	provided. Some high level constraints and assumptions for the system will be also be presented.
-	It should be noted that a more detailed specification of constraints is covered in its 
-	own section.}
-	
-	\subsection{Product Perspective}
-        \paragraph{} The CGC system as a whole is made up of many smaller subsystems. These systems include cars, T-Rex Monitor, GPS Server, Pay Kiosk, etc. These are clearly defined later
-        in this document primarily in the interfaces section. The CGC is the system that can communicate with everything. The analogy can be used that the CGC is the central nervous system of the entire CGC system. most of the sub-systems will work independent of each other.
-        This is by design. ever system should be able to perform their duties without being affected by the state of another system unless two subsystems are directly interacting.
-        The CGC will get informed that an emergency mode should be triggered from the Electric Fence sub-system. It is the responsibility of the CGC to inform all other sub-systems that we are now in an emergency mode.
-        It is also up to the CGC with the help of an employee to reset everything back into a normal mode of operation.
 
-        \paragraph{} 
-	\subsection{Product Functions}
-		\paragraph{} The system needs to be maintainable and the redundancy is a central design decision. The cgc itself should be installed on two separate pieces of hardware. Ideally this hardware is located in different physical locations. The secondary location should be located not on the island. This is the recommendation but is not required.
-        The CGC understand the health and status of every subsystem. With the help of human intervention, all components can be be maintained. an example is that the cars can report of their health. If one goes down for whatever reason, the CGC already understand this and helps communicate this information to an employee.  
-        The system will automatically deploy a new car (Redundant) to help mitigate the problem while the employees work on permanently fixing the broken car. All sub-systems will have this capability.
-	
-        \paragraph{} The product will focus on safety. Every decision that is made leads to the safest possible outcome for the visitors and employees. The system is redundant for safety. There are emergency protocols built into every sub-system to guarantee the safest experience possible for all that interact with the CGC system 
+\section{General Description} \label{gen}
+\paragraph{}\textit{This section \footnote{General Description by Siri Khalsa} provides 
+a general overview of the whole system. How the system interacts with the hardware interfaces 
+and its basic functionality are introduced here. A description of parts to be used in the 
+system and the available functionalities for each type are also provided. Some high level 
+constraints and assumptions for the system will be also be presented. It should be noted 
+that a more detailed specification of constraints is covered in its own section.}
+    
+    \subsection{Product Perspective}
+    \paragraph{} The CGC system as a whole is made up of many smaller subsystems. These systems include cars, T-Rex Monitor, GPS Server, Pay Kiosk, etc. These are clearly defined later in this document primarily in the interfaces section. The CGC is the system that can communicate with everything. The analogy can be used that the CGC is the central nervous system of the entire CGC system. most of the sub-systems will work independent of each other. This is by design. ever system should be able to perform their duties without being affected by the state of another system unless two subsystems are directly interacting. The CGC will get informed that an emergency mode should be triggered from the Electric Fence sub-system. It is the responsibility of the CGC to inform all other sub-systems that we are now in an emergency mode. It is also up to the CGC with the help of an employee to reset everything back into a normal mode of operation.
+
+    \paragraph{} 
+    \subsection{Product Functions}
+    \paragraph{} The system needs to be maintainable and the redundancy is a central design decision. The CGC itself should be installed on two separate pieces of hardware. Ideally this hardware is located in different physical locations. The secondary location should be located not on the island. This is the recommendation but is not required. The CGC understand the health and status of every subsystem. With the help of human intervention, all components can be be maintained. an example is that the cars can report of their health. If one goes down for whatever reason, the CGC already understand this and helps communicate this information to an employee. The system will automatically deploy a new car (Redundant) to help mitigate the problem while the employees work on permanently fixing the broken car. All sub-systems will have this capability.
+    
+    \paragraph{} The product will focus on safety. Every decision that is made leads to the safest possible outcome for the visitors and employees. The system is redundant for safety. There are emergency protocols built into every sub-system to guarantee the safest experience possible for all that interact with the CGC system 
         
-		\paragraph{} the product will push the limits on the latest technology. The entire system is close to being fully autonomous. The product should feel futuristic and high end. This is a feature designed throughout the components.
+    \paragraph{} The product will push the limits on the latest technology. The entire system is close to being fully autonomous. The product should feel futuristic and high end. This is a feature designed throughout the components.
 
-	\subsection{User Features}
-		\paragraph{}  one user feature is the ability to monitor then entire network of nodes as a whole from the CGC Station. The CGC station is a primary interface for employees. It allows employees to help control the system.
-		
-        \paragraph{} Another feature also available to employees is the ability to interact with the financial aspects of the entire system. This is again performed at the CGC Station where there is a direct connection to the data collected by the CGC System.
-		
-        \paragraph{} A huge feature of the system is the autonomous behavior of most of the CGC system. The cars pretty much function on their own and most of the other systems do as well.
-        This is a technological advancement that increases the user experience, both visitor and an employee.
-	
-
-
-	\subsection{Assumptions}
-	\paragraph{} We assume that the infrastructure is all redundant. The CGC is 
-	installed on redundant servers. The network backbone has physical redundant 
-	links to appropriate devices like the cameras, the PA speakers, and the 
-	electric fence. We will also	program redundancy into the logic. Like the 
-	ability to have another car available in case of an emergency or if the car 
-	breaks down.
-		
-	\paragraph{} Another assumption is that messages would be encrypted in order 
-	to provide the security needed, so the messages can not be intercepted and 
-	modified.
+    \subsection{User Features}
+    \paragraph{} One user feature is the ability to monitor then entire network of nodes as a whole from the CGC Station. The CGC station is a primary interface for employees. It allows employees to help control the system.
+        
+    \paragraph{} Another feature also available to employees is the ability to interact with the financial aspects of the entire system. This is again performed at the CGC Station where there is a direct connection to the data collected by the CGC System.
+        
+    \paragraph{} A huge feature of the system is the autonomous behavior of most of the CGC system. The cars pretty much function on their own and most of the other systems do as well. This is a technological advancement that increases the user experience, both visitor and an employee.
+    
+    \subsection{Assumptions}
+    \paragraph{} We assume that the infrastructure is all redundant. The CGC is 
+    installed on redundant servers. The network backbone has physical redundant 
+    links to appropriate devices like the cameras, the PA speakers, and the 
+    electric fence. We will also    program redundancy into the logic. Like the 
+    ability to have another car available in case of an emergency or if the car 
+    breaks down.    
+    \paragraph{} Another assumption is that messages would be encrypted in order 
+    to provide the security needed, so the messages can not be intercepted and 
+    modified.
 
 \section{Specific Requirements} \label{spec} % Siri and Anas
 % logical diagram
 \paragraph{} \textit{Section Introduction}
 
-	\subsection{External Interfaces} \label{inter}% Anas
-	\paragraph{} \textit{The External Interfaces\footnote{External Interfaces by Anas Gauba} 
-	make up all the pieces that the CGC communicates with. The CGC itself must 
-	communicate with everything, 	but a lot of interfaces can function on their own. The 
-	car interface is an example of one that needs to be able to function on it's own.}
-		
-	\paragraph{Pay Kiosk}
-	\paragraph {}\textit{The Pay Kiosk interface triggers events in situations where the visitor interaction is required.  }
-	    \subparagraph{Incoming Events}
-		\begin{enumerate}
-		    \item Register visitor(demographics)/request money.
-		    \item Accept money(type)/build token.
-		\end{enumerate}
-				
-	    \subparagraph{Outgoing Events}
-		\begin{enumerate}
+    \subsection{External Interfaces} \label{inter}% Anas
+    \paragraph{} \textit{The External Interfaces\footnote{External Interfaces by Anas Gauba} 
+    make up all the pieces that the CGC communicates with. The CGC itself must 
+    communicate with everything,     but a lot of interfaces can function on their own. The 
+    car interface is an example of one that needs to be able to function on it's own.}
+        
+    \paragraph{Pay Kiosk}
+    \paragraph {}\textit{The Pay Kiosk interface triggers events in situations where the visitor interaction is required.  }
+        \subparagraph{Incoming Events}
+        \begin{enumerate}
+            \item Register visitor(demographics)/request money.
+            \item Accept money(type)/build token.
+        \end{enumerate}
+                
+        \subparagraph{Outgoing Events}
+        \begin{enumerate}
             \item Activate token(id).
             \item Dispense token(id). 
             \item Dispense change(money, receipt).
             \item Log transaction. 
             \item Report health status to CGC. 
-		\end{enumerate}
+        \end{enumerate}
 
-	\paragraph{Token}
-	\paragraph {}\textit{The events that the Token interface triggers are specifically related to locate the visitor.  }
-	    \subparagraph{Incoming Events}
-		\begin{enumerate}
+    \paragraph{Token}
+    \paragraph {}\textit{The events that the Token interface triggers are specifically related to locate the visitor.  }
+        \subparagraph{Incoming Events}
+        \begin{enumerate}
             \item Trigger Alarm. 
             \item Return to car(carID). 
-		\end{enumerate}
-				
-	    \subparagraph{Outgoing Events}
-		\begin{enumerate}
-			\item Report location to GPS Server(gpsID).
-		\end{enumerate}
+        \end{enumerate}
+                
+        \subparagraph{Outgoing Events}
+        \begin{enumerate}
+            \item Report location to GPS Server(gpsID).
+        \end{enumerate}
 
-	\paragraph{Car}
-	\paragraph{} \textit{The Car interface triggers events in situations where the visitor interacts with the car as well as the internal sensors that the car is communicating with. }
-	    \subparagraph{Incoming Events}
-		\begin{enumerate}
+    \paragraph{Car}
+    \paragraph{} \textit{The Car interface triggers events in situations where the visitor interacts with the car as well as the internal sensors that the car is communicating with. }
+        \subparagraph{Incoming Events}
+        \begin{enumerate}
             \item Read token(tokenID)/Unlock doors or deny access. 
             \item Activate car()[Normal Mode]/Go to south end to pick up visitors.
             \item Activate car()[Emergency Mode]/Go to north end to pick up visitors.
@@ -141,201 +131,205 @@
             \item Weight detected.
             \item Change driving mode(modeName).
             \item Activate intercom.
-		\end{enumerate}
-				
-	    \subparagraph{Outgoing Events}
-		\begin{enumerate}
-		    \item The GPS current location(id).
-		    \item Alert visitors(carID).
-		    \item Trigger alarm.
-		    \item Report health status to CGC.
-		\end{enumerate}
+        \end{enumerate}
+                
+        \subparagraph{Outgoing Events}
+        \begin{enumerate}
+            \item The GPS current location(id).
+            \item Alert visitors(carID).
+            \item Trigger alarm.
+            \item Report health status to CGC.
+        \end{enumerate}
 
     \paragraph{T-Rex Monitor}
-	\paragraph{}\textit{The T-Rex Monitor interface triggers events in situations where the actions of T Rex can be monitored appropriately. }
-	    \subparagraph{Incoming Events}
-		\begin{enumerate}
-			\item Inject tranquilizer. 
-		\end{enumerate}
-				
-	    \subparagraph{Outgoing Events}
-		\begin{enumerate}
-			\item Report T-Rex health.
-			\item Report health status to CGC.
-			\item Report location to GPS Server(gpsID).
-		\end{enumerate}
+    \paragraph{}\textit{The T-Rex Monitor interface triggers events in situations where 
+    the actions of T Rex can be monitored appropriately. }
+        \subparagraph{Incoming Events}
+        \begin{enumerate}
+            \item Inject tranquilizer. 
+        \end{enumerate}
+                
+        \subparagraph{Outgoing Events}
+        \begin{enumerate}
+            \item Report T-Rex health.
+            \item Report health status to CGC.
+            \item Report location to GPS Server(gpsID).
+        \end{enumerate}
 
-	\paragraph{Camera Network}
-	\paragraph{}\textit{The Camera Network interface triggers events in situations where each specific cameras operations can be easily monitored. }
-	    \subparagraph{Incoming Events}
-		\begin{enumerate}
-			\item Delete recording(cameraID, date range).
-			\item Activate recording(cameraID).
-			\item Monitor streaming(cameraID).
-		\end{enumerate}
-		
-	    \subparagraph{Outgoing Events}
-		\begin{enumerate}
-			\item Camera outage(cameraID).
-			\item Report health status to CGC. 
-		\end{enumerate}
+    \paragraph{Camera Network}
+    \paragraph{}\textit{The Camera Network interface triggers events in situations 
+    where each specific cameras operations can be easily monitored. }
+        \subparagraph{Incoming Events}
+        \begin{enumerate}
+            \item Delete recording(cameraID, date range).
+            \item Activate recording(cameraID).
+            \item Monitor streaming(cameraID).
+        \end{enumerate}
+        
+        \subparagraph{Outgoing Events}
+        \begin{enumerate}
+            \item Camera outage(cameraID).
+            \item Report health status to CGC. 
+        \end{enumerate}
 
-	\paragraph{Electric Fence}
-	\paragraph{}\textit{The Electric Fence interface triggers events in the case of any possible distortion in the panels. }
-	    \subparagraph{Incoming Events}
-		\begin{enumerate}
-			\item Null.
-		\end{enumerate}
-				
-	    \subparagraph{Outgoing Events}
-		\begin{enumerate}
-		    \item Electricity distortion/trigger an emergency mode.
-		    \item Report health status to CGC. 
-		\end{enumerate}
+    \paragraph{Electric Fence}
+    \paragraph{}\textit{The Electric Fence interface triggers events in the case of any possible distortion in the panels. }
+        \subparagraph{Incoming Events}
+        \begin{enumerate}
+            \item Null.
+        \end{enumerate}
+                
+        \subparagraph{Outgoing Events}
+        \begin{enumerate}
+            \item Electricity distortion/trigger an emergency mode.
+            \item Report health status to CGC. 
+        \end{enumerate}
 
-	\paragraph{Global Alarm System}
-	\paragraph{}\textit{The Global Alarm System interface triggers events in situations whenever there are annoucements to be made all across the park. }
-	    \subparagraph{Incoming Events}
-		\begin{enumerate}
-			\item Trigger alarms[Emergency Mode]/play emergency alarm sound.
-			\item Trigger alarms[Normal Mode]/play Public Service Annoucement (PSA).
-			\item Disable alarms.
-		\end{enumerate}
-				
-	    \subparagraph{Outgoing Events}
-		\begin{enumerate}
-			\item Report health status to CGC.
-		\end{enumerate}
+    \paragraph{Global Alarm System}
+    \paragraph{}\textit{The Global Alarm System interface triggers events in situations whenever 
+    there are announcements to be made all across the park. }
+        \subparagraph{Incoming Events}
+        \begin{enumerate}
+            \item Trigger alarms[Emergency Mode]/play emergency alarm sound.
+            \item Trigger alarms[Normal Mode]/play Public Service Announcement (PSA).
+            \item Disable alarms.
+        \end{enumerate}
+                
+        \subparagraph{Outgoing Events}
+        \begin{enumerate}
+            \item Report health status to CGC.
+        \end{enumerate}
 
-	\paragraph{CGC Station}
-	\paragraph{}\textit{The CGC Station interface triggers events in situations where an employee has to respond in specific situations. }
-	    \subparagraph{Incoming Events}
-		\begin{enumerate}
-			\item Review health status of all the associated devices.
-		\end{enumerate}
-				
-	    \subparagraph{Outgoing Events}
-		\begin{enumerate}
-			\item Activate tranquilizer.
-			\item Deactivate emergency mode.
-			\item Activate intercom. 
-		\end{enumerate}
+    \paragraph{CGC Station}
+    \paragraph{}\textit{The CGC Station interface triggers events in situations where an employee has to respond in specific situations. }
+        \subparagraph{Incoming Events}
+        \begin{enumerate}
+            \item Review health status of all the associated devices.
+        \end{enumerate}
+                
+        \subparagraph{Outgoing Events}
+        \begin{enumerate}
+            \item Activate tranquilizer.
+            \item Deactivate emergency mode.
+            \item Activate intercom. 
+        \end{enumerate}
 
-	\paragraph{GPS Server}
-	\paragraph{}\textit{The GPS Server interface triggers events in situations of tracking the gps devices. }
-	    \subparagraph{Incoming Events}
-		\begin{enumerate}
-			\item Track location(gpsID).
-		\end{enumerate}
-				
-	    \subparagraph{Outgoing Events}
-		\begin{enumerate}
-			\item Report location(gpsID).
-		\end{enumerate}						
-		
+    \paragraph{GPS Server}
+    \paragraph{}\textit{The GPS Server interface triggers events in situations of tracking the GPS devices. }
+        \subparagraph{Incoming Events}
+        \begin{enumerate}
+            \item Track location(gpsID).
+        \end{enumerate}
+                
+        \subparagraph{Outgoing Events}
+        \begin{enumerate}
+            \item Report location(gpsID).
+        \end{enumerate}                        
+        
     \subsection{Control Logic} \label{logic}%siri
-	\paragraph{} Because the CGC consists of various subsystems, it is important to understand 
-	the system within various scopes and from all subsystems' perspectives. \footnote{Control 
-	Logic by Siri Khalsa, Anas Gauba and Santiago Cejas}
+    \paragraph{} Because the CGC consists of various subsystems, it is important to understand 
+    the system within various scopes and from all subsystems' perspectives. \footnote{Control 
+    Logic by Siri Khalsa, Anas Gauba and Santiago Cejas}
 
     \begin{figure}[H]
- 		\centerline{\includegraphics[scale=0.30]{PayKiosk.png}}
- 		\caption{Pay Kiosk Dynamic Control Model}
-  		\label{fig:normal}
+         \centerline{\includegraphics[scale=0.30]{PayKiosk.png}}
+         \caption{Pay Kiosk Dynamic Control Model}
+          \label{fig:normal}
     \end{figure}
 
     \begin{figure}[H]
- 		{\includegraphics[scale=0.30]{Token.png}}
- 		\caption{Token Dynamic Control Model}
-  		\label{fig:normal}
+         {\includegraphics[scale=0.30]{Token.png}}
+         \caption{Token Dynamic Control Model}
+          \label{fig:normal}
     \end{figure}
 
     \begin{figure}[H]
- 		\centerline{\includegraphics[scale=0.20]{CGCStation.png}}
- 		\caption{CGC Station Dynamic Control Model}
-  		\label{fig:normal}
+         \centerline{\includegraphics[scale=0.20]{CGCStation.png}}
+         \caption{CGC Station Dynamic Control Model}
+          \label{fig:normal}
     \end{figure}
 
     \begin{figure}[H]
- 		\centerline{\includegraphics[scale=0.18]{CarNormalMode.png}}
- 		\caption{Car Normal Mode Dynamic Control Model}
-  		\label{fig:normal}
+         \centerline{\includegraphics[scale=0.18]{CarNormalMode.png}}
+         \caption{Car Normal Mode Dynamic Control Model}
+          \label{fig:normal}
     \end{figure}
 
     \begin{figure}[H]
- 		\centerline{\includegraphics[scale=0.25]{CarEmergencyMode.png}}
- 		\caption{Car Emergency Mode Dynamic Control Model}
-  		\label{fig:normal}
+         \centerline{\includegraphics[scale=0.25]{CarEmergencyMode.png}}
+         \caption{Car Emergency Mode Dynamic Control Model}
+          \label{fig:normal}
     \end{figure}
 
     \begin{figure}[H]
- 		\centerline{\includegraphics[scale=0.25]{GPSServer.png}}
- 		\caption{GPS Server Dynamic Control Model}
-  		\label{fig:normal}
+         \centerline{\includegraphics[scale=0.25]{GPSServer.png}}
+         \caption{GPS Server Dynamic Control Model}
+          \label{fig:normal}
     \end{figure}
 
     \begin{figure}[H]
- 		\centerline{\includegraphics[scale=0.30]{GlobalAlarmSystem.png}}
- 		\caption{Global Alarm System Dynamic Control Model}
-  		\label{fig:normal}
+         \centerline{\includegraphics[scale=0.30]{GlobalAlarmSystem.png}}
+         \caption{Global Alarm System Dynamic Control Model}
+          \label{fig:normal}
     \end{figure}
 
     \begin{figure}[H]
- 		\centerline{\includegraphics[scale=0.17]{CameraNetwork.png}}
- 		\caption{Camera Network System Dynamic Control Model}
-  		\label{fig:normal}
+         \centerline{\includegraphics[scale=0.17]{CameraNetwork.png}}
+         \caption{Camera Network System Dynamic Control Model}
+          \label{fig:normal}
     \end{figure}
 
     \begin{figure}[H]
- 		\centerline{\includegraphics[scale=0.25]{ElectricFence.png}}
- 		\caption{Electric Fence Dynamic Control Model}
-  		\label{fig:normal}
+         \centerline{\includegraphics[scale=0.25]{ElectricFence.png}}
+         \caption{Electric Fence Dynamic Control Model}
+          \label{fig:normal}
     \end{figure}
 
     \begin{figure}[H]
- 		\centerline{\includegraphics[scale=0.25]{T-RexMonitor.png}}
- 		\caption{T-Rex Monitor Dynamic Control Model}
-  		\label{fig:normal}
+         \centerline{\includegraphics[scale=0.25]{T-RexMonitor.png}}
+         \caption{T-Rex Monitor Dynamic Control Model}
+          \label{fig:normal}
     \end{figure}
 
 \section{Design Constraints} \label{cons} %
 % error handling, exceptions, hazards, 
 \paragraph{} \textit{There are quite a bit of constraints\footnote{Design Constraints by Anas Gauba} that the CGC must address in order to successfully function.}
 
-	\subsection{Client}
-	\begin{itemize}
-		\item The visitors must arrive and purchase tokens from the pay kiosks on the south-end of the island. 
+    \subsection{Client}
+    \begin{itemize}
+        \item The visitors must arrive and purchase tokens from the pay kiosks on the south-end of the island. 
         \item The visitors must get a token which acts as a GPS device as well as RFID key to easily access the perks. 
         \item There must only be one token per visitor.
-	\end{itemize}
+    \end{itemize}
 
-	\subsection{Safety}
-	\begin{itemize}
-		\item There must be an emergency mode in the event of the enclosure failure.
-		\item The vehicles must alert and instruct visitors in the event of an emergency.
-		\item The alarm system must be audible on both the north and south ends.
-		\item The vehicles must facilitate evacuation in the event of an emergency.
-		\item There must be a surplus of vehicles on either end of the island at all times.
-		\item The tokens must provide additional evacuation information such as visitor's location.
-		\item The cars must maintain safe speeds at all times.
-		\item The cars must lock the doors before moving to its destination.
-	\end{itemize}
+    \subsection{Safety}
+    \begin{itemize}
+        \item There must be an emergency mode in the event of the enclosure failure.
+        \item The vehicles must alert and instruct visitors in the event of an emergency.
+        \item The alarm system must be audible on both the north and south ends.
+        \item The vehicles must facilitate evacuation in the event of an emergency.
+        \item There must be a surplus of vehicles on either end of the island at all times.
+        \item The tokens must provide additional evacuation information such as visitor's location.
+        \item The cars must maintain safe speeds at all times.
+        \item The cars must lock the doors before moving to its destination.
+    \end{itemize}
 
-	\subsection{Regulations}
-	\begin{itemize}
-		\item The vehicles should accomodate up to ten visitors (excluding the emegency scenario).
-		\item The vehicles must alert visitors once their alotted time is up. 
-	\end{itemize}
+    \subsection{Regulations}
+    \begin{itemize}
+        \item The vehicles should accommodate up to ten visitors (excluding the emergency scenario).
+        \item The vehicles must alert visitors once their allotted time is up. 
+    \end{itemize}
 
-	\subsection{Security}
-	\begin{itemize}
-		\item The T-Rex location is critical and it must be known at all times.
-		\item The camera network stream must be available around the island at all times.
-		\item The employee must directly monitor the health of all the devices, especially the ones which can cause harm to the visitors, such as, T-Rex and Electric Fence. 
-	\end{itemize}
+    \subsection{Security}
+    \begin{itemize}
+        \item The T-Rex location is critical and it must be known at all times.
+        \item The camera network stream must be available around the island at all times.
+        \item The employee must directly monitor the health of all the devices, especially the ones which can cause harm to the visitors, such as, T-Rex and Electric Fence. 
+    \end{itemize}
 
 \section{Sample Use Cases}
-\paragraph{} \textit{intro saying categorized by actor with diagrams blah blah blah these uses are just samples}
+\paragraph{} \textit{The CGC lends itself for a substantial amount of uses. Some notable uses include financial,
+official, managerial, medical, and technical connotations.}
 
 %%%%%% Anas %%%%%
 %    \subsection{Bookkeeper}
@@ -1718,38 +1712,38 @@
 
 
 
-\section{Definition of Terms} \label{defs} %Anas
-	\paragraph{} \textit{The following is a list of definitions \footnote{Definition of 
-	Terms by Anas Gauba} of the most commonly used technical terms within this 
-	document, whose meaning may not be immediately apparent to the lay reader. Most 
-	definitions come from no specific source; instead they are defined by the authors 
-	in the context of their use in this document and originate from the vocabulary 
-	shared across the general references cited \nocite{*}. In the event that a 
-	definition was taken directly from a source, it is followed by a citation}
-	
-	\begin{list}{}{}
-	    \item \textbf{CGC:} Acronym for Cretaceous Gardens Controller 
-	    \item \textbf{DVR:} Acronym for Digital Video Recorder
-	    \item \textbf{Electrical Conduction:} The movement of electrically charged     
-	        particles through a transmission medium.
-	    \item \textbf{GPS:} Global Positioning System 
-	    \item \textbf{Hardwired Ethernet:} This references the latest IEEE standard for 
-	        Ethernet utilizing physical cables.
-	    \item \textbf{Network:} All nodes with which the CGC interacts, the links that 
-	        connect them to each other and to the
-	        CGC, the CGC itself, and all related databases.
-	    \item \textbf{Node:} The generic term that refers to any device connected to 
-	        the CGC in any way. This includes 
-	        autonomous vehicles, tokens, the T.Rex monitor, all electric fence panels, 
-	        all kiosks, and all cameras.
-	    \item \textbf{Safely Inactive:} A state in which a vehicle is fully functional 
-	        and ready to be dispatched.
-	    \item \textbf{Safely Occupied:} A state in which a vehicle contains at least 
-	        one person, is locked, and is ready to depart.
-	    \item \textbf{Token:} An interactive device used by the visitor that grants 
-	        access to locations.
-	\end{list}
+\section{Definition of Terms} \label{defs}
+    \paragraph{} \textit{The following is a list of definitions \footnote{Definition of 
+    Terms by Anas Gauba} of the most commonly used technical terms within this 
+    document, whose meaning may not be immediately apparent to the lay reader. Most 
+    definitions come from no specific source; instead they are defined by the authors 
+    in the context of their use in this document and originate from the vocabulary 
+    shared across the general references cited \nocite{*}. In the event that a 
+    definition was taken directly from a source, it is followed by a citation}
+    
+    \begin{list}{}{}
+        \item \textbf{CGC:} Acronym for Cretaceous Gardens Controller 
+        \item \textbf{DVR:} Acronym for Digital Video Recorder
+        \item \textbf{Electrical Conduction:} The movement of electrically charged     
+            particles through a transmission medium.
+        \item \textbf{GPS:} Global Positioning System 
+        \item \textbf{Hardwired Ethernet:} This references the latest IEEE standard for 
+            Ethernet utilizing physical cables.
+        \item \textbf{Network:} All nodes with which the CGC interacts, the links that 
+            connect them to each other and to the
+            CGC, the CGC itself, and all related databases.
+        \item \textbf{Node:} The generic term that refers to any device connected to 
+            the CGC in any way. This includes 
+            autonomous vehicles, tokens, the T.Rex monitor, all electric fence panels, 
+            all kiosks, and all cameras.
+        \item \textbf{Safely Inactive:} A state in which a vehicle is fully functional 
+            and ready to be dispatched.
+        \item \textbf{Safely Occupied:} A state in which a vehicle contains at least 
+            one person, is locked, and is ready to depart.
+        \item \textbf{Token:} An interactive device used by the visitor that grants 
+            access to locations.
+    \end{list}
 \pagebreak
-\bibliography{../../ReferenceMaterial/BibTeX/references} % Zeke
+\bibliography{../../ReferenceMaterial/BibTeX/references}
 % run latex, then bibtex, then quickbuild (on the tex file)
 \end{document}

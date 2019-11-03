@@ -16,14 +16,14 @@
 \definecolor{DarkBlue}{HTML}{4a5a8a} 
 \definecolor{LightBlue}{HTML}{4f81bf}
 \begin{titlepage}
-	\begin{flushleft}
-		\vspace{1cm} \Huge  \textbf{Cretaceous Gardens Controller}\\
-		\vspace{1cm} \Huge  \textit{Technical Feasibility Study}\\
-		\vspace{1cm} \Large \textit{TFS Version 1.0}\\
-		\vspace{5cm} \LARGE         Team \#3\\ 
-		                            15 October 2019
-		\vfill       \Huge  \textbf{CS 460 Software Engineering}
-	\end{flushleft}
+    \begin{flushleft}
+        \vspace{1cm} \Huge  \textbf{Cretaceous Gardens Controller}\\
+        \vspace{1cm} \Huge  \textit{Technical Feasibility Study}\\
+        \vspace{1cm} \Large \textit{TFS Version 1.0}\\
+        \vspace{5cm} \LARGE         Team \#3\\ 
+                                    15 October 2019
+        \vfill       \Huge  \textbf{CS 460 Software Engineering}
+    \end{flushleft}
 \end{titlepage}
 \normalsize 
 \tableofcontents
@@ -55,128 +55,128 @@ the developers of the system.
 \section{Logistic Implications}
 \paragraph{} This section is an attempt to clarify the constraints provided by Cretaceous garden's owner.
 
-	\subsection{Given Constraints}
-	\paragraph{} Constraints provided by CG are presented as a foundation on which to build. It should be 
-	noted that it is not necessarily complete, as more may be provided in the near future. It is as likely 
-	that some may be deemed unnecessary if another constraint is found to subsume them. Questions pertaining 
-	to a given constraint are shown parenthetically.
-	\begin{itemize}
-		\item Visitors will arrive by port on the \textit{south side} of the island.
-		\\(At what rate?)
-		\item The main attraction will be located on the north side of the island. 
-		\\(Are there multiple routes?)
-		\item The main attraction will be a \textit{Tyrannosaurus Rex} within a massive electric fence enclosure. 
-		\\(Can it be monitored on a per-panel basis?)
-		\item An automatic payment kiosk will provide a unique token \textit{or} ticket to each visitor. 
-		\\(What if the item is damaged or lost?)
-		\item The token \textit{or} ticket will grant vehicle access \textit{and} exhibit viewing access.
-		\item Self-driving car(s) are to stop at the \textit{south end} in order to drive \textit{at most} 10 people. 
-		\\(How many cars at a time?)
-		\item All cars are to lock securely \textit{before} transporting visitors to the north-end.
-		\item All cars are to unlock \textit{after} arriving at the exhibit.
-		\item All cars are to alert visitors when their allotted time to be at the exhibit has run out. 
-		\\(Will this alert be different than an emergency alert?)
-		\\(What should happen if a visitor ignores the "time-up" alert?)
-		\\(Who or what will enforce this?)
-		\item The vehicle is not to leave until all visitors are inside the vehicle. 
-		\\(Even during an emergency?)
-		\item The positions of all cars are to be accounted for at all times. 
-		\\(To what precision?)
-		\item There will be \textit{at least} one video camera. 
-		\\(Will it be closed circuit?) 
-		\\(What kind of camera?)
-		\item Doors are to lock securely with all guests inside \textbf{before} returning the \textit{south end}.
-		\item There is to be a \textit{very strict} protocol in the event of an enclosure failure.
-		\item The emergency alarm is to sound at both ends of the island.
-		\item The system is to be responsible for the quick transport of all visitors to the south end in the event of such an emergency.
-		\\(What should be done if casualties occur?)
-		\\(Should an optional manual driving mode be made available to willing visitors in such an emergency?)
-		\\(What should happen in the event of path obstructions?)
-		\\(How resilient will the vehicles be in the local terrain?) 
-	\end{itemize}
-	\subsection{Additional Constraints}
-	\paragraph{} \textit{subsection introduction}
-	\paragraph{General}
-	\begin{itemize}
-		\item[] All nodes within the network must also be manually accessible.
-		\item[] The CGC can only return to \textit{normal} mode (from \textit{emergency} mode) via human intervention.
-		\item[] If names, emergency contacts, and waiver information is collected, the CGC must have access to it.
-		\item[] Any backup power sources must also be available to the CGC.
-	\end{itemize}
-	
-	\paragraph{Surveillance}
-	\begin{itemize}
-		\item[] All camera feeds must be accessible through the CGC.
-		\item[] All components must be \textit{hot-swappable}.
-		\item[] All uplinks must feature sufficient redundancy. 
-	\end{itemize}
-	
-	\paragraph{Payment}
-	\begin{itemize}
-		\item[] All tickets \textit{or} tokens must be unique.
-		\item[] Credit, debit or cash must be accepted at every kiosk.
-		\item[] The CGC must have access to the status of every kiosk.
-		\item[] All kiosks must have a \textit{normal} mode and \textit{maintenance} mode of operation.
-	\end{itemize}
-	
-	\paragraph{Cars}
-	\begin{itemize}
-		\item[] The total number of active \textit{and} inactive cars must be known at all times.
-		\item[] Must have a \textit{normal} mode and an \textit{emergency} mode of operation.
-		\item[] Must make use of a Global Positioning System (GPS).
-		\item[] Must feature a loud speaker.
-		\item[] All cars must have unique identifiers.
-		\item[] All cars must feature an RFID reader.
-		\item[] All cars must feature an intercom system to communicate with staff.
-		\item[] All cars must maintain a record of their current passengers.
-		\item[] Some fraction of all cars will always patrol the island.
-		\item[] Some fraction of all cars will serve as surplus on either end of the island in case of emergency.
-		\item[] All cars may ignore passenger assignments so as to accept any passengers during an emergency.
-		\item[] All available cars are to be dispatched to the north end during an emergency.
-		\item[] There must be a protocol to handle the breaking down of any vehicle in use.
-	\end{itemize}
-	
-	\paragraph{Enclosure}
-	\begin{itemize}
-		\item[] Emergency mode must be activated upon failure.
-		\item[] There must be a maintenance mode or status for the enclosure.
-		\item[] The status of every enclosure panel must be available to the CGC. 
-	\end{itemize}
-	
-	\paragraph{Alarms}
-	\begin{itemize}
-		\item[] The alarm must be audible \textit{everywhere} on the island.
-		\item[] The alarm sound must be distinct from any other sounds.
-	\end{itemize}
+    \subsection{Given Constraints}
+    \paragraph{} Constraints provided by CG are presented as a foundation on which to build. It should be 
+    noted that it is not necessarily complete, as more may be provided in the near future. It is as likely 
+    that some may be deemed unnecessary if another constraint is found to subsume them. Questions pertaining 
+    to a given constraint are shown parenthetically.
+    \begin{itemize}
+        \item Visitors will arrive by port on the \textit{south side} of the island.
+        \\(At what rate?)
+        \item The main attraction will be located on the north side of the island. 
+        \\(Are there multiple routes?)
+        \item The main attraction will be a \textit{Tyrannosaurus Rex} within a massive electric fence enclosure. 
+        \\(Can it be monitored on a per-panel basis?)
+        \item An automatic payment kiosk will provide a unique token \textit{or} ticket to each visitor. 
+        \\(What if the item is damaged or lost?)
+        \item The token \textit{or} ticket will grant vehicle access \textit{and} exhibit viewing access.
+        \item Self-driving car(s) are to stop at the \textit{south end} in order to drive \textit{at most} 10 people. 
+        \\(How many cars at a time?)
+        \item All cars are to lock securely \textit{before} transporting visitors to the north-end.
+        \item All cars are to unlock \textit{after} arriving at the exhibit.
+        \item All cars are to alert visitors when their allotted time to be at the exhibit has run out. 
+        \\(Will this alert be different than an emergency alert?)
+        \\(What should happen if a visitor ignores the "time-up" alert?)
+        \\(Who or what will enforce this?)
+        \item The vehicle is not to leave until all visitors are inside the vehicle. 
+        \\(Even during an emergency?)
+        \item The positions of all cars are to be accounted for at all times. 
+        \\(To what precision?)
+        \item There will be \textit{at least} one video camera. 
+        \\(Will it be closed circuit?) 
+        \\(What kind of camera?)
+        \item Doors are to lock securely with all guests inside \textbf{before} returning the \textit{south end}.
+        \item There is to be a \textit{very strict} protocol in the event of an enclosure failure.
+        \item The emergency alarm is to sound at both ends of the island.
+        \item The system is to be responsible for the quick transport of all visitors to the south end in the event of such an emergency.
+        \\(What should be done if casualties occur?)
+        \\(Should an optional manual driving mode be made available to willing visitors in such an emergency?)
+        \\(What should happen in the event of path obstructions?)
+        \\(How resilient will the vehicles be in the local terrain?) 
+    \end{itemize}
+    \subsection{Additional Constraints}
+    \paragraph{} \textit{subsection introduction}
+    \paragraph{General}
+    \begin{itemize}
+        \item[] All nodes within the network must also be manually accessible.
+        \item[] The CGC can only return to \textit{normal} mode (from \textit{emergency} mode) via human intervention.
+        \item[] If names, emergency contacts, and waiver information is collected, the CGC must have access to it.
+        \item[] Any backup power sources must also be available to the CGC.
+    \end{itemize}
+    
+    \paragraph{Surveillance}
+    \begin{itemize}
+        \item[] All camera feeds must be accessible through the CGC.
+        \item[] All components must be \textit{hot-swappable}.
+        \item[] All uplinks must feature sufficient redundancy. 
+    \end{itemize}
+    
+    \paragraph{Payment}
+    \begin{itemize}
+        \item[] All tickets \textit{or} tokens must be unique.
+        \item[] Credit, debit or cash must be accepted at every kiosk.
+        \item[] The CGC must have access to the status of every kiosk.
+        \item[] All kiosks must have a \textit{normal} mode and \textit{maintenance} mode of operation.
+    \end{itemize}
+    
+    \paragraph{Cars}
+    \begin{itemize}
+        \item[] The total number of active \textit{and} inactive cars must be known at all times.
+        \item[] Must have a \textit{normal} mode and an \textit{emergency} mode of operation.
+        \item[] Must make use of a Global Positioning System (GPS).
+        \item[] Must feature a loud speaker.
+        \item[] All cars must have unique identifiers.
+        \item[] All cars must feature an RFID reader.
+        \item[] All cars must feature an intercom system to communicate with staff.
+        \item[] All cars must maintain a record of their current passengers.
+        \item[] Some fraction of all cars will always patrol the island.
+        \item[] Some fraction of all cars will serve as surplus on either end of the island in case of emergency.
+        \item[] All cars may ignore passenger assignments so as to accept any passengers during an emergency.
+        \item[] All available cars are to be dispatched to the north end during an emergency.
+        \item[] There must be a protocol to handle the breaking down of any vehicle in use.
+    \end{itemize}
+    
+    \paragraph{Enclosure}
+    \begin{itemize}
+        \item[] Emergency mode must be activated upon failure.
+        \item[] There must be a maintenance mode or status for the enclosure.
+        \item[] The status of every enclosure panel must be available to the CGC. 
+    \end{itemize}
+    
+    \paragraph{Alarms}
+    \begin{itemize}
+        \item[] The alarm must be audible \textit{everywhere} on the island.
+        \item[] The alarm sound must be distinct from any other sounds.
+    \end{itemize}
             
 \section{Findings}
 \paragraph{} \textit{section introduction}
-	\subsection{General}
-	\paragraph{} The general findings for this system are somewhat straight-forward. 
-	In order to be feasible, this system needs a working camera network. This Cretaceous
-	Gardens Controller (CGC) will manage all the cameras. There will also be self paying 
-	kiosk which will present tokens/tickets that are unique to each customer. These unique 
-	ID will act as a key and a locator(GPS) for each user. The kiosk's main functionality 
-	will be to give tickets to the user, accept credit/debit card or cash as the payment 
-	option from the user. In addition to that, it is also feasible that the user should 
-	fill out the form with their names, emergency contact and a waiver so that the CGC 
-	can easily manage people's records. 
+    \subsection{General}
+    \paragraph{} The general findings for this system are somewhat straight-forward. 
+    In order to be feasible, this system needs a working camera network. This Cretaceous
+    Gardens Controller (CGC) will manage all the cameras. There will also be self paying 
+    kiosk which will present tokens/tickets that are unique to each customer. These unique 
+    ID will act as a key and a locator(GPS) for each user. The kiosk's main functionality 
+    will be to give tickets to the user, accept credit/debit card or cash as the payment 
+    option from the user. In addition to that, it is also feasible that the user should 
+    fill out the form with their names, emergency contact and a waiver so that the CGC 
+    can easily manage people's records. 
 
-	\paragraph{} When we talk about each user getting an ID, another benefit of getting an 
-	ID is that the customers unlock the perk of having a self-driving car at their disposal. 
-	It is important to note here that the self-driving cars are contracted out. There are 
-	several features which a basic self-driving car has these days. These main features 
-	include: having a GPS device so that it can transfer customers from one place to another, 
-	have basic speakers and door sensors for customer's safety, and have an access to camera 
-	so that it can drive autonomously. In addition to that, to make it feasible to this project,
-	the self-driving car must have a unique car ID for the CGC to easily locate. The self-driving 
-	car must have a RFID reader so that it can let the customers in the car. The self-driving car 
-	must be able to switch modes such as normal mode and emergency mode. The self-driving car must
-	 have a call button to talk with the \textit{Control Station}.
-	
-	\subsection{Safety}
-	\paragraph{} \textit{subsection introduction}
-	\paragraph{} In terms of safety findings for the Cretaceous Gardens Control System (CGCS), the Electric Fence status needs to be available for customers safety. When the
+    \paragraph{} When we talk about each user getting an ID, another benefit of getting an 
+    ID is that the customers unlock the perk of having a self-driving car at their disposal. 
+    It is important to note here that the self-driving cars are contracted out. There are 
+    several features which a basic self-driving car has these days. These main features 
+    include: having a GPS device so that it can transfer customers from one place to another, 
+    have basic speakers and door sensors for customer's safety, and have an access to camera 
+    so that it can drive autonomously. In addition to that, to make it feasible to this project,
+    the self-driving car must have a unique car ID for the CGC to easily locate. The self-driving 
+    car must have a RFID reader so that it can let the customers in the car. The self-driving car 
+    must be able to switch modes such as normal mode and emergency mode. The self-driving car must
+     have a call button to talk with the \textit{Control Station}.
+    
+    \subsection{Safety}
+    \paragraph{} \textit{subsection introduction}
+    \paragraph{} In terms of safety findings for the Cretaceous Gardens Control System (CGCS), the Electric Fence status needs to be available for customers safety. When the
 electric fence fails, the Emergency mode must be activated to ensure customers safety. When it comes to self-driving cars, they will also have some safety
 features. These safety features are: making sure the door locks securely before it begins to drive. The self-driving cars should know what visitors they are
 carrying to the T-Rex pit by scanning their tokens first, and then letting the visitors in. One more important safety check is that the self-driving cars
@@ -184,62 +184,62 @@ should only leave once all the assigned visitors are in the car. Once, the visit
 back to the south-end. Last but not least, there will be dedicated patrol cars used by employees to go back and forth from south to north end and making 
 sure that everything is safe.  
 
-	\subsection{Emergency}
-	\paragraph{} \textit{subsection introduction}
-	\paragraph{} When it comes to emergency for the CGC, the CGC will go in Emergency Mode when either the electric fence goes off or whenever the maintenance personnel 
+    \subsection{Emergency}
+    \paragraph{} \textit{subsection introduction}
+    \paragraph{} When it comes to emergency for the CGC, the CGC will go in Emergency Mode when either the electric fence goes off or whenever the maintenance personnel 
 tests the system and the alarm goes off. In the case of emergency, the alarms will be triggered everywhere. In the case of an emergency, there will be X
 amount of self-driving cars always be located at the north-side. The self-driving cars will not follow any protocol in the case of an emergency and will 
 accept any passengers and carry the passengers without the requirement of whether the vehicle has all the passengers or not. All the cars on the south end 
 who are not driving any passengers will be relocated to north end to ensure that all the visitors are safely carried back to south end without any 
 major damage. Note here that during the emergency mode, if the fence comes back up, the emergency mode will not exit until manually triggered by a
 human employee.
-	
-	\subsection{Maintenance}
-	\paragraph{} \textit{The maintainability of this system is extremely important. 
-	It is critical that every device that communicates through the system are maintained 
-	and in peak performance at all times. Well maintained equipment will fail less. Due to 
-	the intense need for safety we can not cut corners for the CGC and need for a system 
-	that identifies the need for maintenance efficiently is critical. This project can 
-	be technically feasible. The maintenance system will monitor and respond to all cars, 
-	the electric fence, the camera network, the kiosks and tokens.}
-	
-	\begin{table}[H]
-		\begin{tabular}{lp{10cm}}
-		\textbf{Cars} & The autonomous vehicle is a unique piece of equipment. It is fully 
-		aware of the sensors and parts that it controls. We will leave it up to the 
-		company that we contract out to build cars that can identify when they need 
-		maintenance. We will work with the vehicle manufacturers to make sure the cars 
-		follow specific maintenance protocols. We will build protocols that address how 
-		a car behaves if it needs maintenance while with passengers out on the island but 
-		can still drive, or if it is more serious and the car can not drive.\\
-		\textbf{Fence} & The fence is the most critical piece. we want to avoid the fence going down at all times.
-    	the fence will have redundant power coming in preferable there should be 4 redundant power uplinks. 
-    	if one goes down the fence will stay up without a hiccup. The redundant links should allow for 
-    	maintenance without disturbing the fence.\\
-		\textbf{Camera Systems} & The camera system will have cameras that are how swappable for ease maintenace. the network links will be redundent as Well.
-     	They will report when they are down so they can be maintained\\
-		\textbf{Tokens} & Since this will act as a locator device for the visitors 
-		it is critical to their safety. these may need to be replaced and upgraded periodically\\
-		\textbf{Kiosks} & these should notify the control station of need for maintanance or have a manual override to turn on maintenance mode\\
-		\textbf{CGC} & The main system should be able to test all other systems. When the CGC is 
-		put into maintenance mode it should be able to trigger a simulated fence down to see how 
-		the system will respond this will be done periodically to help isolate problems while 
-		there is not an emergency in progress.\\		
-		\end{tabular}
-	\end{table}
-	\paragraph{} \textit{body paragraph}
+    
+    \subsection{Maintenance}
+    \paragraph{} \textit{The maintainability of this system is extremely important. 
+    It is critical that every device that communicates through the system are maintained 
+    and in peak performance at all times. Well maintained equipment will fail less. Due to 
+    the intense need for safety we can not cut corners for the CGC and need for a system 
+    that identifies the need for maintenance efficiently is critical. This project can 
+    be technically feasible. The maintenance system will monitor and respond to all cars, 
+    the electric fence, the camera network, the kiosks and tokens.}
+    
+    \begin{table}[H]
+        \begin{tabular}{lp{10cm}}
+        \textbf{Cars} & The autonomous vehicle is a unique piece of equipment. It is fully 
+        aware of the sensors and parts that it controls. We will leave it up to the 
+        company that we contract out to build cars that can identify when they need 
+        maintenance. We will work with the vehicle manufacturers to make sure the cars 
+        follow specific maintenance protocols. We will build protocols that address how 
+        a car behaves if it needs maintenance while with passengers out on the island but 
+        can still drive, or if it is more serious and the car can not drive.\\
+        \textbf{Fence} & The fence is the most critical piece. we want to avoid the fence going down at all times.
+        the fence will have redundant power coming in preferable there should be 4 redundant power uplinks. 
+        if one goes down the fence will stay up without a hiccup. The redundant links should allow for 
+        maintenance without disturbing the fence.\\
+        \textbf{Camera Systems} & The camera system will have cameras that are how swappable for ease maintenace. the network links will be redundent as Well.
+         They will report when they are down so they can be maintained\\
+        \textbf{Tokens} & Since this will act as a locator device for the visitors 
+        it is critical to their safety. these may need to be replaced and upgraded periodically\\
+        \textbf{Kiosks} & these should notify the control station of need for maintanance or have a manual override to turn on maintenance mode\\
+        \textbf{CGC} & The main system should be able to test all other systems. When the CGC is 
+        put into maintenance mode it should be able to trigger a simulated fence down to see how 
+        the system will respond this will be done periodically to help isolate problems while 
+        there is not an emergency in progress.\\        
+        \end{tabular}
+    \end{table}
+    \paragraph{} \textit{body paragraph}
 
-	\subsection{Cars}
-	\paragraph{} The autonomous vehicle is a unique piece of equipment. It is fully 
-	aware of the sensors and parts that it controls. We will leave it up to the 
-	company that we contract out to build cars that can identify when they need 
-	maintenance. We will work with the vehicle manufacturers to make sure the cars 
-	follow specific maintenance protocols. We will build protocols that address how 
-	a car behaves if it needs maintenance while with passengers out on the island but 
-	can still drive, or if it is more serious and the car can not drive.
-	
-	\paragraph{} \textit{body paragraph}
-	
+    \subsection{Cars}
+    \paragraph{} The autonomous vehicle is a unique piece of equipment. It is fully 
+    aware of the sensors and parts that it controls. We will leave it up to the 
+    company that we contract out to build cars that can identify when they need 
+    maintenance. We will work with the vehicle manufacturers to make sure the cars 
+    follow specific maintenance protocols. We will build protocols that address how 
+    a car behaves if it needs maintenance while with passengers out on the island but 
+    can still drive, or if it is more serious and the car can not drive.
+    
+    \paragraph{} \textit{body paragraph}
+    
 \section{Conclusions}
 \paragraph{} \textit{section introduction} 
 \paragraph{} \textit{body paragraph}
