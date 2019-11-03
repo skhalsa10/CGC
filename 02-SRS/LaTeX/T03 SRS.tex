@@ -790,7 +790,7 @@ official, managerial, medical, and technical connotations.}
 %                \item[] ...
 %            \end{itemize}
 %    \end{itemize}
-%
+
 %    \par\noindent\rule{\textwidth}{0.4pt}    
 %    \begin{itemize} %Evacuate
 %        \item[]\textbf{Use Case:}                                
@@ -860,73 +860,78 @@ official, managerial, medical, and technical connotations.}
 %    % another use case
 %    
 %    % ...
-%    
-%    \subsection{Guest Vehicle}
-%    \textit{brief description of actor}
-%    \par\noindent\rule{\textwidth}{0.4pt}    
-%    \begin{itemize} %ShuttleGuestsToExhibit
-%        \item[]\textbf{Use Case:}                                
-%            *DoSomething (the name of the action to be executed by actor)*
-%
-%        \item[]\textbf{Primary Actor:}
-%            *ThatWhichWishesToDoSomething (name of actor)*
-%
-%        \item[]\textbf{Goal in Context:}
-%            *that which is to be accomplished by the action*
-%
-%        \item[]\textbf{Preconditions:}
-%            *states of the actor and system prior to the action*
-%
-%        \item[]\textbf{Trigger:}
-%            *that which initiates the action (e.g. actor breaks out of enclosure)*
-%
-%        \item[]\textbf{Scenario:}
-%            *sequence of actions from trigger to goal*
-%            \begin{enumerate}
-%                \item first event
-%                \item second event
-%                \item ...
-%            \end{enumerate}
-%
-%        \item[]\textbf{Exceptions:}
-%            *edge cases, potential hazards, errors, etc*
-%            \begin{itemize}
-%                \item[] some exception
-%                \item[] some other exception                
-%                \item[] ...
-%            \end{itemize}
-%
-%        \item[]\textbf{Priority:}
-%            *level of implementation importance (e.g. correct change is a must)*
-%
-%        \item[]\textbf{When Available:}
-%            *when or during which interval of time the action is to supported by the system*
-%
-%        \item[]\textbf{Frequency of Use:}
-%            *number of uses per unit of time (e.g. annually, billions per second, etc)*
-%
-%        \item[]\textbf{Channel to Primary Actor:}
-%            *means through which the system interacts with actor*
-%
-%        \item[]\textbf{Channels to Secondary Actors:}
-%            *means through which the primary and secondary actors interact*
-%            \begin{itemize}
-%                \item[] some channel
-%                \item[] some other channel
-%                \item[] ...
-%            \end{itemize}
-%        \item[]\textbf{Secondary Actors:}
-%            *intermediary or auxillary actors required to complete the goal*
-%
-%        \item[]\textbf{Open Issues:}
-%            *itemization of current problems with any of the above*
-%            \begin{itemize}
-%                \item[] some issue
-%                \item[] some other issue
-%                \item[] ...
-%            \end{itemize}
-%    \end{itemize}
-%
+    
+    \subsection{Guest Vehicle}
+    \textit{The guest vehicle (GV) plays a vital role in facilitating the guest experience. The actor primarily
+    moves guests to and from the exhibit, but may exhibit other functions when the system is in maintenance or
+    emergency mode.}
+    \par\noindent\rule{\textwidth}{0.4pt}    
+    \begin{itemize}
+        \item[]\textbf{Use Case:}                                
+            ShuttleGuestsToExhibit
+
+        \item[]\textbf{Primary Actor:}
+            Guest Vehicle
+
+        \item[]\textbf{Goal in Context:}
+            To transport guests to the northern part of the island so they may 
+            visit the exhibit.
+
+        \item[]\textbf{Preconditions:}
+            The system is in normal mode and all components are functioning properly.
+
+        \item[]\textbf{Trigger:}
+            A transaction is confirmed and a tokens are provided to guests.
+
+        \item[]\textbf{Scenario:}
+            \begin{enumerate}
+                \item The guests are directed to the parked GV.
+                \item The guests enter the GV.
+                \item The GV instructs guests to enter their token devices into their belt buckles.
+                \item The GV detects all token-containing buckles have been used to fasten corresponding seatbelts.
+                \item The GV locks its doors and unlocks window functionality for guests.
+                \item The GV performs a quick system check.
+                \item The GV heads toward the exhibit.
+                \item The GV arrives and parks in front of a gate that leads to the exhibit.
+                \item The GV reminds the guests to take their tokens with them as it grants them access through the gate.
+                \item The guests exit the vehicle and make their way toward the gate.
+                \item The GV parks itself nearby and starts a timer.
+            \end{enumerate}
+
+        \item[]\textbf{Exceptions:}
+            \begin{itemize}
+                \item[] A guest loses his or her token device, thus preventing seatbelt access, which necessitates
+                staff intervention.
+            \end{itemize}
+
+        \item[]\textbf{Priority:}
+            Essential, must be implemented.
+
+        \item[]\textbf{When Available:}
+            On Demand.
+
+        \item[]\textbf{Frequency of Use:}
+            Up to thousands of times per day.
+            
+        \item[]\textbf{Channel to Primary Actor:}
+            Direct.
+
+        \item[]\textbf{Secondary Actors:}
+            Guests, CGC Station Operator, Tokens
+            
+        \item[]\textbf{Channels to Secondary Actors:}
+            \begin{itemize}
+                \item[] Guests: doors, seatbelts, speakers
+                \item[] CGC Station Operator: direct
+                \item[] Tokens: seatbelt buckles
+            \end{itemize}
+
+        \item[]\textbf{Open Issues:}
+            \begin{itemize}
+                \item[] None known.
+            \end{itemize}
+    \end{itemize}
+
     \par\noindent\rule{\textwidth}{0.4pt}    
     \begin{itemize}
         \item[]\textbf{Use Case:}                                
@@ -1062,7 +1067,6 @@ official, managerial, medical, and technical connotations.}
             CGC Station Operator, Camera Network
             
         \item[]\textbf{Channels to Secondary Actors:}
-            *means through which the primary and secondary actors interact*
             \begin{itemize}
                 \item[] CGC Station Operator: Car Intercom
                 \item[] Camera Network: Camera
@@ -1428,7 +1432,7 @@ official, managerial, medical, and technical connotations.}
                     \item the actor relinquishes the desire to head
                     toward the target destination, no significant damage
                     is incurred, and the normal mode of operation continues.
-                    \end{enumerate} 
+                \end{enumerate} 
             \end{enumerate}
 
         \item[]\textbf{Exceptions:}
