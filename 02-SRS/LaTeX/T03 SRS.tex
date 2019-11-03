@@ -40,7 +40,6 @@ Section \ref{gen} gives an overview of the system. Section \ref{spec} delves int
 detail with subsections \ref{logic} and \ref{inter} that feature a more granular view 
 of the \textit{Control Logic} and the \textit{External Interfaces}. Section \ref{defs} 
 provides the definition of technical terms that will be commonly used.
-\pagebreak
 
 \section{General Description} \label{gen}
 \paragraph{}\textit{This section \footnote{General Description by Siri Khalsa} provides 
@@ -791,75 +790,87 @@ official, managerial, medical, and technical connotations.}
 %            \end{itemize}
 %    \end{itemize}
 
-%    \par\noindent\rule{\textwidth}{0.4pt}    
-%    \begin{itemize} %Evacuate
-%        \item[]\textbf{Use Case:}                                
-%            *DoSomething (the name of the action to be executed by actor)*
-%
-%        \item[]\textbf{Primary Actor:}
-%            *ThatWhichWishesToDoSomething (name of actor)*
-%
-%        \item[]\textbf{Goal in Context:}
-%            *that which is to be accomplished by the action*
-%
-%        \item[]\textbf{Preconditions:}
-%            *states of the actor and system prior to the action*
-%
-%        \item[]\textbf{Trigger:}
-%            *that which initiates the action (e.g. actor breaks out of enclosure)*
-%
-%        \item[]\textbf{Scenario:}
-%            *sequence of actions from trigger to goal*
-%            \begin{enumerate}
-%                \item first event
-%                \item second event
-%                \item ...
-%            \end{enumerate}
-%
-%        \item[]\textbf{Exceptions:}
-%            *edge cases, potential hazards, errors, etc*
-%            \begin{itemize}
-%                \item[] some exception
-%                \item[] some other exception                
-%                \item[] ...
-%            \end{itemize}
-%
-%        \item[]\textbf{Priority:}
-%            *level of implementation importance (e.g. correct change is a must)*
-%
-%        \item[]\textbf{When Available:}
-%            *when or during which interval of time the action is to supported by the system*
-%
-%        \item[]\textbf{Frequency of Use:}
-%            *number of uses per unit of time (e.g. annually, billions per second, etc)*
-%
-%        \item[]\textbf{Channel to Primary Actor:}
-%            *means through which the system interacts with actor*
-%
-%        \item[]\textbf{Channels to Secondary Actors:}
-%            *means through which the primary and secondary actors interact*
-%            \begin{itemize}
-%                \item[] some channel
-%                \item[] some other channel
-%                \item[] ...
-%            \end{itemize}
-%        \item[]\textbf{Secondary Actors:}
-%            *intermediary or auxillary actors required to complete the goal*
-%
-%        \item[]\textbf{Open Issues:}
-%            *itemization of current problems with any of the above*
-%            \begin{itemize}
-%                \item[] some issue
-%                \item[] some other issue
-%                \item[] ...
-%            \end{itemize}
-%    \end{itemize}
-%    
-%    % another use case
-%    
-%    % another use case
-%    
-%    % ...
+    \par\noindent\rule{\textwidth}{0.4pt}    
+    \begin{itemize}
+        \item[]\textbf{Use Case:}                                
+            Evacuate
+
+        \item[]\textbf{Primary Actor:}
+            Guest
+
+        \item[]\textbf{Goal in Context:}
+            To leave the island as quickly and as safely as possible.
+
+        \item[]\textbf{Preconditions:}
+            There exists some imminent threat to the guest (it may be an enclosure failure, inclement 
+            weather, or any other emergency of similar caliber). Sudden guest death (unrelated to the
+            island or system) may also be the case.
+
+        \item[]\textbf{Trigger:}
+            Something horrible occurs. For simplicity, the following scenario assumes the T.Rex destroys
+            its enclosure and is now on the loose.
+
+        \item[]\textbf{Scenario:}
+            \begin{enumerate}
+                \item The T.Rex destroys the enclosure (see subsection \ref{trexleave}).
+                \item Emergency mode is activated.
+                \item All guests are alerted via the car intercom, the token devices, and an
+                island wide speaker system, the Global Alarm System.
+                \item Guests receive instructions via the above means with interleaved reassurances
+                that extra vehicles are on the way to pick them up.
+                \item Guests are also informed that they may enter any vehicle, with or without tokens.
+                \item Once in the vehicle, guests are asked (via the token device) whether or not
+                they would like to depart.
+                \item If at least one individual submits a yes, the car transmits a message to indicate
+                imminent departure with a warning that doors will soon close.
+                \item Once in motion, the guest in the driver seat is offered the option to place the vehicle into
+                manual mode.
+                \item If the individual chooses to do so, then he or she may now pilot the vehicle as he or she wishes.
+                \item Otherwise, the car will head south as quickly and as safely as possible.
+                \item Once at the south end, the car will park and wait for guests to exit.
+                \item After it has been confirmed that no guests remain in the vehicle (seat weight sensors
+                indicate all seats are empty), the guests are given another warning to stand back.
+                \item As the guests head toward the exit, the car closes its doors and speeds north 
+                to collect more guests.
+            \end{enumerate}
+
+        \item[]\textbf{Exceptions:}
+            \begin{itemize}
+                \item[] The car suffers damage that causes it to malfunction.
+            \end{itemize}
+
+        \item[]\textbf{Priority:}
+            Essential, must be implemented.
+
+        \item[]\textbf{When Available:}
+            On demand.
+
+        \item[]\textbf{Frequency of Use:}
+            Hopefully never, but at least once in reality.
+
+        \item[]\textbf{Channel to Primary Actor:}
+            Car doors, tokens, interior car components (if manual mode is enabled)
+            
+        \item[]\textbf{Channels to Secondary Actors:}
+            \begin{itemize}
+                \item[] T.Rex: breached enclosure
+                \item[] Token: device display and speaker
+                \item[] Emergency Personnel: directly at any stage during the evacuation.
+            \end{itemize}
+        \item[]\textbf{Secondary Actors:}
+            T.Rex, Tokens, Emergency Personnel
+
+        \item[]\textbf{Open Issues:}
+            \begin{itemize}
+                \item[] None known.
+            \end{itemize}
+    \end{itemize}
+    
+    % another use case
+    
+    % another use case
+    
+    % ...
     
     \subsection{Guest Vehicle}
     \textit{The guest vehicle (GV) plays a vital role in facilitating the guest experience. The actor primarily
@@ -1383,7 +1394,7 @@ official, managerial, medical, and technical connotations.}
     
 
 %%%%% Zeke %%%%%
-    \subsection{Tyrannosaurus Rex}
+    \subsection{Tyrannosaurus Rex}\label{trexleave}
     \textit{It may be argued that this is not a legitimate actor, but despite its unconscious interaction
     with the system, the T.Rex can act on the system in a variety of - possibly unpredictable - ways.}
     \par\noindent\rule{\textwidth}{0.4pt}    
