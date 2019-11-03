@@ -234,61 +234,61 @@ that a more detailed specification of constraints is covered in its own section.
     \begin{figure}[H]
          \centerline{\includegraphics[scale=0.30]{PayKiosk.png}}
          \caption{Pay Kiosk Dynamic Control Model}
-          \label{fig:normal}
+          \label{fig:paykiosk}
     \end{figure}
 
     \begin{figure}[H]
          {\includegraphics[scale=0.30]{Token.png}}
          \caption{Token Dynamic Control Model}
-          \label{fig:normal}
+          \label{fig:token}
     \end{figure}
 
     \begin{figure}[H]
          \centerline{\includegraphics[scale=0.20]{CGCStation.png}}
          \caption{CGC Station Dynamic Control Model}
-          \label{fig:normal}
+          \label{fig:cgcstation}
     \end{figure}
 
     \begin{figure}[H]
          \centerline{\includegraphics[scale=0.18]{CarNormalMode.png}}
          \caption{Car Normal Mode Dynamic Control Model}
-          \label{fig:normal}
+          \label{fig:carnormalmode}
     \end{figure}
 
     \begin{figure}[H]
          \centerline{\includegraphics[scale=0.25]{CarEmergencyMode.png}}
          \caption{Car Emergency Mode Dynamic Control Model}
-          \label{fig:normal}
+          \label{fig:caremergencymode}
     \end{figure}
 
     \begin{figure}[H]
          \centerline{\includegraphics[scale=0.25]{GPSServer.png}}
          \caption{GPS Server Dynamic Control Model}
-          \label{fig:normal}
+          \label{fig:gpsserver}
     \end{figure}
 
     \begin{figure}[H]
          \centerline{\includegraphics[scale=0.30]{GlobalAlarmSystem.png}}
          \caption{Global Alarm System Dynamic Control Model}
-          \label{fig:normal}
+          \label{fig:globalalarmsystem}
     \end{figure}
 
     \begin{figure}[H]
          \centerline{\includegraphics[scale=0.17]{CameraNetwork.png}}
          \caption{Camera Network System Dynamic Control Model}
-          \label{fig:normal}
+          \label{fig:cameranetwork}
     \end{figure}
 
     \begin{figure}[H]
          \centerline{\includegraphics[scale=0.25]{ElectricFence.png}}
          \caption{Electric Fence Dynamic Control Model}
-          \label{fig:normal}
+          \label{fig:electricfence}
     \end{figure}
 
     \begin{figure}[H]
          \centerline{\includegraphics[scale=0.25]{T-RexMonitor.png}}
          \caption{T-Rex Monitor Dynamic Control Model}
-          \label{fig:normal}
+          \label{fig:trexmonitor}
     \end{figure}
 
 \section{Design Constraints} \label{cons} %
@@ -1294,71 +1294,78 @@ official, managerial, medical, and technical connotations.}
 %    
 %    % ...
 %    
-%    \subsection{System Auditor}
-%    \textit{brief description of actor}
-%    \par\noindent\rule{\textwidth}{0.4pt}    
-%    \begin{itemize}
-%        \item[]\textbf{Use Case:}                                
-%            *DoSomething (the name of the action to be executed by actor)*
-%
-%        \item[]\textbf{Primary Actor:}
-%            *ThatWhichWishesToDoSomething (name of actor)*
-%
-%        \item[]\textbf{Goal in Context:}
-%            *that which is to be accomplished by the action*
-%
-%        \item[]\textbf{Preconditions:}
-%            *states of the actor and system prior to the action*
-%
-%        \item[]\textbf{Trigger:}
-%            *that which initiates the action (e.g. actor breaks out of enclosure)*
-%
-%        \item[]\textbf{Scenario:}
-%            *sequence of actions from trigger to goal*
-%            \begin{enumerate}
-%                \item first event
-%                \item second event
-%                \item ...
-%            \end{enumerate}
-%
-%        \item[]\textbf{Exceptions:}
-%            *edge cases, potential hazards, errors, etc*
-%            \begin{itemize}
-%                \item[] some exception
-%                \item[] some other exception                
-%                \item[] ...
-%            \end{itemize}
-%
-%        \item[]\textbf{Priority:}
-%            *level of implementation importance (e.g. correct change is a must)*
-%
-%        \item[]\textbf{When Available:}
-%            *when or during which interval of time the action is to supported by the system*
-%
-%        \item[]\textbf{Frequency of Use:}
-%            *number of uses per unit of time (e.g. annually, billions per second, etc)*
-%
-%        \item[]\textbf{Channel to Primary Actor:}
-%            *means through which the system interacts with actor*
-%
-%        \item[]\textbf{Channels to Secondary Actors:}
-%            *means through which the primary and secondary actors interact*
-%            \begin{itemize}
-%                \item[] some channel
-%                \item[] some other channel
-%                \item[] ...
-%            \end{itemize}
-%        \item[]\textbf{Secondary Actors:}
-%            *intermediary or auxillary actors required to complete the goal*
-%
-%        \item[]\textbf{Open Issues:}
-%            *itemization of current problems with any of the above*
-%            \begin{itemize}
-%                \item[] some issue
-%                \item[] some other issue
-%                \item[] ...
-%            \end{itemize}
-%    \end{itemize}
+    \subsection{System Auditor}
+    \textit{This actor (SA) may be an external individual that may either be hired by Cretaceous 
+    Gardens to test the robustness of the system, or whose inspection may be mandated by law.}
+    \par\noindent\rule{\textwidth}{0.4pt}    
+    \begin{itemize}
+        \item[]\textbf{Use Case:}                                
+            SimulateProtocols
+
+        \item[]\textbf{Primary Actor:}
+            System Auditor
+
+        \item[]\textbf{Goal in Context:}
+            To observe currently implemented protocols within the system and provide an analysis
+            regarding their safety.
+
+        \item[]\textbf{Preconditions:}
+            The system is not in emergency mode nor maintenance mode, but may be put into such
+            modes for testing purposes (presumably outside business hours).
+
+        \item[]\textbf{Trigger:}
+            The time for a system audit has arrived, either after being scheduled or at random.
+
+        \item[]\textbf{Scenario:}
+            \begin{enumerate}
+                \item The SA arrives to the CGC Control Station outside of business hours.
+                \item The SA requests to observe a simulation of the currently used functions of the system.
+                \item The SA is provided with a set of protocols that may be simulated.
+                \item For each protocol, the SA runs a simulation.
+                \item The system passes the audit and the SA leaves.
+                \item OR
+                \item The system fails while simulating one or more protocols and the auditor presents a deadline
+                to fix the issue lest a fine is incurred.
+            \end{enumerate}
+
+        \item[]\textbf{Exceptions:}
+            \begin{itemize}
+                \item[] An audit occurs in the middle of a system upgrade.
+                \item[] The system is triggered into emergency mode (due to an actual emergency)
+            \end{itemize}
+
+        \item[]\textbf{Priority:}
+            Low, not explicitly required, but may be useful for legal robustness.
+
+        \item[]\textbf{When Available:}
+            On demand.
+
+        \item[]\textbf{Frequency of Use:}
+            Annually or less frequently.
+
+        \item[]\textbf{Channel to Primary Actor:}
+            CGC Control Station interface
+
+        \item[]\textbf{Secondary Actors:}
+            CGC Control Station, Pay Kiosks, Cars, Electric Fence, T.Rex, 
+            T.Rex Monitor, Camera Network
+            
+        \item[]\textbf{Channels to Secondary Actors:}
+            \begin{itemize}
+                \item[] CGC Control Station: simulation
+                \item[] Pay Kiosks: simulation
+                \item[] Cars: simulation
+                \item[] Electric Fence: simulation
+                \item[] T.Rex: simulation
+                \item[] T.Rex Monitor: simulation
+                \item[] Camera Network: simulation
+            \end{itemize}
+
+        \item[]\textbf{Open Issues:}
+            \begin{itemize}
+                \item[] What factors should be relevant in a simulation?
+            \end{itemize}
+    \end{itemize}
     
     % another use case
     
@@ -1367,7 +1374,7 @@ official, managerial, medical, and technical connotations.}
     % ...
     
     
-    \subsection{CGC System Technician}
+    \subsection{System Technician}
     \textit{The this actor (CST) specializes in addressing hardware issues with the CGC Station. This
     individual is responsible for repairing disk drives, monitors, redundancy elements within the
     station, etc.}
