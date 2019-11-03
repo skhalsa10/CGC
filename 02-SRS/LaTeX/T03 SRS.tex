@@ -407,72 +407,86 @@ official, managerial, medical, and technical connotations.}
             \end{itemize}
     \end{itemize}
      
-%    \subsection{Emergency Personnel}
-%    \textit{brief description of actor}
-%    \par\noindent\rule{\textwidth}{0.4pt}    
-%    \begin{itemize}
-%        \item[]\textbf{Use Case:}                                
-%            *DoSomething (the name of the action to be executed by actor)*
-%
-%        \item[]\textbf{Primary Actor:}
-%            *ThatWhichWishesToDoSomething (name of actor)*
-%
-%        \item[]\textbf{Goal in Context:}
-%            *that which is to be accomplished by the action*
-%
-%        \item[]\textbf{Preconditions:}
-%            *states of the actor and system prior to the action*
-%
-%        \item[]\textbf{Trigger:}
-%            *that which initiates the action (e.g. actor breaks out of enclosure)*
-%
-%        \item[]\textbf{Scenario:}
-%            *sequence of actions from trigger to goal*
-%            \begin{enumerate}
-%                \item first event
-%                \item second event
-%                \item ...
-%            \end{enumerate}
-%
-%        \item[]\textbf{Exceptions:}
-%            *edge cases, potential hazards, errors, etc*
-%            \begin{itemize}
-%                \item[] some exception
-%                \item[] some other exception                
-%                \item[] ...
-%            \end{itemize}
-%
-%        \item[]\textbf{Priority:}
-%            *level of implementation importance (e.g. correct change is a must)*
-%
-%        \item[]\textbf{When Available:}
-%            *when or during which interval of time the action is to supported by the system*
-%
-%        \item[]\textbf{Frequency of Use:}
-%            *number of uses per unit of time (e.g. annually, billions per second, etc)*
-%
-%        \item[]\textbf{Channel to Primary Actor:}
-%            *means through which the system interacts with actor*
-%
-%        \item[]\textbf{Channels to Secondary Actors:}
-%            *means through which the primary and secondary actors interact*
-%            \begin{itemize}
-%                \item[] some channel
-%                \item[] some other channel
-%                \item[] ...
-%            \end{itemize}
-%        \item[]\textbf{Secondary Actors:}
-%            *intermediary or auxillary actors required to complete the goal*
-%
-%        \item[]\textbf{Open Issues:}
-%            *itemization of current problems with any of the above*
-%            \begin{itemize}
-%                \item[] some issue
-%                \item[] some other issue
-%                \item[] ...
-%            \end{itemize}
-%    \end{itemize}
-%          
+    \subsection{Emergency Personnel}
+    \textit{Emergency Personnel (EP) may be police officers, federal agents, paramedics, and in certain contexts even 
+    security guards. Among the many actions that may be taken by such an actor are search and rescue, arrest, perform CPR, 
+    and many more.}
+    \par\noindent\rule{\textwidth}{0.4pt}    
+    \begin{itemize}
+        \item[]\textbf{Use Case:}                                
+            SearchAndRescue
+
+        \item[]\textbf{Primary Actor:}
+            Emergency Personnel
+
+        \item[]\textbf{Goal in Context:}
+            To find any potentially remaining guests after a disaster has occurred on the island.
+            
+        \item[]\textbf{Preconditions:}
+            Emergency mode may or may not be currently active, but it has definitely been triggered prior to 
+            the arrival of the actor.
+
+        \item[]\textbf{Trigger:}
+            A distress signal has been received from Cretaceous Gardens (from Isla Trueno).
+
+        \item[]\textbf{Scenario:}
+            \begin{enumerate}
+                \item The platoon has received orders to address an emergency on Isla Trueno. 
+                \item The troops arrive to the island littered with debris and corpses. 
+                \item Some Pay kiosks remain active with an eerie glow coming from an uncannily 
+                cheerful welcome screen.
+                \item Screams of terror can be heard in the distance, followed by tremendous roars.
+                \item The Emergency Personnel head to the kiosks and enter special codes that provide
+                them with an enormous supply of token devices.
+                \item The EP diffuse throughout the island as they sweep for survivors.
+                \item Several helicopters can be heard swarming overhead and small group
+                is sent to the CGC Station.
+                \item As the troops move inland they find severely injured, but alive, guests.
+                \item The troops give the injured new tokens which may be detected by the team
+                at the station.
+                \item A second group arrives at the island, and is directed by the team at the station
+                (via walkie talkies) to the injured.
+                \item The team notices the T-Rex Monitor signal moving toward the sweeping group of soldiers
+                and they alert them immediately to get into offensive positions.
+                \item The helicopters overhead lower themselves to wait for the animal.
+                \item Permission to engage is granted and the beast is taken down.
+                \item The troops continue their operation until sunrise as teams of paramedics
+                are shipped to the island.
+            \end{enumerate}
+
+        \item[]\textbf{Exceptions:}
+            \begin{itemize}
+                \item[] The T.Rex destroys the CGC Station.
+            \end{itemize}
+
+        \item[]\textbf{Priority:}
+            Essential, must be implemented.
+            
+        \item[]\textbf{When Available:}
+            On demand.
+
+        \item[]\textbf{Frequency of Use:}
+            Hopefully never.
+
+        \item[]\textbf{Channel to Primary Actor:}
+            Token GPS
+
+        \item[]\textbf{Secondary Actors:}
+            Guests, Tokens, Pay Kiosks
+
+        \item[]\textbf{Channels to Secondary Actors:}
+            \begin{itemize}
+                \item[] Guests: tokens
+                \item[] Tokens: pay kiosks
+                \item[] Pay Kiosks: direct
+            \end{itemize}
+
+        \item[]\textbf{Open Issues:}
+            \begin{itemize}
+                \item[] None known.
+            \end{itemize}
+    \end{itemize}
+        
     \subsection{Guest}
     \textit{The guest is the primary benefactor of many to the system's features. The primary role of this
     actor is to safely indulge in what the resort has to offer. The most common use for a guest is to see the main
