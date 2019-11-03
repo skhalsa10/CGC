@@ -15,6 +15,14 @@
 \subsubsectionfont{\color{LightBlue}}
 \paragraphfont{\color{LightBlue}}
 \subparagraphfont{\color{LightBlue}}
+\setlength{\arrayrulewidth}{1pt}
+\renewcommand{\arraystretch}{1.5}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{nicegreen}{rgb}{0.58, 0.98, 0.71}
+
 \begin{document}
 \definecolor{DarkBlue}{HTML}{4a5a8a} 
 \definecolor{LightBlue}{HTML}{4f81bf}
@@ -108,6 +116,7 @@ fields are treated analogously.}
     \textbf{.} & brief description \\
     \textbf{.} & brief description \\
     \textbf{.} & brief description\\
+    \hline
     \multicolumn{2}{|c|}{\textbf{Functions}} \\
     \hline
     \textbf{function1()} & $\rightarrow$ brief description \\
@@ -115,11 +124,11 @@ fields are treated analogously.}
     \textbf{.} & $\rightarrow$ brief description \\
     \textbf{.} & $\rightarrow$ brief description \\
     \textbf{.} & $\rightarrow$ brief description\\
+    \hline
 \end{tabularx}
 \end{table}
-\par\noindent\rule{\textwidth}{0.4pt}
 
-\section{Sample Use Case} \label{samp}
+\section{Sample Use Cases} \label{samp}
 \paragraph{} \textit{A broad overview of use cases begins this section and it is followed 
 by detailed case descriptions. Human actors are denoted by small stick figures and have the 
 same color scheme as the box that contains their labels. The section later features use case 
