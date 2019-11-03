@@ -330,139 +330,83 @@ that a more detailed specification of constraints is covered in its own section.
 \paragraph{} \textit{The CGC lends itself for a substantial amount of uses. Some notable uses include financial,
 official, managerial, medical, and technical connotations.}
 
-%%%%%% Anas %%%%%
-%    \subsection{Bookkeeper}
-%    \textit{brief description of actor}
-%    \par\noindent\rule{\textwidth}{0.4pt}    
-%    \begin{itemize}
-%        \item[]\textbf{Use Case:}                                
-%            *DoSomething (the name of the action to be executed by actor)*
-%
-%        \item[]\textbf{Primary Actor:}
-%            *ThatWhichWishesToDoSomething (name of actor)*
-%
-%        \item[]\textbf{Goal in Context:}
-%            *that which is to be accomplished by the action*
-%
-%        \item[]\textbf{Preconditions:}
-%            *states of the actor and system prior to the action*
-%
-%        \item[]\textbf{Trigger:}
-%            *that which initiates the action (e.g. actor breaks out of enclosure)*
-%
-%        \item[]\textbf{Scenario:}
-%            *sequence of actions from trigger to goal*
-%            \begin{enumerate}
-%                \item first event
-%                \item second event
-%                \item ...
-%            \end{enumerate}
-%
-%        \item[]\textbf{Exceptions:}
-%            *edge cases, potential hazards, errors, etc*
-%            \begin{itemize}
-%                \item[] some exception
-%                \item[] some other exception                
-%                \item[] ...
-%            \end{itemize}
-%
-%        \item[]\textbf{Priority:}
-%            *level of implementation importance (e.g. correct change is a must)*
-%
-%        \item[]\textbf{When Available:}
-%            *when or during which interval of time the action is to supported by the system*
-%
-%        \item[]\textbf{Frequency of Use:}
-%            *number of uses per unit of time (e.g. annually, billions per second, etc)*
-%
-%        \item[]\textbf{Channel to Primary Actor:}
-%            *means through which the system interacts with actor*
-%
-%        \item[]\textbf{Channels to Secondary Actors:}
-%            *means through which the primary and secondary actors interact*
-%            \begin{itemize}
-%                \item[] some channel
-%                \item[] some other channel
-%                \item[] ...
-%            \end{itemize}
-%        \item[]\textbf{Secondary Actors:}
-%            *intermediary or auxillary actors required to complete the goal*
-%
-%        \item[]\textbf{Open Issues:}
-%            *itemization of current problems with any of the above*
-%            \begin{itemize}
-%                \item[] some issue
-%                \item[] some other issue
-%                \item[] ...
-%            \end{itemize}
-%    \end{itemize}
-%    
-%    \subsection{CGC Station Operator}
-%    \textit{brief description of actor}
-%    \par\noindent\rule{\textwidth}{0.4pt}    
-%    \begin{itemize}
-%        \item[]\textbf{Use Case:}                                
-%            *DoSomething (the name of the action to be executed by actor)*
-%
-%        \item[]\textbf{Primary Actor:}
-%            *ThatWhichWishesToDoSomething (name of actor)*
-%
-%        \item[]\textbf{Goal in Context:}
-%            *that which is to be accomplished by the action*
-%
-%        \item[]\textbf{Preconditions:}
-%            *states of the actor and system prior to the action*
-%
-%        \item[]\textbf{Trigger:}
-%            *that which initiates the action (e.g. actor breaks out of enclosure)*
-%
-%        \item[]\textbf{Scenario:}
-%            *sequence of actions from trigger to goal*
-%            \begin{enumerate}
-%                \item first event
-%                \item second event
-%                \item ...
-%            \end{enumerate}
-%
-%        \item[]\textbf{Exceptions:}
-%            *edge cases, potential hazards, errors, etc*
-%            \begin{itemize}
-%                \item[] some exception
-%                \item[] some other exception                
-%                \item[] ...
-%            \end{itemize}
-%
-%        \item[]\textbf{Priority:}
-%            *level of implementation importance (e.g. correct change is a must)*
-%
-%        \item[]\textbf{When Available:}
-%            *when or during which interval of time the action is to supported by the system*
-%
-%        \item[]\textbf{Frequency of Use:}
-%            *number of uses per unit of time (e.g. annually, billions per second, etc)*
-%
-%        \item[]\textbf{Channel to Primary Actor:}
-%            *means through which the system interacts with actor*
-%
-%        \item[]\textbf{Channels to Secondary Actors:}
-%            *means through which the primary and secondary actors interact*
-%            \begin{itemize}
-%                \item[] some channel
-%                \item[] some other channel
-%                \item[] ...
-%            \end{itemize}
-%        \item[]\textbf{Secondary Actors:}
-%            *intermediary or auxillary actors required to complete the goal*
-%
-%        \item[]\textbf{Open Issues:}
-%            *itemization of current problems with any of the above*
-%            \begin{itemize}
-%                \item[] some issue
-%                \item[] some other issue
-%                \item[] ...
-%            \end{itemize}
-%    \end{itemize}
-%     
+    \subsection{CGC Station Operator}
+    \textit{The CGC Station Operator  (GSO)is the actor responsible for monitoring the central CGC system that
+    controls all other components. This individual may communicate with guests or other employees 
+    through the car intercom, may place vehicles into manual mode, and has access to the camera network.}
+    \par\noindent\rule{\textwidth}{0.4pt}    
+    \begin{itemize}
+        \item[]\textbf{Use Case:}                                
+            ReprimandTroublesomeGuest
+
+        \item[]\textbf{Primary Actor:}
+            CGC Station Operator
+
+        \item[]\textbf{Goal in Context:}
+            To reprimand a guest that is causing trouble by incremental warnings ranging from
+            casual notice, to threats of banishment from the resort.
+
+        \item[]\textbf{Preconditions:}
+            The system and all components are functioning properly.
+
+        \item[]\textbf{Trigger:}
+            A guest is caught throwing rocks into the enclosure.
+            
+        \item[]\textbf{Scenario:}
+            \begin{enumerate}
+                \item The GSO reviews an alert from the electric fence interface.
+                \item The GSO reads that small voltage spikes have been detected.
+                \item The GSO heads to the surveillance camera that corresponds to the
+                panel in question.
+                \item The GSO observes a guest hurling rocks at the enclosure, which
+                explains the voltage spikes.
+                \item The GSO immediately and firmly tells the guest to stop throwing rocks
+                through the PA system near the site.
+                \item The GSO is ignored by the guest who gives the finger to the camera.
+                \item The GSO dispatches the nearest patrol vehicle to the location.
+                \item The GSO explains the situation to the security guard that happens 
+                to be in the patrol vehicle at the time.
+                \item The GSO firmly alerts the unruly guest that a security guard has been sent.
+                \item The security guard arrives and reprimands the guest.
+                \item The guest become violent and gets tased and pepper sprayed.
+                \item The guest is apprehended and placed in the patrol vehicle.
+                \item The GSO dismisses the electric fence alerts.
+            \end{enumerate}
+
+        \item[]\textbf{Exceptions:}
+            \begin{itemize}
+                \item[] The system is triggered into emergency mode.
+            \end{itemize}
+
+        \item[]\textbf{Priority:}
+            Moderate, not necessary, but can be useful.
+            
+        \item[]\textbf{When Available:}
+            On demand.
+
+        \item[]\textbf{Frequency of Use:}
+            More frequent with higher volumes of visits.
+            
+        \item[]\textbf{Channel to Primary Actor:}
+            Electric fence panel, CGC Station GUI, camera 
+
+        \item[]\textbf{Secondary Actors:}
+            Patrol Vehicle, Security Guard, Electric Fence, Guest
+            
+        \item[]\textbf{Channels to Secondary Actors:}
+            \begin{itemize}
+                \item[] Patrol Vehicle: direct
+                \item[] Security Guard: car intercom
+                \item[] Electric Fence: direct
+                \item[] Guest: PA system, electric fence
+            \end{itemize}
+
+        \item[]\textbf{Open Issues:}
+            \begin{itemize}
+                \item[] None known.
+            \end{itemize}
+    \end{itemize}
+     
 %    \subsection{Emergency Personnel}
 %    \textit{brief description of actor}
 %    \par\noindent\rule{\textwidth}{0.4pt}    
@@ -528,267 +472,92 @@ official, managerial, medical, and technical connotations.}
 %                \item[] ...
 %            \end{itemize}
 %    \end{itemize}
-%     
-%%%%%% Matt %%%%%
-%    \subsection{Enclosure Maintenance Personnel}
-%    \textit{brief description of actor}
-%    \par\noindent\rule{\textwidth}{0.4pt}    
-%    \begin{itemize}
-%        \item[]\textbf{Use Case:}                                
-%            *DoSomething (the name of the action to be executed by actor)*
-%
-%        \item[]\textbf{Primary Actor:}
-%            *ThatWhichWishesToDoSomething (name of actor)*
-%
-%        \item[]\textbf{Goal in Context:}
-%            *that which is to be accomplished by the action*
-%
-%        \item[]\textbf{Preconditions:}
-%            *states of the actor and system prior to the action*
-%
-%        \item[]\textbf{Trigger:}
-%            *that which initiates the action (e.g. actor breaks out of enclosure)*
-%
-%        \item[]\textbf{Scenario:}
-%            *sequence of actions from trigger to goal*
-%            \begin{enumerate}
-%                \item first event
-%                \item second event
-%                \item ...
-%            \end{enumerate}
-%
-%        \item[]\textbf{Exceptions:}
-%            *edge cases, potential hazards, errors, etc*
-%            \begin{itemize}
-%                \item[] some exception
-%                \item[] some other exception                
-%                \item[] ...
-%            \end{itemize}
-%
-%        \item[]\textbf{Priority:}
-%            *level of implementation importance (e.g. correct change is a must)*
-%
-%        \item[]\textbf{When Available:}
-%            *when or during which interval of time the action is to supported by the system*
-%
-%        \item[]\textbf{Frequency of Use:}
-%            *number of uses per unit of time (e.g. annually, billions per second, etc)*
-%
-%        \item[]\textbf{Channel to Primary Actor:}
-%            *means through which the system interacts with actor*
-%
-%        \item[]\textbf{Channels to Secondary Actors:}
-%            *means through which the primary and secondary actors interact*
-%            \begin{itemize}
-%                \item[] some channel
-%                \item[] some other channel
-%                \item[] ...
-%            \end{itemize}
-%        \item[]\textbf{Secondary Actors:}
-%            *intermediary or auxillary actors required to complete the goal*
-%
-%        \item[]\textbf{Open Issues:}
-%            *itemization of current problems with any of the above*
-%            \begin{itemize}
-%                \item[] some issue
-%                \item[] some other issue
-%                \item[] ...
-%            \end{itemize}
-%    \end{itemize}
-%     
-%    \subsection{Guest}
-%    \textit{brief description of actor}
-%    \par\noindent\rule{\textwidth}{0.4pt}    
-%    \begin{itemize} %ViewTRex
-%        \item[]\textbf{Use Case:}                                
-%            *DoSomething (the name of the action to be executed by actor)*
-%
-%        \item[]\textbf{Primary Actor:}
-%            *ThatWhichWishesToDoSomething (name of actor)*
-%
-%        \item[]\textbf{Goal in Context:}
-%            *that which is to be accomplished by the action*
-%
-%        \item[]\textbf{Preconditions:}
-%            *states of the actor and system prior to the action*
-%
-%        \item[]\textbf{Trigger:}
-%            *that which initiates the action (e.g. actor breaks out of enclosure)*
-%
-%        \item[]\textbf{Scenario:}
-%            *sequence of actions from trigger to goal*
-%            \begin{enumerate}
-%                \item first event
-%                \item second event
-%                \item ...
-%            \end{enumerate}
-%
-%        \item[]\textbf{Exceptions:}
-%            *edge cases, potential hazards, errors, etc*
-%            \begin{itemize}
-%                \item[] some exception
-%                \item[] some other exception                
-%                \item[] ...
-%            \end{itemize}
-%
-%        \item[]\textbf{Priority:}
-%            *level of implementation importance (e.g. correct change is a must)*
-%
-%        \item[]\textbf{When Available:}
-%            *when or during which interval of time the action is to supported by the system*
-%
-%        \item[]\textbf{Frequency of Use:}
-%            *number of uses per unit of time (e.g. annually, billions per second, etc)*
-%
-%        \item[]\textbf{Channel to Primary Actor:}
-%            *means through which the system interacts with actor*
-%
-%        \item[]\textbf{Channels to Secondary Actors:}
-%            *means through which the primary and secondary actors interact*
-%            \begin{itemize}
-%                \item[] some channel
-%                \item[] some other channel
-%                \item[] ...
-%            \end{itemize}
-%        \item[]\textbf{Secondary Actors:}
-%            *intermediary or auxillary actors required to complete the goal*
-%
-%        \item[]\textbf{Open Issues:}
-%            *itemization of current problems with any of the above*
-%            \begin{itemize}
-%                \item[] some issue
-%                \item[] some other issue
-%                \item[] ...
-%            \end{itemize}
-%    \end{itemize}
-%     
-%    \par\noindent\rule{\textwidth}{0.4pt}    
-%    \begin{itemize} %LeaveResort
-%        \item[]\textbf{Use Case:}                                
-%            *DoSomething (the name of the action to be executed by actor)*
-%
-%        \item[]\textbf{Primary Actor:}
-%            *ThatWhichWishesToDoSomething (name of actor)*
-%
-%        \item[]\textbf{Goal in Context:}
-%            *that which is to be accomplished by the action*
-%
-%        \item[]\textbf{Preconditions:}
-%            *states of the actor and system prior to the action*
-%
-%        \item[]\textbf{Trigger:}
-%            *that which initiates the action (e.g. actor breaks out of enclosure)*
-%
-%        \item[]\textbf{Scenario:}
-%            *sequence of actions from trigger to goal*
-%            \begin{enumerate}
-%                \item first event
-%                \item second event
-%                \item ...
-%            \end{enumerate}
-%
-%        \item[]\textbf{Exceptions:}
-%            *edge cases, potential hazards, errors, etc*
-%            \begin{itemize}
-%                \item[] some exception
-%                \item[] some other exception                
-%                \item[] ...
-%            \end{itemize}
-%
-%        \item[]\textbf{Priority:}
-%            *level of implementation importance (e.g. correct change is a must)*
-%
-%        \item[]\textbf{When Available:}
-%            *when or during which interval of time the action is to supported by the system*
-%
-%        \item[]\textbf{Frequency of Use:}
-%            *number of uses per unit of time (e.g. annually, billions per second, etc)*
-%
-%        \item[]\textbf{Channel to Primary Actor:}
-%            *means through which the system interacts with actor*
-%
-%        \item[]\textbf{Channels to Secondary Actors:}
-%            *means through which the primary and secondary actors interact*
-%            \begin{itemize}
-%                \item[] some channel
-%                \item[] some other channel
-%                \item[] ...
-%            \end{itemize}
-%        \item[]\textbf{Secondary Actors:}
-%            *intermediary or auxillary actors required to complete the goal*
-%
-%        \item[]\textbf{Open Issues:}
-%            *itemization of current problems with any of the above*
-%            \begin{itemize}
-%                \item[] some issue
-%                \item[] some other issue
-%                \item[] ...
-%            \end{itemize}
-%    \end{itemize}
-%     
-%    \par\noindent\rule{\textwidth}{0.4pt}    
-%    \begin{itemize} %PurchaseToken
-%        \item[]\textbf{Use Case:}                                
-%            *DoSomething (the name of the action to be executed by actor)*
-%
-%        \item[]\textbf{Primary Actor:}
-%            *ThatWhichWishesToDoSomething (name of actor)*
-%
-%        \item[]\textbf{Goal in Context:}
-%            *that which is to be accomplished by the action*
-%
-%        \item[]\textbf{Preconditions:}
-%            *states of the actor and system prior to the action*
-%
-%        \item[]\textbf{Trigger:}
-%            *that which initiates the action (e.g. actor breaks out of enclosure)*
-%
-%        \item[]\textbf{Scenario:}
-%            *sequence of actions from trigger to goal*
-%            \begin{enumerate}
-%                \item first event
-%                \item second event
-%                \item ...
-%            \end{enumerate}
-%
-%        \item[]\textbf{Exceptions:}
-%            *edge cases, potential hazards, errors, etc*
-%            \begin{itemize}
-%                \item[] some exception
-%                \item[] some other exception                
-%                \item[] ...
-%            \end{itemize}
-%
-%        \item[]\textbf{Priority:}
-%            *level of implementation importance (e.g. correct change is a must)*
-%
-%        \item[]\textbf{When Available:}
-%            *when or during which interval of time the action is to supported by the system*
-%
-%        \item[]\textbf{Frequency of Use:}
-%            *number of uses per unit of time (e.g. annually, billions per second, etc)*
-%
-%        \item[]\textbf{Channel to Primary Actor:}
-%            *means through which the system interacts with actor*
-%
-%        \item[]\textbf{Channels to Secondary Actors:}
-%            *means through which the primary and secondary actors interact*
-%            \begin{itemize}
-%                \item[] some channel
-%                \item[] some other channel
-%                \item[] ...
-%            \end{itemize}
-%        \item[]\textbf{Secondary Actors:}
-%            *intermediary or auxillary actors required to complete the goal*
-%
-%        \item[]\textbf{Open Issues:}
-%            *itemization of current problems with any of the above*
-%            \begin{itemize}
-%                \item[] some issue
-%                \item[] some other issue
-%                \item[] ...
-%            \end{itemize}
-%    \end{itemize}
+%          
+    \subsection{Guest}
+    \textit{The guest is the primary benefactor of many to the system's features. The primary role of this
+    actor is to safely indulge in what the resort has to offer. The most common use for a guest is to see the main
+    exhibit but there may be several prerequisite uses that lead up to that.}
+    \par\noindent\rule{\textwidth}{0.4pt}    
+    \begin{itemize}
+        \item[]\textbf{Use Case:}                                
+            ViewTRex
+
+        \item[]\textbf{Primary Actor:}
+            Guest
+
+        \item[]\textbf{Goal in Context:}
+            To see a live dinosaur.
+
+        \item[]\textbf{Preconditions:}
+            The system and all components are functioning normally.
+            
+        \item[]\textbf{Trigger:}
+            The guest wishes to see a dinosaur since the age of five.
+
+        \item[]\textbf{Scenario:}
+            \begin{enumerate}
+                \item Upon hearing of the grand opening of Cretaceous Gardens, the guest immediately
+                heads to the island by whatever means possible.
+                \item On arrival, the guest witnesses tremendous lines formed at many pay kiosks
+                near the entrance of the resort.
+                \item After what seems like an eternity, the it is the guest's turn to purchase entry to the resort.
+                \item The guest is welcomed through a pleasant graphical display.
+                \item The guest is asked a series of questions in order verify compliance with the park policies
+                (e.g. How old are you? Do you consent to having your picture taken? Do you accept full responsibility 
+                for any injuries sustained due to personal choices? Do you accept the risks of seeing a live 
+                Tyrannosaurus Rex and free Cretaceous Gardens of any and all consequences of doing so?)
+                \item After ignoring all the fine print and zipping through the legal stuff, the guest finally
+                arrives at the screen that will allow the rental of an access token.
+                \item The guest enters the amount of time he or she plans to stay and is given the total price.
+                \item The guest is prompted to enter payment.
+                \item The guest pays after confirmation and receives the rental token device.
+                \item Instructions on what to do next are displayed on the kiosk screen.
+                \item The guest uses the token device to enter the resort via a small gate.
+                \item The guest eventually arrives at a parked car, into which others may or may not be entering.
+                \item The guest enters the token device into the seatbelt buckle and secures the seatbelt.
+                \item The guest lets the car do its job (see section \ref{carscenarios}).
+                \item The guest arrives at the exhibit and exits the car, taking the token device along.
+                \item The guest heads toward another gate which scans the token device to provide access.
+                \item The guest sprints toward the enclosure.
+                \item The guest is lucky and gets to see the mighty T.Rex sniffing around. 
+            \end{enumerate}
+
+        \item[]\textbf{Exceptions:}
+            \begin{itemize}
+                \item[] Guest changes his or her mind anywhere in the scenario and decides to leave.
+                \item[] The system is triggered into emergency mode.
+            \end{itemize}
+
+        \item[]\textbf{Priority:}
+            *level of implementation importance (e.g. correct change is a must)*
+
+        \item[]\textbf{When Available:}
+            *when or during which interval of time the action is to supported by the system*
+
+        \item[]\textbf{Frequency of Use:}
+            *number of uses per unit of time (e.g. annually, billions per second, etc)*
+
+        \item[]\textbf{Channel to Primary Actor:}
+            *means through which the system interacts with actor*
+
+        \item[]\textbf{Channels to Secondary Actors:}
+            *means through which the primary and secondary actors interact*
+            \begin{itemize}
+                \item[] some channel
+                \item[] some other channel
+                \item[] ...
+            \end{itemize}
+        \item[]\textbf{Secondary Actors:}
+            *intermediary or auxillary actors required to complete the goal*
+
+        \item[]\textbf{Open Issues:}
+            *itemization of current problems with any of the above*
+            \begin{itemize}
+                \item[] some issue
+                \item[] some other issue
+                \item[] ...
+            \end{itemize}
+    \end{itemize}
 
     \par\noindent\rule{\textwidth}{0.4pt}    
     \begin{itemize}
@@ -814,7 +583,7 @@ official, managerial, medical, and technical connotations.}
             \begin{enumerate}
                 \item The T.Rex destroys the enclosure (see subsection \ref{trexleave}).
                 \item Emergency mode is activated.
-                \item All guests are alerted via the car intercom, the token devices, and an
+                \item22 All guests are alerted via the car intercom, the token devices, and an
                 island wide speaker system, the Global Alarm System.
                 \item Guests receive instructions via the above means with interleaved reassurances
                 that extra vehicles are on the way to pick them up.
@@ -872,7 +641,7 @@ official, managerial, medical, and technical connotations.}
     
     % ...
     
-    \subsection{Guest Vehicle}
+    \subsection{Guest Vehicle}\label{carscenarios}
     \textit{The guest vehicle (GV) plays a vital role in facilitating the guest experience. The actor primarily
     moves guests to and from the exhibit, but may exhibit other functions when the system is in maintenance or
     emergency mode.}
@@ -1011,20 +780,14 @@ official, managerial, medical, and technical connotations.}
             \end{itemize}
     \end{itemize}
     
-    % another use case
-    
-    % another use case
-    
-    % ...
-%%%%% Santi %%%%%
-    \subsection{Network Maintenance Personnel}
-    \textit{The Network Maintenance Personnel (NMP) is responsible for the physical connections 
+    \subsection{Maintenance Personnel}
+    \textit{Maintenance Personnel (MP) is responsible for the physical connections 
     and addressing any issues with the physical components used with by the CGC (e.g cameras, 
-    kiosks, cars, etc.). This individual would be in charge of responding to nodal failures.}
+    kiosks, cars, enclosure panels, etc.). This individual would be in charge of responding to nodal failures.}
     \par\noindent\rule{\textwidth}{0.4pt}    
     \begin{itemize}
         \item[]\textbf{Use Case:}                                
-            RepairExtraEnclosureCamera
+            RepairExternalEnclosureCamera
 
         \item[]\textbf{Primary Actor:}
             Network Maintenance Personnel
