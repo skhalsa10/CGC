@@ -67,25 +67,26 @@ that a more detailed specification of constraints is covered in its own section.
         
     \paragraph{} A huge feature of the system is the autonomous behavior of most of the CGC system. The cars pretty much function on their own and most of the other systems do as well. This is a technological advancement that increases the user experience, both visitor and an employee.
     
+
     \subsection{Assumptions}
     \paragraph{} We assume that the infrastructure is all redundant. The CGC is 
     installed on redundant servers. The network backbone has physical redundant 
     links to appropriate devices like the cameras, the PA speakers, and the 
-    electric fence. We will also    program redundancy into the logic. Like the 
+    electric fence. We will also	program redundancy into the logic. Like the 
     ability to have another car available in case of an emergency or if the car 
-    breaks down.    
+    breaks down.
+
     \paragraph{} Another assumption is that messages would be encrypted in order 
     to provide the security needed, so the messages can not be intercepted and 
     modified.
 
-\section{Specific Requirements} \label{spec} % Siri and Anas
-% logical diagram
+\section{Specific Requirements} \label{spec}
 \paragraph{} \textit{Section Introduction}
 
     \subsection{External Interfaces} \label{inter}% Anas
     \paragraph{} \textit{The External Interfaces\footnote{External Interfaces by Anas Gauba} 
     make up all the pieces that the CGC communicates with. The CGC itself must 
-    communicate with everything,     but a lot of interfaces can function on their own. The 
+    communicate with everything, 	but a lot of interfaces can function on their own. The
     car interface is an example of one that needs to be able to function on it's own.}
         
     \paragraph{Pay Kiosk}
@@ -223,75 +224,98 @@ that a more detailed specification of constraints is covered in its own section.
         \subparagraph{Outgoing Events}
         \begin{enumerate}
             \item Report location(gpsID).
-        \end{enumerate}                        
+        \end{enumerate}						
         
     \subsection{Control Logic} \label{logic}%siri
-    \paragraph{} Because the CGC consists of various subsystems, it is important to understand 
-    the system within various scopes and from all subsystems' perspectives. \footnote{Control 
-    Logic by Siri Khalsa, Anas Gauba and Santiago Cejas}
+    \paragraph{} \textit{ This section outlines the control logic of the CGC system. Due to the size of the entire system we have broken down the logic diagrams into the sub-components of the CGC\footnote{Control Logic by Siri Khalsa, Anas Gauba and Santi}
+    The explanation for each component can be seen below. The Control Logic diagram for the CGC system as a whole was missed due to time constraints but is planned to be added in the future if time permits.}
 
+    \paragraph{Pay Kiosk}
+    \paragraph{}\textit{The Pay Kiosk logic can be seen below. the goal is to help communicate with potential visitors and help them purchase tokens to gain access to the garden.
+    The system starts at the main screen and will move into separate states to help facilitate the sale. If the emergency mode is triggered in the CGC system than the Pay kiosk will return the the main screen.}
     \begin{figure}[H]
-         \centerline{\includegraphics[scale=0.30]{PayKiosk.png}}
+         \centerline{\includegraphics[scale=0.70]{PayKiosk.png}}
          \caption{Pay Kiosk Dynamic Control Model}
           \label{fig:paykiosk}
     \end{figure}
 
+    \paragraph{Token}
+    \paragraph{}\textit{The Tokens logic is extremely simple. It is in an activated state when deployed to a visitor. Here it will perform all of its functions. The GPS will send signals to the GPS server. It will also sound an alarm or display and sound information.}
     \begin{figure}[H]
-         {\includegraphics[scale=0.30]{Token.png}}
+         {\includegraphics[scale=0.80]{Token.png}}
          \caption{Token Dynamic Control Model}
           \label{fig:token}
     \end{figure}
 
+    \paragraph{CGC Station}
+    \paragraph{}\textit{This is one of the more complex subsystems. The logic here states that there are separate screens that act as states. The main screen displays access to other screens 
+    and a general overview of the state of everything connected to the CGC. This system can change states to screens such as the Health Status screen, which can display the health status of all reporting devices.
+    Another screen that can be accessed is the Emergency screen here all actions related to controlling the CGC when the emergency mode has been activated can be seen. The same type of logic can be inferred through out the rest of the screens which are made available.}
     \begin{figure}[H]
-         \centerline{\includegraphics[scale=0.20]{CGCStation.png}}
+         \centerline{\includegraphics[scale=0.80]{CGCStation.png}}
          \caption{CGC Station Dynamic Control Model}
           \label{fig:cgcstation}
     \end{figure}
 
+    \paragraph{Car Normal Mode}
+    \paragraph{}\textit{The car is incredibly complex. To successfully explain the Car logic two diagrams were created. This diagram is for the Normal mode of the car. There are some main states that the car is in. All cars start out in an inactive state where they wait to be activated. In the case of
+    this diagram they will be activated with the goal of picking up visitors at the south end of the island. They move immediately into the Drive to South state. This is a state that implies the car is actively drive with the destination of the South end.
+    When the car arrives at the destination is always going into a drop off state. when ready for passengers it will move into a pick up state. There is another state of Driving to North End. If the car drops off after this destination, It will go to a waiting state while the visitors it brought over enjoy the exhibit.}
     \begin{figure}[H]
-         \centerline{\includegraphics[scale=0.18]{CarNormalMode.png}}
+         \centerline{\includegraphics[scale=0.60]{CarNormalMode.png}}
          \caption{Car Normal Mode Dynamic Control Model}
           \label{fig:carnormalmode}
     \end{figure}
 
+    \paragraph{Car Emergency Mode}
+    \paragraph{}\textit{This is the second diagram for the car. It explains the logic the car follows inside of an emergency triggered state. All spare cars drive to the north end. they pick up passengers and move back to the south end.}
     \begin{figure}[H]
-         \centerline{\includegraphics[scale=0.25]{CarEmergencyMode.png}}
+         \centerline{\includegraphics[scale=0.80]{CarEmergencyMode.png}}
          \caption{Car Emergency Mode Dynamic Control Model}
           \label{fig:caremergencymode}
     \end{figure}
 
+    \paragraph{GPS Server}
+    \paragraph{}\textit{The Control Logic for the GPS server is very simple the system is either in a healthy state where all nodes are healthy and accounted for and the system itself is running healthy. The other state is a degraded state. This state includes a down GPS client or a down GPS server.}
     \begin{figure}[H]
-         \centerline{\includegraphics[scale=0.25]{GPSServer.png}}
+         \centerline{\includegraphics[scale=0.80]{GPSServer.png}}
          \caption{GPS Server Dynamic Control Model}
           \label{fig:gpsserver}
     \end{figure}
 
+    \paragraph{Global Alarm System}
+    \paragraph{}\textit{The Global Alarm System logic is also very simple. the speakers can either be active and doing something or the system can be idle waiting to be triggered into an active state.}
     \begin{figure}[H]
-         \centerline{\includegraphics[scale=0.30]{GlobalAlarmSystem.png}}
+         \centerline{\includegraphics[scale=0.80]{GlobalAlarmSystem.png}}
          \caption{Global Alarm System Dynamic Control Model}
           \label{fig:globalalarmsystem}
     \end{figure}
 
+    \paragraph{Camera Network}
+    \paragraph{}\textit{The camera network has a healthy state and degraded state. it also has a DVR state where the system can manage recordings of video feeds.}
     \begin{figure}[H]
-         \centerline{\includegraphics[scale=0.17]{CameraNetwork.png}}
+         \centerline{\includegraphics[scale=0.80]{CameraNetwork.png}}
          \caption{Camera Network System Dynamic Control Model}
           \label{fig:cameranetwork}
     \end{figure}
 
+    \paragraph{Electric Fence}
+    \paragraph{}\textit{The electric fence can either be in an Idle or healthy state. It could also be in an Emergency state at this point it triggers the entire CGC to go into emergency mode.}
     \begin{figure}[H]
-         \centerline{\includegraphics[scale=0.25]{ElectricFence.png}}
+         \centerline{\includegraphics[scale=0.80]{ElectricFence.png}}
          \caption{Electric Fence Dynamic Control Model}
           \label{fig:electricfence}
     \end{figure}
 
+    \paragraph{T-Rex Monitor}
+    \paragraph{}\textit{The logic in this diagram is for the T-Rex Monitor}   
     \begin{figure}[H]
-         \centerline{\includegraphics[scale=0.25]{T-RexMonitor.png}}
+         \centerline{\includegraphics[scale=0.80]{T-RexMonitor.png}}
          \caption{T-Rex Monitor Dynamic Control Model}
           \label{fig:trexmonitor}
     \end{figure}
 
-\section{Design Constraints} \label{cons} %
-% error handling, exceptions, hazards, 
+\section{Design Constraints} \label{cons} 
 \paragraph{} \textit{There are quite a bit of constraints\footnote{Design Constraints by Anas Gauba} that the CGC must address in order to successfully function.}
 
     \subsection{Client}
@@ -543,33 +567,32 @@ official, managerial, medical, and technical connotations.}
             \end{itemize}
 
         \item[]\textbf{Priority:}
-            *level of implementation importance (e.g. correct change is a must)*
+            Essential, must be implemented
 
         \item[]\textbf{When Available:}
-            *when or during which interval of time the action is to supported by the system*
+            During business hours.
 
         \item[]\textbf{Frequency of Use:}
-            *number of uses per unit of time (e.g. annually, billions per second, etc)*
-
+            Up to thousands of times per day
+            
         \item[]\textbf{Channel to Primary Actor:}
-            *means through which the system interacts with actor*
+            External media source, island dock, pay kiosk interface, car door,
+            seatbelt buckle, exhibit gate, electric enclosure
 
-        \item[]\textbf{Channels to Secondary Actors:}
-            *means through which the primary and secondary actors interact*
-            \begin{itemize}
-                \item[] some channel
-                \item[] some other channel
-                \item[] ...
-            \end{itemize}
         \item[]\textbf{Secondary Actors:}
-            *intermediary or auxillary actors required to complete the goal*
-
-        \item[]\textbf{Open Issues:}
-            *itemization of current problems with any of the above*
+            Pay Kiosk, Token, Car, T.Rex
+            
+        \item[]\textbf{Channels to Secondary Actors:}
             \begin{itemize}
-                \item[] some issue
-                \item[] some other issue
-                \item[] ...
+                \item[] Pay Kiosk: pay kiosk touch screen, card or cash receptacle, token dispenser
+                \item[] Token: token dispenser
+                \item[] Car: car door, seatbelt and buckle
+                \item[] T.Rex: all the above, and the electric fence enclosure
+            \end{itemize}
+            
+        \item[]\textbf{Open Issues:}
+            \begin{itemize}
+                \item[] None known.
             \end{itemize}
     \end{itemize}
 
@@ -1436,7 +1459,6 @@ official, managerial, medical, and technical connotations.}
 % secondary actors (note that primary actors above may be secondary in some contexts)
 % any devices not mentioned above
 % any humans not mentioned above
-
 
 
 \section{Definition of Terms} \label{defs}
