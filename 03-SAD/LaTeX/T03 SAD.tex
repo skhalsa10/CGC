@@ -96,11 +96,35 @@ of their physical triggers have been connected to them with bidirectional blue a
 % .
 
 \section{Component Specifications}
-\paragraph{} \textit{Here are the class specifications \footnote{Component specifications by Anas and Siri} for objects 
-found in Section \ref{over}. The most important attributes and functions are given and, where appropriate, any expected 
+\paragraph{} \textit{Here are the class specifications\footnote{Component specifications by Anas and Siri} for objects 
+found in Section \ref{over}. The most important attributes and functions are given and where appropriate, any expected 
 preconditions, parameters, return values, and post conditions are included. Explanations are given for each component, but 
 it should be noted that helper functions are not shown, as they are entrusted with the programmer. Important fields and helper
 fields are treated analogously.}
+
+\begin{table}[H]
+\begin{tabularx}{\hsize}{|Y|Y|}
+    \hline
+    \rowcolor{nicegreen}
+    \multicolumn{2}{|c|}{\textbf{Electric Fence}} \\ % Title of Class
+    \hline
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+    \hline
+    \textbf{currentMode} & indicates whether or not which mode is detected. \\
+    \textbf{healthStatus } & indicates the health of the electric fence. \\
+    \textbf{electrical conductance } &  electricity in the fence.\\
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+    \hline
+    \textbf{checkStatus()} & $\rightarrow$ checks the status of the fence. \\
+    \textbf{switchMode(mode)} & $\rightarrow$ switches the mode based on the specification by CGC. \\
+    \textbf{reportHealth()} & $\rightarrow$ reports the health of the fence. \\
+    \hline
+
+\end{tabularx}
+\end{table}
+
 
 \begin{table}[H]
 \begin{tabularx}{\hsize}{|Y|Y|}
@@ -125,6 +149,7 @@ fields are treated analogously.}
     \textbf{.} & $\rightarrow$ brief description \\
     \textbf{.} & $\rightarrow$ brief description\\
     \hline
+
 \end{tabularx}
 \end{table}
 
