@@ -158,6 +158,7 @@ fields are treated analogously.}
     \hline
     \multicolumn{2}{|c|}{\textbf{Functions}} \\
     \hline
+    \textbf{systemCheck()} & $\rightarrow$ performs checks on the system. \\
     \textbf{maintainanceMode()} & $\rightarrow$ goes into maintainance mode. \\
     \hline
 
@@ -245,7 +246,105 @@ fields are treated analogously.}
     \hline
     \multicolumn{2}{|c|}{\textbf{Functions}} \\
     \hline
+    \textbf{systemCheck()} & $\rightarrow$ performs checks on the system. \\
     \textbf{maintainanceMode()} & $\rightarrow$ goes into maintainance mode. \\
+    \hline
+
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\hsize}{|Y|Y|}
+    \hline
+    \rowcolor{nicegreen}
+    \multicolumn{2}{|c|}{\textbf{GPS Server Class }} \\
+    \hline
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+    \hline
+    \textbf{registeredGPSDevices} & indicates all the valid registered gps devices. \\
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+    \hline
+    \textbf{pingAll()} & $\rightarrow$ will return true if every registeredDevice responds. \\
+    \textbf{ping(gpsID)} & $\rightarrow$ will ping specific GPS node and return true if it responds. \\
+    \textbf{getLocation(gpsID)} & $\rightarrow$ will return location. \\
+    \textbf{getAllLocations()} & $\rightarrow$  gives list of all gps devices. \\
+    \hline
+
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\hsize}{|Y|Y|}
+    \hline
+    \rowcolor{nicegreen}
+    \multicolumn{2}{|c|}{\textbf{Maintainer Class}} \\ 
+    \hline
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+    \hline
+    \textbf{health status} & indicates the health of the camera network. \\
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+    \hline
+    \textbf{systemCheck()} & $\rightarrow$ performs checks on the system. \\
+    \textbf{maintainanceMode()} & $\rightarrow$ goes into maintainance mode. \\
+    \hline
+
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\hsize}{|Y|Y|}
+    \hline
+    \rowcolor{nicegreen}
+    \multicolumn{2}{|c|}{\textbf{Some Class }} \\
+    \hline
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+    \hline
+    \textbf{attribute 1} & brief description \\
+    \textbf{attribute 2} & brief description \\
+    \textbf{.} & brief description \\
+    \textbf{.} & brief description \\
+    \textbf{.} & brief description\\
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+    \hline
+    \textbf{function1()} & $\rightarrow$ brief description \\
+    \textbf{function2()} & $\rightarrow$ brief description \\
+    \textbf{.} & $\rightarrow$ brief description \\
+    \textbf{.} & $\rightarrow$ brief description \\
+    \textbf{.} & $\rightarrow$ brief description\\
+    \hline
+
+\end{tabularx}
+\end{table}
+
+
+\begin{table}[H]
+\begin{tabularx}{\hsize}{|Y|Y|}
+    \hline
+    \rowcolor{nicegreen}
+    \multicolumn{2}{|c|}{\textbf{Some Class }} \\
+    \hline
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+    \hline
+    \textbf{attribute 1} & brief description \\
+    \textbf{attribute 2} & brief description \\
+    \textbf{.} & brief description \\
+    \textbf{.} & brief description \\
+    \textbf{.} & brief description\\
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+    \hline
+    \textbf{function1()} & $\rightarrow$ brief description \\
+    \textbf{function2()} & $\rightarrow$ brief description \\
+    \textbf{.} & $\rightarrow$ brief description \\
+    \textbf{.} & $\rightarrow$ brief description \\
+    \textbf{.} & $\rightarrow$ brief description\\
     \hline
 
 \end{tabularx}
