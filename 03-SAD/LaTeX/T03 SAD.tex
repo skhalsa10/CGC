@@ -55,8 +55,8 @@ How will ensure the desired behavior?
 \paragraph{} This is a road map for the eventual implementation of the system. It details the most relevant objects and their relationships in the form of diagrams. Explanations accompany all diagrams for the sake of clarity.
 
 \section{Design Overview} \label{over}
-\paragraph{} \textit{The class architecture presented here \footnote{Diagrams by 
-Siri, Anas, Santi, and Zeke.} aims to maximize efficiency, maintainability, and 
+\paragraph{} \textit{The class architecture presented here\footnote{Diagrams by 
+Siri and Anas.} aims to maximize efficiency, maintainability, and 
 safety. Without an efficient system, its safety may be compromised due to unnecessary 
 delays between components. Maintainability can impact a safe implementation of the 
 system if the system is permeable to programmer errors. The decoupling of concerns and 
@@ -96,11 +96,46 @@ of their physical triggers have been connected to them with bidirectional blue a
 % .
 
 \section{Component Specifications}
-\paragraph{} \textit{Here are the class specifications\footnote{Component specifications by Anas and Siri} for objects 
+\paragraph{} \textit{Here are the class specifications\footnote{Component specifications by Anas and Siri.} for objects 
 found in Section \ref{over}. The most important attributes and functions are given and where appropriate, any expected 
 preconditions, parameters, return values, and post conditions are included. Explanations are given for each component, but 
 it should be noted that helper functions are not shown, as they are entrusted with the programmer. Important fields and helper
 fields are treated analogously.}
+
+\begin{table}[H]
+\begin{tabularx}{\hsize}{|Y|Y|}
+    \hline
+    \rowcolor{nicegreen}
+    \multicolumn{2}{|c|}{\textbf{CGC Class }} \\
+    \hline
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+    \hline
+    \textbf{RegisteredTokens} & keeps track of registered visitors to the park. \\
+    \textbf{ActiveStation} & checks to ensure CGC stations are active. \\
+    \textbf{ActivePayKiosks} & checks to ensure Pay Kiosks are active.  \\
+    \textbf{ActiveCars} &  keeps track of active cars. \\
+    \textbf{InactiveCars} & keeps tracks of inactive cars. \\
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+    \hline
+    \textbf{logTransaction(transanction)} & $\rightarrow$ will write the transaction to the finance controller. \\
+    \textbf{queryFinanceState(SQLScript)} & $\rightarrow$ return the query results. \\
+    \textbf{queryHealthState(SQLScript)} & $\rightarrow$ return the query results. \\
+    \textbf{getAllGPSLocations()} & $\rightarrow$ forward all gps locations from the GPS Server. \\
+    \textbf{registerToken(tokenID) } & $\rightarrow$ activate token. \\
+    \textbf{retireToken(tokenID)} & $\rightarrow$  removes the token from the registered list and cleanly shuts down necessary tasks.\\
+    \textbf{relayVideoStream(cameraID, stationID)} & $\rightarrow$ bridge video stream to station. \\
+    \textbf{triggerEmergencyMode()} & $\rightarrow$ goes to emergency mode.\\
+    \textbf{deactivateEmergencyMode()} & $\rightarrow$ goes back to normal mode operations.\\
+    \textbf{activateCar()} & $\rightarrow$  this will activate a new car from the parking lot. \\
+    \textbf{bridgeIntercom(carID, stationID)} & $\rightarrow$ this will start a communication link and return null if a fialure.\\
+    \textbf{brokerGAConn(stationID)} & $\rightarrow$ returns false for global alarm connection if already in use. \\
+    \hline
+
+\end{tabularx}
+\end{table}
+
 
 \begin{table}[H]
 \begin{tabularx}{\hsize}{|Y|Y|}
