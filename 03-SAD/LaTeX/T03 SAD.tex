@@ -45,9 +45,9 @@
 for its profitability and maintainability, and by the programmer for its legibility and clarity. It should be clear
 that all three pillars ultimately characterize good software, but more importantly that the three are interdependent.
 The developer must then guarantee all of the above for the sake of all entities involved. A top down approach has been
-taken up to this point. The feasibility study asked answered the fundamental question: Can it be done? The requirements
-definition document was then passed the baton and answered the next logical question: Within what parameters can it be done?
-The software specification document then answered: What is the desired behavior of the system? Now we may answer: 
+taken up to this point. The Technical Feasibility Study asked answered the fundamental question: Can it be done? The equirements
+Definition Document was then passed the baton and answered the next logical question: Within what parameters can it be done?
+The Software Requirements Specification document then answered: What is the desired behavior of the system? Now we may answer: 
 How will ensure the desired behavior?
 
 \paragraph{} The ultimate goal is to ensure an efficient, safe, and maintainable implementation of the Cretaceous Gardens Controller (CGC) software\footnote{Introduction by Zeke.}. To that end, all objects are illustrated in their proper contexts, and their crucial functions have been delineated as clearly as possible while simultaneously allowing the programmer enough flexibility so as to not stifle his or her creative process. 
@@ -677,34 +677,30 @@ official, managerial, medical, and technical connotations.}
             \end{itemize}
 
         \item[]\textbf{Priority:}
-            *level of implementation importance (e.g. correct change is a must)*
+            Essential, must be implemented.
 
         \item[]\textbf{When Available:}
-            *when or during which interval of time the action is to supported by the system*
+            On Demand.
 
         \item[]\textbf{Frequency of Use:}
-            *number of uses per unit of time (e.g. annually, billions per second, etc)*
+            Up to thousands of times per day.
 
         \item[]\textbf{Channel to Primary Actor:}
-            *means through which the system interacts with actor*
+            Direct.
 
         \item[]\textbf{Channels to Secondary Actors:}
             *means through which the primary and secondary actors interact*
             \begin{itemize}
-                \item[] some channel
-                \item[] some other channel
-                \item[] ...
+                \item[] Kiosk: Display on kiosk.
+                \item[] Token: Device desplay and speaker.
+                \item[] Guest Vehicle: Token interrfaces and seat sensors.
+                \item[] T-Rex: Seen through enclosure fence.
             \end{itemize}
         \item[]\textbf{Secondary Actors:}
-            *intermediary or auxillary actors required to complete the goal*
+            Kiosk, Token, Guest Vehicle, T-Rex.
 
         \item[]\textbf{Open Issues:}
-            *itemization of current problems with any of the above*
-            \begin{itemize}
-                \item[] some issue
-                \item[] some other issue
-                \item[] ...
-            \end{itemize}
+            None known.
     \end{itemize}
 
     \par\noindent\rule{\textwidth}{0.4pt}    
@@ -724,12 +720,12 @@ official, managerial, medical, and technical connotations.}
             island or system) may also be the case.
 
         \item[]\textbf{Trigger:}
-            Something horrible occurs. For simplicity, the following scenario assumes the T.Rex destroys
+            Something horrible occurs. For simplicity, the following scenario assumes the T-Rex destroys
             its enclosure and is now on the loose.
 
         \item[]\textbf{Scenario:}
             \begin{enumerate}
-                \item The T.Rex destroys the enclosure (see subsection \ref{trexleave}).
+                \item The T-Rex destroys the enclosure (see subsection \ref{trexleave}).
                 \item Emergency mode is activated.
                 \item22 All guests are alerted via the car intercom, the token devices, and an
                 island wide speaker system, the Global Alarm System.
@@ -770,7 +766,7 @@ official, managerial, medical, and technical connotations.}
             
         \item[]\textbf{Channels to Secondary Actors:}
             \begin{itemize}
-                \item[] T.Rex: breached enclosure
+                \item[] T-Rex: breached enclosure
                 \item[] Token: device display and speaker
                 \item[] Emergency Personnel: directly at any stage during the evacuation.
             \end{itemize}
