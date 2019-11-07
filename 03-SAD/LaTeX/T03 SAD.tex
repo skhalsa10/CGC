@@ -189,7 +189,7 @@ is representative of all the sub-components it belongs to.} \\
 \begin{tabularx}{\hsize}{|Y|Y|}
     \hline
     \rowcolor{nicegreen}
-    \multicolumn{2}{|c|}{\textbf{Electric Fence Class}} \\ % Title of Class
+    \multicolumn{2}{|c|}{\textbf{Electric Fence Class}} \\ 
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
@@ -338,6 +338,30 @@ is representative of all the sub-components it belongs to.} \\
 \end{tabularx}
 \end{table}
 
+
+\begin{table}[H]
+\begin{tabularx}{\hsize}{|Y|Y|}
+    \hline
+    \rowcolor{nicegreen}
+    \multicolumn{2}{|c|}{\textbf{CGC Station Class }} \\
+    \hline
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+    \hline
+    \textbf{currentScreen} & the active screen. \\
+    \textbf{intercom} & the intercom to talk any relevant components. \\
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+    \hline
+    \textbf{startIntercom()} & $\rightarrow$ activate intercom to speak to any specific component. \\
+    \textbf{syncEmergencyState(sqlScript)} & $\rightarrow$ queries for the state of emergency. \\
+    \textbf{syncHealthState(sqlScript)} & $\rightarrow$ sync the status of all the components. \\
+    \textbf{syncFinanceState(sqlScript)} & $\rightarrow$ queries finance and expenses information. \\
+    \textbf{activateTranqulizer()} & $\rightarrow$ activates tranquilizer in emergency state.\\
+    \hline
+
+\end{tabularx}
+\end{table}
 
 \begin{table}[H]
 \begin{tabularx}{\hsize}{|Y|Y|}
