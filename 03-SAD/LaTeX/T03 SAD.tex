@@ -402,19 +402,20 @@ InjectDino()
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
     \hline
-    \textbf{attribute 1} & brief description \\
-    \textbf{attribute 2} & brief description \\
-    \textbf{.} & brief description \\
-    \textbf{.} & brief description \\
-    \textbf{.} & brief description\\
+    \textbf{Token} & The token for the visitor to get all perks of the park.  \\
+    \textbf{TransactionID} & the id of the transaction. \\
+    \textbf{MoneyType} & type of money requested upon registration. \\
     \hline
     \multicolumn{2}{|c|}{\textbf{Functions}} \\
     \hline
-    \textbf{function1()} & $\rightarrow$ brief description \\
-    \textbf{function2()} & $\rightarrow$ brief description \\
-    \textbf{.} & $\rightarrow$ brief description \\
-    \textbf{.} & $\rightarrow$ brief description \\
-    \textbf{.} & $\rightarrow$ brief description\\
+    \textbf{buildToken()} & $\rightarrow$  builds token and logs transaction.\\
+    \textbf{displayPurchaseForm()} & $\rightarrow$ displays the registration form. \\
+    \textbf{register(demographics)} & $\rightarrow$ registers the visitor based on the provided information. \\
+    \textbf{requestMoney()} & $\rightarrow$ requests for money.\\
+    \textbf{acceptMoney(moneyType)} & $\rightarrow$ accepts the appropriate money type. \\
+    \textbf{dispense(money, receipt())} & $\rightarrow$ dispenses money with receipt. \\
+    \textbf{activateToken(tokenID)} & $\rightarrow$ activates token. \\
+    \textbf{dispenseToken(tokenID} & $\rightarrow$ dispenses token. \\
     \hline
 
 \end{tabularx}
