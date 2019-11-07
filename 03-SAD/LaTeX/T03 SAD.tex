@@ -106,7 +106,7 @@ fields are treated analogously.}
 \begin{tabularx}{\hsize}{|Y|Y|}
     \hline
     \rowcolor{nicegreen}
-    \multicolumn{2}{|c|}{\textbf{Electric Fence}} \\ % Title of Class
+    \multicolumn{2}{|c|}{\textbf{Electric Fence Class}} \\ % Title of Class
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
@@ -130,7 +130,7 @@ fields are treated analogously.}
 \begin{tabularx}{\hsize}{|Y|Y|}
     \hline
     \rowcolor{nicegreen}
-    \multicolumn{2}{|c|}{\textbf{Electric Fence Sensor}} \\ % Title of Class
+    \multicolumn{2}{|c|}{\textbf{Electric Fence Sensor Class}} \\ 
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
@@ -149,7 +149,7 @@ fields are treated analogously.}
 \begin{tabularx}{\hsize}{|Y|Y|}
     \hline
     \rowcolor{nicegreen}
-    \multicolumn{2}{|c|}{\textbf{Maintainer}} \\ % Title of Class
+    \multicolumn{2}{|c|}{\textbf{Maintainer Class}} \\ 
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
@@ -163,6 +163,95 @@ fields are treated analogously.}
 
 \end{tabularx}
 \end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\hsize}{|Y|Y|}
+    \hline
+    \rowcolor{nicegreen}
+    \multicolumn{2}{|c|}{\textbf{Camera Network Class}} \\ 
+    \hline
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+    \hline
+    \textbf{Camera} & software that is responsible for streaming video. \\
+    \textbf{DVR} &  software that is responsible for storing/retain video.\\
+    \textbf{Maintainer} &  object that checks for health status of the fence.\\
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+    \hline
+    \textbf{checkCameraStatus(cameraID)} & $\rightarrow$ checks the status of the camera. \\
+    \textbf{deleteRecording(cameraID, date range)} & $\rightarrow$ delete the recording from a given camera from specified range. \\
+    \textbf{activateRecording(cameraID)} & $\rightarrow$ begin recording the given camera. \\
+    \textbf{monitor(cameraID)} & $\rightarrow$ view the associated camera. \\
+    \textbf{reportOutage()} & $\rightarrow$ report for any possible camera outage upon CGC request. \\
+    \hline
+
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\hsize}{|Y|Y|}
+    \hline
+    \rowcolor{nicegreen}
+    \multicolumn{2}{|c|}{\textbf{Camera Class}} \\ 
+    \hline
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+    \hline
+    \textbf{cameraID} & The camera number. \\
+    \textbf{status} & The camera status. \\
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+    \hline
+    \textbf{getID()} & $\rightarrow$ gives the id of the camera. \\
+    \textbf{play()} & $\rightarrow$ starts streaming the video. \\
+    \textbf{getStatus()} & $\rightarrow$ gives the status of the camera. \\
+    \textbf{getStream()} & $\rightarrow$ view camera. \\
+    \hline
+
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\hsize}{|Y|Y|}
+    \hline
+    \rowcolor{nicegreen}
+    \multicolumn{2}{|c|}{\textbf{DVR Class}} \\ 
+    \hline
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+    \hline
+    \textbf{streamRecord} & keeps track of video streams. \\
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+    \hline
+    \textbf{start(cameraID)} & $\rightarrow$ begin recording of the camera. \\
+    \textbf{delete(cameraID, range)} & $\rightarrow$ delete video stream. \\
+    \hline
+
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\hsize}{|Y|Y|}
+    \hline
+    \rowcolor{nicegreen}
+    \multicolumn{2}{|c|}{\textbf{Maintainer Class}} \\ 
+    \hline
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+    \hline
+    \textbf{health status} & indicates the health of the camera network. \\
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+    \hline
+    \textbf{maintainanceMode()} & $\rightarrow$ goes into maintainance mode. \\
+    \hline
+
+\end{tabularx}
+\end{table}
+
+
 
 \section{Sample Use Cases} \label{samp}
 \paragraph{} \textit{A broad overview of use cases begins this section and it is followed 
