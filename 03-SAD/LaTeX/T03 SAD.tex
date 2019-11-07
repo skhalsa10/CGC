@@ -162,6 +162,28 @@ fields are treated analogously.}
 \end{tabularx}
 \end{table}
 
+\begin{table}[H]
+\begin{tabularx}{\hsize}{|Y|Y|}
+    \hline
+    \rowcolor{nicegreen}
+    \multicolumn{2}{|c|}{\textbf{Maintainer Class*}} \\ 
+    \hline
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+    \hline
+    \textbf{health status} & indicates the health of the appropriate sub-component system. \\
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+    \hline
+    \textbf{systemCheck()} & $\rightarrow$ performs checks on the system. \\
+    \textbf{maintainanceMode()} & $\rightarrow$ goes into maintainance mode. \\
+    \hline
+
+\end{tabularx}
+     * : {In order to be not repetitive in the sub-components, this class is shown once here and 
+is representative of all the sub-components it belongs to.} \\
+\end{table}
+
 
 \begin{table}[H]
 \begin{tabularx}{\hsize}{|Y|Y|}
@@ -201,26 +223,6 @@ fields are treated analogously.}
     \multicolumn{2}{|c|}{\textbf{Functions}} \\
     \hline
     \textbf{checkElectricConductance()} & $\rightarrow$ check possible distortions in thefence. \\
-    \hline
-
-\end{tabularx}
-\end{table}
-
-\begin{table}[H]
-\begin{tabularx}{\hsize}{|Y|Y|}
-    \hline
-    \rowcolor{nicegreen}
-    \multicolumn{2}{|c|}{\textbf{Maintainer Class}} \\ 
-    \hline
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
-    \hline
-    \textbf{health status} & indicates the health of the electric fence. \\
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Functions}} \\
-    \hline
-    \textbf{systemCheck()} & $\rightarrow$ performs checks on the system. \\
-    \textbf{maintainanceMode()} & $\rightarrow$ goes into maintainance mode. \\
     \hline
 
 \end{tabularx}
@@ -298,26 +300,6 @@ fields are treated analogously.}
 \begin{tabularx}{\hsize}{|Y|Y|}
     \hline
     \rowcolor{nicegreen}
-    \multicolumn{2}{|c|}{\textbf{Maintainer Class}} \\ 
-    \hline
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
-    \hline
-    \textbf{health status} & indicates the health of the camera network. \\
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Functions}} \\
-    \hline
-    \textbf{systemCheck()} & $\rightarrow$ performs checks on the system. \\
-    \textbf{maintainanceMode()} & $\rightarrow$ goes into maintainance mode. \\
-    \hline
-
-\end{tabularx}
-\end{table}
-
-\begin{table}[H]
-\begin{tabularx}{\hsize}{|Y|Y|}
-    \hline
-    \rowcolor{nicegreen}
     \multicolumn{2}{|c|}{\textbf{GPS Server Class }} \\
     \hline
     \hline
@@ -331,26 +313,6 @@ fields are treated analogously.}
     \textbf{ping(gpsID)} & $\rightarrow$ will ping specific GPS node and return true if it responds. \\
     \textbf{getLocation(gpsID)} & $\rightarrow$ will return location. \\
     \textbf{getAllLocations()} & $\rightarrow$  gives list of all gps devices. \\
-    \hline
-
-\end{tabularx}
-\end{table}
-
-\begin{table}[H]
-\begin{tabularx}{\hsize}{|Y|Y|}
-    \hline
-    \rowcolor{nicegreen}
-    \multicolumn{2}{|c|}{\textbf{Maintainer Class}} \\ 
-    \hline
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
-    \hline
-    \textbf{health status} & indicates the health of the camera network. \\
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Functions}} \\
-    \hline
-    \textbf{systemCheck()} & $\rightarrow$ performs checks on the system. \\
-    \textbf{maintainanceMode()} & $\rightarrow$ goes into maintainance mode. \\
     \hline
 
 \end{tabularx}
@@ -403,7 +365,6 @@ fields are treated analogously.}
 
 \end{tabularx}
 \end{table}
-
 
 
 \section{Sample Use Cases} \label{samp}
