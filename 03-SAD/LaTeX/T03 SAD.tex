@@ -425,7 +425,7 @@ InjectDino()
 \begin{tabularx}{\hsize}{|Y|Y|}
     \hline
     \rowcolor{nicegreen}
-    \multicolumn{2}{|c|}{\textbf{Some Class }} \\
+    \multicolumn{2}{|c|}{\textbf{Car Cass }} \\
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
@@ -1573,23 +1573,21 @@ structures concerning the safety controls are as fast as possible but also that 
 of prioritizing all signals in the best way possible.}
 
     \subsection{Safety}
-    \paragraph{} The safety is highly prioritized in our design of the ECS. We have 
-    considered associating the fire alarm directly with the ECS because in the case 
-    of the fire alarm triggering, this event has a very high priority and the ECS 
-    should immediately react to this event. When it comes to elevator and bay safety, 
-    each elevator and bay will have set of Safety Controls that they can communicate 
-    through and the ECS monitors the situation from the top. By ensuring safety for 
-    both bays and the elevators, the ECS operation will be carried smoothly without 
-    hurting the passengers.
+    \paragraph{} The safety is highly prioritized in our design of the CGC. We have 
+    global fire alarm system and the CGC directly have access to it in the case 
+    emergency, this event has a very high priority and the CGC 
+    should immediately react to this event. When it comes to self-driving cars, we also need to ensure the door locks
+    and car should follow appropriate protocol in the case of emergency. For T-Rex, the tranquilizer is a safety precaution which will 
+    keep the visitors safe at all times.
 
     \subsection{Implementation Guidelines}
     \paragraph{} According to the design, we suggest programmers to use some sort of 
     Concurrent safe Messaging Queue for the communication between sensing objects and 
     their associated parent objects. We also recommend using concurrent safe Priority 
-    Queue for the ECS, so the ECS can react based on the certain given priority. The 
+    Queue for the CGC, so the CGC can react based on the certain given priority. The 
     priority should be considered because in the case of an emergency, the priority 
-    for that event should be at the very top so that the ECS should immediately react 
-    to it by closing its doors and going to first floor if its not there already.
+    for that event should be at the very top so that the CGC should immediately react 
+    to it and follow emergency protocol.
 
 \section{Definition of Terms} \label{defs}
 \paragraph{} \textit{The following is a list of definitions contain the most commonly used 
