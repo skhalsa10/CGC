@@ -112,14 +112,14 @@ fields are treated analogously.}
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
     \hline
     \textbf{currentMode} & indicates whether or not which mode is detected. \\
-    \textbf{healthStatus } & indicates the health of the electric fence. \\
-    \textbf{electrical conductance sensor} &  electricity in the fence.\\
+    \textbf{Electric Fence Sensor} &  object that senses any distortions in the fence.\\
+    \textbf{Maintainer} &  object that checks for health status of the fence.\\
     \hline
     \multicolumn{2}{|c|}{\textbf{Functions}} \\
     \hline
     \textbf{checkStatus()} & $\rightarrow$ checks the status of the fence. \\
     \textbf{switchMode(mode)} & $\rightarrow$ switches the mode based on the specification by CGC. \\
-    \textbf{reportHealth()} & $\rightarrow$ reports the health of the fence. \\
+    \textbf{reportHealthToCGC()} & $\rightarrow$ reports the health of the fence. \\
     \hline
 
 \end{tabularx}
@@ -130,24 +130,35 @@ fields are treated analogously.}
 \begin{tabularx}{\hsize}{|Y|Y|}
     \hline
     \rowcolor{nicegreen}
-    \multicolumn{2}{|c|}{\textbf{Some Class Name}} \\ % Title of Class
+    \multicolumn{2}{|c|}{\textbf{Electric Fence Sensor}} \\ % Title of Class
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
     \hline
-    \textbf{attribute 1} & brief description \\
-    \textbf{attribute 2} & brief description \\
-    \textbf{.} & brief description \\
-    \textbf{.} & brief description \\
-    \textbf{.} & brief description\\
+    \textbf{electric conductance} & senses electricity in the fence. \\
     \hline
     \multicolumn{2}{|c|}{\textbf{Functions}} \\
     \hline
-    \textbf{function1()} & $\rightarrow$ brief description \\
-    \textbf{function2()} & $\rightarrow$ brief description \\
-    \textbf{.} & $\rightarrow$ brief description \\
-    \textbf{.} & $\rightarrow$ brief description \\
-    \textbf{.} & $\rightarrow$ brief description\\
+    \textbf{checkElectricConductance()} & $\rightarrow$ check possible distortions in thefence. \\
+    \hline
+
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\hsize}{|Y|Y|}
+    \hline
+    \rowcolor{nicegreen}
+    \multicolumn{2}{|c|}{\textbf{Maintainer}} \\ % Title of Class
+    \hline
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+    \hline
+    \textbf{health status} & indicates the health of the electric fence. \\
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+    \hline
+    \textbf{maintainanceMode()} & $\rightarrow$ goes into maintainance mode. \\
     \hline
 
 \end{tabularx}
