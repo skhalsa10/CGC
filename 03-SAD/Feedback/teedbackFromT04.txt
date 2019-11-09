@@ -1,0 +1,28 @@
+INTRO: 
+-Put summary of all sections.
+-Nice summary of RDD and SRS
+
+SECTION 2: 
+-Diagram is confusing, maybe show the giant one in the end. What is threaded is not clear, what are interfaces is not clear (put under a line), and this implementation would need lots of objects, so keep that in mind.
+-No communication on what is internal vs. external, add paragraphs to the figures to describe what they are. Describe what's there and why you have it. 
+-Token sensor is in the diagram but never mentioned in the SAD.
+
+SECTION 3:
+-Class descriptions are very readable, we like the tables and the formatting. 
+-Your use cases are also very good, there are many and are detailed(maybe too detailed, see below). 
+
+SECTION 4:
+Needs use case diagrams (stick figures), since you have so many. 
+One team member says that you can simplify your use cases (view T-Rex is 2 pages), you don't need to list every little detail, however, some team members think this is good. 
+We do agree that some have a lot of needless details, just describe how the user interacts with the software and not the long lines, etc. 
+
+SECTION 5:
+Design constraints might benefit from more content. 
+
+
+
+GENERAL:
+Your specications for the maintainer class implies a new maintainer class for each class. Is this the best way to implement this? Is it its own thread, is there a way to make it more centralized? 
+
+SUMMARY: 
+Overall, Team 04 feels like this is a good document. It needs some additions and improvements (see above), but has a lot of great content and formatting.
