@@ -28,9 +28,9 @@
 \definecolor{LightBlue}{HTML}{4f81bf}
 \begin{titlepage}
     \begin{flushleft}
-        \vspace{1cm} \Huge  \textbf{Elevator Control System}\\
+        \vspace{1cm} \Huge  \textbf{Cretaceous Gardens Controller}\\
         \vspace{1cm} \Huge  \textit{Software Architecture Design}\\
-        \vspace{1cm} \Large \textit{SAD Version 1.0}\\
+        \vspace{1cm} \Large \textit{SAD Version 2.0}\\
         \vspace{5cm} \LARGE         Team \#3\\ 
                                     7 November 2019
         \vfill       \Huge  \textbf{CS 460 Software Engineering}
@@ -52,72 +52,106 @@ How will ensure the desired behavior?
 
 \paragraph{} The ultimate goal is to ensure an efficient, safe, and maintainable implementation of the Cretaceous Gardens Controller (CGC) software\footnote{Introduction by Zeke.}. To that end, all objects are illustrated in their proper contexts, and their crucial functions have been delineated as clearly as possible while simultaneously allowing the programmer enough flexibility so as to not stifle his or her creative process. 
 
-\paragraph{} This is a road map for the eventual implementation of the system. It details the most relevant objects and their relationships in the form of diagrams. Explanations accompany all diagrams for the sake of clarity.
+\paragraph{} This is a road map for the eventual implementation of the system. It details the most 
+relevant objects and their relationships in the form of diagrams. Explanations accompany all diagrams 
+for the sake of clarity.
 
 \section{Design Overview} \label{over}
 \paragraph{} \textit{The class architecture presented here\footnote{Diagrams by 
 Siri and Anas.} aims to maximize efficiency, maintainability, and 
-safety. Without an efficient system, its safety may be compromised due to unnecessary 
+safety. Without an efficient system, it's safety may be compromised due to unnecessary 
 delays between components. Maintainability can impact a safe implementation of the 
 system if the system is permeable to programmer errors. The decoupling of concerns and 
-a solid hierarchy are paramount.} %The design has been color-coded to increase readability. 
-%The colors are only for the sake of distinguishing one component from another. The component 
-%specification diagrams in the following section inherit these colors. Small red arrows point 
-%to objects that may be triggered by an event. Said objects are virtual devices and iconifications 
-%of their physical triggers have been connected to them with bidirectional blue arrows.}
+a solid hierarchy are paramount.} 
+
 
 \begin{figure}[H]
-    \centerline{\includegraphics[scale=.15]{CGCOverview.png}}
-    \caption{An overview of the Cretaceous Gardens Control System.}
- %Red arrows indicate that an object may be triggered by an event. The event is represented by the icon connected to the object.}
-    \label{fig:CGCOverview}
+    \centerline{\includegraphics[scale=.095]{CGCOverview.png}}
+    \caption{\textbf{CGC Overview:} This showcases the entire system as a whole working togethor. The CGC 
+acts as a central system that can communicate with all active systems. We see it is not composed 
+of any other objects, but rather it owns references to all active systems and helps keep track of 
+them and helps bridge connections to other active systems. It is important to note that the red 
+triangle in the corner of some objects symbolize that it runs in it's own thread. The red arrows 
+symbolize that these objects can cause triggering events that generate some sort of action inside the 
+system. One last thing that may seem unusual is the small circles above some objects labeled 
+maintainable. This means that these objects implement the interface maintainable and the behavior 
+associated with it.}
+  \label{fig:CGCOverview}
 \end{figure}    
+
+
 
 \begin{figure}[H]
     \centerline{\includegraphics[scale=.20]{CGCStation.png}}
-    \caption{The Cretaceous Gardens Control (CGC) Station.}
+    \caption{\textbf{CGC Station: } A critical device that interfaces employees with the CGC System. we 
+clearly see that the device interfaces with a microphone and speaker. these are critical for 
+intercom communucation to and from other devices. There is also a touch display with a user interface 
+that helps the Employee  obtain information such as financial information, the health status of all 
+devices, and other screens. It is a device that itself is Maintainable and also reports it's health.}
     \label{fig:CGCStation}
 \end{figure}
   
+
 \begin{figure}[H]
     \centerline{\includegraphics[scale=.20]{PayKiosk.png}}
-    \caption{The Pay Kiosk.}
+    \caption{\textbf{The Pay Kiosk: }The Pay Kiosk object controls the Pay Kiosk device. These are devices used to 
+purchase and build access Tokens for the visitors. It is critical as it helps the users get into 
+the Gardens while also helping the client make money. It is composed of objects that are hardware such
+ as the token and change dispensors. it also contains other sensors such as credit card and cash 
+ recepticles as well as a touch screen. It has a system that helps log transactions and build tokens. 
+ It will configure another critical device, the Token. this is a high tech piece of equipment that is 
+ used by the visitor as an access card, but also a communication device, a gps device, as well as 
+ other interactive capabilities.}
     \label{fig:PayKiosk}
 \end{figure} 
 
+
 \begin{figure}[H]
     \centerline{\includegraphics[scale=.20]{Car.png}}
-    \caption{The self-driving car.}
+    \caption{\textbf{The Car: }The car object is another critical device. it is a layer on top of the contracted car 
+manufacture's own software layer for their autonomous vehicle. It can communicate with sensors such as 
+weight sensors, seatbelt sensors, and much more. It has a GPS that communicates with the GPS Server. 
+It also includes API's that can be used to give it a destination, override the controls and other such 
+capabilitites. It is also a Maintainable object.}
     \label{fig:Car}
 \end{figure}
 
 \begin{figure}[H]
     \centerline{\includegraphics[scale=.20]{TRexMonitor.png}}
-    \caption{The T-Rex Monitor.}
+    \caption{\textbf{The T-Rex Monitor: }The T-Rex Monitor  helps the CGC keep track of the T-Rex. 
+It monitors it's Biometrics to make sure it is not stressed out. it also controls a tranquilizor 
+that can put the dino to sleep in a safe mannor. This is another Maintainable system. }
     \label{fig:TRexMonitor}
 \end{figure}
 
 \begin{figure}[H]
     \centerline{\includegraphics[scale=.20]{CameraNetwork.png}}
-    \caption{The Camera Network.}
+    \caption{\textbf{The Camera Network: }The Camera Network Object has one goal and that is to control every single Camera feed. 
+It connects this camera feed to a DVR system to help record the feed. It is a Maintainable system.}
     \label{fig:CameraNetwork}
 \end{figure}    
 
 \begin{figure}[H]
     \centerline{\includegraphics[scale=.20]{ElectricFence.png}}
-    \caption{The Electric Fence.}
+    \caption{\textbf{The Electric Fence: }The is another very simple software system. The entire goal is to monitor the 
+electric fence. To do this it utilizes the Electric Fence Sensor. It is also Maintainable.}
     \label{fig:ElectricFence}
-\end{figure}    
+\end{figure}   
+
 
 \begin{figure}[H]
     \centerline{\includegraphics[scale=.20]{GlobalAlarm.png}}
-    \caption{The Global Alarm System.}
+    \caption{\textbf{The Global Alarm System: }The global alarm system controls the loud PA speakers on the island and is critical
+ in case of an emergency. This will be able to report on its health by implementing the maintainable 
+ interface. It is very basic and the CGC can broker connections to it from CGC Stations.}
     \label{fig:GlobalAlarm}
 \end{figure}  
 
 \begin{figure}[H]
     \centerline{\includegraphics[scale=.20]{GPSServer.png}}
-    \caption{The GPS Server.}
+    \caption{\textbf{The GPS Server: }The GPS server is a central server that keeps track of all Registered and active GPS devices. 
+It contians the locations of all devices and these are made available through functions. the server will be able 
+to report its health by implementing the maintianable interface.}
     \label{fig:GPSServer}
 \end{figure}   
 
@@ -425,7 +459,7 @@ InjectDino()
 \begin{tabularx}{\hsize}{|Y|Y|}
     \hline
     \rowcolor{nicegreen}
-    \multicolumn{2}{|c|}{\textbf{Some Class }} \\
+    \multicolumn{2}{|c|}{\textbf{Car Cass }} \\
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
@@ -1569,23 +1603,21 @@ structures concerning the safety controls are as fast as possible but also that 
 of prioritizing all signals in the best way possible.}
 
     \subsection{Safety}
-    \paragraph{} The safety is highly prioritized in our design of the ECS. We have 
-    considered associating the fire alarm directly with the ECS because in the case 
-    of the fire alarm triggering, this event has a very high priority and the ECS 
-    should immediately react to this event. When it comes to elevator and bay safety, 
-    each elevator and bay will have set of Safety Controls that they can communicate 
-    through and the ECS monitors the situation from the top. By ensuring safety for 
-    both bays and the elevators, the ECS operation will be carried smoothly without 
-    hurting the passengers.
+    \paragraph{} The safety is highly prioritized in our design of the CGC. We have 
+    global fire alarm system and the CGC directly have access to it in the case 
+    emergency, this event has a very high priority and the CGC 
+    should immediately react to this event. When it comes to self-driving cars, we also need to ensure the door locks
+    and car should follow appropriate protocol in the case of emergency. For T-Rex, the tranquilizer is a safety precaution which will 
+    keep the visitors safe at all times.
 
     \subsection{Implementation Guidelines}
     \paragraph{} According to the design, we suggest programmers to use some sort of 
     Concurrent safe Messaging Queue for the communication between sensing objects and 
     their associated parent objects. We also recommend using concurrent safe Priority 
-    Queue for the ECS, so the ECS can react based on the certain given priority. The 
+    Queue for the CGC, so the CGC can react based on the certain given priority. The 
     priority should be considered because in the case of an emergency, the priority 
-    for that event should be at the very top so that the ECS should immediately react 
-    to it by closing its doors and going to first floor if its not there already.
+    for that event should be at the very top so that the CGC should immediately react 
+    to it and follow emergency protocol.
 
 \section{Definition of Terms} \label{defs}
 \paragraph{} \textit{The following is a list of definitions contain the most commonly used 
