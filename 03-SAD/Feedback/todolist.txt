@@ -1,0 +1,22 @@
+1. change title
+2. last sentence paragraph one of introduction needs work
+3. the last paragraph of intro needs to explain what we will encounter in each section.
+4.remove italics for design overview first paragraph
+5. compact overview diagram DONE
+6. comment on what the stack of boxes mean 
+7. showcase drivers DONE
+8.showcase software. DONE
+9. before each subcomponents give sentences explaining. DONE
+10.give a caption and table number to class tables
+11. keep from writing over page numbers either move page numbers to different location or change diagrams
+12. pay kiosk... should have a waiversigned related function?
+13. missing ) in dispenseToken function in pay kiosk class table
+14. there is some floating functions in no table
+15. car class table missing
+16. 28 pages of use cases is extreme only need critiical ones to help define the architecture.
+17. need use case diagrams
+18. remove Acronym in definition of acronyms.
+19. add red triangles for threads DONE
+20. add red arrows for event triggering classes DONE
+21. new sections for specific implementation plan
+
