@@ -1,5 +1,5 @@
-1. change title
-2. last sentence paragraph one of introduction needs work
+1. change title // done
+2. last sentence paragraph one of introduction needs work //done
 3. the last paragraph of intro needs to explain what we will encounter in each section.
 4.remove italics for design overview first paragraph
 5. compact overview diagram DONE
