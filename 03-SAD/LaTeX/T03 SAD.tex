@@ -472,23 +472,31 @@ is representative of all the sub-components it belongs to.} \\
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
     \hline
-    \textbf{attribute 1} & brief description \\
-    \textbf{attribute 2} & brief description \\
-    \textbf{.} & brief description \\
-    \textbf{.} & brief description \\
-    \textbf{.} & brief description\\
+    \textbf{isActivated} & Specifies if the car is activated \\
+    \textbf{isParked} & Specifies if the car is parked \\
+    \textbf{Position} & Specifies where is the car located \\
+    \textbf{Destiny} & Destiny where the car has to travel\\
+    \textbf{Passengers} & Number of passengers in the car\\
     \hline
     \multicolumn{2}{|c|}{\textbf{Functions}} \\
     \hline
-    \textbf{function1()} & $\rightarrow$ brief description \\
-    \textbf{function2()} & $\rightarrow$ brief description \\
-    \textbf{.} & $\rightarrow$ brief description \\
-    \textbf{.} & $\rightarrow$ brief description \\
-    \textbf{.} & $\rightarrow$ brief description\\
+    \textbf{checkPosition()} & $\rightarrow$ Return the position of the car in the island \\
+    \textbf{checkIfParked()} & $\rightarrow$ Return if the car is parked \\
+    \textbf{isActivated()} & $\rightarrow$ Return if the car is activated \\
+    \textbf{activateCar()} & $\rightarrow$ Will activate the car \\
+	\textbf{desactivateCar()} & $\rightarrow$ Will desactivate the car  \\
+	\textbf{travelToDestiny()} & $\rightarrow$ Will start the trip to the destiny \\
+    \textbf{setDestiny()} & $\rightarrow$ Will set the destiny of the car\\
+	\textbf{ValidateToken()} & $\rightarrow$ Check if the token is valid \\
+	\textbf{lockDoors()} & $\rightarrow$ Will lock the doors of the car \\
+	\textbf{unlockDoors()} & $\rightarrow$ Will unlock the doors of the car \\
+	\textbf{passengerSit()} & $\rightarrow$ Will recognize that there is a passenger sit and has his belt on \\
+	\textbf{sendLocationToCGC()} & $\rightarrow$ Will send the location to GCG \\
     \hline
 
 \end{tabularx}
 \end{table}
+
 
 \section{Sample Use Cases} \label{samp}
 \paragraph{} \textit{A broad overview of use cases begins this section and it is followed 
