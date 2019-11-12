@@ -1590,12 +1590,27 @@ official, managerial, medical, and technical connotations.}
             \end{itemize}
     \end{itemize}
     
-    % another use case
-    
-    % another use case
-    
-    % ...
-    
+\section{Class Implementation} \label{impl}
+\paragraph{} \textit{There is now a foundation laid out to build something incredible. 
+Due to the limitation of time there will only be a small feature set built though. This section will 
+ultimately outline the implementation subset that will be delivered during the class period.}
+
+\paragraph{} To showcase possible behavior that may be seen at the gardens there needs to be a way to showcase 
+the GPS tracking of the Visitors, Employees, Cars, and T-rex. The best way to do this is to simulate the actual system 
+that would display this information. To do this we will simulate the graphics of the CGC Station which would normally display active nodes
+and also act as a way for an employee to control aspects of the system. This simulation will have additional controls that
+can control what nodes get spawned into the simulation of the park. The goal for a system like this would be to test the behavior of the protocols 
+and also help design protocols. The protocol designer will not be implemented in this version. For now something similar to the following image will be built.
+The logic to help make this simulation work will also be built.
+
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=.10]{CGCStationGUI.png}}
+    \caption{\textbf{CGC Station Sim GUI: } A potential version the simulated gui that will be build.}
+    \label{fig:CGCStationGUI}
+\end{figure}
+
+
+
 \section{Design Constraints} \label{cons}
 \paragraph{} \textit{Due to the real-time nature of the system, there exist some additional 
 constraints\footnote{Design Constraints by Anas.}. Namely, it must be the case that all data 
