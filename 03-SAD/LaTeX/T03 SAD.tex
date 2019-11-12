@@ -7,7 +7,10 @@
 \usepackage[table]{xcolor}
 \usepackage{tabularx}
 \usepackage{arydshln}
+\usepackage{fancyhdr}
 
+\pagestyle{fancy}
+\fancyhf{}
 \bibliographystyle{apalike}
 \setcitestyle{open={[},close={]}}
 \sectionfont{\color{DarkBlue}} 
@@ -81,8 +84,10 @@ of any other objects, but rather it owns references to all active systems and he
 them and helps bridge connections to other active systems. It is important to note that the red 
 triangle in the corner of some objects symbolize that it runs in it's own thread. The red arrows 
 symbolize that these objects can cause triggering events that generate some sort of action inside the 
-system. One last thing that may seem unusual is the small circles above some objects labeled 
-maintainable. This means that these objects implement the interface maintainable and the behavior 
+system. Another thing that may not be immediately apparent is the stack of objects. This means that there 
+can be 1 to n of these objects running at any one timeOne last thing that may seem unusual is the 
+small circles above some objects labeled maintainable. This means that these objects implement 
+the interface maintainable and the behavior 
 associated with it.}
   \label{fig:CGCOverview}
 \end{figure}    
@@ -408,11 +413,10 @@ is representative of all the sub-components it belongs to.} \\
 \end{tabularx}
 \end{table}
 
-checkHealth()
-reportBiometricsAlarm()
-syncLocation()
-injectDino()
-
+%checkHealth()
+%reportBiometricsAlarm()
+%syncLocation()
+%injectDino()
 \begin{table}[H]
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
@@ -460,7 +464,7 @@ injectDino()
     \textbf{acceptMoney(moneyType)} & $\rightarrow$ accepts the appropriate money type. \\
     \textbf{dispense(money, receipt())} & $\rightarrow$ dispenses money with receipt. \\
     \textbf{activateToken(tokenID)} & $\rightarrow$ activates token. \\
-    \textbf{dispenseToken(tokenID} & $\rightarrow$ dispenses token. \\
+    \textbf{dispenseToken(tokenID)} & $\rightarrow$ dispenses token. \\
     \hline
 
 \end{tabularx}
@@ -1232,6 +1236,110 @@ on an irregular or infrequent basis (e.g. veterinarians, auditors, emergency per
             \end{itemize}
     \end{itemize}
     
+    % another use case
+    
+    % another use case
+    
+    % ...
+    
+    \subsection{Zookeeper} \label{zook}
+    \textit{A zookeeper may interact with the CGC in a variety of ways, but some of the
+    major roles of such an actor (as with any zookeeper) are to prepare the diet of the T-Rex, 
+    feed the T.Rex, to observe its behavior, or groom it.}
+    \par\noindent\rule{\textwidth}{0.4pt}    
+    \begin{itemize}
+        \item[]\textbf{Use Case:} 
+            FeedTRex                                
+
+        \item[]\textbf{Primary Actor:}
+            Zookeeper
+
+        \item[]\textbf{Goal in Context:}
+            To safely provide food for the T.Rex, whether it be live, frozen, thawed, or prepared
+            prey.
+
+        \item[]\textbf{Preconditions:}
+            The CGC is not in emergency mode, and all components are fully functional.
+
+        \item[]\textbf{Trigger:}
+            It is time to feed the T.Rex.
+
+        \item[]\textbf{Scenario:}
+            \begin{enumerate}
+                \item The CGC Station Operator dispatches the zookeeper in a self driving car
+                to the edge of the enclosure furthest from the current location of the T.Rex.
+                \item The Zookeeper requests an all-clear confirmation from the operator.
+                \item The operator disengages the electricity of the panel to provide access.
+                \item The Zookeeper enters and travels a significant distance into the enclosure.
+                \item The Zookeeper drops off the food.
+                \item The Zookeeper travels back the point of entry.
+                \item The Zookeeper exits the enclosure.
+                \item The Operator confirms successful exit.
+                \item The Operator reengages the electricity of the panel. 
+            \end{enumerate}
+
+        \item[]\textbf{Exceptions:}
+            \begin{itemize}
+                \item[] There is a shortage of food on the island.
+                \item[] The T.Rex is sick or injured and does not want to eat.
+                \item[] The T.Rex reaches the zookeeper before the zookeeper exits the enclosure.
+            \end{itemize}
+
+        \item[]\textbf{Priority:}
+            Essential, must be implemented
+
+        \item[]\textbf{When Available:}
+            On demand and via operator-zookeeper protocol
+
+        \item[]\textbf{Frequency of Use:}
+            Periodically (it can be daily, weekly, or monthly for example)
+
+        \item[]\textbf{Channel to Primary Actor:}
+            \begin{itemize}
+                \item[] Enclosure Panel
+            \end{itemize}
+
+        \item[]\textbf{Secondary Actors:}
+            CGC Station Operator, T.Rex, Car
+        
+        \item[]\textbf{Channels to Secondary Actors:}
+            \begin{itemize}
+                \item[] CGC Station Operator: Car Intercom, Camera Network
+                \item[] T.Rex: Enclosure Panel
+            \end{itemize}
+
+        \item[]\textbf{Open Issues:}
+            \begin{itemize}
+                \item[] Should the panel remain inactive while 
+                the zookeeper is inside?
+                \item[] Should the zookeeper simply wear an electric 
+                safety suit to avoid disengagement all together?
+            \end{itemize}
+    \end{itemize}
+    
+
+
+\section{Class Implementation} \label{impl}
+\paragraph{} \textit{There is now a foundation laid out to build something incredible. 
+Due to the limitation of time there will only be a small feature set built though. This section will 
+ultimately outline the implementation subset that will be delivered during the class period.}
+
+\paragraph{} To showcase possible behavior that may be seen at the gardens there needs to be a way to showcase 
+the GPS tracking of the Visitors, Employees, Cars, and T-rex. The best way to do this is to simulate the actual system 
+that would display this information. To do this we will simulate the graphics of the CGC Station which would normally display active nodes
+and also act as a way for an employee to control aspects of the system. This simulation will have additional controls that
+can control what nodes get spawned into the simulation of the park. The goal for a system like this would be to test the behavior of the protocols 
+and also help design protocols. The protocol designer will not be implemented in this version. For now something similar to the following image will be built.
+The logic to help make this simulation work will also be built.
+
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=.10]{CGCStationGUI.png}}
+    \caption{\textbf{CGC Station Sim GUI: } A potential version the simulated gui that will be build.}
+    \label{fig:CGCStationGUI}
+\end{figure}
+
+
+
 \section{Design Constraints} \label{cons}
 \paragraph{} \textit{Due to the real-time nature of the system, there exist some additional 
 constraints\footnote{Design Constraints by Anas.}. Namely, it must be the case that all data 
