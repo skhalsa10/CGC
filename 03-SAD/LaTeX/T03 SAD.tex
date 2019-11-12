@@ -1617,6 +1617,11 @@ The logic to help make this simulation work will also be built.
     \label{fig:CGCStationGUI}
 \end{figure}
 
+\paragraph{} To implement this there will be only 6 major classes that will get built and implemented. There 
+will be the CGC Station, which includes the GUI, the CGC which will spawn and keep track of the Car, T-Rex Monitor, Visitor, Employee.
+Th Car, T-Rex Monitor , Visitor, and Employee will implement the Tracking and Maintainable interface. This will guarantee that 
+these classes will report their location and health to the CGC that can then be used to represent this data in a GUI format.
+Every class will run on it's own thread. to make these all communicate successfully to
 
 
 \section{Design Constraints} \label{cons}
