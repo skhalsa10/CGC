@@ -7,7 +7,10 @@
 \usepackage[table]{xcolor}
 \usepackage{tabularx}
 \usepackage{arydshln}
+\usepackage{fancyhdr}
 
+\pagestyle{fancy}
+\fancyhf{}
 \bibliographystyle{apalike}
 \setcitestyle{open={[},close={]}}
 \sectionfont{\color{DarkBlue}} 
@@ -57,12 +60,12 @@ relevant objects and their relationships in the form of diagrams. Explanations a
 for the sake of clarity.
 
 \section{Design Overview} \label{over}
-\paragraph{} \textit{The class architecture presented here\footnote{Diagrams by 
+\paragraph{} The class architecture presented here\footnote{Diagrams by 
 Siri and Anas.} aims to maximize efficiency, maintainability, and 
 safety. Without an efficient system, it's safety may be compromised due to unnecessary 
 delays between components. Maintainability can impact a safe implementation of the 
 system if the system is permeable to programmer errors. The decoupling of concerns and 
-a solid hierarchy are paramount.} 
+a solid hierarchy are paramount. 
 
 
 \begin{figure}[H]
@@ -73,8 +76,10 @@ of any other objects, but rather it owns references to all active systems and he
 them and helps bridge connections to other active systems. It is important to note that the red 
 triangle in the corner of some objects symbolize that it runs in it's own thread. The red arrows 
 symbolize that these objects can cause triggering events that generate some sort of action inside the 
-system. One last thing that may seem unusual is the small circles above some objects labeled 
-maintainable. This means that these objects implement the interface maintainable and the behavior 
+system. Another thing that may not be immediately apparent is the stack of objects. This means that there 
+can be 1 to n of these objects running at any one timeOne last thing that may seem unusual is the 
+small circles above some objects labeled maintainable. This means that these objects implement 
+the interface maintainable and the behavior 
 associated with it.}
   \label{fig:CGCOverview}
 \end{figure}    
@@ -397,11 +402,6 @@ is representative of all the sub-components it belongs to.} \\
 \end{tabularx}
 \end{table}
 
-checkHealth()
-reportBiometricsAlarm()
-syncLocation()
-InjectDino()
-
 \begin{table}[H]
 \begin{tabularx}{\hsize}{|Y|Y|}
     \hline
@@ -449,7 +449,7 @@ InjectDino()
     \textbf{acceptMoney(moneyType)} & $\rightarrow$ accepts the appropriate money type. \\
     \textbf{dispense(money, receipt())} & $\rightarrow$ dispenses money with receipt. \\
     \textbf{activateToken(tokenID)} & $\rightarrow$ activates token. \\
-    \textbf{dispenseToken(tokenID} & $\rightarrow$ dispenses token. \\
+    \textbf{dispenseToken(tokenID)} & $\rightarrow$ dispenses token. \\
     \hline
 
 \end{tabularx}
@@ -1629,8 +1629,8 @@ In the event that a definition was taken directly from a source, it is followed 
 Design Specification document.}}
 
 \begin{list}{}{}
-    \item \textbf{CGC:} Acronym for Cretaceous Gardens Controller 
-    \item \textbf{DVR:} Acronym for Digital Video Recorder
+    \item \textbf{CGC:} Cretaceous Gardens Controller 
+    \item \textbf{DVR:} Digital Video Recorder
     \item \textbf{Electrical Conduction:} The movement of electrically charged particles through a transmission medium.
     \item \textbf{GPS:} Global Positioning System 
     \item \textbf{Hardwired Ethernet:} This references the latest IEEE standard for Ethernet utilizing physical cables.
