@@ -493,8 +493,12 @@ InjectDino()
 \section{Sample Use Cases} \label{samp}
 \paragraph{} \textit{A broad overview of use cases begins this section and it is followed 
 by detailed case descriptions. Human actors are denoted by small stick figures and have the 
-same color scheme as the box that contains their labels. The section later features use case 
-diagrams for each actor and a detailed sample of use cases.}
+same color scheme as the box that contains their labels. The section has been generalized into
+three types of users for simplicity. Guests, internal personnel, and external personnel constitute
+the types of actors. Guests are park visitors, internal personnel are those actors that contribute 
+(typically through daily employment) to the function of the resort on a regular basis (e.g. cars, 
+maintenance personnel, the T.Rex), and external personnel are actors which interact with the system
+on an irregular or infrequent basis (e.g. veterinarians, auditors, emergency personnel).}
 %\begin{figure}[H]
 %    \centerline{\includegraphics[scale=.30]{ECSUseCaseUML.png}}
 %    \caption{Shows the a general view of use cases as a diagram. The primary actors are color coded on the left, and exclusive
@@ -502,171 +506,7 @@ diagrams for each actor and a detailed sample of use cases.}
 %    grey color scheme. The dashed lines indicate inclusions.}
 %    \label{fig:usecasediagram}
 %\end{figure}
-section{Sample Use Cases}
-\paragraph{} \textit{The CGC lends itself for a substantial amount of uses. Some notable uses include financial,
-official, managerial, medical, and technical connotations.}
-
-    \subsection{CGC Station Operator}
-    \textit{The CGC Station Operator  (GSO)is the actor responsible for monitoring the central CGC system that
-    controls all other components. This individual may communicate with guests or other employees 
-    through the car intercom, may place vehicles into manual mode, and has access to the camera network.}
-    \par\noindent\rule{\textwidth}{0.4pt}    
-    \begin{itemize}
-        \item[]\textbf{Use Case:}                                
-            ReprimandTroublesomeGuest
-
-        \item[]\textbf{Primary Actor:}
-            CGC Station Operator
-
-        \item[]\textbf{Goal in Context:}
-            To reprimand a guest that is causing trouble by incremental warnings ranging from
-            casual notice, to threats of banishment from the resort.
-
-        \item[]\textbf{Preconditions:}
-            The system and all components are functioning properly.
-
-        \item[]\textbf{Trigger:}
-            A guest is caught throwing rocks into the enclosure.
-            
-        \item[]\textbf{Scenario:}
-            \begin{enumerate}
-                \item The GSO reviews an alert from the electric fence interface.
-                \item The GSO reads that small voltage spikes have been detected.
-                \item The GSO heads to the surveillance camera that corresponds to the
-                panel in question.
-                \item The GSO observes a guest hurling rocks at the enclosure, which
-                explains the voltage spikes.
-                \item The GSO immediately and firmly tells the guest to stop throwing rocks
-                through the PA system near the site.
-                \item The GSO is ignored by the guest who gives the finger to the camera.
-                \item The GSO dispatches the nearest patrol vehicle to the location.
-                \item The GSO explains the situation to the security guard that happens 
-                to be in the patrol vehicle at the time.
-                \item The GSO firmly alerts the unruly guest that a security guard has been sent.
-                \item The security guard arrives and reprimands the guest.
-                \item The guest become violent and gets tased and pepper sprayed.
-                \item The guest is apprehended and placed in the patrol vehicle.
-                \item The GSO dismisses the electric fence alerts.
-            \end{enumerate}
-
-        \item[]\textbf{Exceptions:}
-            \begin{itemize}
-                \item[] The system is triggered into emergency mode.
-            \end{itemize}
-
-        \item[]\textbf{Priority:}
-            Moderate, not necessary, but can be useful.
-            
-        \item[]\textbf{When Available:}
-            On demand.
-
-        \item[]\textbf{Frequency of Use:}
-            More frequent with higher volumes of visits.
-            
-        \item[]\textbf{Channel to Primary Actor:}
-            Electric fence panel, CGC Station GUI, camera 
-
-        \item[]\textbf{Secondary Actors:}
-            Patrol Vehicle, Security Guard, Electric Fence, Guest
-            
-        \item[]\textbf{Channels to Secondary Actors:}
-            \begin{itemize}
-                \item[] Patrol Vehicle: direct
-                \item[] Security Guard: car intercom
-                \item[] Electric Fence: direct
-                \item[] Guest: PA system, electric fence
-            \end{itemize}
-
-        \item[]\textbf{Open Issues:}
-            \begin{itemize}
-                \item[] None known.
-            \end{itemize}
-    \end{itemize}
-     
-    \subsection{Emergency Personnel}
-    \textit{Emergency Personnel (EP) may be police officers, federal agents, paramedics, and in certain contexts even 
-    security guards. Among the many actions that may be taken by such an actor are search and rescue, arrest, perform CPR, 
-    and many more.}
-    \par\noindent\rule{\textwidth}{0.4pt}    
-    \begin{itemize}
-        \item[]\textbf{Use Case:}                                
-            SearchAndRescue
-
-        \item[]\textbf{Primary Actor:}
-            Emergency Personnel
-
-        \item[]\textbf{Goal in Context:}
-            To find any potentially remaining guests after a disaster has occurred on the island.
-            
-        \item[]\textbf{Preconditions:}
-            Emergency mode may or may not be currently active, but it has definitely been triggered prior to 
-            the arrival of the actor.
-
-        \item[]\textbf{Trigger:}
-            A distress signal has been received from Cretaceous Gardens (from Isla Trueno).
-
-        \item[]\textbf{Scenario:}
-            \begin{enumerate}
-                \item The platoon has received orders to address an emergency on Isla Trueno. 
-                \item The troops arrive to the island littered with debris and corpses. 
-                \item Some Pay kiosks remain active with an eerie glow coming from an uncannily 
-                cheerful welcome screen.
-                \item Screams of terror can be heard in the distance, followed by tremendous roars.
-                \item The Emergency Personnel head to the kiosks and enter special codes that provide
-                them with an enormous supply of token devices.
-                \item The EP diffuse throughout the island as they sweep for survivors.
-                \item Several helicopters can be heard swarming overhead and small group
-                is sent to the CGC Station.
-                \item As the troops move inland they find severely injured, but alive, guests.
-                \item The troops give the injured new tokens which may be detected by the team
-                at the station.
-                \item A second group arrives at the island, and is directed by the team at the station
-                (via walkie talkies) to the injured.
-                \item The team notices the T-Rex Monitor signal moving toward the sweeping group of soldiers
-                and they alert them immediately to get into offensive positions.
-                \item The helicopters overhead lower themselves to wait for the animal.
-                \item Permission to engage is granted and the beast is taken down.
-                \item The troops continue their operation until sunrise as teams of paramedics
-                are shipped to the island.
-            \end{enumerate}
-
-        \item[]\textbf{Exceptions:}
-            \begin{itemize}
-                \item[] The T.Rex destroys the CGC Station.
-            \end{itemize}
-
-        \item[]\textbf{Priority:}
-            Essential, must be implemented.
-            
-        \item[]\textbf{When Available:}
-            On demand.
-
-        \item[]\textbf{Frequency of Use:}
-            Hopefully never.
-
-        \item[]\textbf{Channel to Primary Actor:}
-            Token GPS
-
-        \item[]\textbf{Secondary Actors:}
-            Guests, Tokens, Pay Kiosks
-
-        \item[]\textbf{Channels to Secondary Actors:}
-            \begin{itemize}
-                \item[] Guests: tokens
-                \item[] Tokens: pay kiosks
-                \item[] Pay Kiosks: direct
-            \end{itemize}
-
-        \item[]\textbf{Open Issues:}
-            \begin{itemize}
-                \item[] None known.
-            \end{itemize}
-    \end{itemize}
-        
-    \subsection{Guest}
-    \textit{The guest is the primary benefactor of many to the system's features. The primary role of this
-    actor is to safely indulge in what the resort has to offer. The most common use for a guest is to see the main
-    exhibit but there may be several prerequisite uses that lead up to that.}
+\subsection{Guests}
     \par\noindent\rule{\textwidth}{0.4pt}    
     \begin{itemize}
         \item[]\textbf{Use Case:}                                
@@ -731,11 +571,10 @@ official, managerial, medical, and technical connotations.}
             Direct.
 
         \item[]\textbf{Channels to Secondary Actors:}
-            *means through which the primary and secondary actors interact*
             \begin{itemize}
                 \item[] Kiosk: Display on kiosk.
-                \item[] Token: Device desplay and speaker.
-                \item[] Guest Vehicle: Token interrfaces and seat sensors.
+                \item[] Token: Device display and speaker.
+                \item[] Guest Vehicle: Token interfaces and seat sensors.
                 \item[] T-Rex: Seen through enclosure fence.
             \end{itemize}
         \item[]\textbf{Secondary Actors:}
@@ -820,17 +659,80 @@ official, managerial, medical, and technical connotations.}
                 \item[] None known.
             \end{itemize}
     \end{itemize}
+
+\subsection{Internal Personnel}
+    \begin{itemize}
+        \item[]\textbf{Use Case:}                                
+            ReprimandTroublesomeGuest
+
+        \item[]\textbf{Primary Actor:}
+            CGC Station Operator
+
+        \item[]\textbf{Goal in Context:}
+            To reprimand a guest that is causing trouble by incremental warnings ranging from
+            casual notice, to threats of banishment from the resort.
+
+        \item[]\textbf{Preconditions:}
+            The system and all components are functioning properly.
+
+        \item[]\textbf{Trigger:}
+            A guest is caught throwing rocks into the enclosure.
+            
+        \item[]\textbf{Scenario:}
+            \begin{enumerate}
+                \item The GSO reviews an alert from the electric fence interface.
+                \item The GSO reads that small voltage spikes have been detected.
+                \item The GSO heads to the surveillance camera that corresponds to the
+                panel in question.
+                \item The GSO observes a guest hurling rocks at the enclosure, which
+                explains the voltage spikes.
+                \item The GSO immediately and firmly tells the guest to stop throwing rocks
+                through the PA system near the site.
+                \item The GSO is ignored by the guest who gives the finger to the camera.
+                \item The GSO dispatches the nearest patrol vehicle to the location.
+                \item The GSO explains the situation to the security guard that happens 
+                to be in the patrol vehicle at the time.
+                \item The GSO firmly alerts the unruly guest that a security guard has been sent.
+                \item The security guard arrives and reprimands the guest.
+                \item The guest become violent and gets tased and pepper sprayed.
+                \item The guest is apprehended and placed in the patrol vehicle.
+                \item The GSO dismisses the electric fence alerts.
+            \end{enumerate}
+
+        \item[]\textbf{Exceptions:}
+            \begin{itemize}
+                \item[] The system is triggered into emergency mode.
+            \end{itemize}
+
+        \item[]\textbf{Priority:}
+            Moderate, not necessary, but can be useful.
+            
+        \item[]\textbf{When Available:}
+            On demand.
+
+        \item[]\textbf{Frequency of Use:}
+            More frequent with higher volumes of visits.
+            
+        \item[]\textbf{Channel to Primary Actor:}
+            Electric fence panel, CGC Station GUI, camera 
+
+        \item[]\textbf{Secondary Actors:}
+            Patrol Vehicle, Security Guard, Electric Fence, Guest
+            
+        \item[]\textbf{Channels to Secondary Actors:}
+            \begin{itemize}
+                \item[] Patrol Vehicle: direct
+                \item[] Security Guard: car intercom
+                \item[] Electric Fence: direct
+                \item[] Guest: PA system, electric fence
+            \end{itemize}
+
+        \item[]\textbf{Open Issues:}
+            \begin{itemize}
+                \item[] None known.
+            \end{itemize}
+    \end{itemize}
     
-    % another use case
-    
-    % another use case
-    
-    % ...
-    
-    \subsection{Guest Vehicle}\label{carscenarios}
-    \textit{The guest vehicle (GV) plays a vital role in facilitating the guest experience. The actor primarily
-    moves guests to and from the exhibit, but may exhibit other functions when the system is in maintenance or
-    emergency mode.}
     \par\noindent\rule{\textwidth}{0.4pt}    
     \begin{itemize}
         \item[]\textbf{Use Case:}                                
@@ -966,145 +868,145 @@ official, managerial, medical, and technical connotations.}
             \end{itemize}
     \end{itemize}
     
-    \subsection{Maintenance Personnel}
-    \textit{Maintenance Personnel (MP) is responsible for the physical connections 
-    and addressing any issues with the physical components used with by the CGC (e.g cameras, 
-    kiosks, cars, enclosure panels, etc.). This individual would be in charge of responding to nodal failures.}
     \par\noindent\rule{\textwidth}{0.4pt}    
     \begin{itemize}
-        \item[]\textbf{Use Case:}                                
-            RepairExternalEnclosureCamera
+        \item[]\textbf{Use Case:} 
+            FeedTRex                                
 
         \item[]\textbf{Primary Actor:}
-            Network Maintenance Personnel
+            Zookeeper
 
         \item[]\textbf{Goal in Context:}
-            To fix or replace a malfunctioning or broken camera that has been detected to
-            be in such a state by the CGC. The camera in question resides outside the exhibit
-            enclosure.
+            To safely provide food for the T.Rex, whether it be live, frozen, thawed, or prepared
+            prey.
 
         \item[]\textbf{Preconditions:}
-            The CGC is not in emergency mode but may be in either normal or maintenance mode, and
-            the issue has already been diagnosed (i.e. it is known with certainty that the problem
-            is the camera and not the link to the camera).
+            The CGC is not in emergency mode, and all components are fully functional.
 
         \item[]\textbf{Trigger:}
-            The CGC reports an error in some camera within the Camera Network after 
-            failing to make contact via alternate paths.
+            It is time to feed the T.Rex.
 
         \item[]\textbf{Scenario:}
             \begin{enumerate}
-                \item NMP is dispatched and transported in an self-driving car to the 
-                location of the problem by the CGC Station Operator (CSO).
-                \item NMP arrives and performs a repair, exchanges the broken camera
-                for a new one, or attaches a new one if it happens to be gone all together.
-                \item The CSO and NMP perform tests to ensure proper function.
-                \item The maintenance is concluded.
-                \item The NMP is dispatched to any other components that may need servicing.
-                \item [OR]
-                \item The NMP returns any removed parts (e.g. the broken camera) to a stock room.
+                \item The CGC Station Operator dispatches the zookeeper in a self driving car
+                to the edge of the enclosure furthest from the current location of the T.Rex.
+                \item The Zookeeper requests an all-clear confirmation from the operator.
+                \item The operator disengages the electricity of the panel to provide access.
+                \item The Zookeeper enters and travels a significant distance into the enclosure.
+                \item The Zookeeper drops off the food.
+                \item The Zookeeper travels back the point of entry.
+                \item The Zookeeper exits the enclosure.
+                \item The Operator confirms successful exit.
+                \item The Operator reengages the electricity of the panel. 
             \end{enumerate}
 
         \item[]\textbf{Exceptions:}
             \begin{itemize}
-                \item[] Maintenance materials are out of stock.
-                \item[] Emergency mode interrupts the procedure.
+                \item[] There is a shortage of food on the island.
+                \item[] The T.Rex is sick or injured and does not want to eat.
+                \item[] The T.Rex reaches the zookeeper before the zookeeper exits the enclosure.
             \end{itemize}
 
         \item[]\textbf{Priority:}
-            Moderate, should be implemented.
+            Essential, must be implemented
 
         \item[]\textbf{When Available:}
-            On Demand.
+            On demand and via operator-zookeeper protocol
 
         \item[]\textbf{Frequency of Use:}
-            It may vary with respect to the average lifetime of the cameras in the network.
+            Periodically (it can be daily, weekly, or monthly for example)
 
         \item[]\textbf{Channel to Primary Actor:}
-            CGC Station, Car, Camera, Camera Network
+            \begin{itemize}
+                \item[] Enclosure Panel
+            \end{itemize}
 
         \item[]\textbf{Secondary Actors:}
-            CGC Station Operator, Camera Network
-            
+            CGC Station Operator, T.Rex, Car
+        
         \item[]\textbf{Channels to Secondary Actors:}
             \begin{itemize}
-                \item[] CGC Station Operator: Car Intercom
-                \item[] Camera Network: Camera
+                \item[] CGC Station Operator: Car Intercom, Camera Network
+                \item[] T.Rex: Enclosure Panel
             \end{itemize}
 
         \item[]\textbf{Open Issues:}
             \begin{itemize}
-                \item[] None known
+                \item[] Should the panel remain inactive while 
+                the zookeeper is inside?
+                \item[] Should the zookeeper simply wear an electric 
+                safety suit to avoid disengagement all together?
             \end{itemize}
     \end{itemize}
-%    
-%    % another use case
-%    
-%    % another use case
-%    
-%    % ...
-    
-    \subsection{Patrol Vehicle}
-    \textit{This actor is a special type of autonomous vehicle that patrols the island for an 
-    added layer of protection and in the interest of guest welfare.}
-    \par\noindent\rule{\textwidth}{0.4pt}    
+
+\subsection{External Personnel}
     \begin{itemize}
         \item[]\textbf{Use Case:}                                
-            PatrolIsland
+            SearchAndRescue
 
         \item[]\textbf{Primary Actor:}
-            Patrol Vehicle
+            Emergency Personnel
 
         \item[]\textbf{Goal in Context:}
-            To provide a means via which security personnel may patrol the island. The vehicles
-            are to be on a mostly predetermined route, so the security guards (in this context)
-            are mostly passive agents.
-
+            To find any potentially remaining guests after a disaster has occurred on the island.
+            
         \item[]\textbf{Preconditions:}
-            The system is in normal mode and all components are functioning properly.
+            Emergency mode may or may not be currently active, but it has definitely been triggered prior to 
+            the arrival of the actor.
 
         \item[]\textbf{Trigger:}
-            The resort opens for business.
+            A distress signal has been received from Cretaceous Gardens (from Isla Trueno).
 
         \item[]\textbf{Scenario:}
             \begin{enumerate}
-                \item Cretaceous Gardens opens to employees before opening for the business day.
-                \item The Patrol Vehicle (PV) is dispatched via a routine protocol.
-                \item The PV performs a test run around the island before picking up the security guard
-                of the shift.
-                \item The security guard enters the PV, after which the PV performs another test trip.
-                \item The security guard double checks state of the route.
-                \item Anything out of the ordinary is reported to the relevant parties (maintenance for example).
-                \item The PV returns to the southern part of the island.
-                \item The security guard confirms an all clear with other employees.
-                \item The rest of the employees continue their setup as the security guard enters the PV.
-                \item The PV begins its daily patrolling routine (one or more simple circuits around the island).
+                \item The platoon has received orders to address an emergency on Isla Trueno. 
+                \item The troops arrive to the island littered with debris and corpses. 
+                \item Some Pay kiosks remain active with an eerie glow coming from an uncannily 
+                cheerful welcome screen.
+                \item Screams of terror can be heard in the distance, followed by tremendous roars.
+                \item The Emergency Personnel head to the kiosks and enter special codes that provide
+                them with an enormous supply of token devices.
+                \item The EP diffuse throughout the island as they sweep for survivors.
+                \item Several helicopters can be heard swarming overhead and small group
+                is sent to the CGC Station.
+                \item As the troops move inland they find severely injured, but alive, guests.
+                \item The troops give the injured new tokens which may be detected by the team
+                at the station.
+                \item A second group arrives at the island, and is directed by the team at the station
+                (via walkie talkies) to the injured.
+                \item The team notices the T-Rex Monitor signal moving toward the sweeping group of soldiers
+                and they alert them immediately to get into offensive positions.
+                \item The helicopters overhead lower themselves to wait for the animal.
+                \item Permission to engage is granted and the beast is taken down.
+                \item The troops continue their operation until sunrise as teams of paramedics
+                are shipped to the island.
             \end{enumerate}
 
         \item[]\textbf{Exceptions:}
             \begin{itemize}
-                \item[] The system is triggered into emergency mode.
+                \item[] The T.Rex destroys the CGC Station.
             \end{itemize}
 
         \item[]\textbf{Priority:}
-            Low, not necessary but may be useful.
-
+            Essential, must be implemented.
+            
         \item[]\textbf{When Available:}
-            During business hours.
+            On demand.
 
         \item[]\textbf{Frequency of Use:}
-            Daily.
+            Hopefully never.
 
         \item[]\textbf{Channel to Primary Actor:}
-            Direct.
+            Token GPS
 
         \item[]\textbf{Secondary Actors:}
-            CGC Station Operator, Security Guard
-            
+            Guests, Tokens, Pay Kiosks
+
         \item[]\textbf{Channels to Secondary Actors:}
             \begin{itemize}
-                \item[] Security Guard: Car door, inner components of car 
-                \item[] CGC Station Operator: CGC station interface
+                \item[] Guests: tokens
+                \item[] Tokens: pay kiosks
+                \item[] Pay Kiosks: direct
             \end{itemize}
 
         \item[]\textbf{Open Issues:}
@@ -1112,92 +1014,8 @@ official, managerial, medical, and technical connotations.}
                 \item[] None known.
             \end{itemize}
     \end{itemize}
-%    
-%    % another use case
-%    
-%    % another use case
-%    
-%    % ...
-
-    \subsection{Sales department}
-    \textit{The sales department (SD) is, for the sake of simplicity, is the actor interested 
-    in maximizing ticket sales and profits. The SD is interested in any financial trends
-    for the sake of such aims. They may also be interested in finding efficiency bottle necks
-    that incur unnecessary costs.}
-    \par\noindent\rule{\textwidth}{0.4pt}    
-    \begin{itemize}
-        \item[]\textbf{Use Case:}                                
-            VisualizeSalesData
-
-        \item[]\textbf{Primary Actor:}
-            Sale Department
-
-        \item[]\textbf{Goal in Context:}
-            To acquire and study data related to sales within some given period of time.
-
-        \item[]\textbf{Preconditions:}
-            The system is not in emergency mode nor maintenance mode and all components are 
-            functioning properly.
-
-        \item[]\textbf{Trigger:}
-            It is about time to wrap up a fiscal quarter to plan for the next one.
-
-        \item[]\textbf{Scenario:}
-            \begin{enumerate}
-                \item A meeting is scheduled in order to plan for the next quarter.
-                \item The SD gathers all sales data provided by the CGC.
-                \item The SD uses a provided interface to organize the data into meaningful visualizations.
-                \item The SD exports the visualizations for a presentation at the meeting.
-                \item The meeting is held and the SD presents their findings.
-                \item The SD contribution helps guide the conversation for what to do next.
-                \item The meeting concludes. 
-            \end{enumerate}
-
-        \item[]\textbf{Exceptions:}
-            \begin{itemize}
-                \item[] The system enter emergency mode.
-            \end{itemize}
-
-        \item[]\textbf{Priority:}
-            Extremely low, need not be implemented.
-
-        \item[]\textbf{When Available:}
-            On demand.
-
-        \item[]\textbf{Frequency of Use:}
-            May be used continuously (as a live data feed), or any number of snapshots
-            may be taken hourly, daily, weekly, etc.
-
-        \item[]\textbf{Channel to Primary Actor:}
-            An auxiliary interface specialized for financial data visualization.
-
-        \item[]\textbf{Secondary Actors:}
-            CGC Control Station
-            
-        \item[]\textbf{Channels to Secondary Actors:}
-            \begin{itemize}
-                \item[] CGC Control Station: some network link to forward relevant data
-            \end{itemize}
-
-        \item[]\textbf{Open Issues:}
-            \begin{itemize}
-                \item[] An interface separate from the Control Station interface would have to
-                be developed as it would reside elsewhere on the island.
-            \end{itemize}
-    \end{itemize}
-    
-    % another use case
-    
-    % another use case
-    
-    % ...
-
-%%%%% Siri %%%%%
-    \subsection{System Administrator}
-    \textit{The this actor (SA) specializes in addressing hardware issues with the CGC Station. This
-    individual is responsible for repairing disk drives, monitors, redundancy elements within the
-    station, updating machine operating systems, etc.}
-    \par\noindent\rule{\textwidth}{0.4pt}    
+        
+    \par\noindent\rule{\textwidth}{0.4pt}  
     \begin{itemize}
         \item[]\textbf{Use Case:}                                
             UpgradeSystemMemory
@@ -1261,11 +1079,8 @@ official, managerial, medical, and technical connotations.}
                 \item[] None known.
             \end{itemize}
     \end{itemize}
-    
-    \subsection{System Auditor}
-    \textit{This actor (SA) may be an external individual that may either be hired by Cretaceous 
-    Gardens to test the robustness of the system, or whose inspection may be mandated by law.}
-    \par\noindent\rule{\textwidth}{0.4pt}    
+
+    \par\noindent\rule{\textwidth}{0.4pt}
     \begin{itemize}
         \item[]\textbf{Use Case:}                                
             SimulateProtocols
@@ -1334,111 +1149,8 @@ official, managerial, medical, and technical connotations.}
                 \item[] What factors should be relevant in a simulation?
             \end{itemize}
     \end{itemize}
-
-    % another use case
     
-    % another use case
-    
-    % ...
-    
-
-%%%%% Zeke %%%%%
-    \subsection{Tyrannosaurus Rex}\label{trexleave}
-    \textit{It may be argued that this is not a legitimate actor, but despite its unconscious interaction
-    with the system, the T.Rex can act on the system in a variety of - possibly unpredictable - ways.}
-    \par\noindent\rule{\textwidth}{0.4pt}    
-    \begin{itemize}
-        \item[]\textbf{Use Case:}
-            LeaveEnclosure
-
-        \item[]\textbf{Primary Actor:}
-            T.Rex
-
-        \item[]\textbf{Goal in Context:}
-            To get somewhere that happens to be outside the enclosure.
-
-        \item[]\textbf{Preconditions:}
-            Actor is not sedated, the system is not in maintenance mode 
-            nor emergency mode, and all components are functioning properly.
-
-        \item[]\textbf{Trigger:}
-            The T.Rex sees or smells something outside the enclosure.
-
-        \item[]\textbf{Scenario:}                    
-            \begin{enumerate}
-                \item The actor looks through the enclosure, 
-                toward an imagined near-future destination beyond
-                the enclosure. \label{beginTRLeave}
-                \item The actor walks toward the target destination.
-                \item The actor is impeded by the electric fence. \label{impedeTRLeave}
-                \item The actor becomes fearful.
-                \begin{enumerate}
-                    \item The actor retreats from the fence.
-                    \item[OR]
-                    \item The actor attacks the fence. 
-                \end{enumerate}
-                \item The electric fence increases its voltage.
-                \item The scenario may repeat from either 
-                act \ref{beginTRLeave}, from act \ref{impedeTRLeave}, 
-                or continues such that:
-                \begin{enumerate}
-                    \item the actor is sedated to prevent further damage
-                    to self or enclosure, and maintenance mode is triggered
-                    \item[OR]
-                    \item the enclosure is breached, the actor 
-                    heads toward the target destination, and emergency
-                    mode is triggered.
-                    \item[OR]
-                    \item the actor relinquishes the desire to head
-                    toward the target destination, no significant damage
-                    is incurred, and the normal mode of operation continues.
-                \end{enumerate} 
-            \end{enumerate}
-
-        \item[]\textbf{Exceptions:}
-            \begin{itemize}
-                \item[] Actor Perishes.
-            \end{itemize}
-
-        \item[]\textbf{Priority:}
-            Essential, must be implemented.
-
-        \item[]\textbf{When Available:}
-            At random.
-
-        \item[]\textbf{Frequency of Use:}
-            Preferably never, but less likely with time (ideally)
-
-        \item[]\textbf{Channels to Primary Actor:}
-            \begin{itemize}
-                \item[] Electric Enclosure Panel
-                \item[] T.Rex Monitor
-            \end{itemize}
-            
-        \item[]\textbf{Secondary Actors:}
-            CGC Station Operator, Global Alarm System
-            
-        \item[]\textbf{Channels to Secondary Actors:}  
-            \begin{itemize}
-                \item[] CGC Station Operator: Camera Network, T.Rex Monitor
-                \item[] Global Alarm System: Electric Enclosure Panel
-            \end{itemize}
-
-        \item[]\textbf{Open Issues:}
-            \begin{itemize}
-                \item[] None known.
-            \end{itemize}
-    \end{itemize}
-    
-    % another use case
-    
-    % another use case
-    
-    % ...
-    
-    \subsection{Veterinarian}
-    \textit{The veterinarian role includes uses such as routine checkups or medical treatment for the T.Rex.}
-    \par\noindent\rule{\textwidth}{0.4pt}    
+    \par\noindent\rule{\textwidth}{0.4pt}
     \begin{itemize}
         \item[]\textbf{Use Case:}                                
             RoutineCheckup
@@ -1516,93 +1228,6 @@ official, managerial, medical, and technical connotations.}
                 safety suit to avoid disengagement all together?
             \end{itemize}
     \end{itemize}
-    
-    % another use case
-    
-    % another use case
-    
-    % ...
-    
-    \subsection{Zookeeper} \label{zook}
-    \textit{A zookeeper may interact with the CGC in a variety of ways, but some of the
-    major roles of such an actor (as with any zookeeper) are to prepare the diet of the T-Rex, 
-    feed the T.Rex, to observe its behavior, or groom it.}
-    \par\noindent\rule{\textwidth}{0.4pt}    
-    \begin{itemize}
-        \item[]\textbf{Use Case:} 
-            FeedTRex                                
-
-        \item[]\textbf{Primary Actor:}
-            Zookeeper
-
-        \item[]\textbf{Goal in Context:}
-            To safely provide food for the T.Rex, whether it be live, frozen, thawed, or prepared
-            prey.
-
-        \item[]\textbf{Preconditions:}
-            The CGC is not in emergency mode, and all components are fully functional.
-
-        \item[]\textbf{Trigger:}
-            It is time to feed the T.Rex.
-
-        \item[]\textbf{Scenario:}
-            \begin{enumerate}
-                \item The CGC Station Operator dispatches the zookeeper in a self driving car
-                to the edge of the enclosure furthest from the current location of the T.Rex.
-                \item The Zookeeper requests an all-clear confirmation from the operator.
-                \item The operator disengages the electricity of the panel to provide access.
-                \item The Zookeeper enters and travels a significant distance into the enclosure.
-                \item The Zookeeper drops off the food.
-                \item The Zookeeper travels back the point of entry.
-                \item The Zookeeper exits the enclosure.
-                \item The Operator confirms successful exit.
-                \item The Operator reengages the electricity of the panel. 
-            \end{enumerate}
-
-        \item[]\textbf{Exceptions:}
-            \begin{itemize}
-                \item[] There is a shortage of food on the island.
-                \item[] The T.Rex is sick or injured and does not want to eat.
-                \item[] The T.Rex reaches the zookeeper before the zookeeper exits the enclosure.
-            \end{itemize}
-
-        \item[]\textbf{Priority:}
-            Essential, must be implemented
-
-        \item[]\textbf{When Available:}
-            On demand and via operator-zookeeper protocol
-
-        \item[]\textbf{Frequency of Use:}
-            Periodically (it can be daily, weekly, or monthly for example)
-
-        \item[]\textbf{Channel to Primary Actor:}
-            \begin{itemize}
-                \item[] Enclosure Panel
-            \end{itemize}
-
-        \item[]\textbf{Secondary Actors:}
-            CGC Station Operator, T.Rex, Car
-        
-        \item[]\textbf{Channels to Secondary Actors:}
-            \begin{itemize}
-                \item[] CGC Station Operator: Car Intercom, Camera Network
-                \item[] T.Rex: Enclosure Panel
-            \end{itemize}
-
-        \item[]\textbf{Open Issues:}
-            \begin{itemize}
-                \item[] Should the panel remain inactive while 
-                the zookeeper is inside?
-                \item[] Should the zookeeper simply wear an electric 
-                safety suit to avoid disengagement all together?
-            \end{itemize}
-    \end{itemize}
-    
-    % another use case
-    
-    % another use case
-    
-    % ...
     
 \section{Design Constraints} \label{cons}
 \paragraph{} \textit{Due to the real-time nature of the system, there exist some additional 
