@@ -75,7 +75,7 @@ a solid hierarchy are paramount \footnote{Diagrams by Siri and Anas.}.
 
 \begin{figure}[H]
     \centerline{\includegraphics[scale=.095]{CGCOverview.png}}
-    \caption{\textbf{CGC Overview:} This showcases the entire system as a whole working togethor. The CGC 
+    \caption{\textbf{CGC Overview:} This showcases the entire system as a whole working together. The CGC 
 acts as a central system that can communicate with all active systems. We see it is not composed 
 of any other objects, but rather it owns references to all active systems and helps keep track of 
 them and helps bridge connections to other active systems. It is important to note that the red 
@@ -105,10 +105,10 @@ devices, and other screens. It is a device that itself is Maintainable and also 
     \caption{\textbf{The Pay Kiosk: }The Pay Kiosk object controls the Pay Kiosk device. These are devices used to 
 purchase and build access Tokens for the visitors. It is critical as it helps the users get into 
 the Gardens while also helping the client make money. It is composed of objects that are hardware such
- as the token and change dispensors. it also contains other sensors such as credit card and cash 
- recepticles as well as a touch screen. It has a system that helps log transactions and build tokens. 
+ as the token and change dispensers. it also contains other sensors such as credit card and cash 
+ receptacles as well as a touch screen. It has a system that helps log transactions and build tokens. 
  It will configure another critical device, the Token. this is a high tech piece of equipment that is 
- used by the visitor as an access card, but also a communication device, a gps device, as well as 
+ used by the visitor as an access card, but also a communication device, a GPS device, as well as 
  other interactive capabilities.}
     \label{fig:PayKiosk}
 \end{figure} 
@@ -118,17 +118,17 @@ the Gardens while also helping the client make money. It is composed of objects 
     \centerline{\includegraphics[scale=.20]{Car.png}}
     \caption{\textbf{The Car: }The car object is another critical device. it is a layer on top of the contracted car 
 manufacture's own software layer for their autonomous vehicle. It can communicate with sensors such as 
-weight sensors, seatbelt sensors, and much more. It has a GPS that communicates with the GPS Server. 
+weight sensors, seat belt sensors, and much more. It has a GPS that communicates with the GPS Server. 
 It also includes API's that can be used to give it a destination, override the controls and other such 
-capabilitites. It is also a Maintainable object.}
+capabilities. It is also a Maintainable object.}
     \label{fig:Car}
 \end{figure}
 
 \begin{figure}[H]
     \centerline{\includegraphics[scale=.20]{TRexMonitor.png}}
     \caption{\textbf{The T-Rex Monitor: }The T-Rex Monitor  helps the CGC keep track of the T-Rex. 
-It monitors it's Biometrics to make sure it is not stressed out. it also controls a tranquilizor 
-that can put the dino to sleep in a safe mannor. This is another Maintainable system. }
+It monitors it's Biometrics to make sure it is not stressed out. it also controls a tranquilizer 
+that can put the dino to sleep in a safe manner. This is another Maintainable system. }
     \label{fig:TRexMonitor}
 \end{figure}
 
@@ -158,8 +158,8 @@ electric fence. To do this it utilizes the Electric Fence Sensor. It is also Mai
 \begin{figure}[H]
     \centerline{\includegraphics[scale=.20]{GPSServer.png}}
     \caption{\textbf{The GPS Server: }The GPS server is a central server that keeps track of all Registered and active GPS devices. 
-It contians the locations of all devices and these are made available through functions. the server will be able 
-to report its health by implementing the maintianable interface.}
+It contains the locations of all devices and these are made available through functions. the server will be able 
+to report its health by implementing the maintainable interface.}
     \label{fig:GPSServer}
 \end{figure}   
 
@@ -171,41 +171,43 @@ it should be noted that helper functions are not shown, as they are entrusted wi
 fields are treated analogously.}
 
 \begin{table}[H]
-\begin{tabularx}{\hsize}{|Y|Y|}
+\small
+\begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{nicegreen}
-    \multicolumn{2}{|c|}{\textbf{CGC Class }} \\
+    \multicolumn{2}{|c|}{\textbf{CGC Class}} \\
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
     \hline
-    \textbf{RegisteredTokens} & keeps track of registered visitors to the park. \\
-    \textbf{ActiveStation} & checks to ensure CGC stations are active. \\
-    \textbf{ActivePayKiosks} & checks to ensure Pay Kiosks are active.  \\
-    \textbf{ActiveCars} &  keeps track of active cars. \\
-    \textbf{InactiveCars} & keeps tracks of inactive cars. \\
+    \textbf{RegisteredTokens} & number of registered tokens. \\
+    \textbf{ActiveStation} & boolean station status \\
+    \textbf{ActivePayKiosks} & number of active kiosks  \\
+    \textbf{ActiveCars} &  number of active cars\\
+    \textbf{InactiveCars} & number of inactive cars. \\
     \hline
     \multicolumn{2}{|c|}{\textbf{Functions}} \\
     \hline
-    \textbf{logTransaction(transanction)} & $\rightarrow$ will write the transaction to the finance controller. \\
-    \textbf{queryFinanceState(SQLScript)} & $\rightarrow$ return the query results. \\
-    \textbf{queryHealthState(SQLScript)} & $\rightarrow$ return the query results. \\
-    \textbf{getAllGPSLocations()} & $\rightarrow$ forward all gps locations from the GPS Server. \\
-    \textbf{registerToken(tokenID) } & $\rightarrow$ activate token. \\
-    \textbf{retireToken(tokenID)} & $\rightarrow$  removes the token from the registered list and cleanly shuts down necessary tasks.\\
-    \textbf{relayVideoStream(cameraID, stationID)} & $\rightarrow$ bridge video stream to station. \\
-    \textbf{triggerEmergencyMode()} & $\rightarrow$ goes to emergency mode.\\
-    \textbf{deactivateEmergencyMode()} & $\rightarrow$ goes back to normal mode operations.\\
-    \textbf{activateCar()} & $\rightarrow$  this will activate a new car from the parking lot. \\
-    \textbf{bridgeIntercom(carID, stationID)} & $\rightarrow$ this will start a communication link and return null if a fialure.\\
-    \textbf{brokerGAConn(stationID)} & $\rightarrow$ returns false for global alarm connection if already in use. \\
+    \textbf{logTransaction(transaction)} & $\rightarrow$ write to finance controller. \\
+    \textbf{queryFinanceState(SQLScript)} & $\rightarrow$ query financial data. \\
+    \textbf{queryHealthState(SQLScript)} & $\rightarrow$ query health data \\
+    \textbf{getAllGPSLocations()} & $\rightarrow$ get all current GPS locations. \\
+    \textbf{registerToken(tokenID) } & $\rightarrow$ register token. \\
+    \textbf{retireToken(tokenID)} & $\rightarrow$  remove token from registered list\\
+    \textbf{relayStream(cameraID,stationID)} & $\rightarrow$ relay video stream to station\\
+    \textbf{enterEmergencyMode()} & $\rightarrow$ enter emergency mode\\
+    \textbf{enterNormalMode()} & $\rightarrow$ enter normal mode\\
+    \textbf{activateCar()} & $\rightarrow$ activate new car from parking lot\\
+    \textbf{bridgeIntercom(carID,stationID)} & $\rightarrow$ open communication link\\
+    \textbf{connectToPA(stationID)} & $\rightarrow$ connects station to island speakers\\
     \hline
 
 \end{tabularx}
 \end{table}
 
 \begin{table}[H]
-\begin{tabularx}{\hsize}{|Y|Y|}
+\small
+\begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{nicegreen}
     \multicolumn{2}{|c|}{\textbf{Maintainer Class*}} \\ 
@@ -218,7 +220,7 @@ fields are treated analogously.}
     \multicolumn{2}{|c|}{\textbf{Functions}} \\
     \hline
     \textbf{systemCheck()} & $\rightarrow$ performs checks on the system. \\
-    \textbf{maintainanceMode()} & $\rightarrow$ goes into maintainance mode. \\
+    \textbf{maintainanceMode()} & $\rightarrow$ goes into maintenance mode. \\
     \hline
 
 \end{tabularx}
@@ -228,7 +230,8 @@ is representative of all the sub-components it belongs to.} \\
 
 
 \begin{table}[H]
-\begin{tabularx}{\hsize}{|Y|Y|}
+\small
+\begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{nicegreen}
     \multicolumn{2}{|c|}{\textbf{Electric Fence Class}} \\ 
@@ -252,7 +255,7 @@ is representative of all the sub-components it belongs to.} \\
 
 
 \begin{table}[H]
-\begin{tabularx}{\hsize}{|Y|Y|}
+\begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{nicegreen}
     \multicolumn{2}{|c|}{\textbf{Electric Fence Sensor Class}} \\ 
@@ -264,14 +267,14 @@ is representative of all the sub-components it belongs to.} \\
     \hline
     \multicolumn{2}{|c|}{\textbf{Functions}} \\
     \hline
-    \textbf{checkElectricConductance()} & $\rightarrow$ check possible distortions in thefence. \\
+    \textbf{checkElectricConductance()} & $\rightarrow$ check possible distortions in the fence. \\
     \hline
 
 \end{tabularx}
 \end{table}
 
 \begin{table}[H]
-\begin{tabularx}{\hsize}{|Y|Y|}
+\begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{nicegreen}
     \multicolumn{2}{|c|}{\textbf{Camera Network Class}} \\ 
@@ -296,7 +299,7 @@ is representative of all the sub-components it belongs to.} \\
 \end{table}
 
 \begin{table}[H]
-\begin{tabularx}{\hsize}{|Y|Y|}
+\begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{nicegreen}
     \multicolumn{2}{|c|}{\textbf{Camera Class}} \\ 
@@ -319,7 +322,7 @@ is representative of all the sub-components it belongs to.} \\
 \end{table}
 
 \begin{table}[H]
-\begin{tabularx}{\hsize}{|Y|Y|}
+\begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{nicegreen}
     \multicolumn{2}{|c|}{\textbf{DVR Class}} \\ 
@@ -339,7 +342,7 @@ is representative of all the sub-components it belongs to.} \\
 \end{table}
 
 \begin{table}[H]
-\begin{tabularx}{\hsize}{|Y|Y|}
+\begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{nicegreen}
     \multicolumn{2}{|c|}{\textbf{GPS Server Class }} \\
@@ -347,21 +350,21 @@ is representative of all the sub-components it belongs to.} \\
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
     \hline
-    \textbf{registeredGPSDevices} & indicates all the valid registered gps devices. \\
+    \textbf{registeredGPSDevices} & indicates all the valid registered GPS devices. \\
     \hline
     \multicolumn{2}{|c|}{\textbf{Functions}} \\
     \hline
     \textbf{pingAll()} & $\rightarrow$ will return true if every registeredDevice responds. \\
     \textbf{ping(gpsID)} & $\rightarrow$ will ping specific GPS node and return true if it responds. \\
     \textbf{getLocation(gpsID)} & $\rightarrow$ will return location. \\
-    \textbf{getAllLocations()} & $\rightarrow$  gives list of all gps devices. \\
+    \textbf{getAllLocations()} & $\rightarrow$  gives list of all GPS devices. \\
     \hline
 
 \end{tabularx}
 \end{table}
 
 \begin{table}[H]
-\begin{tabularx}{\hsize}{|Y|Y|}
+\begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{nicegreen}
     \multicolumn{2}{|c|}{\textbf{Global Alarm System Class }} \\
@@ -373,7 +376,7 @@ is representative of all the sub-components it belongs to.} \\
     \hline
     \multicolumn{2}{|c|}{\textbf{Functions}} \\
     \hline
-    \textbf{playEmergencyAlarmSound()} & $\rightarrow$ plays the predevined emergency protocal sounds and message. \\
+    \textbf{playEmergencyAlarmSound()} & $\rightarrow$ plays the predefined emergency protocol sounds and message. \\
     \textbf{playMessage(soundStream)} & $\rightarrow$ will transform the  incoming sound stream out to the loud speakers. \\
     \hline
 
@@ -382,7 +385,7 @@ is representative of all the sub-components it belongs to.} \\
 
 
 \begin{table}[H]
-\begin{tabularx}{\hsize}{|Y|Y|}
+\begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{nicegreen}
     \multicolumn{2}{|c|}{\textbf{CGC Station Class }} \\
@@ -399,7 +402,7 @@ is representative of all the sub-components it belongs to.} \\
     \textbf{syncEmergencyState(sqlScript)} & $\rightarrow$ queries for the state of emergency. \\
     \textbf{syncHealthState(sqlScript)} & $\rightarrow$ sync the status of all the components. \\
     \textbf{syncFinanceState(sqlScript)} & $\rightarrow$ queries finance and expenses information. \\
-    \textbf{activateTranqulizer()} & $\rightarrow$ activates tranquilizer in emergency state.\\
+    \textbf{activateTranquilizer()} & $\rightarrow$ activates tranquilizer in emergency state.\\
     \hline
 
 \end{tabularx}
@@ -408,10 +411,10 @@ is representative of all the sub-components it belongs to.} \\
 checkHealth()
 reportBiometricsAlarm()
 syncLocation()
-InjectDino()
+injectDino()
 
 \begin{table}[H]
-\begin{tabularx}{\hsize}{|Y|Y|}
+\begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{nicegreen}
     \multicolumn{2}{|c|}{\textbf{T-Rex Monitor Class }} \\
@@ -436,7 +439,7 @@ InjectDino()
 
 
 \begin{table}[H]
-\begin{tabularx}{\hsize}{|Y|Y|}
+\begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{nicegreen}
     \multicolumn{2}{|c|}{\textbf{Pay Kiosk Class }} \\
@@ -464,10 +467,10 @@ InjectDino()
 \end{table}
 
 \begin{table}[H]
-\begin{tabularx}{\hsize}{|Y|Y|}
+\begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{nicegreen}
-    \multicolumn{2}{|c|}{\textbf{Car Cass }} \\
+    \multicolumn{2}{|c|}{\textbf{Car Class}} \\
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
@@ -493,7 +496,7 @@ InjectDino()
 \section{Sample Use Cases} \label{samp}
 \paragraph{} \textit{A broad overview of use cases begins this section and it is followed 
 by detailed case descriptions. Human actors are denoted by small stick figures and have the 
-same color scheme as the box that contains their labels. The section has been generalized into
+same color scheme as the box that contains their labels. This section has been generalized into
 three types of users for simplicity. Guests, internal personnel, and external personnel constitute
 the types of actors. Guests are park visitors, internal personnel are those actors that contribute 
 (typically through daily employment) to the function of the resort on a regular basis (e.g. cars, 
