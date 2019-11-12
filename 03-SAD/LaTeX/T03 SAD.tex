@@ -1328,7 +1328,39 @@ The logic to help make this simulation work will also be built.
     \label{fig:CGCStationGUI}
 \end{figure}
 
+\paragraph{} To implement this there will be only 5 major classes that will get built and implemented. There 
+will be the CGC Station, which includes the GUI, the CGC which will spawn and keep track of the Car, T-Rex Monitor, and Token.
+The Car, T-Rex Monitor , and Token will implement the Tracking and Maintainable interface. This will guarantee that 
+these classes will report their location and health to the CGC that can then be used to represent this data in a GUI format.
+Every class will run on it's own thread. To make these all communicate successfully with eachother, they will all own a Blocking queue. 
 
+\subsection{CGC Station}
+\paragraph{} The CGC Station will control the GUI. It will contain a blocking queue and a reference to the CGC blocking queue to communicate. The state of the GUI
+will be updated by the CGC by means of messages through the blocking queues.
+
+\subsection{CGC}
+\paragraph{} The CGC has its own priority Blocking queue. It has a reference to ALL other active 
+instances. It will spawn, manage, and kill other objects and control their threads. 
+The goal is to allow a central location to keep track of everything!
+
+\subsection{Car}
+\paragraph{} The car will have two versions, the Patrol car and the Tour car. 
+The patrol will just go patrol the path to make sure there are no emergencies. The Tour car will implement the logic to pick 
+up guests and bring them to the Exhibit and bring them back.
+
+\subsection{T-Rex Monitor}
+\paragraph{} This will implement some basic stuff. primarily this exists to show the T-Rex Wondering around in it's cage. 
+The T-rex wondering logic will not be very impressive. the T-Rex will not attempt to get out or 
+hurt guests. when emergency mode is triggered, 
+it may act like it got injected with a tranq. This will just make the movement stop.
+
+\subsection{Token}
+\paragraph{} This will be used to showcase the GPS location on the map for the visitors and the Employees. It will have very basic behavior one 
+to make it move towards the car pickup location on the south lot. It will also wonder around looking at the dinasour until time is up.
+
+\paragraph{}Every class will extend or implement the animation timer to allow it to perform behavior against time. For example, 
+to give a realistic pace to the movement of a token GPS. the X and Y location of the gps may not move every frame. The animation timer is what allows this animation of data.
+the only class that will NOT extend an animation timer is the CGC this class will respond only to messages in its blocking queue. It will wait other wise.
 
 \section{Design Constraints} \label{cons}
 \paragraph{} \textit{Due to the real-time nature of the system, there exist some additional 
