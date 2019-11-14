@@ -7,3 +7,6 @@
 *.bbl
 *.blg
 *.dvi
+*.iml
+./Implementation/.idea/*
+./Implementation/out/*
