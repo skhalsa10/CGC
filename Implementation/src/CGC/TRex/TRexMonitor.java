@@ -2,13 +2,13 @@ package CGC.TRex;
 
 import java.awt.*;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.PriorityBlockingQueue;
+
 
 import CGC.CGC;
 import CGC.Locatable;
 import CGC.Maintainable;
 import CGC.Messages.Message;
-import javafx.animation.AnimationTimer;
+
 
 public class TRexMonitor extends Thread implements Maintainable, Locatable {
     // Maybe add other coordinate space (square space?) to make sure
