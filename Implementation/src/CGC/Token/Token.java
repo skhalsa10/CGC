@@ -20,10 +20,6 @@ public abstract class Token extends Thread implements Maintainable, Locatable {
         start();
     }
 
-    @Override
-    public void run() {
-
-    }
 
     /**
      * The timer task will be used to place messages in the blocking queue

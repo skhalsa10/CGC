@@ -1,4 +1,7 @@
 package CGC.Car;
 
-public abstract class Car {
+import CGC.Locatable;
+import CGC.Maintainable;
+
+public abstract class Car extends Thread implements Maintainable, Locatable {
 }
