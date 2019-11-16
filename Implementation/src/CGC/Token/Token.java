@@ -4,12 +4,13 @@ import CGC.CGC;
 import CGC.Locatable;
 import CGC.Maintainable;
 import CGC.Messages.Message;
+import CGC.Communicator;
 
 import java.awt.*;
 import java.util.Timer;
 import java.util.concurrent.PriorityBlockingQueue;
 
-public abstract class Token extends Thread implements Maintainable, Locatable {
+public abstract class Token extends Thread implements Maintainable, Locatable, Communicator {
     private int tokenID;
     private PriorityBlockingQueue<Message> messages;
     private Point GPS;

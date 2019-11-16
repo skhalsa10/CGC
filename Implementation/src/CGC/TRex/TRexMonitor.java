@@ -95,7 +95,7 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
      * @param m
      */
     @Override
-    public void sendMessage(Message m) {
+    public synchronized void sendMessage(Message m) {
         //TODO Store this message in the queue for processing later
     }
 }

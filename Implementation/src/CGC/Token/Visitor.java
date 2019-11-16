@@ -1,6 +1,7 @@
 package CGC.Token;
 
 import CGC.CGC;
+import CGC.Messages.Message;
 
 import java.awt.*;
 
@@ -51,5 +52,14 @@ public class Visitor extends Token {
      */
     private void updateLocation(Point loc) {
         //TODO send a message to the CGC with updated location
+    }
+
+    /**
+     * 
+     * @param m
+     */
+    @Override
+    public void sendMessage(Message m) {
+
     }
 }
