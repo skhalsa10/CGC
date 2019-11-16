@@ -1,17 +1,14 @@
 package CGC.Station;
 
+import javafx.animation.AnimationTimer;
 
-import CGC.Locatable;
-import CGC.Maintainable;
-
-public class Station extends Thread implements Locatable, Maintainable {
-    @Override
-    public void getLocation() {
-
-    }
+/**
+ * This station will be the GUI for this application
+ */
+public class Station extends AnimationTimer {
 
     @Override
-    public void checkHealth() {
+    public void handle(long now) {
 
     }
 }
