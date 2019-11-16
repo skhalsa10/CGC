@@ -21,7 +21,7 @@ public class Station extends AnimationTimer implements Runnable{
 
         //TODO since this is a GUI the constructor will be pretty big while it pieces togethor  all
         // the components.
-        
+
         Thread messageThread = new Thread(this);
         messageThread.start();
 
