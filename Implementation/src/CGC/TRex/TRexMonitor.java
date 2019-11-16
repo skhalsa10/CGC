@@ -20,7 +20,8 @@ import CGC.Messages.Message;
  * blocking queue this will make the thread wait efficiently without using a busy wait.
  */
 public class TRexMonitor extends Thread implements Maintainable, Locatable, Communicator {
-    // Maybe add other coordinate space (square space?) to make sure
+    // Maybe add other coordinate space (square space? ... or circle if someone wants to do
+    // circle math) to make sure
     // that TRex doesn't go outside.
     private Point GPS;
     private CGC cgc;
@@ -57,7 +58,7 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
     /**
      *  This will inject the T-Rex with the tranq if there is one  available.
      */
-    public void inject() {
+    private void inject() {
 
     }
 
