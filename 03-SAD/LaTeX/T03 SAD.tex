@@ -62,9 +62,10 @@ as to not stifle his or her creative process.
 relevant objects and their relationships in the form of diagrams. Explanations accompany all diagrams for the sake of clarity.
 Section \ref{over} presents an overview of the intended design, with descriptions of the largest subsystems that compose the CGC. 
 Section \ref{specs} provides greater detail with respect to the individual components and their sub components. Section \ref{samp} 
-provides a number of use cases for the system, which have been classified into a few categories. Section \ref{cons} delineates 
+provides a number of use cases for the system, which have been classified into a few categories. The implementation plan 
+can be found in Section \ref{impl}. Section \ref{cons} delineates 
 constraints to which the design is subject. Section \ref{defs} closes the document with the definitions of any terms used 
-throughout the document that may need further clarification. 
+throughout the document that may need further clarification.
 \footnote{Introduction by Ezequiel Ramos.}.
 
 \section{Design Overview} \label{over}
@@ -72,22 +73,16 @@ throughout the document that may need further clarification.
 safety. Without an efficient system, it's safety may be compromised due to unnecessary 
 delays between components. Maintainability can impact a safe implementation of the 
 system if the system is permeable to programmer errors. The decoupling of concerns and 
-a solid hierarchy are paramount \footnote{Diagrams by Siri and Anas.}.
-
+a solid hierarchy are paramount \footnote{Diagrams by Siri, Anas, and Zeke.}.
 
 \begin{figure}[H]
-    \centerline{\includegraphics[scale=.095]{CGCOverview.png}}
-    \caption{\textbf{CGC Overview:} This showcases the entire system as a whole working together. The CGC 
-acts as a central system that can communicate with all active systems. We see it is not composed 
-of any other objects, but rather it owns references to all active systems and helps keep track of 
-them and helps bridge connections to other active systems. It is important to note that the red 
-triangle in the corner of some objects symbolize that it runs in it's own thread. The red arrows 
-symbolize that these objects can cause triggering events that generate some sort of action inside the 
-system. Another thing that may not be immediately apparent is the stack of objects. This means that there 
-can be 1 to n of these objects running at any one timeOne last thing that may seem unusual is the 
-small circles above some objects labeled maintainable. This means that these objects implement 
-the interface maintainable and the behavior 
-associated with it.}
+    \centerline{\includegraphics[scale=0.15]{CGC-Design-Overview.png}}
+    \caption{\textbf{CGC Overview:} The CGC is a central system that communicates with all active systems. 
+    It is not composed of other modules, but rather owns references to all active systems in order to monitor 
+    them and to bridge their connections. Objects with red upper left corners execute on their own threads. 
+    Red arrows indicate objects that may trigger events in response to external signals. Stacks of objects 
+    represent multiple instances. Objects that implement a \texttt{Maintainable} interface are denoted with a small
+    open circle.}
   \label{fig:CGCOverview}
 \end{figure}    
 
