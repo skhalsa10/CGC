@@ -9,11 +9,6 @@ import java.util.concurrent.PriorityBlockingQueue;
 /**
  *  This Class will manage the communication with TRex Monitor, Electric Fence, and DVR.
  *
- * The SurveillanceSystem may receive a message from cgc to inject TRex
- *     1. it will sendMessage to TRex Monitor which will then inject Dino.
- *     2. After injecting dino, the TRex Monitor will sendMessage back to SurveillanceSystem which then will send back
- *        message to cgc and cgc will update the gui appropriately.
- *
  * The SurveillanceSystem may receive a message from the CGC to report the Health of electric fence, TRexMonitor, and DVR
  *     1. SendMessage to all children's requesting health. Keep track of the updates.
  *     2. It will respond with a message back to cgc with the current health of all children's.
@@ -22,11 +17,11 @@ import java.util.concurrent.PriorityBlockingQueue;
  *     1. SendMessage to TRexMonitor to get updated location.
  *     2. SendMessage back to cgc with TRex location.
  *
- * The SurveillanceSystem may receive EmergencyMode message
+ * The SurveillanceSystem may receive EmergencyMode message from cgc
  *    1. it needs to sendMessage to all children's.
  *    2. Put itself in emergency mode.
  *
- * The SurveillanceSystem may receive exit EmergencyMode message
+ * The SurveillanceSystem may receive exit EmergencyMode message from cgc
  *    1. it needs to sendMessage to all children's.
  *    2. Put itself out of emergency mode.
  *
