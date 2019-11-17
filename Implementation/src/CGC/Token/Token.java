@@ -25,6 +25,7 @@ public abstract class Token extends Thread implements Maintainable, Locatable, C
     /**
      * The timer task will be used to place messages in the blocking queue
      * to change x,y coordinates and perform any other potential behavior overtime.
+     * Will need to use a TimerTask with the timer.
      */
     protected abstract void startTokenTimer();
 

@@ -2,7 +2,6 @@ package CGC.Token;
 
 import CGC.CGC;
 import CGC.Messages.Message;
-
 import java.awt.*;
 
 public class Visitor extends Token {
@@ -16,11 +15,17 @@ public class Visitor extends Token {
         super(tokenID, cgc);
     }
 
+    /**
+     * please use the Timer Task in conjunction with Timer to schedule actions over time
+     */
     @Override
     protected void startTokenTimer() {
 
     }
 
+    /**
+     * in case you want to stop the timer and the tasks it generates
+     */
     @Override
     protected void stopTokenTimer() {
 
@@ -55,8 +60,10 @@ public class Visitor extends Token {
     }
 
     /**
-     * 
-     * @param m
+     * this is a public message to the outside world to use if the "CGC" needs to send a message to this class it will do
+     * so by calling this message. this class may be processing messages already. so this should just move the message into
+     * its blocking queue to process when it can.
+     * @param m is the message to be placed in this class' Message queue
      */
     @Override
     public void sendMessage(Message m) {

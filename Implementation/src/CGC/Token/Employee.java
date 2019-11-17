@@ -1,6 +1,7 @@
 package CGC.Token;
 
 import CGC.CGC;
+import CGC.Messages.Message;
 
 import java.awt.*;
 
@@ -13,7 +14,8 @@ public class Employee extends Token{
 
     @Override
     public void run() {
-
+        //TODO this should love over the blocking queue processing messages until
+        // it receives the "Shutdown" Message that tells it to gracefully shutdown
     }
 
     @Override
@@ -52,5 +54,10 @@ public class Employee extends Token{
      */
     private void updateLocation(Point loc) {
         //TODO send a message to the CGC with updated location
+    }
+
+    @Override
+    public void sendMessage(Message m) {
+
     }
 }

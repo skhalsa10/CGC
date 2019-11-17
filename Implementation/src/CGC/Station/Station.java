@@ -1,5 +1,6 @@
 package CGC.Station;
 
+import CGC.Communicator;
 import CGC.Messages.Message;
 import javafx.animation.AnimationTimer;
 import javafx.stage.Stage;
@@ -13,7 +14,7 @@ import java.util.concurrent.PriorityBlockingQueue;
  *    Due to the need to animate figures on the screen over time we need to have this.
  * 2. the second thread  needs to be dedicated to processing messages. it will wait on the blocking
  */
-public class Station extends AnimationTimer implements Runnable{
+public class Station extends AnimationTimer implements Runnable, Communicator {
     long lastUpdate = 0;
     PriorityBlockingQueue<Message> messages;
 
@@ -47,6 +48,11 @@ public class Station extends AnimationTimer implements Runnable{
 
     @Override
     public void run() {
+
+    }
+
+    @Override
+    public void sendMessage(Message m) {
 
     }
 }
