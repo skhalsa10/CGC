@@ -1,7 +1,7 @@
-package CGC.Token;
+package cgc.Token;
 
-import CGC.CGC;
-import CGC.Messages.Message;
+import cgc.CGC;
+import cgc.Messages.Message;
 
 import java.awt.*;
 
@@ -30,30 +30,30 @@ public class Employee extends Token{
 
     @Override
     public synchronized void checkHealth() {
-        //TODO place a Message inside of the this Class' blocking queue that tells it to update the CGC with
+        //TODO place a Message inside of the this Class' blocking queue that tells it to update the cgc with
         // Health info
     }
 
     /**
-     * send message to CGC.
+     * send message to cgc.
      */
     private void reportHealth(boolean healthStatus) {
-        //TODO Send a message to the CGC with health Status
+        //TODO Send a message to the cgc with health Status
     }
 
     /**
-     * place message inside  queue which triggers an update to the CGC when processed
+     * place message inside  queue which triggers an update to the cgc when processed
      */
     @Override
     public synchronized void getLocation() {
-        //TODO place a message in this class' message queue to trigger a a location sync to the CGC
+        //TODO place a message in this class' message queue to trigger a a location sync to the cgc
     }
 
     /**
-     * send message to CGC.
+     * send message to cgc.
      */
     private void updateLocation(Point loc) {
-        //TODO send a message to the CGC with updated location
+        //TODO send a message to the cgc with updated location
     }
 
     @Override

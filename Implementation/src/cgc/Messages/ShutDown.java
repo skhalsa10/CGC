@@ -1,4 +1,4 @@
-package CGC.Messages;
+package cgc.Messages;
 
 /**
  * this is a Completed Message it should be sent to a class to tell it to shut down gracefully

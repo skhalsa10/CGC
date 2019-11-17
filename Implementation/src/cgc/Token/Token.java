@@ -1,10 +1,10 @@
-package CGC.Token;
+package cgc.Token;
 
-import CGC.CGC;
-import CGC.Locatable;
-import CGC.Maintainable;
-import CGC.Messages.Message;
-import CGC.Communicator;
+import cgc.CGC;
+import cgc.Locatable;
+import cgc.Maintainable;
+import cgc.Messages.Message;
+import cgc.Communicator;
 
 import java.awt.*;
 import java.util.Timer;

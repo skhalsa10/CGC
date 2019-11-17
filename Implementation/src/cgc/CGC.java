@@ -1,18 +1,16 @@
-package CGC;
+package cgc;
 
-import CGC.Car.Car;
-import CGC.Messages.Message;
-import CGC.PayKiosk.PayKiosk;
-import CGC.Station.Station;
-import CGC.Token.Token;
+import cgc.Car.Car;
+import cgc.Messages.Message;
+import cgc.PayKiosk.PayKiosk;
+import cgc.Station.Station;
+import cgc.Token.Token;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Objects;
 import java.util.concurrent.PriorityBlockingQueue;
 
 public class CGC extends Thread implements Communicator {
-    // When designing CGC, threads can only communicate through blocking queue with
+    // When designing cgc, threads can only communicate through blocking queue with
     // messages.
     private HashMap<Integer, Token> registeredTokens;
     private HashMap<Integer, PayKiosk> activePayKiosks;

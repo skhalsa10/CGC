@@ -1,4 +1,4 @@
-package CGC;
+package cgc;
 
 import javafx.application.Application;
 

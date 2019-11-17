@@ -1,6 +1,4 @@
-package CGC;
-
-import java.awt.*;
+package cgc;
 
 /**
  * The purpose of this interface is to enforce location services.
@@ -14,7 +12,7 @@ public interface Locatable {
      * @return a Point representing the current x and y location of the implementing object.
      * This Originally returned a Point ^^^^ but because of the threaded nature of this project.
      * This has changed to void. What this should really do is place a message intot he implementing classes
-     * blocking queue to tell it to update the location with the CGC when it finds time to.
+     * blocking queue to tell it to update the location with the cgc when it finds time to.
      */
     void getLocation();
 }

@@ -1,7 +1,7 @@
-package CGC.Station;
+package cgc.Station;
 
-import CGC.Communicator;
-import CGC.Messages.Message;
+import cgc.Communicator;
+import cgc.Messages.Message;
 import javafx.animation.AnimationTimer;
 import javafx.stage.Stage;
 

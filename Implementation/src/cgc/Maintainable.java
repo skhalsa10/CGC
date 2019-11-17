@@ -1,4 +1,4 @@
-package CGC;
+package cgc;
 
 /**
  * This interface encorces Maintainable behvavior. This allows for the ability
@@ -14,7 +14,7 @@ public interface Maintainable {
      * @return a boolean on whether the implementing class is currently in a healthy state or if it is in need of maintanance
      *      * This Originally returned a boolean ^^^^ but because of the threaded nature of this project.
      *      * This has changed to void. What this should really do is place a message into the implementing classes
-     *      * blocking queue to tell it to update the healthstatus with the CGC when it finds time to.
+     *      * blocking queue to tell it to update the healthstatus with the cgc when it finds time to.
      */
     void checkHealth();
 }

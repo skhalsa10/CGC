@@ -1,4 +1,4 @@
-package CGC.PayKiosk;
+package cgc.PayKiosk;
 
 public class TokenFactory {
 }

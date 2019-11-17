@@ -1,14 +1,14 @@
-package CGC.TRex;
+package cgc.TRex;
 
 import java.awt.*;
 import java.util.concurrent.LinkedBlockingQueue;
 
 
-import CGC.CGC;
-import CGC.Communicator;
-import CGC.Locatable;
-import CGC.Maintainable;
-import CGC.Messages.Message;
+import cgc.CGC;
+import cgc.Communicator;
+import cgc.Locatable;
+import cgc.Maintainable;
+import cgc.Messages.Message;
 
 /**
  * the T-Rex Monitor class simulates how the real T-Rex monitor would be. This class
@@ -64,30 +64,30 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
 
     @Override
     public synchronized void checkHealth() {
-        //TODO place a Message inside of the Trex blocking queue that tells it to update the CGC with
+        //TODO place a Message inside of the Trex blocking queue that tells it to update the cgc with
         // Health info
     }
 
     /**
-     * send message to CGC.
+     * send message to cgc.
      */
     private void reportHealth(boolean healthStatus) {
-        //TODO Send a message to the CGC with health Status
+        //TODO Send a message to the cgc with health Status
     }
 
     /**
-     * place message inside Trex queue qich triggers an update to the CGC when processed
+     * place message inside Trex queue qich triggers an update to the cgc when processed
      */
     @Override
     public synchronized void getLocation() {
-        //TODO place a message in the T-Rex message queue to trigger a a location sync to the CGC
+        //TODO place a message in the T-Rex message queue to trigger a a location sync to the cgc
     }
 
     /**
-     * send message to CGC.
+     * send message to cgc.
      */
     private void updateLocation(Point loc) {
-        //TODO send a message to the CGC with updated location
+        //TODO send a message to the cgc with updated location
     }
 
     /**

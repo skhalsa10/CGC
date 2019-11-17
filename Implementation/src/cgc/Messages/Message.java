@@ -1,4 +1,4 @@
-package CGC.Messages;
+package cgc.Messages;
 
 /**
  * This interface defines an object that we can send accross blocking Queue or sockets. The goal
@@ -8,7 +8,7 @@ package CGC.Messages;
  *
  * This will also allow each team member to define messages they expect to receive in their class. for example the
  * T-Rex Monitor may expect a Message that is an instanceof RequestGPS the implemeneting class will decode this and
- * may respond by sending a message to the CGC with updated Location
+ * may respond by sending a message to the cgc with updated Location
  */
 public interface Message {
     /**

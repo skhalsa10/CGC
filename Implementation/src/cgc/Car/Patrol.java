@@ -1,4 +1,4 @@
-package CGC.Car;
+package cgc.Car;
 
 public class Patrol {
 }

@@ -1,4 +1,4 @@
-package CGC.Messages;
+package cgc.Messages;
 
 
 import java.util.Comparator;
