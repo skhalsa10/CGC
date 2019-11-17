@@ -5,10 +5,10 @@ import cgc.Locatable;
 import cgc.Maintainable;
 
 public abstract class Token extends Thread implements Locatable, Maintainable, Communicator {
-    int ID;
+    private int tokenID;
 
 
-    public Token(int ID) {
-        this.ID = ID;
+    public Token(int tokenID) {
+        this.tokenID = tokenID;
     }
 }

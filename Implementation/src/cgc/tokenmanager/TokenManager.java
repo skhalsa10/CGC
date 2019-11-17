@@ -8,19 +8,30 @@ import cgc.messages.Message;
  *  This Class will manage the communication with all Token devices this includes Guests and
  *  Employees.
  *
- * The Kiosk Manager will receive a message from the Pay Kiosk that a token was purchased.
- *      1. It will then log the transaction with the transaction analyzer.
- *      2. it will send a message to the CGC to generate a new Guest Token
+ * The Token Manager may receive a message from a token with updated location
+ *     1. it will respond by forwarding that location with tokenID to cgc.
  *
- * The Kiosk Manager May get a Message from the CGC to retrieve updated Finance information
- *      1. it should respond by sending updated FinanceInfo Message
+ * The Token Manager may receive updated health information from the token
+ *     1. it must update its list of token health information.
  *
- * The Kiosk Manager May receive a Shutdown Message from the CGC
- *      1. it will need to send a Shutdown Message to all Pay Kiosk
+ * The Token Manager may sendMessage to token for updated health information
+ *
+ * The Token Manager may sendMessage to token requesting its location.
+ *
+ * The Token Manager may receive EmergencyMode message
+ *    1. it needs to sendMessage to all active tokens.
+ *    2. Put itself in emergency mode.
+ *
+ * The Token Manager may receive exit EmergencyMode message
+ *    1. it needs to sendMessage to all active tokens.
+ *    2. Put itself out of emergency mode.
+ *
+ * The Token Manager May receive a Shutdown Message from the CGC
+ *      1. it will need to send a Shutdown Message to all active tokens
  *      2. it will then shut down gracefully itself.
  *
- * The Kiosk Manager may receive a message from the CGC to report the Health of all the Pay Kiosks
- *      1. It will respond with a message with the current health of all Pay Kiosks
+ * The Token Manager may receive a message from the CGC to report the Health of all the Tokens
+ *      1. It will respond with a message with the current health of all tokens
  *
  */
 public class TokenManager extends Thread implements Communicator {

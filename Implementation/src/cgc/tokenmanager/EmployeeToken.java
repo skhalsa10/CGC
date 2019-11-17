@@ -2,9 +2,9 @@ package cgc.tokenmanager;
 
 import cgc.messages.Message;
 
-public class Employee extends Token {
+public class EmployeeToken extends Token {
 
-    public Employee(int ID) {
+    public EmployeeToken(int ID) {
         super(ID);
     }
 

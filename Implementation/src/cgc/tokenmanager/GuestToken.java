@@ -2,9 +2,9 @@ package cgc.tokenmanager;
 
 import cgc.messages.Message;
 
-public class Guest extends Token {
+public class GuestToken extends Token {
 
-    public Guest(int ID) {
+    public GuestToken(int ID) {
         super(ID);
     }
 
