@@ -1,4 +1,15 @@
 package cgc.cgcstation;
 
-public class CGCStation {
+import cgc.Communicator;
+import cgc.messages.Message;
+
+public class CGCStation extends Thread implements Communicator {
+
+    public CGCStation() {
+    }
+
+    @Override
+    public void sendMessage(Message m) {
+
+    }
 }
