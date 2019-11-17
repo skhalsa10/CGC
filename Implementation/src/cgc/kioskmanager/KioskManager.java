@@ -21,6 +21,8 @@ import cgc.messages.Message;
  * The Kiosk Manager may receive a message from the CGC to report the Health of all the Pay Kiosks
  *      1. It will respond with a message with the current health of all Pay Kiosks
  *
+ * The Kiosk Manager may receive a message that we are in Emergency Mode
+ *      1. It must respond by sending all Pay Kiosks an EmergencyMode Message
  */
 public class KioskManager extends Thread implements Communicator {
     //this is needed to send messages back up to the CGC
