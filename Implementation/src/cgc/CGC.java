@@ -32,11 +32,11 @@ import java.util.concurrent.PriorityBlockingQueue;
  * The CGC may receive a message from tokenManager a Location with the TokenID
  *  1. will forward information to the CGCStation
  *
- * The CGC may send message to ServeillanceSystem, CGCStation, KioskManager, VehicleManager, tokenManager EnterEmergencyMode
+ * The CGC may send message to ServeillanceSystem, CGCStation, KioskManager, VehicleManager, tokenManager to EnterEmergencyMode
  *
- * The CGC may send message to ServeillanceSystem, CGCStation, KioskManager, VehicleManager, tokenManager ExitEmergencyMode
+ * The CGC may send message to ServeillanceSystem, CGCStation, KioskManager, VehicleManager, tokenManager to ExitEmergencyMode
  *
- * The CGC may send message to ServeillanceSystem, CGCStation, KioskManager, VehicleManager, tokenManager to report health.
+ * The CGC may send message to ServeillanceSystem, KioskManager, VehicleManager, tokenManager to report health.
  *
  * The CGC May send message to ServeillanceSystem TokenManager, and VehicleManager to get updated locations
  *
