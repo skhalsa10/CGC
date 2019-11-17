@@ -27,7 +27,7 @@ import cgc.messages.Message;
 public class KioskManager extends Thread implements Communicator {
     //this is needed to send messages back up to the CGC
     private CGC cgc;
-    private FinancialAnalyzer financialAnalyzer;
+    private TransactionLogger transactionLogger;
     //TODO need datastructure to keep track of active kiosks
     //TODO need a data structure that associated the Kiosk ID with its associated Health status
 

@@ -7,9 +7,9 @@ package cgc.kioskmanager;
  * can control all aspects  of this class. This class will be left up to the maker of the Kiosk Manager
  * to build out. ALL finance related action should be done using this class.
  */
-public class FinancialAnalyzer {
+public class TransactionLogger {
 
-    public FinancialAnalyzer() {
+    public TransactionLogger() {
 
     }
 }
