@@ -24,6 +24,8 @@ import java.util.concurrent.PriorityBlockingQueue;
  *
  * The Pay Kiosk may receive a message to shut down.
  *      1. it must shut down gracefully
+ *
+ * The Pay Kiosk MUST send message to the Kiosk Manager that a token was purchased from this kiosk
  */
 public class PayKiosk extends Thread implements Communicator, Maintainable {
     private KioskManager kioskManager;
