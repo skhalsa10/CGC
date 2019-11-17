@@ -4,6 +4,8 @@ import cgc.CGC;
 import cgc.Communicator;
 import cgc.messages.Message;
 
+import java.util.concurrent.PriorityBlockingQueue;
+
 /**
  * This Class will manage the communication with all Kiosks. It will also manage the finance logic.
  *
@@ -28,6 +30,7 @@ public class KioskManager extends Thread implements Communicator {
     //this is needed to send messages back up to the CGC
     private CGC cgc;
     private TransactionLogger transactionLogger;
+    private PriorityBlockingQueue<Message>  messages;
     //TODO need datastructure to keep track of active kiosks
     //TODO need a data structure that associated the Kiosk ID with its associated Health status
 
