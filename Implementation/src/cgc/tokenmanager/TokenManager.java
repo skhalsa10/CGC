@@ -49,6 +49,7 @@ public class TokenManager extends Thread implements Communicator {
     private PriorityBlockingQueue<Message> messages;
 
     public  TokenManager(CGC cgc){
+        messages = new PriorityBlockingQueue<>();
         this.cgc = cgc;
 
     }

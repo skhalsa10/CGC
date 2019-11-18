@@ -28,6 +28,9 @@ import java.awt.*;
  */
 public class GuestToken extends Token {
 
+    //TODO there may also need to be a sepperate timer and timer task to trigger when a guest visitor is ready to leave exhibit
+
+
     public GuestToken(int ID, TokenManager tokenManager, Point GPSLocation) {
 
         super(ID, tokenManager);

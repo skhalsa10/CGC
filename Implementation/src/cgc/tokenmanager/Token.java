@@ -14,6 +14,9 @@ public abstract class Token extends Thread implements Locatable, Maintainable, C
     protected boolean healthStatus;
     protected PriorityBlockingQueue<Message> messages;
     protected TokenManager tokenManager;
+    //TODO should there be a property here to determine if it is ready for pickup?
+    //TODO what about one to determine if it is currently in  a car?
+    //TODO what about one if it is on the southlot or north lot?
 
 
     public Token(int tokenID, TokenManager tokenManager) {
