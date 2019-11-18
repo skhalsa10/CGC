@@ -5,10 +5,9 @@ package cgc.messages;
  * this particular class is basic and does not contain much other info but these message can contain other data.
  */
 public class ShutDown implements Message {
-    private final long timeStamp;
 
     public ShutDown() {
-        this.timeStamp = System.nanoTime();
+
     }
 
     @Override
@@ -18,6 +17,14 @@ public class ShutDown implements Message {
 
     @Override
     public long getTimeStamp() {
-        return timeStamp;
+        return this.timeStamp;
+    }
+
+    @Override
+    public int compareTo(Message o) {
+        long result = this.timeStamp - o.getTimeStamp();
+        if (result > 0 ) { return 1; }
+        else if (result == 0) { return 0; }
+        else { return 0; }
     }
 }
