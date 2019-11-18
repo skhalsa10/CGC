@@ -163,29 +163,29 @@ represent multiple instances, and virtual devices are have icons in their lower 
 %    \label{fig:PayKiosk}
 %\end{figure} 
 
-\begin{figure}[H]
-    \centerline{\includegraphics[scale=.20]{TRexMonitor.png}}
-    \caption{\textbf{The T-Rex Monitor: }The T-Rex Monitor  helps the CGC keep track of the T-Rex. 
-It monitors it's Biometrics to make sure it is not stressed out. it also controls a tranquilizer 
-that can put the dino to sleep in a safe manner. This is another Maintainable system. }
-    \label{fig:TRexMonitor}
-\end{figure}    
-
-\begin{figure}[H]
-    \centerline{\includegraphics[scale=.20]{ElectricFence.png}}
-    \caption{\textbf{The Electric Fence: }The is another very simple software system. The entire goal is to monitor the 
-electric fence. To do this it utilizes the Electric Fence Sensor. It is also Maintainable.}
-    \label{fig:ElectricFence}
-\end{figure}   
-
-
-\begin{figure}[H]
-    \centerline{\includegraphics[scale=.20]{GlobalAlarm.png}}
-    \caption{\textbf{The Global Alarm System: }The global alarm system controls the loud PA speakers on the island and is critical
- in case of an emergency. This will be able to report on its health by implementing the maintainable 
- interface. It is very basic and the CGC can broker connections to it from CGC Stations.}
-    \label{fig:GlobalAlarm}
-\end{figure}  
+%\begin{figure}[H]
+%    \centerline{\includegraphics[scale=.20]{TRexMonitor.png}}
+%    \caption{\textbf{The T-Rex Monitor: }The T-Rex Monitor  helps the CGC keep track of the T-Rex. 
+%It monitors it's Biometrics to make sure it is not stressed out. it also controls a tranquilizer 
+%that can put the dino to sleep in a safe manner. This is another Maintainable system. }
+%    \label{fig:TRexMonitor}
+%\end{figure}    
+%
+%\begin{figure}[H]
+%    \centerline{\includegraphics[scale=.20]{ElectricFence.png}}
+%    \caption{\textbf{The Electric Fence: }The is another very simple software system. The entire goal is to monitor the 
+%electric fence. To do this it utilizes the Electric Fence Sensor. It is also Maintainable.}
+%    \label{fig:ElectricFence}
+%\end{figure}   
+%
+%
+%\begin{figure}[H]
+%    \centerline{\includegraphics[scale=.20]{GlobalAlarm.png}}
+%    \caption{\textbf{The Global Alarm System: }The global alarm system controls the loud PA speakers on the island and is critical
+% in case of an emergency. This will be able to report on its health by implementing the maintainable 
+% interface. It is very basic and the CGC can broker connections to it from CGC Stations.}
+%    \label{fig:GlobalAlarm}
+%\end{figure}  
 
 \section{Component Specifications} \label{specs}
 \paragraph{} \textit{Here are the class specifications\footnote{Component specifications by Anas and Siri.} for objects 
@@ -238,7 +238,7 @@ fields are treated analogously.}
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{vehiclered}
-    \multicolumn{2}{|c|}{\textbf{\textt{Vehicle}}} \\
+    \multicolumn{2}{|c|}{\textbf{\texttt{Vehicle}}} \\
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
@@ -482,6 +482,9 @@ fields are treated analogously.}
 \end{tabularx}
 \end{table}
 
+\subsection{Token Manager}
+
+\subsection{Protocol Manager}
 
 \section{Sample Use Cases} \label{samp}
 \paragraph{} \textit{A broad overview of use cases begins this section and it is followed 
@@ -1328,7 +1331,7 @@ of prioritizing all signals in the best way possible.}
     for that event should be at the very top so that the CGC should immediately react 
     to it and follow emergency protocol.
 
-\section{Actual Implementation Plan} \label{impl}
+\section{Implementation Plan} \label{impl}
 \paragraph{} \textit{There is now a foundation laid out to build something incredible. 
 Due to the limitation of time there will only be a small feature set built though. This section will 
 ultimately outline the implementation subset that will be delivered during the class period.}\footnote{ Actual Implementation Plan by Siri.}
