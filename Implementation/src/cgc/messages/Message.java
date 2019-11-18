@@ -9,8 +9,11 @@ package cgc.messages;
  * This will also allow each team member to define messages they expect to receive in their class. for example the
  * T-Rex Monitor may expect a Message that is an instanceof RequestGPS the implemeneting class will decode this and
  * may respond by sending a message to the cgc with updated Location
+ *
+ * The Message interface needs to be comparable so that the priorityBlockingQueue can have the messages in order.
  */
-public interface Message {
+public interface Message extends Comparable<Message> {
+    final long timeStamp = System.nanoTime();
     /**
      *
      * @return string representation of message
