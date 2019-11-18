@@ -25,6 +25,14 @@
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 \definecolor{nicegreen}{rgb}{0.58, 0.98, 0.71}
 
+\definecolor{cgcgrey}{RGB}{229,229,229}
+\definecolor{vehiclered}{RGB}{255,187,177}
+\definecolor{bigbrotheryellow}{RGB}{255,236,169}
+\definecolor{stationorange}{RGB}{255,219,169}
+\definecolor{tokenpurple}{RGB}{249,210,222}
+\definecolor{kioskgreen}{RGB}{199,232,172}
+\definecolor{protocolblue}{RGB}{193,228,247}
+
 \begin{document}
 \definecolor{DarkBlue}{HTML}{4a5a8a} 
 \definecolor{LightBlue}{HTML}{4f81bf}
@@ -62,66 +70,98 @@ as to not stifle his or her creative process.
 relevant objects and their relationships in the form of diagrams. Explanations accompany all diagrams for the sake of clarity.
 Section \ref{over} presents an overview of the intended design, with descriptions of the largest subsystems that compose the CGC. 
 Section \ref{specs} provides greater detail with respect to the individual components and their sub components. Section \ref{samp} 
-provides a number of use cases for the system, which have been classified into a few categories. The implementation plan 
-can be found in Section \ref{impl}. Section \ref{cons} delineates 
-constraints to which the design is subject. Section \ref{defs} closes the document with the definitions of any terms used 
-throughout the document that may need further clarification.
+provides a number of use cases for the system, which have been classified into a few categories. Section \ref{cons} delineates 
+constraints to which the design is subject. The implementation plan can be found in Section \ref{impl}. Section \ref{defs} closes the document with the definitions of any terms used throughout the document that may need further clarification.
 \footnote{Introduction by Ezequiel Ramos.}.
 
 \section{Design Overview} \label{over}
-\paragraph{} The class architecture presented here aims to maximize efficiency, maintainability, and 
-safety. Without an efficient system, it's safety may be compromised due to unnecessary 
-delays between components. Maintainability can impact a safe implementation of the 
-system if the system is permeable to programmer errors. The decoupling of concerns and 
-a solid hierarchy are paramount \footnote{Diagrams by Siri, Anas, and Zeke.}.
+\paragraph{} The design aims to maximize efficiency and maintainability for the sake of
+safety, as it may be compromised by unnecessary component delay or by the degree to which 
+lends itself to programmer errors. Objects with red upper left corners execute on their own threads, 
+red arrows indicate objects that may trigger events in response to external signals, stacks of objects 
+represent multiple instances, and virtual devices are have icons in their lower right corners. 
+\footnote{Diagrams by Siri, Anas, and Zeke.}.
 
 \begin{figure}[H]
-    \centerline{\includegraphics[scale=0.15]{CGC-Design-Overview.png}}
-    \caption{\textbf{CGC Overview:} The CGC is a central system that communicates with all active systems. 
+    \centering
+    \textbf{Cretaceous Gardens Controller Overview}\par
+    \includegraphics[scale=0.173]{CGC-Design-Overview.png}
+    \caption{The CGC is a centralized system that communicates with all active systems. 
     It is not composed of other modules, but rather owns references to all active systems in order to monitor 
-    them and to bridge their connections. Objects with red upper left corners execute on their own threads. 
-    Red arrows indicate objects that may trigger events in response to external signals. Stacks of objects 
-    represent multiple instances. Objects that implement a \texttt{Maintainable} interface are denoted with a small
-    open circle.}
+    them and to bridge their connections.}
   \label{fig:CGCOverview}
 \end{figure}    
 
-
+\begin{figure}[H]
+    \centering
+    \textbf{The CGC and its Children}\par
+    \includegraphics[scale=.23]{CGC-Top.png}
+    \caption{The \textbf{CGC} mitigates communication between the \textbf{Vehicle Manager},
+    \textbf{Surveillance System}, \textbf{GCG Station}, \textbf{Token Manager}, \textbf{Kiosk Manager}, and \textbf{Protocol Manager}.
+    the last of these will not be implemented.}
+    \label{fig:CGCTop}
+\end{figure}
 
 \begin{figure}[H]
-    \centerline{\includegraphics[scale=.20]{CGCStation.png}}
-    \caption{\textbf{CGC Station: } A critical device that interfaces employees with the CGC System. we 
-clearly see that the device interfaces with a microphone and speaker. these are critical for 
-intercom communication to and from other devices. There is also a touch display with a user interface 
-that helps the Employee  obtain information such as financial information, the health status of all 
-devices, and other screens. It is a device that itself is Maintainable and also reports it's health.}
+    \centering
+    \textbf{Vehicle Manager}\par
+    \includegraphics[scale=.23]{Vehicle-Manager.png}
+    \caption{The \textbf{Vehicle Manager} coordinates vehicles and vehicle information for the CGC. It communicates 
+    directly with the virtual analog of all cars in the system to process hardware, maintenance, and routing information.}
+    \label{fig:VehicleManager}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \textbf{Surveillance System}\par
+    \includegraphics[scale=.27]{Surveillance-System.png}
+    \caption{The \textbf{Surveillance System} encapsulates the \textbf{Camera} network (shown as a stack), the \textbf{Electric Fence}, and the
+    \textbf{T-Rex Monitor}.}
+    \label{fig:SurveillanceSystem}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \textbf{CGC Station}\par
+    \includegraphics[scale=.28]{CGC-Station.png}
+    \caption{The \textbf{CGC Station} represents the means through which the CGC may be accessed by employees. 
+    Its three main components are the graphical user interface, the touch screen on which said GUI displays, and
+    an intercom system.}
     \label{fig:CGCStation}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \textbf{Token Manager}\par
+    \includegraphics[scale=.40]{Token-Manager.png}
+    \caption{The \textbf{Token Manager} is responsible for programming and tracking tokens for the CGC. It communicates 
+    directly with the virtual analog of the physical token devices.}
+    \label{fig:TokenManager}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \textbf{Protocol Manager}\par
+    \includegraphics[scale=.30]{Protocol-Manager.png}
+    \caption{The \textbf{Protocol Manager} is the component from which the CGC, in effect, receives its overall behavior.
+    Because it will not be fully implemented, it will not feature the ability to be given protocols and will instead simply
+    contain the \texttt{NormalMode} and \texttt{EmergencyMode} protocols.}
+    \label{fig:ProtocolManager}
 \end{figure}
   
 
-\begin{figure}[H]
-    \centerline{\includegraphics[scale=.20]{PayKiosk.png}}
-    \caption{\textbf{The Pay Kiosk: }The Pay Kiosk object controls the Pay Kiosk device. These are devices used to 
-purchase and build access Tokens for the visitors. It is critical as it helps the users get into 
-the Gardens while also helping the client make money. It is composed of objects that are hardware such
- as the token and change dispensers. it also contains other sensors such as credit card and cash 
- receptacles as well as a touch screen. It has a system that helps log transactions and build tokens. 
- It will configure another critical device, the Token. this is a high tech piece of equipment that is 
- used by the visitor as an access card, but also a communication device, a GPS device, as well as 
- other interactive capabilities.}
-    \label{fig:PayKiosk}
-\end{figure} 
-
-
-\begin{figure}[H]
-    \centerline{\includegraphics[scale=.20]{Car.png}}
-    \caption{\textbf{The Car: }The car object is another critical device. it is a layer on top of the contracted car 
-manufacture's own software layer for their autonomous vehicle. It can communicate with sensors such as 
-weight sensors, seat belt sensors, and much more. It has a GPS that communicates with the GPS Server. 
-It also includes API's that can be used to give it a destination, override the controls and other such 
-capabilities. It is also a Maintainable object.}
-    \label{fig:Car}
-\end{figure}
+%\begin{figure}[H]
+%    \centerline{\includegraphics[scale=.20]{PayKiosk.png}}
+%    \caption{\textbf{The Pay Kiosk: }The Pay Kiosk object controls the Pay Kiosk device. These are devices used to 
+%purchase and build access Tokens for the visitors. It is critical as it helps the users get into 
+%the Gardens while also helping the client make money. It is composed of objects that are hardware such
+% as the token and change dispensers. it also contains other sensors such as credit card and cash 
+% receptacles as well as a touch screen. It has a system that helps log transactions and build tokens. 
+% It will configure another critical device, the Token. this is a high tech piece of equipment that is 
+% used by the visitor as an access card, but also a communication device, a GPS device, as well as 
+% other interactive capabilities.}
+%    \label{fig:PayKiosk}
+%\end{figure} 
 
 \begin{figure}[H]
     \centerline{\includegraphics[scale=.20]{TRexMonitor.png}}
@@ -129,13 +169,6 @@ capabilities. It is also a Maintainable object.}
 It monitors it's Biometrics to make sure it is not stressed out. it also controls a tranquilizer 
 that can put the dino to sleep in a safe manner. This is another Maintainable system. }
     \label{fig:TRexMonitor}
-\end{figure}
-
-\begin{figure}[H]
-    \centerline{\includegraphics[scale=.20]{CameraNetwork.png}}
-    \caption{\textbf{The Camera Network: }The Camera Network Object has one goal and that is to control every single Camera feed. 
-It connects this camera feed to a DVR system to help record the feed. It is a Maintainable system.}
-    \label{fig:CameraNetwork}
 \end{figure}    
 
 \begin{figure}[H]
@@ -154,14 +187,6 @@ electric fence. To do this it utilizes the Electric Fence Sensor. It is also Mai
     \label{fig:GlobalAlarm}
 \end{figure}  
 
-\begin{figure}[H]
-    \centerline{\includegraphics[scale=.20]{GPSServer.png}}
-    \caption{\textbf{The GPS Server: }The GPS server is a central server that keeps track of all Registered and active GPS devices. 
-It contains the locations of all devices and these are made available through functions. the server will be able 
-to report its health by implementing the maintainable interface.}
-    \label{fig:GPSServer}
-\end{figure}   
-
 \section{Component Specifications} \label{specs}
 \paragraph{} \textit{Here are the class specifications\footnote{Component specifications by Anas and Siri.} for objects 
 found in Section \ref{over}. The most important attributes and functions are given and where appropriate, any expected 
@@ -173,7 +198,7 @@ fields are treated analogously.}
 \small
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
-    \rowcolor{nicegreen}
+    \rowcolor{cgcgrey}
     \multicolumn{2}{|c|}{\textbf{CGC Class}} \\
     \hline
     \hline
@@ -232,7 +257,7 @@ is representative of all the sub-components it belongs to.} \\
 \small
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
-    \rowcolor{nicegreen}
+    \rowcolor{bigbrotheryellow}
     \multicolumn{2}{|c|}{\textbf{Electric Fence Class}} \\ 
     \hline
     \hline
@@ -256,7 +281,7 @@ is representative of all the sub-components it belongs to.} \\
 \begin{table}[H]
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
-    \rowcolor{nicegreen}
+    \rowcolor{bigbrotheryellow}
     \multicolumn{2}{|c|}{\textbf{Electric Fence Sensor Class}} \\ 
     \hline
     \hline
@@ -275,7 +300,7 @@ is representative of all the sub-components it belongs to.} \\
 \begin{table}[H]
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
-    \rowcolor{nicegreen}
+    \rowcolor{bigbrotheryellow}
     \multicolumn{2}{|c|}{\textbf{Camera Network Class}} \\ 
     \hline
     \hline
@@ -300,7 +325,7 @@ is representative of all the sub-components it belongs to.} \\
 \begin{table}[H]
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
-    \rowcolor{nicegreen}
+    \rowcolor{bigbrotheryellow}
     \multicolumn{2}{|c|}{\textbf{Camera Class}} \\ 
     \hline
     \hline
@@ -323,7 +348,7 @@ is representative of all the sub-components it belongs to.} \\
 \begin{table}[H]
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
-    \rowcolor{nicegreen}
+    \rowcolor{bigbrotheryellow}
     \multicolumn{2}{|c|}{\textbf{DVR Class}} \\ 
     \hline
     \hline
@@ -343,50 +368,7 @@ is representative of all the sub-components it belongs to.} \\
 \begin{table}[H]
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
-    \rowcolor{nicegreen}
-    \multicolumn{2}{|c|}{\textbf{GPS Server Class }} \\
-    \hline
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
-    \hline
-    \textbf{registeredGPSDevices} & indicates all the valid registered GPS devices. \\
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Functions}} \\
-    \hline
-    \textbf{pingAll()} & $\rightarrow$ will return true if every registeredDevice responds. \\
-    \textbf{ping(gpsID)} & $\rightarrow$ will ping specific GPS node and return true if it responds. \\
-    \textbf{getLocation(gpsID)} & $\rightarrow$ will return location. \\
-    \textbf{getAllLocations()} & $\rightarrow$  gives list of all GPS devices. \\
-    \hline
-
-\end{tabularx}
-\end{table}
-
-\begin{table}[H]
-\begin{tabularx}{\hsize}{|X|X|}
-    \hline
-    \rowcolor{nicegreen}
-    \multicolumn{2}{|c|}{\textbf{Global Alarm System Class }} \\
-    \hline
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
-    \hline
-    \textbf{} &  \\
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Functions}} \\
-    \hline
-    \textbf{playEmergencyAlarmSound()} & $\rightarrow$ plays the predefined emergency protocol sounds and message. \\
-    \textbf{playMessage(soundStream)} & $\rightarrow$ will transform the  incoming sound stream out to the loud speakers. \\
-    \hline
-
-\end{tabularx}
-\end{table}
-
-
-\begin{table}[H]
-\begin{tabularx}{\hsize}{|X|X|}
-    \hline
-    \rowcolor{nicegreen}
+    \rowcolor{stationorange}
     \multicolumn{2}{|c|}{\textbf{CGC Station Class }} \\
     \hline
     \hline
@@ -414,7 +396,7 @@ is representative of all the sub-components it belongs to.} \\
 \begin{table}[H]
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
-    \rowcolor{nicegreen}
+    \rowcolor{bigbrotheryellow}
     \multicolumn{2}{|c|}{\textbf{T-Rex Monitor Class }} \\
     \hline
     \hline
@@ -439,7 +421,7 @@ is representative of all the sub-components it belongs to.} \\
 \begin{table}[H]
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
-    \rowcolor{nicegreen}
+    \rowcolor{kioskgreen}
     \multicolumn{2}{|c|}{\textbf{Pay Kiosk Class }} \\
     \hline
     \hline
@@ -467,8 +449,8 @@ is representative of all the sub-components it belongs to.} \\
 \begin{table}[H]
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
-    \rowcolor{nicegreen}
-    \multicolumn{2}{|c|}{\textbf{Car Class}} \\
+    \rowcolor{vehiclered}
+    \multicolumn{2}{|c|}{\textbf{Vehicle Class}} \\
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
@@ -673,7 +655,7 @@ on an irregular or infrequent basis (e.g. veterinarians, auditors, emergency per
 \begin{figure}[H]
     \centerline{\includegraphics[scale=.30]{Use_Cases__Internal.png}}
     \caption{Shows the a general view of the Internal Personnel Use Cases as a diagram.}
-    \label{fig:usecaseguest}
+    \label{fig:usecaseinternal}
 \end{figure}    
     \begin{itemize}
         \item[]\textbf{Use Case:}                                
@@ -957,7 +939,7 @@ on an irregular or infrequent basis (e.g. veterinarians, auditors, emergency per
 \begin{figure}[H]
     \centerline{\includegraphics[scale=.30]{Use_Cases__External.png}}
     \caption{Shows the a general view of the External Personnel Use Cases as a diagram.}
-    \label{fig:usecaseguest}
+    \label{fig:usecaseexternal}
 \end{figure}
     \begin{itemize}
         \item[]\textbf{Use Case:}                                
@@ -1321,6 +1303,29 @@ on an irregular or infrequent basis (e.g. veterinarians, auditors, emergency per
     
 
 \pagebreak
+\section{Design Constraints} \label{cons}
+\paragraph{} \textit{Due to the real-time nature of the system, there exist some additional 
+constraints\footnote{Design Constraints by Anas.}. Namely, it must be the case that all data 
+structures concerning the safety controls are as fast as possible but also that they are capable 
+of prioritizing all signals in the best way possible.}
+
+    \subsection{Safety}
+    \paragraph{} The safety is highly prioritized in our design of the CGC. We have 
+    global fire alarm system and the CGC directly have access to it in the case 
+    emergency, this event has a very high priority and the CGC 
+    should immediately react to this event. When it comes to self-driving cars, we also need to ensure the door locks
+    and car should follow appropriate protocol in the case of emergency. For T-Rex, the tranquilizer is a safety precaution which will 
+    keep the visitors safe at all times.
+
+    \subsection{Implementation Guidelines}
+    \paragraph{} According to the design, we suggest programmers to use some sort of 
+    Concurrent safe Messaging Queue for the communication between sensing objects and 
+    their associated parent objects. We also recommend using concurrent safe Priority 
+    Queue for the CGC, so the CGC can react based on the certain given priority. The 
+    priority should be considered because in the case of an emergency, the priority 
+    for that event should be at the very top so that the CGC should immediately react 
+    to it and follow emergency protocol.
+
 \section{Actual Implementation Plan} \label{impl}
 \paragraph{} \textit{There is now a foundation laid out to build something incredible. 
 Due to the limitation of time there will only be a small feature set built though. This section will 
@@ -1362,7 +1367,7 @@ up guests and bring them to the Exhibit and bring them back.
 
 \subsection{T-Rex Monitor}
 \paragraph{} This will implement some basic stuff. primarily this exists to show the T-Rex Wondering around in it's cage. 
-The T-rex wondering logic will not be very impressive. the T-Rex will not attempt to get out or 
+The T-Rex wondering logic will not be very impressive. the T-Rex will not attempt to get out or 
 hurt guests. when emergency mode is triggered, 
 it may act like it got injected with a tranq. This will just make the movement stop.
 
@@ -1378,8 +1383,9 @@ to give a realistic pace to the movement of a token GPS. the X and Y location of
 the only class that will NOT extend an animation timer is the CGC this class will respond only to messages in its blocking queue. It will wait other wise.
 
 \subsection{Details}
-\paragraph{}To implement this in the 3 week period we will stratigically implement the basic functioning of the software product. If we have time 
-, we will add additional features. The goal is to showcase something. Hopefully we can showcase a lot. The next tabel describes the goals for each week and what to accomplish 
+\paragraph{}To implement this in the 3 week period we will stratigically implement the basic functioning of the software product. If we have time,
+ we will add additional features. The goal is to showcase something. Hopefully we can showcase a lot. The next tabel describes the goals for each
+ week and what to accomplish 
 
 \begin{table}[H]
 \begin{tabularx}{\hsize}{|X|X|}
@@ -1416,31 +1422,6 @@ the only class that will NOT extend an animation timer is the CGC this class wil
     \hline
 \end{tabularx}
 \end{table}
-
-
-
-\section{Design Constraints} \label{cons}
-\paragraph{} \textit{Due to the real-time nature of the system, there exist some additional 
-constraints\footnote{Design Constraints by Anas.}. Namely, it must be the case that all data 
-structures concerning the safety controls are as fast as possible but also that they are capable 
-of prioritizing all signals in the best way possible.}
-
-    \subsection{Safety}
-    \paragraph{} The safety is highly prioritized in our design of the CGC. We have 
-    global fire alarm system and the CGC directly have access to it in the case 
-    emergency, this event has a very high priority and the CGC 
-    should immediately react to this event. When it comes to self-driving cars, we also need to ensure the door locks
-    and car should follow appropriate protocol in the case of emergency. For T-Rex, the tranquilizer is a safety precaution which will 
-    keep the visitors safe at all times.
-
-    \subsection{Implementation Guidelines}
-    \paragraph{} According to the design, we suggest programmers to use some sort of 
-    Concurrent safe Messaging Queue for the communication between sensing objects and 
-    their associated parent objects. We also recommend using concurrent safe Priority 
-    Queue for the CGC, so the CGC can react based on the certain given priority. The 
-    priority should be considered because in the case of an emergency, the priority 
-    for that event should be at the very top so that the CGC should immediately react 
-    to it and follow emergency protocol.
 
 \section{Definition of Terms} \label{defs}
 \paragraph{} \textit{The following is a list of definitions contain the most commonly used 
