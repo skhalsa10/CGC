@@ -194,12 +194,14 @@ preconditions, parameters, return values, and post conditions are included. Expl
 it should be noted that helper functions are not shown, as they are entrusted with the programmer. Important fields and helper
 fields are treated analogously.}
 
+\subsection*{Cretaceous Gardens Controller}
+%%%%%% intro if necessary
 \begin{table}[H]
 \small
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{cgcgrey}
-    \multicolumn{2}{|c|}{\textbf{CGC Class}} \\
+    \multicolumn{2}{|c|}{\textbf{\texttt{CGC}}} \\
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
@@ -229,36 +231,73 @@ fields are treated analogously.}
 \end{tabularx}
 \end{table}
 
+
+\subsection{Vehicle Manager}
+%%%intro if necessary
 \begin{table}[H]
-\small
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
-    \rowcolor{nicegreen}
-    \multicolumn{2}{|c|}{\textbf{Maintainer Class*}} \\ 
+    \rowcolor{vehiclered}
+    \multicolumn{2}{|c|}{\textbf{\textt{Vehicle}}} \\
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
     \hline
-    \textbf{health status} & indicates the health of the appropriate sub-component system. \\
+    \textbf{isActivated} & Specifies if the car is activated \\
+    \textbf{isParked} & Specifies if the car is parked \\
+    \textbf{Position} & Specifies where is the car located \\
+    \textbf{Destiny} & Destiny where the car has to travel\\
+    \textbf{Passengers} & Number of passengers in the car\\
     \hline
     \multicolumn{2}{|c|}{\textbf{Functions}} \\
     \hline
-    \textbf{systemCheck()} & $\rightarrow$ performs checks on the system. \\
-    \textbf{maintainanceMode()} & $\rightarrow$ goes into maintenance mode. \\
+    \textbf{checkPosition()} & $\rightarrow$ Return the position of the car in the island \\
+    \textbf{checkIfParked()} & $\rightarrow$ Return if the car is parked \\
+    \textbf{isActivated()} & $\rightarrow$ Return if the car is activated \\
+    \textbf{activateCar()} & $\rightarrow$ Will activate the car \\
+	\textbf{desactivateCar()} & $\rightarrow$ Will desactivate the car  \\
+	\textbf{travelToDestiny()} & $\rightarrow$ Will start the trip to the destiny \\
+    \textbf{setDestiny()} & $\rightarrow$ Will set the destiny of the car\\
+	\textbf{ValidateToken()} & $\rightarrow$ Check if the token is valid \\
+	\textbf{lockDoors()} & $\rightarrow$ Will lock the doors of the car \\
+	\textbf{unlockDoors()} & $\rightarrow$ Will unlock the doors of the car \\
+	\textbf{passengerSit()} & $\rightarrow$ Will recognize that there is a passenger sit and has his belt on \\
+	\textbf{sendLocationToCGC()} & $\rightarrow$ Will send the location to GCG \\
     \hline
-
 \end{tabularx}
-     * : {In order to be not repetitive in the sub-components, this class is shown once here and 
-is representative of all the sub-components it belongs to.} \\
 \end{table}
 
+%\begin{table}[H]
+%\small
+%\begin{tabularx}{\hsize}{|X|X|}
+%    \hline
+%    \rowcolor{nicegreen}
+%    \multicolumn{2}{|c|}{\textbf{Maintainer Class*}} \\ 
+%    \hline
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+%    \hline
+%    \textbf{health status} & indicates the health of the appropriate sub-component system. \\
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+%    \hline
+%    \textbf{systemCheck()} & $\rightarrow$ performs checks on the system. \\
+%    \textbf{maintainanceMode()} & $\rightarrow$ goes into maintenance mode. \\
+%    \hline
+%
+%\end{tabularx}
+%     * : {In order to be not repetitive in the sub-components, this class is shown once here and 
+%is representative of all the sub-components it belongs to.} \\
+%\end{table}
 
+\subsection{Surveillance System}
+%% intro maybe
 \begin{table}[H]
 \small
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{bigbrotheryellow}
-    \multicolumn{2}{|c|}{\textbf{Electric Fence Class}} \\ 
+    \multicolumn{2}{|c|}{\textbf{\texttt{ElectricFence}}} \\ 
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
@@ -282,7 +321,7 @@ is representative of all the sub-components it belongs to.} \\
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{bigbrotheryellow}
-    \multicolumn{2}{|c|}{\textbf{Electric Fence Sensor Class}} \\ 
+    \multicolumn{2}{|c|}{\textbf{\texttt{ElectricFenceSensor}}} \\ 
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
@@ -293,7 +332,6 @@ is representative of all the sub-components it belongs to.} \\
     \hline
     \textbf{checkElectricConductance()} & $\rightarrow$ check possible distortions in the fence. \\
     \hline
-
 \end{tabularx}
 \end{table}
 
@@ -301,7 +339,7 @@ is representative of all the sub-components it belongs to.} \\
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{bigbrotheryellow}
-    \multicolumn{2}{|c|}{\textbf{Camera Network Class}} \\ 
+    \multicolumn{2}{|c|}{\textbf{\texttt{CameraNetwork}}} \\ 
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
@@ -318,7 +356,6 @@ is representative of all the sub-components it belongs to.} \\
     \textbf{monitor(cameraID)} & $\rightarrow$ view the associated camera. \\
     \textbf{reportOutage()} & $\rightarrow$ report for any possible camera outage upon CGC request. \\
     \hline
-
 \end{tabularx}
 \end{table}
 
@@ -326,7 +363,7 @@ is representative of all the sub-components it belongs to.} \\
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{bigbrotheryellow}
-    \multicolumn{2}{|c|}{\textbf{Camera Class}} \\ 
+    \multicolumn{2}{|c|}{\textbf{\texttt{Camera}}} \\ 
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
@@ -349,7 +386,7 @@ is representative of all the sub-components it belongs to.} \\
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{bigbrotheryellow}
-    \multicolumn{2}{|c|}{\textbf{DVR Class}} \\ 
+    \multicolumn{2}{|c|}{\textbf{\texttt{DVR}}} \\ 
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
@@ -360,30 +397,6 @@ is representative of all the sub-components it belongs to.} \\
     \hline
     \textbf{start(cameraID)} & $\rightarrow$ begin recording of the camera. \\
     \textbf{delete(cameraID, range)} & $\rightarrow$ delete video stream. \\
-    \hline
-
-\end{tabularx}
-\end{table}
-
-\begin{table}[H]
-\begin{tabularx}{\hsize}{|X|X|}
-    \hline
-    \rowcolor{stationorange}
-    \multicolumn{2}{|c|}{\textbf{CGC Station Class }} \\
-    \hline
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
-    \hline
-    \textbf{currentScreen} & the active screen. \\
-    \textbf{intercom} & the intercom to talk any relevant components. \\
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Functions}} \\
-    \hline
-    \textbf{startIntercom()} & $\rightarrow$ activate intercom to speak to any specific component. \\
-    \textbf{syncEmergencyState(sqlScript)} & $\rightarrow$ queries for the state of emergency. \\
-    \textbf{syncHealthState(sqlScript)} & $\rightarrow$ sync the status of all the components. \\
-    \textbf{syncFinanceState(sqlScript)} & $\rightarrow$ queries finance and expenses information. \\
-    \textbf{activateTranquilizer()} & $\rightarrow$ activates tranquilizer in emergency state.\\
     \hline
 
 \end{tabularx}
@@ -417,12 +430,36 @@ is representative of all the sub-components it belongs to.} \\
 \end{tabularx}
 \end{table}
 
+\subsection{CGC Station}
+\begin{table}[H]
+\begin{tabularx}{\hsize}{|X|X|}
+    \hline
+    \rowcolor{stationorange}
+    \multicolumn{2}{|c|}{\textbf{\texttt{CGCStation}}} \\
+    \hline
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+    \hline
+    \textbf{currentScreen} & the active screen. \\
+    \textbf{intercom} & the intercom to talk any relevant components. \\
+    \hline
+    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+    \hline
+    \textbf{startIntercom()} & $\rightarrow$ activate intercom to speak to any specific component. \\
+    \textbf{syncEmergencyState(sqlScript)} & $\rightarrow$ queries for the state of emergency. \\
+    \textbf{syncHealthState(sqlScript)} & $\rightarrow$ sync the status of all the components. \\
+    \textbf{syncFinanceState(sqlScript)} & $\rightarrow$ queries finance and expenses information. \\
+    \textbf{activateTranquilizer()} & $\rightarrow$ activates tranquilizer in emergency state.\\
+    \hline
+\end{tabularx}
+\end{table}
 
+\subsection{Kiosk Manager}
 \begin{table}[H]
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{kioskgreen}
-    \multicolumn{2}{|c|}{\textbf{Pay Kiosk Class }} \\
+    \multicolumn{2}{|c|}{\textbf{\texttt{PayKiosk}}} \\
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
@@ -442,41 +479,6 @@ is representative of all the sub-components it belongs to.} \\
     \textbf{activateToken(tokenID)} & $\rightarrow$ activates token. \\
     \textbf{dispenseToken(tokenID)} & $\rightarrow$ dispenses token. \\
     \hline
-
-\end{tabularx}
-\end{table}
-
-\begin{table}[H]
-\begin{tabularx}{\hsize}{|X|X|}
-    \hline
-    \rowcolor{vehiclered}
-    \multicolumn{2}{|c|}{\textbf{Vehicle Class}} \\
-    \hline
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
-    \hline
-    \textbf{isActivated} & Specifies if the car is activated \\
-    \textbf{isParked} & Specifies if the car is parked \\
-    \textbf{Position} & Specifies where is the car located \\
-    \textbf{Destiny} & Destiny where the car has to travel\\
-    \textbf{Passengers} & Number of passengers in the car\\
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Functions}} \\
-    \hline
-    \textbf{checkPosition()} & $\rightarrow$ Return the position of the car in the island \\
-    \textbf{checkIfParked()} & $\rightarrow$ Return if the car is parked \\
-    \textbf{isActivated()} & $\rightarrow$ Return if the car is activated \\
-    \textbf{activateCar()} & $\rightarrow$ Will activate the car \\
-	\textbf{desactivateCar()} & $\rightarrow$ Will desactivate the car  \\
-	\textbf{travelToDestiny()} & $\rightarrow$ Will start the trip to the destiny \\
-    \textbf{setDestiny()} & $\rightarrow$ Will set the destiny of the car\\
-	\textbf{ValidateToken()} & $\rightarrow$ Check if the token is valid \\
-	\textbf{lockDoors()} & $\rightarrow$ Will lock the doors of the car \\
-	\textbf{unlockDoors()} & $\rightarrow$ Will unlock the doors of the car \\
-	\textbf{passengerSit()} & $\rightarrow$ Will recognize that there is a passenger sit and has his belt on \\
-	\textbf{sendLocationToCGC()} & $\rightarrow$ Will send the location to GCG \\
-    \hline
-
 \end{tabularx}
 \end{table}
 
