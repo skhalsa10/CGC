@@ -1,4 +1,4 @@
-package cgc.SurveillanceSystem;
+package cgc.surveillancesystem;
 
 import cgc.CGC;
 import cgc.Communicator;

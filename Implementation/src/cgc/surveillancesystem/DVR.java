@@ -1,4 +1,4 @@
-package cgc.SurveillanceSystem;
+package cgc.surveillancesystem;
 
 /**
  *  This is probably for v1. We can implement this if we have time (or somebody has an idea of how to implement this)
