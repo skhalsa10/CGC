@@ -14,11 +14,6 @@ public class CGCRequestLocation implements Message {
     }
 
     @Override
-    public String readMessage() {
-        return "The cgc is requesting the current Location.";
-    }
-
-    @Override
     public long getTimeStamp() {
         return this.timeStamp;
     }

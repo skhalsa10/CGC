@@ -7,11 +7,6 @@ public class ExitEmergencyMode implements Message {
     }
 
     @Override
-    public String readMessage() {
-        return "Exiting Emergency Mode.";
-    }
-
-    @Override
     public long getTimeStamp() {
         return this.timeStamp;
     }

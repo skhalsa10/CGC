@@ -14,11 +14,6 @@ public class CGCRequestHealth implements Message {
     }
 
     @Override
-    public String readMessage() {
-        return "The cgc is requesting the current Health Status.";
-    }
-
-    @Override
     public long getTimeStamp() {
         return this.timeStamp;
     }

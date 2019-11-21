@@ -2,7 +2,8 @@ package cgc;
 
 import cgc.cgcstation.CGCStation;
 import cgc.kioskmanager.KioskManager;
-import cgc.messages.Message;
+import cgc.messages.*;
+import cgc.surveillancesystem.SurveillanceSystem;
 import cgc.tokenmanager.TokenManager;
 import cgc.vehiclemanager.VehicleManager;
 import javafx.stage.Stage;
@@ -48,16 +49,23 @@ public class CGC extends Thread implements Communicator {
     private KioskManager kioskManager;
     private VehicleManager vehicleManager;
     private TokenManager tokenManager;
+    private SurveillanceSystem surveillanceSystem;
 
     public CGC(Stage primaryStage){
-        station = new CGCStation(primaryStage,this);
-
+        this.station = new CGCStation(primaryStage,this);
+        this.kioskManager = new KioskManager(this);
+        this.vehicleManager = new VehicleManager(this);
+        this.tokenManager = new TokenManager(this);
+        this.messages = new PriorityBlockingQueue<>();
+        this.surveillanceSystem = new SurveillanceSystem(this);
+        start();
     }
 
 
     @Override
     public void sendMessage(Message m) {
         //Todo this should place a message in the CGC Message queue to be processed later
+        this.messages.add(m);
     }
 
     /**
@@ -67,10 +75,46 @@ public class CGC extends Thread implements Communicator {
      */
     @Override
     public void run() {
-        //TODO loop on the blocking queue until Shutdown message
+        //TODO loop on the blocking queue until Shutdown message.
     }
 
     private void processMessage(Message m){
         //TODO check what instance m is and take appropriate action
+        if (m instanceof ShutDown) {
+            this.vehicleManager.sendMessage(m);
+            this.kioskManager.sendMessage(m);
+            this.tokenManager.sendMessage(m);
+            this.surveillanceSystem.sendMessage(m);
+            this.station.sendMessage(m);
+        }
+        if (m instanceof ElectricFenceDown) {
+            Message emergencyModeTriggered = new EnterEmergencyMode();
+
+            this.vehicleManager.sendMessage(emergencyModeTriggered);
+            this.kioskManager.sendMessage(emergencyModeTriggered);
+            this.tokenManager.sendMessage(emergencyModeTriggered);
+            this.surveillanceSystem.sendMessage(emergencyModeTriggered);
+            this.station.sendMessage(emergencyModeTriggered);
+        }
+        if (m instanceof UpdatedFinanceInfo) {
+            // forward it to cgcstation.
+            this.station.sendMessage(m);
+        }
+        if (m instanceof RequestToken) {
+            // guest token is requested, forward it to tokenManager.
+            this.tokenManager.sendMessage(m);
+        }
+        if (m instanceof TokenInfo) {
+            // forward token location, id to cgcstation.
+            this.station.sendMessage(m);
+        }
+        if (m instanceof CGCRequestHealth) {
+            // the view health button was pressed on CGCStationGUI.
+            // sendMessage to all the managers to report their health.
+            this.surveillanceSystem.sendMessage(m);
+            this.kioskManager.sendMessage(m);
+            this.tokenManager.sendMessage(m);
+            this.vehicleManager.sendMessage(m);
+        }
     }
 }

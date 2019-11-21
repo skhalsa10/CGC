@@ -14,11 +14,6 @@ package cgc.messages;
  */
 public interface Message extends Comparable<Message> {
     final long timeStamp = System.nanoTime();
-    /**
-     *
-     * @return string representation of message
-     */
-    String readMessage();
 
     /**
      * Will be used to sort messages in priority blocking queue.
