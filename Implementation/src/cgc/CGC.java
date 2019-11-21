@@ -50,6 +50,7 @@ public class CGC extends Thread implements Communicator {
     private TokenManager tokenManager;
 
     public CGC(Stage primaryStage){
+        station = new CGCStation(primaryStage,this);
 
     }
 
