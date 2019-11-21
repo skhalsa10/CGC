@@ -43,8 +43,10 @@ public class CGCStation extends Thread implements Communicator {
     private CGC cgc;
     private PriorityBlockingQueue<Message> messages;
     private CGCGUI cgcgui;
+    private PASystem paSystem;
 
     public CGCStation(Stage primaryStage, CGC cgc) {
+        paSystem = new PASystem(this);
     }
 
     @Override

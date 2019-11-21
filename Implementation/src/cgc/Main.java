@@ -1,14 +1,16 @@
 package cgc;
 
 import javafx.application.Application;
-
 import javafx.stage.Stage;
 
 public class Main extends Application {
+    CGC cgc;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        primaryStage.setTitle("Hello World");
+        cgc = new CGC(primaryStage);
+        primaryStage.show();
+
     }
 
 
