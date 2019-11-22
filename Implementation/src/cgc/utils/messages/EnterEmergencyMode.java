@@ -7,7 +7,7 @@ public class EnterEmergencyMode implements Message {
     }
 
     /**
-     * This always has -2 to make it highest priority no matter what (this message is always
+     * This always has 0 to make it highest priority no matter what (this message is always
      * less to any other message it gets compared to).
      * @return
      */
