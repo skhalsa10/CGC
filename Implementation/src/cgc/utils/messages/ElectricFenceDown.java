@@ -8,11 +8,11 @@ public class ElectricFenceDown implements Message {
 
     /**
      *
-     * @return This always has -1 to make it second highest priority after EnterEmergencyMode message.
+     * @return This always has 1 to make it second highest priority after EnterEmergencyMode message.
      */
     @Override
     public long getTimeStamp() {
-        return -1;
+        return 1;
     }
 
 
