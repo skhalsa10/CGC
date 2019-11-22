@@ -1,4 +1,4 @@
-package cgc.messages;
+package cgc.utils.messages;
 
 /**
  * Once the token is created then, The tokenManager will pass on token info such as location and tokenID to CGC.

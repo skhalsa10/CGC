@@ -1,4 +1,4 @@
-package cgc.messages;
+package cgc.utils.messages;
 
 /**
  * This interface defines an object that we can send accross blocking Queue or sockets. The goal

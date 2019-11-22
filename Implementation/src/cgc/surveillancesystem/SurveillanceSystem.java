@@ -1,8 +1,8 @@
 package cgc.surveillancesystem;
 
 import cgc.CGC;
-import cgc.Communicator;
-import cgc.messages.Message;
+import cgc.utils.Communicator;
+import cgc.utils.messages.Message;
 
 import java.util.concurrent.PriorityBlockingQueue;
 
