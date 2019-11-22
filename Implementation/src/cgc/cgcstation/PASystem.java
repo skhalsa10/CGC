@@ -1,8 +1,6 @@
 package cgc.cgcstation;
 
-import cgc.Communicator;
-import cgc.Maintainable;
-import cgc.messages.Message;
+import cgc.utils.messages.Message;
 
 import javax.sound.sampled.*;
 import java.io.File;

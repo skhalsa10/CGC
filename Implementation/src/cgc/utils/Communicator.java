@@ -1,6 +1,6 @@
-package cgc;
+package cgc.utils;
 
-import cgc.messages.Message;
+import cgc.utils.messages.Message;
 
 /**
  * the purpose of this interface is to enforce the ability to receive messages if a class implements this

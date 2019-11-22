@@ -1,4 +1,4 @@
-package cgc;
+package cgc.utils;
 
 import java.awt.*;
 

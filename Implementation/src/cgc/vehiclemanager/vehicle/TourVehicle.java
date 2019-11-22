@@ -1,6 +1,6 @@
 package cgc.vehiclemanager.vehicle;
 
-import cgc.messages.Message;
+import cgc.utils.messages.Message;
 import cgc.vehiclemanager.VehicleManager;
 
 import java.awt.*;

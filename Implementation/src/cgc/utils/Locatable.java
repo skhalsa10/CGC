@@ -1,4 +1,4 @@
-package cgc;
+package cgc.utils;
 
 /**
  * The purpose of this interface is to enforce location services.

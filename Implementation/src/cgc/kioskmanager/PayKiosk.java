@@ -1,8 +1,8 @@
 package cgc.kioskmanager;
 
-import cgc.Communicator;
-import cgc.Maintainable;
-import cgc.messages.Message;
+import cgc.utils.Communicator;
+import cgc.utils.Maintainable;
+import cgc.utils.messages.Message;
 
 import java.util.Timer;
 import java.util.TimerTask;
