@@ -6,19 +6,15 @@ public class EnterEmergencyMode implements Message {
 
     }
 
-    @Override
-    public long getTimeStamp() {
-        return 0;
-    }
-
     /**
      * This always has -2 to make it highest priority no matter what (this message is always
      * less to any other message it gets compared to).
-     * @param o other message
-     * @return -2 for highest priority.
+     * @return
      */
     @Override
-    public int compareTo(Message o) {
+    public long getTimeStamp() {
         return -2;
     }
+
+
 }
