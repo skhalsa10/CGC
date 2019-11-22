@@ -1,4 +1,4 @@
-package cgc;
+package cgc.utils;
 
 /**
  * This interface encorces Maintainable behvavior. This allows for the ability

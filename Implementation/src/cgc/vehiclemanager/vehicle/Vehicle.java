@@ -1,9 +1,9 @@
 package cgc.vehiclemanager.vehicle;
 
-import cgc.Communicator;
-import cgc.Locatable;
-import cgc.Maintainable;
-import cgc.messages.Message;
+import cgc.utils.Communicator;
+import cgc.utils.Locatable;
+import cgc.utils.Maintainable;
+import cgc.utils.messages.Message;
 import cgc.vehiclemanager.VehicleManager;
 
 import java.awt.*;

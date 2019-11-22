@@ -2,7 +2,8 @@ package cgc;
 
 import cgc.cgcstation.CGCStation;
 import cgc.kioskmanager.KioskManager;
-import cgc.messages.Message;
+import cgc.utils.Communicator;
+import cgc.utils.messages.Message;
 import cgc.tokenmanager.TokenManager;
 import cgc.vehiclemanager.VehicleManager;
 import javafx.stage.Stage;

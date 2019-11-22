@@ -1,6 +1,6 @@
 package cgc.tokenmanager;
 
-import cgc.messages.Message;
+import cgc.utils.messages.Message;
 
 import java.awt.*;
 

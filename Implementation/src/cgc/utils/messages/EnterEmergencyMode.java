@@ -1,4 +1,4 @@
-package cgc.messages;
+package cgc.utils.messages;
 
 public class EnterEmergencyMode implements Message {
 

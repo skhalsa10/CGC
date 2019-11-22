@@ -1,4 +1,4 @@
-package cgc.messages;
+package cgc.utils.messages;
 
 /**
  * this is a Completed Message it should be sent to a class to tell it to shut down gracefully
