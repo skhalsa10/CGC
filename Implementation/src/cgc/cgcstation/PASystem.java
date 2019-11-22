@@ -21,7 +21,9 @@ public class PASystem  {
     private CGCStation cgcStation;
     //TODO Mode enum
     File theme;
-    AudioInputStream audioIn;
+    File emergency;
+    AudioInputStream themeAudio;
+    AudioInputStream emergencyAudio;
     Clip clip;
 
     public PASystem(CGCStation cgcStation) {
@@ -29,11 +31,15 @@ public class PASystem  {
 
         this.cgcStation = cgcStation;
 
-        theme = Paths.get("./src/resources/emergency.wav").toFile();
+        theme = Paths.get("./src/resources/theme.wav").toFile();
+        emergency = Paths.get("./src/resources/emergency.wav").toFile();
         try {
-            audioIn = AudioSystem.getAudioInputStream(theme);
+            themeAudio = AudioSystem.getAudioInputStream(theme);
+            emergencyAudio = AudioSystem.getAudioInputStream(emergency);
             clip = AudioSystem.getClip();
-            clip.open(audioIn);
+            clip.open(themeAudio);
+
+
 
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
@@ -47,18 +53,37 @@ public class PASystem  {
         clip.start();
     }
 
-//    @Override
-//    public void sendMessage(Message m) {
-//
-//    }
-//
-//    @Override
-//    public void checkHealth() {
-//
-//    }
-//
-//    @Override
-//    public void run() {
-//
-//    }
+    public void enterEmergency(){
+        clip.stop();
+        setAudio(emergencyAudio);
+        clip.start();
+    }
+
+    public void exitEmergency(){
+        clip.stop();
+        setAudio(themeAudio);
+        clip.start();
+
+    }
+
+    private void setAudio(AudioInputStream themeAudio) {
+        clip.close();
+        try {
+            clip.open(themeAudio);
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void shutDown(){
+        clip.close();
+        try {
+            emergencyAudio.close();
+            themeAudio.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
