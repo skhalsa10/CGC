@@ -36,6 +36,6 @@ public interface Message extends Comparable<Message> {
         long result = this.getTimeStamp() - o.getTimeStamp();
         if (result > 0 ) { return 1; }
         else if (result == 0) { return 0; }
-        else { return 0; }
+        else { return -1; }
     }
 }
