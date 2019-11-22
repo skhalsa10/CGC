@@ -1,34 +1,37 @@
 package cgc.cgcstation;
 
-import cgc.utils.messages.Message;
-
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.concurrent.PriorityBlockingQueue;
 
 import static javax.sound.sampled.Clip.LOOP_CONTINUOUSLY;
 
 /**
- * This will play sounds on the speaker
+ * This will play sounds on the speaker.
+ *
+ * This class is extremeley simple when it is constructed it
+ * begins playing the theme music for the park. It can enter Emergency mode.
+ *
+ * the effect here is to change the music to an emergency protocol
+ * with instructions oh what the guests should do.
+ *
  */
 public class PASystem  {
 
-    private PriorityBlockingQueue<Message> messages;
-    private CGCStation cgcStation;
-    //TODO Mode enum
-    File theme;
-    File emergency;
-    AudioInputStream themeAudio;
-    AudioInputStream emergencyAudio;
-    Clip clip;
 
-    public PASystem(CGCStation cgcStation) {
+    private boolean isInEmergencyMode;
+    private File theme;
+    private File emergency;
+    private AudioInputStream themeAudio;
+    private AudioInputStream emergencyAudio;
+    private Clip clip;
 
 
-        this.cgcStation = cgcStation;
+    public PASystem() {
 
+        this.isInEmergencyMode = false;
+        //load the wav files used for regular and emergency mode
         theme = Paths.get("./src/resources/theme.wav").toFile();
         emergency = Paths.get("./src/resources/emergency.wav").toFile();
         try {
@@ -51,19 +54,37 @@ public class PASystem  {
         clip.start();
     }
 
+    /**
+     * swap the mode to emergency
+     */
     public void enterEmergency(){
-        clip.stop();
-        setAudio(emergencyAudio);
-        clip.start();
+        if(!isInEmergencyMode) {
+            clip.stop();
+            setAudio(emergencyAudio);
+            clip.loop(LOOP_CONTINUOUSLY);
+            clip.start();
+            isInEmergencyMode = true;
+        }
     }
 
+    /**
+     * lets put it back into normal mode dude
+     */
     public void exitEmergency(){
-        clip.stop();
-        setAudio(themeAudio);
-        clip.start();
+        if(isInEmergencyMode) {
+            clip.stop();
+            setAudio(themeAudio);
+            clip.loop(LOOP_CONTINUOUSLY);
+            clip.start();
+            isInEmergencyMode = false;
+        }
 
     }
 
+    /**
+     * this will load the input audio stream into the Clip that is being played
+     * @param themeAudio this is the audio stream to play :)
+     */
     private void setAudio(AudioInputStream themeAudio) {
         clip.close();
         try {
@@ -75,6 +96,9 @@ public class PASystem  {
         }
     }
 
+    /**
+     * we need to close the files that were opened d
+     */
     public void shutDown(){
         clip.close();
         try {
