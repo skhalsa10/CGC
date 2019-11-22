@@ -33,9 +33,9 @@ public interface Message extends Comparable<Message> {
 
     @Override
     default int compareTo(Message o) {
-        long result = this.timeStamp - o.getTimeStamp();
+        long result = this.getTimeStamp() - o.getTimeStamp();
         if (result > 0 ) { return 1; }
         else if (result == 0) { return 0; }
-        else { return 0; }
+        else { return -1; }
     }
 }

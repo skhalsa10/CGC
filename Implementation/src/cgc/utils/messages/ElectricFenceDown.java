@@ -12,7 +12,7 @@ public class ElectricFenceDown implements Message {
      */
     @Override
     public long getTimeStamp() {
-        return -1;
+        return 1;
     }
 
 
