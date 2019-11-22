@@ -52,6 +52,8 @@ public class CGC extends Thread implements Communicator {
     private VehicleManager vehicleManager;
     private TokenManager tokenManager;
     private SurveillanceSystem surveillanceSystem;
+    private boolean run;
+    private boolean emergencyMode;
 
     public CGC(Stage primaryStage){
         this.station = new CGCStation(primaryStage,this);
@@ -60,6 +62,8 @@ public class CGC extends Thread implements Communicator {
         this.tokenManager = new TokenManager(this);
         this.messages = new PriorityBlockingQueue<>();
         this.surveillanceSystem = new SurveillanceSystem(this);
+        this.run = true;
+        this.emergencyMode = false;
         start();
     }
 
@@ -67,7 +71,7 @@ public class CGC extends Thread implements Communicator {
     @Override
     public void sendMessage(Message m) {
         //Todo this should place a message in the CGC Message queue to be processed later
-        this.messages.add(m);
+        this.messages.put(m);
     }
 
     /**
@@ -78,6 +82,14 @@ public class CGC extends Thread implements Communicator {
     @Override
     public void run() {
         //TODO loop on the blocking queue until Shutdown message.
+        while (run) {
+            try {
+                Message m = this.messages.take();
+                processMessage(m);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void processMessage(Message m){
@@ -88,15 +100,20 @@ public class CGC extends Thread implements Communicator {
             this.tokenManager.sendMessage(m);
             this.surveillanceSystem.sendMessage(m);
             this.station.sendMessage(m);
+            this.run = false;
         }
         if (m instanceof ElectricFenceDown) {
-            Message emergencyModeTriggered = new EnterEmergencyMode();
+            if (!emergencyMode) {
+                Message emergencyModeTriggered = new EnterEmergencyMode();
+                
+                this.vehicleManager.sendMessage(emergencyModeTriggered);
+                this.kioskManager.sendMessage(emergencyModeTriggered);
+                this.tokenManager.sendMessage(emergencyModeTriggered);
+                this.surveillanceSystem.sendMessage(emergencyModeTriggered);
+                this.station.sendMessage(emergencyModeTriggered);
+                this.emergencyMode = true;
+            }
 
-            this.vehicleManager.sendMessage(emergencyModeTriggered);
-            this.kioskManager.sendMessage(emergencyModeTriggered);
-            this.tokenManager.sendMessage(emergencyModeTriggered);
-            this.surveillanceSystem.sendMessage(emergencyModeTriggered);
-            this.station.sendMessage(emergencyModeTriggered);
         }
         if (m instanceof UpdatedFinanceInfo) {
             // forward it to cgcstation.
