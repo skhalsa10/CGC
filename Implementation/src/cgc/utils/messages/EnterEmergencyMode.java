@@ -13,7 +13,7 @@ public class EnterEmergencyMode implements Message {
      */
     @Override
     public long getTimeStamp() {
-        return -2;
+        return 0;
     }
 
 
