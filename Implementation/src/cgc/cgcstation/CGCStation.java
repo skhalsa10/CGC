@@ -3,6 +3,7 @@ package cgc.cgcstation;
 import cgc.CGC;
 import cgc.utils.Communicator;
 import cgc.utils.messages.Message;
+import cgc.utils.messages.ShutDown;
 import javafx.stage.Stage;
 
 import java.util.concurrent.PriorityBlockingQueue;
@@ -44,22 +45,45 @@ public class CGCStation extends Thread implements Communicator {
     private PriorityBlockingQueue<Message> messages;
     private CGCGUI cgcgui;
     private PASystem paSystem;
+    private boolean isRunning;
 
     public CGCStation(Stage primaryStage, CGC cgc) {
-        paSystem = new PASystem(this);
+        this.cgc = cgc;
+        paSystem = new PASystem();
+        cgcgui = new CGCGUI(primaryStage,this);
+        isRunning = true;
+        messages = new PriorityBlockingQueue<>();
+        this.start();
     }
 
+    /**
+     * This will just pass the message to the messaging queue
+     * @param m
+     */
     @Override
     public void sendMessage(Message m) {
-
+        messages.put(m);
     }
 
     @Override
     public void run() {
-
+        while(isRunning){
+            System.out.println("HAHAHAHAHA");
+            try {
+                Message m = messages.take();
+                processMessage(m);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void processMessage(Message m){
-
+        //this handles the shutdown message
+        if(m instanceof ShutDown){
+            //TODO should I be sending a shutdown message to the GUI?
+            paSystem.shutDown();
+            isRunning = false;
+        }
     }
 }
