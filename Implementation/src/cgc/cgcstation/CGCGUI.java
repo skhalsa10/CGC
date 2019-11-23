@@ -12,10 +12,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.geometry.Insets;
 
-import java.awt.*;
 import java.util.concurrent.PriorityBlockingQueue;
 
 public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
@@ -34,6 +33,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
     private Canvas canvas;
     private GraphicsContext gc;
     private StackPane canvasContainer;
+    private Color CANVASBACKGROUND = Color.web("#313335");
 
     //button stuff
     private VBox leftBPane;
@@ -135,6 +135,13 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         //there are 1000 miliseconds in a second. if we divide this by 60 there
         // are 16.666667 ms between frame draws
         if (now - lastUpdate >= 16_667_000) {
+
+            //first thing we need to do is paint the background of the map
+            gc.setFill(CANVASBACKGROUND);
+            gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+            //draw the trex pit
+            gc.setStroke();
 
             // helped to stabalize the rendor time
             lastUpdate = now;
