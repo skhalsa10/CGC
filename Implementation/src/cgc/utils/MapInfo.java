@@ -17,17 +17,17 @@ import java.awt.*;
  */
 public final class MapInfo {
     //colors for GUI
-    public final Color CANVASBACKGROUND = Color.web("#313335");
-    public final Color TREXPITSTROKE = Color.web("#c92d39");
-    public final Color TREXPITFILL = Color.web("#666666");
-    public final Color TREX = Color.web("#c92d39");
-    public final Color EMPLOYEE = Color.web("#834187");
-    public final Color GUEST = Color.web("#7ab648");
-    public final Color TOURVEHICLE = Color.WHITE;
-    public final Color PATROLVEHICLE = Color.web("#3aa6dd");
-    public final Color KIOSK = Color.web("#ffc374");
-    public final Color SOUTHSTROKE = Color.web("#834187");
-    public final Color SOUTHFILL = Color.web("#666666");
+    public final static Color CANVASBACKGROUND = Color.web("#313335");
+    public final static Color TREXPITSTROKE = Color.web("#c92d39");
+    public final static Color TREXPITFILL = Color.web("#666666");
+    public final static Color TREX = Color.web("#c92d39");
+    public final static Color EMPLOYEE = Color.web("#834187");
+    public final static Color GUEST = Color.web("#7ab648");
+    public final static Color TOURVEHICLE = Color.WHITE;
+    public final static Color PATROLVEHICLE = Color.web("#3aa6dd");
+    public final static Color KIOSK = Color.web("#ffc374");
+    public final static Color SOUTHSTROKE = Color.web("#834187");
+    public final static Color SOUTHFILL = Color.web("#666666");
 
 
     public final static double MAP_WIDTH = 600;
