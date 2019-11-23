@@ -1,9 +1,17 @@
 package cgc.cgcstation;
 
 import cgc.utils.Communicator;
+import cgc.utils.MapInfo;
 import cgc.utils.messages.Message;
 import javafx.animation.AnimationTimer;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.geometry.Insets;
 
 import java.util.concurrent.PriorityBlockingQueue;
 
@@ -16,18 +24,55 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
 
     //GUI stuff
     private Stage stage;
+    private Scene scene;
+    private VBox root;
+
+    //animated map
+    private Canvas canvas;
+    private GraphicsContext gc;
+    private StackPane canvasContainer;
+
+    //button stuff
+    private VBox leftBPane;
+    private VBox rightBPane;
 
 
     public CGCGUI(Stage primaryStage, CGCStation cgcStation) {
 
         isRunning = true;
         messageThread = new Thread(this);
-        messageThread.start();
+        messages = new PriorityBlockingQueue<>();
 
         //GUI
         this.stage = primaryStage;
         stage.setTitle("Cretaceous Gardens Controller");
 
+        //init main stuff
+        root = new VBox();
+        root.setAlignment(Pos.CENTER);
+        canvasContainer = new StackPane();
+        canvas = new Canvas(MapInfo.MAP_WIDTH,MapInfo.MAP_HEIGHT);
+        gc = canvas.getGraphicsContext2D();
+
+        //button stuff
+        leftBPane = new VBox();
+        leftBPane.setAlignment(Pos.CENTER);
+        leftBPane.setSpacing(5);
+        leftBPane.setPadding(new Insets(5, 5, 5, 5));
+        rightBPane = new VBox();
+        rightBPane.setAlignment(Pos.CENTER);
+        rightBPane.setSpacing(5);
+        rightBPane.setPadding(new Insets(5, 5, 5, 5));
+
+        //create scene and set style sheet
+        scene = new Scene(root, 1200, 1200);
+        scene.getStylesheets().add("cgc/cgcstation/GUI.css");
+
+        //display the stage
+        stage.setScene(scene);
+        stage.show();
+
+        messageThread.start();
         this.start();
     }
 
