@@ -56,15 +56,6 @@ public class PatrolVehicle extends Vehicle {
         //TODO place this message in messages queue
     }
 
-    @Override
-    public synchronized void getLocation() {
-        //TODO Place a message in messages queue to send a location update to Token Manager
-    }
-
-    @Override
-    public synchronized void checkHealth() {
-        //TODO Place a message in messages queue to send a health update to Token Manager
-    }
 
     @Override
     public void run() {
