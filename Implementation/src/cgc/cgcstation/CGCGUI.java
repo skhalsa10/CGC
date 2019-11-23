@@ -135,14 +135,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         //there are 1000 miliseconds in a second. if we divide this by 60 there
         // are 16.666667 ms between frame draws
         if (now - lastUpdate >= 16_667_000) {
-
-            //first thing we need to do is paint the background of the map
-            gc.setFill(CANVASBACKGROUND);
-            gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
-            //draw the trex pit
-            gc.setStroke();
-
+            
             // helped to stabalize the rendor time
             lastUpdate = now;
         }
