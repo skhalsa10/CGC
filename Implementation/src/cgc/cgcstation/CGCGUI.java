@@ -8,11 +8,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
 
+import java.awt.*;
 import java.util.concurrent.PriorityBlockingQueue;
 
 public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
@@ -25,7 +28,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
     //GUI stuff
     private Stage stage;
     private Scene scene;
-    private VBox root;
+    private HBox root;
 
     //animated map
     private Canvas canvas;
@@ -35,6 +38,11 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
     //button stuff
     private VBox leftBPane;
     private VBox rightBPane;
+    private Button exitEmergency;
+    private Button enterEmergency;
+    private Button viewHealth;
+    private Button viewFinances;
+
 
 
     public CGCGUI(Stage primaryStage, CGCStation cgcStation) {
@@ -48,7 +56,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         stage.setTitle("Cretaceous Gardens Controller");
 
         //init main stuff
-        root = new VBox();
+        root = new HBox();
         root.setAlignment(Pos.CENTER);
         canvasContainer = new StackPane();
         canvas = new Canvas(MapInfo.MAP_WIDTH,MapInfo.MAP_HEIGHT);
@@ -57,15 +65,34 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         //button stuff
         leftBPane = new VBox();
         leftBPane.setAlignment(Pos.CENTER);
-        leftBPane.setSpacing(5);
-        leftBPane.setPadding(new Insets(5, 5, 5, 5));
+        //leftBPane.setSpacing(5);
+        //leftBPane.setPadding(new Insets(5, 5, 5, 5));
         rightBPane = new VBox();
         rightBPane.setAlignment(Pos.CENTER);
-        rightBPane.setSpacing(5);
-        rightBPane.setPadding(new Insets(5, 5, 5, 5));
+        //rightBPane.setSpacing(5);
+        //rightBPane.setPadding(new Insets(5, 5, 5, 5));
+        //buttons
+        enterEmergency = new Button("Enter\nEmergency");
+        enterEmergency.getStyleClass().add("enterEmergency-button");
+        exitEmergency = new Button("Exit\nEmergency");
+        exitEmergency.getStyleClass().add("exitEmergency-button");
+        viewHealth = new Button("View\nHealth");
+        viewHealth.getStyleClass().add("viewHealth-button");
+        viewFinances = new Button("View\nFinances");
+        viewFinances.getStyleClass().add("viewFinances-button");
+
+        //populate stuff
+        leftBPane.getChildren().addAll(enterEmergency,exitEmergency);
+        rightBPane.getChildren().addAll(viewHealth,viewFinances);
+        canvasContainer.getChildren().addAll(canvas);
+        canvasContainer.getStyleClass().add("canvasContainer");
+        root.getChildren().addAll(leftBPane,canvasContainer,rightBPane);
+
+
+
 
         //create scene and set style sheet
-        scene = new Scene(root, 1200, 1200);
+        scene = new Scene(root, 1000, 1000);
         scene.getStylesheets().add("cgc/cgcstation/GUI.css");
 
         //display the stage

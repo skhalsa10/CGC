@@ -1,5 +1,69 @@
 .root{
-    -fx-background-color: black;
+    -fx-background-color: #3c3f41;
     -fx-border-color: #3c3f41;
     -fx-border-width: 1px;
+}
+
+.canvasContainer{
+    -fx-background-color: #313335;
+}
+
+.enterEmergency-button{
+    -fx-text-fill: #de5f85;
+    -fx-font-size: 25px;
+    -fx-border-color: #5d6264;
+    -fx-background-color: #313335;
+
+}
+
+.enterEmergency-button:pressed{
+    -fx-text-fill: #313335;
+    -fx-font-size: 25px;
+    -fx-border-color: #5d6264;
+    -fx-background-color: #de5f85;
+}
+
+.exitEmergency-button{
+    -fx-text-fill: #c7e8ac;
+    -fx-font-size: 25px;
+    -fx-border-color: #5d6264;
+    -fx-background-color: #313335;
+
+}
+
+.exitEmergency-button:pressed{
+    -fx-text-fill: #313335;
+    -fx-font-size: 25px;
+    -fx-border-color: #5d6264;
+    -fx-background-color: #c7e8ac;
+}
+
+.viewHealth-button{
+    -fx-text-fill: #c7e8ac;
+    -fx-font-size: 25px;
+    -fx-border-color: #5d6264;
+    -fx-background-color: #313335;
+
+}
+
+.viewHealth-button:pressed{
+    -fx-text-fill: #313335;
+    -fx-font-size: 25px;
+    -fx-border-color: #5d6264;
+    -fx-background-color: #c7e8ac;
+}
+
+.viewFinances-button{
+    -fx-text-fill: #ff9264;
+    -fx-font-size: 25px;
+    -fx-border-color: #5d6264;
+    -fx-background-color: #313335;
+
+}
+
+.viewFinances-button:pressed{
+    -fx-text-fill: #313335;
+    -fx-font-size: 25px;
+    -fx-border-color: #5d6264;
+    -fx-background-color: #ff9264;
 }
