@@ -41,7 +41,10 @@ public final class MapInfo {
     public final static Point2D North_Pickup_Location = new Point2D(0,TREX_PIT_HEIGHT);
     //point in the upper left corner of square t-rex pit
     public final static Point2D UPPER_LEFT_TREX_PIT = new Point2D(MAP_WIDTH/4,0);
-
+    public final static Point2D UPPER_RIGHT_TREX_PIT = new Point2D(MAP_WIDTH/4 + TREX_PIT_WIDTH,0);
+    public final static Point2D BOTTOM_LEFT_TREX_PIT = new Point2D(MAP_WIDTH/4, TREX_PIT_HEIGHT);
+    public final static Point2D BOTTOM_RIGHT_TREX_PIT = new Point2D(MAP_WIDTH/4 + TREX_PIT_WIDTH, TREX_PIT_HEIGHT);
+    public final static Point2D CENTER_TREX_PIT = new Point2D(MAP_WIDTH/4 + TREX_PIT_WIDTH/2, TREX_PIT_HEIGHT/2);
 
     //TODO add linear coordinate for the path of te highway that goes from south to north
     //two points needed
