@@ -38,11 +38,11 @@ import java.util.concurrent.PriorityBlockingQueue;
  *
  * CGCStaion will receive message from CGC with Location w/ tokenID
  *  1. Forward message to GUI
+ *  DONE
  *
  * CGCStation will send message to CGC for updated Health info
+ * DONE
  *
- * CGCStation will receive message from CGC with updated health of all devices
- *  1. forward message to gui to display.
  *
  */
 public class CGCStation extends Thread implements Communicator {
