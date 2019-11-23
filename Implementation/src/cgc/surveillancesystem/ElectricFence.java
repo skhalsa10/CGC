@@ -15,13 +15,15 @@ public class ElectricFence extends Thread implements Maintainable, Communicator 
     private Timer timer;
 
     public ElectricFence(SurveillanceSystem surveillanceSystem) {
+        this.surveillanceSystem = surveillanceSystem;
+        this.messages = new PriorityBlockingQueue<>();
 
     }
 
 
     @Override
     public void sendMessage(Message m) {
-
+        this.messages.put(m);
     }
 
     @Override

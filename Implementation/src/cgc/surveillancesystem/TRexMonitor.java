@@ -1,11 +1,15 @@
 package cgc.surveillancesystem;
 
 import cgc.utils.Communicator;
+import cgc.utils.Entity;
 import cgc.utils.Locatable;
 import cgc.utils.Maintainable;
 import cgc.utils.messages.Message;
+import cgc.utils.messages.UpdatedHealth;
+import cgc.utils.messages.UpdatedLocation;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.util.concurrent.PriorityBlockingQueue;
 
 /**
@@ -26,15 +30,17 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
     // Maybe add other coordinate space (square space? ... or circle if someone wants to do
     // circle math) to make sure
     // that TRex doesn't go outside.
-    private Point GPS;
+    private Point2D GPS;
     private SurveillanceSystem surveillanceSystem;
     private boolean isTranquilized;
     private boolean healthStatus;
     private PriorityBlockingQueue<Message> messages;
-
+    private boolean run;
 
     public TRexMonitor(SurveillanceSystem surveillanceSystem) {
+        this.run = true;
         this.surveillanceSystem = surveillanceSystem;
+        this.messages = new PriorityBlockingQueue<>();
 
         startTRexTimer();
         start();
@@ -48,6 +54,14 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
     @Override
     public void run() {
         // TODO: this will call processMessage accordingly.
+        while (run) {
+            try {
+                Message m = this.messages.take();
+                processMessage(m);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -76,6 +90,8 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
      */
     private void reportHealth(boolean healthStatus) {
         //TODO Send a message to the surveillanceSystem with health Status
+        UpdatedHealth updatedHealth = new UpdatedHealth(Entity.TREX, 1, healthStatus);
+        this.surveillanceSystem.sendMessage(updatedHealth);
     }
 
     /**
@@ -89,7 +105,7 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
     /**
      * send message to surveillanceSystem.
      */
-    private void updateLocation(Point loc) {
+    private void updateLocation(Point2D loc) {
         //TODO send a message to the surveillance with updated location
     }
 
@@ -100,6 +116,7 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
     @Override
     public synchronized void sendMessage(Message m) {
         //TODO Store this message in the queue for processing later
+        this.messages.put(m);
     }
 
     private void processMessage(Message message) {
