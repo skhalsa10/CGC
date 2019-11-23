@@ -11,13 +11,7 @@ public class TokenInfo implements Message {
 
     }
 
-    @Override
-    public long getTimeStamp() {
-        return 0;
-    }
+    //getTokenID()
 
-    @Override
-    public int compareTo(Message o) {
-        return 0;
-    }
+
 }

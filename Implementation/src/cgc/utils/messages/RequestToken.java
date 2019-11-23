@@ -7,13 +7,5 @@ public class RequestToken implements Message {
 
     }
 
-    @Override
-    public long getTimeStamp() {
-        return 0;
-    }
 
-    @Override
-    public int compareTo(Message o) {
-        return 0;
-    }
 }
