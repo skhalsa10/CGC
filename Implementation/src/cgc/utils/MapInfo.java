@@ -1,5 +1,7 @@
 package cgc.utils;
 
+import javafx.geometry.Point2D;
+
 import java.awt.*;
 
 /**
@@ -14,15 +16,15 @@ import java.awt.*;
  */
 public final class MapInfo {
 
-    public final static int MAP_WIDTH = 600;
-    public final static int MAP_HEIGHT = 1000;
-    public final static Point GUEST_SPAWN_LOCATION = new Point(MAP_WIDTH/2,MAP_HEIGHT);
-    public final static Point SOUTH_PICKUP_LOCATION = new Point();
-    public final static Point North_Pickup_Location = new Point();
+    public final static double MAP_WIDTH = 600;
+    public final static double MAP_HEIGHT = 1000;
+    public final static Point2D GUEST_SPAWN_LOCATION = new Point2D(MAP_WIDTH/2,MAP_HEIGHT);
+    public final static Point2D SOUTH_PICKUP_LOCATION = new Point2D();
+    public final static Point2D North_Pickup_Location = new Point2D();
     //point in the upper left corner of square t-rex pit
-    public final static Point UPPER_LEFT_TREX_PIT = new Point(MAP_WIDTH/4,0);
-    public final static int TREX_PIT_WIDTH = MAP_WIDTH/2;
-    public final static int TREX_PIT_HEIGHT = TREX_PIT_WIDTH;
+    public final static Point2D UPPER_LEFT_TREX_PIT = new Point2D(MAP_WIDTH/4,0);
+    public final static double TREX_PIT_WIDTH = MAP_WIDTH/2;
+    public final static double TREX_PIT_HEIGHT = TREX_PIT_WIDTH;
 
     //TODO add linear coordinate for the path of te highway that goes from south to north
     //two points needed

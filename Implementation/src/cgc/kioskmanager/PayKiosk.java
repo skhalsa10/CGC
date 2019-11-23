@@ -1,6 +1,7 @@
 package cgc.kioskmanager;
 
 import cgc.utils.Communicator;
+import cgc.utils.Locatable;
 import cgc.utils.Maintainable;
 import cgc.utils.messages.Message;
 
@@ -27,7 +28,7 @@ import java.util.concurrent.PriorityBlockingQueue;
  *
  * The Pay Kiosk MUST send message to the Kiosk Manager that a token was purchased from this kiosk
  */
-public class PayKiosk extends Thread implements Communicator, Maintainable {
+public class PayKiosk extends Thread implements Communicator, Maintainable, Locatable {
     private KioskManager kioskManager;
     private PriorityBlockingQueue<Message> messages;
     private int ID;
@@ -43,11 +44,6 @@ public class PayKiosk extends Thread implements Communicator, Maintainable {
     @Override
     public void sendMessage(Message m) {
         //TODO Put Message m into the messages queue
-    }
-
-    @Override
-    public void checkHealth() {
-        //TODO Place a message into the Message Queue to update the Kiosk Manager with the current health
     }
 
     @Override
