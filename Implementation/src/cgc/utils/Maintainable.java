@@ -7,6 +7,7 @@ package cgc.utils;
  *  It is up to the implementing class to keep track of the health and produce a boolean when health is checked.
  */
 public interface Maintainable {
+     boolean healthStatus = true;
 
     /**
      * We will only enforce the ability to get a true or false value for the health of the implementing class.

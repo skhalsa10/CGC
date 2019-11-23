@@ -104,9 +104,6 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
     }
 
 
-    private void processMessage(Message m){
-        //TODO
-    }
 
 
     @Override
@@ -125,6 +122,11 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
             }
         }
     }
+
+    private void processMessage(Message m){
+
+    }
+
 
     /**
      * this is used to paint the gui on the screen. it is needed to draw the animation.

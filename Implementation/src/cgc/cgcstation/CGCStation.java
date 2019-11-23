@@ -126,6 +126,9 @@ public class CGCStation extends Thread implements Communicator {
             }
 
         }
+        else{
+            System.out.println("cant candle message: " + m);
+        }
 
     }
 }
