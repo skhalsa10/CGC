@@ -24,10 +24,6 @@ public class ElectricFence extends Thread implements Maintainable, Communicator 
 
     }
 
-    @Override
-    public void checkHealth() {
-
-    }
 
     private void startElectricFenceTimer() {
         // TODO: use timer task with timer to electric fence outage (maybe after a min?)
