@@ -28,6 +28,7 @@ public final class MapInfo {
     public final static Color KIOSK = Color.web("#ffc374");
     public final static Color SOUTHSTROKE = Color.web("#834187");
     public final static Color SOUTHFILL = Color.web("#666666");
+    public final static Color ROADCOLOR = Color.BEIGE;
 
 
     public final static double MAP_WIDTH = 600;
