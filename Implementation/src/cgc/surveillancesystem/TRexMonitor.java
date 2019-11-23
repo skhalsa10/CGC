@@ -79,11 +79,6 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
 
     }
 
-    @Override
-    public synchronized void checkHealth() {
-        //TODO place a Message inside of the Trex blocking queue that tells it to update the surveillance system with
-        // Health info
-    }
 
     /**
      * send message to surveillance system.
@@ -92,14 +87,6 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
         //TODO Send a message to the surveillanceSystem with health Status
         UpdatedHealth updatedHealth = new UpdatedHealth(Entity.TREX, 1, healthStatus);
         this.surveillanceSystem.sendMessage(updatedHealth);
-    }
-
-    /**
-     * place message inside Trex queue qich triggers an update to the surveillanceSystem when processed
-     */
-    @Override
-    public synchronized void getLocation() {
-        //TODO place a message in the T-Rex message queue to trigger a a location sync to the surveillance
     }
 
     /**

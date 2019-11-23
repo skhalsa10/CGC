@@ -15,7 +15,7 @@ import java.awt.*;
 public final class MapInfo {
 
     public final static int MAP_WIDTH = 600;
-    public final static int MAP_HEIGHT = 1200;
+    public final static int MAP_HEIGHT = 1000;
     public final static Point GUEST_SPAWN_LOCATION = new Point(MAP_WIDTH/2,MAP_HEIGHT);
     public final static Point SOUTH_PICKUP_LOCATION = new Point();
     public final static Point North_Pickup_Location = new Point();
