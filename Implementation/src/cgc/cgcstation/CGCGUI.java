@@ -33,7 +33,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
     private Canvas canvas;
     private GraphicsContext gc;
     private StackPane canvasContainer;
-    private Color CANVASBACKGROUND = Color.web("#313335");
+
 
     //button stuff
     private VBox leftBPane;
