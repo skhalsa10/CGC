@@ -4,6 +4,7 @@ import cgc.utils.Communicator;
 import cgc.utils.MapInfo;
 import cgc.utils.messages.Message;
 import javafx.animation.AnimationTimer;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -12,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.concurrent.PriorityBlockingQueue;
@@ -42,6 +42,9 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
     private Button enterEmergency;
     private Button viewHealth;
     private Button viewFinances;
+
+    //State stuff
+    private Point2D  TRexLoc;
 
 
 
@@ -88,7 +91,8 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         canvasContainer.getStyleClass().add("canvasContainer");
         root.getChildren().addAll(leftBPane,canvasContainer,rightBPane);
 
-
+        //TESTING TODO REMOVE GOR GOLIVE
+        TRexLoc = new Point2D(MapInfo.CENTER_TREX_PIT.getX(), MapInfo.CENTER_TREX_PIT.getY());
 
 
         //create scene and set style sheet
@@ -139,11 +143,26 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         if (now - lastUpdate >= 16_667_000) {
 
             //first thing we need to do is paint the background of the map
-            gc.setFill(CANVASBACKGROUND);
+            gc.setFill(MapInfo.CANVASBACKGROUND);
             gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
             //draw the trex pit
-            gc.setStroke();
+            gc.setStroke(MapInfo.TREXPITSTROKE);
+            gc.setLineWidth(4);
+            gc.setFill(MapInfo.TREXPITFILL);
+            gc.fillRect(MapInfo.UPPER_LEFT_TREX_PIT.getX(), MapInfo.UPPER_LEFT_TREX_PIT.getY(),MapInfo.TREX_PIT_WIDTH, MapInfo.TREX_PIT_HEIGHT);
+            gc.strokeRect(MapInfo.UPPER_LEFT_TREX_PIT.getX(), MapInfo.UPPER_LEFT_TREX_PIT.getY(),MapInfo.TREX_PIT_WIDTH, MapInfo.TREX_PIT_HEIGHT);
+
+            //draw the South building
+            gc.setStroke(MapInfo.SOUTHSTROKE);
+            gc.setLineWidth(4);
+            gc.setFill(MapInfo.SOUTHFILL);
+            gc.fillRect(MapInfo.UPPER_LEFT_SOUTH_BULDING.getX(), MapInfo.UPPER_LEFT_SOUTH_BULDING.getY(),MapInfo.SOUTHBUILDING_WIDTH, MapInfo.SOUTHBUILDING_HEIGHT);
+            gc.strokeRect(MapInfo.UPPER_LEFT_SOUTH_BULDING.getX(), MapInfo.UPPER_LEFT_SOUTH_BULDING.getY(),MapInfo.SOUTHBUILDING_WIDTH, MapInfo.SOUTHBUILDING_HEIGHT);
+
+            //DRAW TREX
+            gc.setFill(MapInfo.TREX);
+            gc.fillOval(TRexLoc.getX(),TRexLoc.getY(),8,8);
 
             // helped to stabalize the rendor time
             lastUpdate = now;
