@@ -40,7 +40,7 @@ public final class MapInfo {
     //PICKUP LOCATIONS
     public final static Point2D GUEST_SPAWN_LOCATION = new Point2D(MAP_WIDTH/2,MAP_HEIGHT);
     public final static Point2D SOUTH_PICKUP_LOCATION = new Point2D(MAP_WIDTH/2,MAP_HEIGHT-SOUTHBUILDING_HEIGHT);
-    public final static Point2D North_Pickup_Location = new Point2D(0,TREX_PIT_HEIGHT);
+    public final static Point2D NORTH_PICKUP_LOCATION = new Point2D(MAP_WIDTH/2,TREX_PIT_HEIGHT);
 
     //TREX STUFF
     public final static Point2D UPPER_LEFT_TREX_PIT = new Point2D(MAP_WIDTH/4,0);
@@ -51,6 +51,10 @@ public final class MapInfo {
 
     //South BUILDING
     public final static Point2D UPPER_LEFT_SOUTH_BULDING = new Point2D((MAP_WIDTH-SOUTHBUILDING_WIDTH)/2,MAP_HEIGHT-SOUTHBUILDING_HEIGHT);
+
+    //Vehicle path
+    public final static Point2D ROAD_SOUTH = new Point2D(MAP_WIDTH/2,MAP_HEIGHT-SOUTHBUILDING_HEIGHT);
+    public final static Point2D ROAD_NORTH = new Point2D(MAP_WIDTH/2,TREX_PIT_HEIGHT);
 
     //TODO add linear coordinate for the path of te highway that goes from south to north
     //two points needed
