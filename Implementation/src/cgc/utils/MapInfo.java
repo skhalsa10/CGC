@@ -54,7 +54,7 @@ public final class MapInfo {
 
     //Vehicle path
     public final static Point2D ROAD_SOUTH = new Point2D(MAP_WIDTH/2,MAP_HEIGHT-SOUTHBUILDING_HEIGHT);
-    public final static Point2D ROAD_NORTH = new Point2D(MAP_WIDTH/2,TREX_PIT_HEIGHT);
+    public final static Point2D ROAD_NORTH = new Point2D(MAP_WIDTH/2,TREX_PIT_HEIGHT+30);
 
     //TODO add linear coordinate for the path of te highway that goes from south to north
     //two points needed

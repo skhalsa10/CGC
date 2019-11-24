@@ -5,7 +5,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    CGC cgc;
+    private CGC cgc;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -16,7 +16,7 @@ public class Main extends Application {
 
     @Override
     public void stop(){
-        System.out.println("shutting down");
+        System.out.println("Main shutting down");
         cgc.sendMessage(new ShutDown());
     }
 

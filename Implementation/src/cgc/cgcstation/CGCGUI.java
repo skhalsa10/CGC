@@ -111,12 +111,8 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         //button stuff
         leftBPane = new VBox();
         leftBPane.setAlignment(Pos.CENTER);
-        //leftBPane.setSpacing(5);
-        //leftBPane.setPadding(new Insets(5, 5, 5, 5));
         rightBPane = new VBox();
         rightBPane.setAlignment(Pos.CENTER);
-        //rightBPane.setSpacing(5);
-        //rightBPane.setPadding(new Insets(5, 5, 5, 5));
         //buttons
         enterEmergency = new Button("Enter\nEmergency");
         enterEmergency.getStyleClass().add("enterEmergency-button");
@@ -262,6 +258,10 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
             //TODO MAKE SURE to do anythign else I need
             isInEmergency = true;
         }
+        else if(m instanceof UpdatedFinanceInfo){
+            UpdatedFinanceInfo m2 = (UpdatedFinanceInfo)m;
+            //TODO switch to finacne screen and display finance info
+        }
         else if(m instanceof ShutDown){
             System.out.println("GUI is Shutting down");
             isRunning = false;
@@ -352,6 +352,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         gc.setFill(MapInfo.KIOSK);
         for(Point2D p: kioskLocations.values()){
             gc.fillRect(p.getX(),p.getY(),8,8);
+            //TODO add the health overlay
         }
 
 
@@ -360,23 +361,27 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         gc.setFill(MapInfo.TOURVEHICLE);
         for(Point2D p: tourLocations.values()){
             gc.fillOval(p.getX(),p.getY(),6,6);
+            //TODO add the health overlay
         }
 //        patrolLocations = new HashMap<>();
         //DRAW patrol VEHICLES
         gc.setFill(MapInfo.PATROLVEHICLE);
         for(Point2D p: patrolLocations.values()){
             gc.fillOval(p.getX(),p.getY(),6,6);
+            //TODO add the health overlay
         }
 //        employeeLocations = new HashMap<>();
         //DRAW employee tokens
         gc.setFill(MapInfo.EMPLOYEE);
         for(Point2D p: employeeLocations.values()){
             gc.fillOval(p.getX(),p.getY(),6,6);
+            //TODO add the health overlay
         }
 //        guestLocations = new HashMap<>();
         gc.setFill(MapInfo.GUEST);
         for(Point2D p: guestLocations.values()){
             gc.fillOval(p.getX(),p.getY(),6,6);
+            //TODO add the health overlay
         }
 
         if(isInEmergency){

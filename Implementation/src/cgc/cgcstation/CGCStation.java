@@ -16,6 +16,7 @@ import java.util.concurrent.PriorityBlockingQueue;
  *
  * the CGCStation will receive message from CGCGui to ShutdownCGC
  *  1. The CGCStation will sendMessage to CGC to ShutdownCGC
+ *  DONE
  *
  * The CGCStation will receive Shutdown Message from CGC
  *  1. shutting down GUI
