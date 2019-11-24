@@ -1,6 +1,8 @@
 package cgc.kioskmanager;
 import java.util.ArrayList;
+import java.util.Date;
 import java.time.LocalTime;
+import java.util.Calendar;
 
 /**
  * The purpose of this class is to help analyze the finances generated
@@ -14,7 +16,6 @@ public class TransactionLogger {
     //Variables related with finances.
     private Double totalBenefits;
     private ArrayList<Double> mensualBenefits;
-    private Date date;
     
     public TransactionLogger() {
         initializeMensualBenefits();
@@ -26,6 +27,13 @@ public class TransactionLogger {
         totalBenefits+= amount;
 
         //Mensual approach
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(purcharseDate);
+        int month = cal.get(Calendar.MONTH);
+        double month_amount = mensualBenefits.get(month) + amount;
+
+        //Setting the amount in the corresponding month
+        mensualBenefits.set(month, month_amount);
     }
 
 
