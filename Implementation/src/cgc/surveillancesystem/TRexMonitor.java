@@ -199,6 +199,7 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
         else if (message instanceof ExitEmergencyMode) {
             this.emergencyMode = false;
             this.healthStatus = true;
+            reportHealth(this.healthStatus);
             // resume timer and trex movement.
             restartTimer();
         }

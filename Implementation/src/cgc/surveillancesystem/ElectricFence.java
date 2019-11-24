@@ -90,6 +90,7 @@ public class ElectricFence extends Thread implements Maintainable, Communicator 
         else if (message instanceof ExitEmergencyMode) {
             this.emergencyMode = false;
             this.healthStatus = true;
+            reportHealth(this.healthStatus);
             // resume timer for a possible natural electric fence outage.
             restartTimer();
         }
