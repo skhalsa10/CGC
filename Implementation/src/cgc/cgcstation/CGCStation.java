@@ -87,10 +87,10 @@ public class CGCStation extends Thread implements Communicator {
     private synchronized void processMessage(Message m){
         //this handles the shutdown message
         if(m instanceof ShutDown){
-            //TODO should I be sending a shutdown message to the GUI?
             paSystem.shutDown();
             cgcgui.sendMessage(m);
             isRunning = false;
+            System.out.println("CGCSTATION is shutting down");
         }
         else if(m instanceof UpdatedFinanceInfo){
             cgcgui.sendMessage(m);

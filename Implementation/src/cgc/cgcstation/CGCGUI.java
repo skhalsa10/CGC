@@ -258,8 +258,14 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         }
         else if(m instanceof EnterEmergencyMode){
             EnterEmergencyMode m2 = (EnterEmergencyMode) m;
+            System.out.println("received enteremergencymode");
             //TODO MAKE SURE to do anythign else I need
             isInEmergency = true;
+        }
+        else if(m instanceof ShutDown){
+            System.out.println("GUI is Shutting down");
+            isRunning = false;
+            this.stop();
         }
         else{
             System.out.println("Cant process this message sorry");
