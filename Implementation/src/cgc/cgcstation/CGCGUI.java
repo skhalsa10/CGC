@@ -2,10 +2,10 @@ package cgc.cgcstation;
 
 import cgc.utils.Communicator;
 import cgc.utils.MapInfo;
-import cgc.utils.messages.Message;
-import cgc.utils.messages.UpdatedHealth;
-import cgc.utils.messages.UpdatedLocation;
+import cgc.utils.messages.*;
 import javafx.animation.AnimationTimer;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -28,7 +28,13 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
     private PriorityBlockingQueue<Message> messages;
     private Thread messageThread;
     private boolean isRunning;
+    private boolean isInEmergency;
     private Screen currentScreen;
+    private boolean healthOverlayIsOn;
+    private int stateCounter=0;
+    private boolean emergencyBorderOn=true;
+    private boolean emergencyByGUI = false;
+    private double emergencyFenceWidth = 0;
 
     //GUI stuff
     private Stage stage;
@@ -72,7 +78,9 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
 
     public CGCGUI(Stage primaryStage, CGCStation cgcStation) {
 
+        healthOverlayIsOn = false;
         isRunning = true;
+        isInEmergency = false;
         messageThread = new Thread(this);
         messages = new PriorityBlockingQueue<>();
         currentScreen = Screen.MAIN;
@@ -112,10 +120,37 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         //buttons
         enterEmergency = new Button("Enter\nEmergency");
         enterEmergency.getStyleClass().add("enterEmergency-button");
+        enterEmergency.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(!isInEmergency) {
+                    emergencyByGUI = true;
+                    cgcStation.sendMessage(new ElectricFenceDown());
+                }
+            }
+        });
+
         exitEmergency = new Button("Exit\nEmergency");
         exitEmergency.getStyleClass().add("exitEmergency-button");
+        exitEmergency.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(isInEmergency) {
+                    cgcStation.sendMessage(new ExitEmergencyMode());
+                    emergencyByGUI = false;
+                    isInEmergency = false;
+                    emergencyFenceWidth=0;
+                }
+            }
+        });
         viewHealth = new Button("View\nHealth");
         viewHealth.getStyleClass().add("viewHealth-button");
+        viewHealth.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                healthOverlayIsOn = !healthOverlayIsOn;
+            }
+        });
         viewFinances = new Button("View\nFinances");
         viewFinances.getStyleClass().add("viewFinances-button");
 
@@ -155,6 +190,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         while(isRunning){
             try {
                 Message m = messages.take();
+                //System.out.println("receiving messages");
                 processMessage(m);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -164,23 +200,31 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
 
     private synchronized void processMessage(Message m){
         if(m instanceof UpdatedLocation){
+
             UpdatedLocation m2 = (UpdatedLocation) m;
+
             switch (m2.getEntityName()){
                 case TREX:{
+                    //System.out.println("X: " + m2.getLoc().getX() + " Y: " + m2.getLoc().getY());
                     TRexLoc = m2.getLoc();
+                    break;
                 }
                 case GUEST_TOKEN:{
                     //this should replace location if it exists or add it if it doesnt
                     guestLocations.put(m2.getEntityID(), m2.getLoc());
+                    break;
                 }
                 case TOUR_VEHICLE:{
                     tourLocations.put(m2.getEntityID(), m2.getLoc());
+                    break;
                 }
                 case EMPLOYEE_TOKEN:{
                     employeeLocations.put(m2.getEntityID(), m2.getLoc());
+                    break;
                 }
                 case PATROL_VEHICLE:{
                     patrolLocations.put(m2.getEntityID(), m2.getLoc());
+                    break;
 
                 }
             }
@@ -190,22 +234,32 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
             switch (m2.getEntityName()){
                 case TREX:{
                     TRexHealth = m2.isHealthStatus();
+                    break;
                 }
                 case GUEST_TOKEN:{
                     //this should replace location if it exists or add it if it doesnt
                     guestHealth.put(m2.getEntityID(), m2.isHealthStatus());
+                    break;
                 }
                 case TOUR_VEHICLE:{
                     tourHealth.put(m2.getEntityID(), m2.isHealthStatus());
+                    break;
                 }
                 case EMPLOYEE_TOKEN:{
                     employeeHealth.put(m2.getEntityID(), m2.isHealthStatus());
+                    break;
                 }
                 case PATROL_VEHICLE:{
                     patrolHealth.put(m2.getEntityID(), m2.isHealthStatus());
+                    break;
 
                 }
             }
+        }
+        else if(m instanceof EnterEmergencyMode){
+            EnterEmergencyMode m2 = (EnterEmergencyMode) m;
+            //TODO MAKE SURE to do anythign else I need
+            isInEmergency = true;
         }
         else{
             System.out.println("Cant process this message sorry");
@@ -254,6 +308,15 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         //draw the trex pit
         gc.setStroke(MapInfo.TREXPITSTROKE);
         gc.setLineWidth(4);
+        if(isInEmergency && !emergencyByGUI){
+            gc.setLineWidth(emergencyFenceWidth);
+            if(stateCounter%3 == 0){
+                emergencyFenceWidth++;
+           }
+            if(emergencyFenceWidth>5) {
+                emergencyFenceWidth = 0;
+            }
+        }
         gc.setFill(MapInfo.TREXPITFILL);
         gc.fillRect(MapInfo.UPPER_LEFT_TREX_PIT.getX(), MapInfo.UPPER_LEFT_TREX_PIT.getY(),MapInfo.TREX_PIT_WIDTH, MapInfo.TREX_PIT_HEIGHT);
         gc.strokeRect(MapInfo.UPPER_LEFT_TREX_PIT.getX(), MapInfo.UPPER_LEFT_TREX_PIT.getY(),MapInfo.TREX_PIT_WIDTH, MapInfo.TREX_PIT_HEIGHT);
@@ -269,6 +332,15 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         //DRAW TREX
         gc.setFill(MapInfo.TREX);
         gc.fillOval(TRexLoc.getX(),TRexLoc.getY(),8,8);
+        if(healthOverlayIsOn){
+            if(TRexHealth) {
+                gc.setFill(Color.LIME);
+                gc.fillText("Healthy",TRexLoc.getX(),TRexLoc.getY());
+            }else{
+                gc.setFill(Color.LIGHTSALMON);
+                gc.fillText("Not Healthy",TRexLoc.getX(),TRexLoc.getY());
+            }
+        }
 
         //DRAW KIOSKS
         gc.setFill(MapInfo.KIOSK);
@@ -299,6 +371,19 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         gc.setFill(MapInfo.GUEST);
         for(Point2D p: guestLocations.values()){
             gc.fillOval(p.getX(),p.getY(),6,6);
+        }
+
+        if(isInEmergency){
+            if(emergencyBorderOn) {
+                gc.setStroke(Color.web("#c92d39", .2));
+                gc.setLineWidth(40);
+                gc.strokeRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            }
+            stateCounter++;
+            if(stateCounter%50==0){
+                emergencyBorderOn = !emergencyBorderOn;
+            }
+
         }
 
 
