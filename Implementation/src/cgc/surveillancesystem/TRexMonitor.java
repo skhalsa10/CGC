@@ -82,28 +82,28 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
 
         switch (directionToMove) {
             case EAST:
-                changedPoint = new Point2D(oldX + 0.1, oldY);
+                changedPoint = new Point2D(oldX + 3.0, oldY);
                 break;
             case WEST:
-                changedPoint = new Point2D(oldX - 0.1, oldY);
+                changedPoint = new Point2D(oldX - 3.0, oldY);
                 break;
             case NORTH:
-                changedPoint = new Point2D(oldX, oldY + 0.1);
+                changedPoint = new Point2D(oldX, oldY + 3.0);
                 break;
             case SOUTH:
-                changedPoint = new Point2D(oldX, oldY - 0.1);
+                changedPoint = new Point2D(oldX, oldY - 3.0);
                 break;
             case NORTHEAST:
-                changedPoint = new Point2D(oldX + 0.1, oldY + 0.1);
+                changedPoint = new Point2D(oldX + 3.0, oldY + 3.0);
                 break;
             case NORTHWEST:
-                changedPoint = new Point2D(oldX - 0.1, oldY + 0.1);
+                changedPoint = new Point2D(oldX - 3.0, oldY + 3.0);
                 break;
             case SOUTHEAST:
-                changedPoint = new Point2D(oldX + 0.1, oldY - 0.1);
+                changedPoint = new Point2D(oldX + 3.0, oldY - 3.0);
                 break;
             case SOUTHWEST:
-                changedPoint = new Point2D(oldX - 0.1, oldY - 0.1);
+                changedPoint = new Point2D(oldX - 3.0, oldY - 3.0);
                 break;
         }
         return changedPoint;
