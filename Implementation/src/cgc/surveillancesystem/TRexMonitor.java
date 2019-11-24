@@ -114,7 +114,7 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
         double leftX = MapInfo.UPPER_LEFT_TREX_PIT.getX();
         double rightX = MapInfo.UPPER_RIGHT_TREX_PIT.getX();
 
-        if (x < leftX && x > rightX && y < 0 && y > MapInfo.TREX_PIT_HEIGHT) {
+        if (x < leftX || x > rightX || y < 0 || y > MapInfo.TREX_PIT_HEIGHT) {
             return false;
         }
 
