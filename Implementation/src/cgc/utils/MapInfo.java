@@ -3,7 +3,6 @@ package cgc.utils;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
-import java.awt.*;
 
 /**
  * the following constants can be used to calculate  math related stuff with the map is needed

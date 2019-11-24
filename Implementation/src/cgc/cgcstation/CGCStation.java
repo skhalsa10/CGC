@@ -68,7 +68,7 @@ public class CGCStation extends Thread implements Communicator {
      * @param m
      */
     @Override
-    public void sendMessage(Message m) {
+    public synchronized void sendMessage(Message m) {
         messages.put(m);
     }
 
@@ -84,7 +84,7 @@ public class CGCStation extends Thread implements Communicator {
         }
     }
 
-    private void processMessage(Message m){
+    private synchronized void processMessage(Message m){
         //this handles the shutdown message
         if(m instanceof ShutDown){
             //TODO should I be sending a shutdown message to the GUI?
