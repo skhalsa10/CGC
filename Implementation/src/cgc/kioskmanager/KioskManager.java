@@ -2,8 +2,11 @@ package cgc.kioskmanager;
 
 import cgc.CGC;
 import cgc.utils.Communicator;
-import cgc.utils.messages.Message;
+import cgc.utils.messages.*;
 
+import javafx.geometry.Point2D;
+
+import java.util.ArrayList;
 import java.util.concurrent.PriorityBlockingQueue;
 
 /**
@@ -31,12 +34,27 @@ public class KioskManager extends Thread implements Communicator {
     private CGC cgc;
     private TransactionLogger transactionLogger;
     private PriorityBlockingQueue<Message>  messages;
+    private boolean isRunning;
+    private boolean isInEmergencyMode;
     //TODO need datastructure to keep track of active kiosks
     //TODO need a data structure that associated the Kiosk ID with its associated Health status
+    private ArrayList<PayKiosk> kiosks;
+    private ArrayList<Boolean> healthKiosks;
 
+
+    //This function will intialize the pay kiosks and set them their position Point2D.
+    private void initializePayKiosks(){
+
+    }
 
     public KioskManager(CGC cgc){
         this.cgc = cgc;
+        TransactionLogger = new TransactionLogger();
+        messages = new PriorityBlockingQueue<>();
+        this.initializePayKiosks();
+        healthKiosks = new ArrayList<Boolean>(4);
+        isRunning = true;
+        isInEmergencyMode = false;
     }
 
     /**
@@ -46,17 +64,43 @@ public class KioskManager extends Thread implements Communicator {
      */
     @Override
     public void sendMessage(Message m) {
-        //TODO place message into Priority blocking queue
+        messages.put(m);
     }
 
     @Override
     public void run() {
-        //TODO loop and wait on blocking queue until Shutdown message received.
-        //TODO when a message is receive it will call processMessage(m)
+        while(isRunning){
+            try {
+                Message m = messages.take();
+                processMessage(m);
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        }
     }
 
 
     private void processMessage(Message m){
-        //TODO check what instance m is and take appropriate action
+        
+        if (m instanceof ShutDown) {
+            //Send message to all the treads (Pay Kiosk).
+        }
+        else if (m instanceof TokenPurchasedInfo){
+            //Pass to the Transaction Log.
+
+            //Message to the GCG generate new Token
+        }
+        else if (m instanceof UpdatedFinanceInfo){
+
+        }
+        else if (m instanceof CGCRequestHealth){
+            //This is ok?
+        }
+        else if( m instanceof EnterEmergencyMode){
+            //Enter emergency mode.
+        }
+        else if( m instanceof ExitEmergencyMode){
+            //Exit emergency mode.
+        }
     }
 }

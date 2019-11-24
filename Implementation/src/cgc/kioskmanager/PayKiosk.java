@@ -3,7 +3,8 @@ package cgc.kioskmanager;
 import cgc.utils.Communicator;
 import cgc.utils.Locatable;
 import cgc.utils.Maintainable;
-import cgc.utils.messages.Message;
+import cgc.utils.Entity;
+import cgc.utils.messages.*;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -32,28 +33,67 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
     private KioskManager kioskManager;
     private PriorityBlockingQueue<Message> messages;
     private int ID;
+    private Entity entity;
     private Timer timer;
     private TimerTask timerTask;
+    private boolean isRunning;
     private boolean healthStatus;
-
+    private boolean isInEmergencyMode;
+    
+    //Ticket price .v1
+    private static double price = 15.00;
+    
     public PayKiosk(KioskManager kioskManager, int ID){
         this.kioskManager = kioskManager;
         this.ID = ID;
+        entity = Entity.KIOSK;
+        messages = new PriorityBlockingQueue<>();
+        isRunning = true;
+        healthStatus = true;
+        isInEmergencyMode = false;
+        this.start();
     }
 
     @Override
     public void sendMessage(Message m) {
-        //TODO Put Message m into the messages queue
+        messages.put(m);
     }
 
     @Override
     public void run() {
-        //TODO loop and wait on blocking queue until Shutdown message received.
-        //TODO when a message is receive it will call processMessage(m)
+        while(isRunning){
+            try {
+                Message m = messages.take();
+                processMessage(m);
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     private synchronized void processMessage(Message m){
-        //TODO check what instance m is and take appropriate action
+        //This handels the shutdown message
+        if (m instanceof ShutDown){
+            isRunning = false;
+        }
+        else if (CGCRequestHealth){
+            //Make message to the CGC.
+            Message updatedHealth = new UpdatedHealth(entity, ID, healthStatus);
+            kioskManager.sendMessage(m);
+        }
+        else if (m instanceof EnterEmergencyMode){
+            isInEmergencyMode = true;
+        }
+        else if (m instanceof ExitEmergencyMode){
+            isInEmergencyMode = false;
+        }
+    }
+
+    public void buyTicket(){
+        //Sends to the KioskManager that a ticket has been purchased.
+        date purchasedDate = new Date();
+        Message tokenPurchased = new TokenPurchasedInfo(price, purchasedDate);
+        this.kioskManager.sendMessage(tokenPurchased);
     }
 
     /**
@@ -61,6 +101,7 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
      */
     private void startTimer(){
         //TODO use the timer and timer task to purchase a token.
-        // e
+
+        
     }
 }
