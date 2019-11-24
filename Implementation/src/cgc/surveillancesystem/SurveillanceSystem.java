@@ -71,6 +71,7 @@ public class SurveillanceSystem extends Thread implements Communicator {
             this.electricFence.sendMessage(m);
             this.tRexMonitor.sendMessage(m);
             this.run = false;
+            System.out.println("SurveillanceSystem is shutting down.");
         }
         else if (m instanceof EnterEmergencyMode) {
             if (!emergencyMode) {

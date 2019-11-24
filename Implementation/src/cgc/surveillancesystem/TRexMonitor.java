@@ -189,6 +189,8 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
         // TODO: process message using instanceof
         if (message instanceof ShutDown) {
             this.run = false;
+            this.timer.cancel();
+            System.out.println("TRexMonitor is shutting down.");
         }
         else if (message instanceof EnterEmergencyMode) {
             if (!emergencyMode) {
