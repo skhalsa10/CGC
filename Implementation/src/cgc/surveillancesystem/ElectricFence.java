@@ -15,17 +15,23 @@ public class ElectricFence extends Thread implements Maintainable, Communicator 
     private Timer timer;
 
     public ElectricFence(SurveillanceSystem surveillanceSystem) {
+        this.surveillanceSystem = surveillanceSystem;
+        this.messages = new PriorityBlockingQueue<>();
 
     }
 
 
     @Override
-    public void sendMessage(Message m) {
-
+    public synchronized void sendMessage(Message m) {
+        this.messages.put(m);
     }
 
 
     private void startElectricFenceTimer() {
         // TODO: use timer task with timer to electric fence outage (maybe after a min?)
+    }
+
+    private synchronized void processMessage(Message message) {
+
     }
 }

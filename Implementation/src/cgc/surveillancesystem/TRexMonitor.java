@@ -1,11 +1,12 @@
 package cgc.surveillancesystem;
 
-import cgc.utils.Communicator;
-import cgc.utils.Locatable;
-import cgc.utils.Maintainable;
-import cgc.utils.messages.Message;
+import cgc.utils.*;
+import cgc.utils.messages.*;
+import javafx.geometry.Point2D;
 
-import java.awt.*;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.PriorityBlockingQueue;
 
 /**
@@ -23,19 +24,29 @@ import java.util.concurrent.PriorityBlockingQueue;
  *        message to cgc and cgc will update the gui appropriately.
  */
 public class TRexMonitor extends Thread implements Maintainable, Locatable, Communicator {
-    // Maybe add other coordinate space (square space? ... or circle if someone wants to do
-    // circle math) to make sure
-    // that TRex doesn't go outside.
-    private Point GPS;
+    private Point2D GPS;
     private SurveillanceSystem surveillanceSystem;
     private boolean isTranquilized;
     private boolean healthStatus;
     private PriorityBlockingQueue<Message> messages;
+    private Timer timer;
+    private boolean run;
+    private boolean emergencyMode;
 
+    private enum Direction {
+        EAST, WEST, NORTH, SOUTH, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST
+    }
 
     public TRexMonitor(SurveillanceSystem surveillanceSystem) {
+        this.run = true;
+        this.emergencyMode = false;
+        this.healthStatus = true;
         this.surveillanceSystem = surveillanceSystem;
+        this.messages = new PriorityBlockingQueue<>();
+        // initially place trex at the center of electric fence.
+        this.GPS = MapInfo.CENTER_TREX_PIT;
 
+        this.timer = new Timer();
         startTRexTimer();
         start();
     }
@@ -48,21 +59,101 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
     @Override
     public void run() {
         // TODO: this will call processMessage accordingly.
+        while (run) {
+            try {
+                Message m = this.messages.take();
+                processMessage(m);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
+
+    private Direction randomDirection() {
+        Direction[] dir = Direction.values();
+        Random rand = new Random();
+        // generate random number between 0-7.
+        return dir[rand.nextInt(dir.length)];
+    }
+
+    private Point2D changeCoordinates(double oldX, double oldY) {
+        Direction directionToMove = randomDirection();
+        Point2D changedPoint = null;
+
+        switch (directionToMove) {
+            case EAST:
+                changedPoint = new Point2D(oldX + 0.1, oldY);
+                break;
+            case WEST:
+                changedPoint = new Point2D(oldX - 0.1, oldY);
+                break;
+            case NORTH:
+                changedPoint = new Point2D(oldX, oldY + 0.1);
+                break;
+            case SOUTH:
+                changedPoint = new Point2D(oldX, oldY - 0.1);
+                break;
+            case NORTHEAST:
+                changedPoint = new Point2D(oldX + 0.1, oldY + 0.1);
+                break;
+            case NORTHWEST:
+                changedPoint = new Point2D(oldX - 0.1, oldY + 0.1);
+                break;
+            case SOUTHEAST:
+                changedPoint = new Point2D(oldX + 0.1, oldY - 0.1);
+                break;
+            case SOUTHWEST:
+                changedPoint = new Point2D(oldX - 0.1, oldY - 0.1);
+                break;
+        }
+        return changedPoint;
+    }
+
+    private boolean isLegalMove(double x, double y) {
+        // creating bounds.
+        double leftX = MapInfo.UPPER_LEFT_TREX_PIT.getX();
+        double rightX = MapInfo.UPPER_RIGHT_TREX_PIT.getX();
+
+        if (x < leftX && x > rightX && y < 0 && y > MapInfo.TREX_PIT_HEIGHT) {
+            return false;
+        }
+
+        return true;
+    }
+
 
     /**
      * Instantiates timer and schedules timer tasks to
      * change x,y coordinates, and anything else that needs to happen over time
      */
     private void startTRexTimer() {
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                MoveTRex move = new MoveTRex();
+                messages.put(move);
+            }
+        };
+        // schedules after every second.
+        this.timer.schedule(task, 0, 1000);
+    }
 
+    private void restartTimer() {
+        //this.timer.cancel();
+        this.timer = new Timer();
+        startTRexTimer();
     }
 
     /**
      *  This will inject the T-Rex with the tranq if there is one available.
      */
     private void inject() {
-
+        this.healthStatus = false;
+        // stop timer and trex movement.
+        this.timer.cancel();
+        // do we send UpdateLocation and health??
+        reportHealth(this.healthStatus);
+        updateLocation(this.GPS);
     }
 
 
@@ -71,13 +162,17 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
      */
     private void reportHealth(boolean healthStatus) {
         //TODO Send a message to the surveillanceSystem with health Status
+        UpdatedHealth updatedHealth = new UpdatedHealth(Entity.TREX, 1, healthStatus);
+        this.surveillanceSystem.sendMessage(updatedHealth);
     }
 
     /**
      * send message to surveillanceSystem.
      */
-    private void updateLocation(Point loc) {
+    private void updateLocation(Point2D loc) {
         //TODO send a message to the surveillance with updated location
+        UpdatedLocation updatedLocation = new UpdatedLocation(Entity.TREX, 1, loc);
+        this.surveillanceSystem.sendMessage(updatedLocation);
     }
 
     /**
@@ -87,11 +182,41 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
     @Override
     public synchronized void sendMessage(Message m) {
         //TODO Store this message in the queue for processing later
+        this.messages.put(m);
     }
 
-    private void processMessage(Message message) {
+    private synchronized void processMessage(Message message) {
         // TODO: process message using instanceof
-
+        if (message instanceof ShutDown) {
+            this.run = false;
+        }
+        if (message instanceof EnterEmergencyMode) {
+            if (!emergencyMode) {
+                this.emergencyMode = true;
+                inject();
+            }
+        }
+        if (message instanceof ExitEmergencyMode) {
+            this.emergencyMode = false;
+            this.healthStatus = true;
+            // resume timer and trex movement.
+            restartTimer();
+        }
+        if (message instanceof CGCRequestHealth) {
+            reportHealth(this.healthStatus);
+        }
+        if (message instanceof CGCRequestLocation) {
+            updateLocation(this.GPS);
+        }
+        if (message instanceof MoveTRex) {
+            Point2D pointToBeChanged = changeCoordinates(this.GPS.getX(), this.GPS.getY());
+            boolean isLegal = isLegalMove(pointToBeChanged.getX(), pointToBeChanged.getY());
+            if (isLegal) {
+                this.GPS = pointToBeChanged;
+                // Once TRex moves, i think it should update.
+                updateLocation(this.GPS);
+            }
+        }
     }
 }
 

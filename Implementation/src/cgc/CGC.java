@@ -19,29 +19,29 @@ import java.util.concurrent.PriorityBlockingQueue;
  * messages to these classes ONLY.
  *
  * The CGC may Receive a message from the CGCStation to shutdown application
- *  1. Send shutdown Message ServeillanceSystem, CGCStation, KioskManager, VehicleManager, tokenManager
+ *  1. Send shutdown Message ServeillanceSystem, CGCStation, KioskManager, VehicleManager, tokenManager DONE!
  *
  * The CGC may receive Message from ServeillanceSystem that electrical fence is down
- *  1. Will blast out EmergencyMode triggered to ServeillanceSystem, CGCStation, KioskManager, VehicleManager, tokenManager
+ *  1. Will blast out EmergencyMode triggered to ServeillanceSystem, CGCStation, KioskManager, VehicleManager, tokenManager DONE!
  *
- * the CGC may send a message to KioskManager requesting updated Finacne info
+ * the CGCStation may request for finance info, then the CGC may send a message to KioskManager requesting Finacne info DONE!
  *
- * The CGC may receive message from Kiosk Manager with Updated Finance info
+ * The CGC may receive message from Kiosk Manager with Updated Finance info DONE!
  *  1. this message will be forwarded to the CGCStation
  *
- * The CGC May receive a message from KioskManager requesting a new GuestToken to be Generated
+ * The CGC May receive a message from KioskManager requesting a new GuestToken to be Generated DONE!
  *  1. this message will be forwarded to the TokenManager
  *
- * The CGC may receive a message from tokenManager a Location with the TokenID
+ * The CGC may receive a message from tokenManager a Location with the TokenID DONE!
  *  1. will forward information to the CGCStation
  *
- * The CGC may send message to ServeillanceSystem, CGCStation, KioskManager, VehicleManager, tokenManager to EnterEmergencyMode
+ * The CGC may send message to ServeillanceSystem, CGCStation, KioskManager, VehicleManager, tokenManager to EnterEmergencyMode DONE!
  *
- * The CGC may send message to ServeillanceSystem, CGCStation, KioskManager, VehicleManager, tokenManager to ExitEmergencyMode
+ * The CGC may send message to ServeillanceSystem, KioskManager, VehicleManager, tokenManager to ExitEmergencyMode DONE!
  *
- * The CGC may send message to ServeillanceSystem, KioskManager, VehicleManager, tokenManager to report health.
+ * The CGC may send message to ServeillanceSystem, KioskManager, VehicleManager, tokenManager to report health. DONE!
  *
- * The CGC May send message to ServeillanceSystem TokenManager, and VehicleManager to get updated locations
+ * The CGC May send message to ServeillanceSystem TokenManager, and VehicleManager to get updated locations DONE!
  *
  */
 public class CGC extends Thread implements Communicator {
@@ -52,6 +52,8 @@ public class CGC extends Thread implements Communicator {
     private VehicleManager vehicleManager;
     private TokenManager tokenManager;
     private SurveillanceSystem surveillanceSystem;
+    private boolean run;
+    private boolean emergencyMode;
 
     public CGC(Stage primaryStage){
         this.station = new CGCStation(primaryStage,this);
@@ -60,44 +62,69 @@ public class CGC extends Thread implements Communicator {
         this.tokenManager = new TokenManager(this);
         this.messages = new PriorityBlockingQueue<>();
         this.surveillanceSystem = new SurveillanceSystem(this);
+        this.run = true;
+        this.emergencyMode = false;
         start();
     }
 
 
     @Override
-    public void sendMessage(Message m) {
-        //Todo this should place a message in the CGC Message queue to be processed later
-        this.messages.add(m);
+    public synchronized void sendMessage(Message m) {
+        this.messages.put(m);
     }
 
     /**
      * This overrides the run method from extending thread. This should loop over the Message Queue
-     * It will wait on the Messages and not be stuck in a busy wait which is not good.
-     * It should never exit this loop unless it received the ShutDown Message.
+     * It will wait on the Messages (put and take block and wait until the thread is free) and
+     * not be stuck in a busy wait which is not good.
+     * It should never exit this loop unless it received the ShutDown Message in which case the boolean value run = false.
      */
     @Override
     public void run() {
-        //TODO loop on the blocking queue until Shutdown message.
+        while (run) {
+            try {
+                Message m = this.messages.take();
+                processMessage(m);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    private void processMessage(Message m){
-        //TODO check what instance m is and take appropriate action
+    private synchronized void processMessage(Message m){
         if (m instanceof ShutDown) {
             this.vehicleManager.sendMessage(m);
             this.kioskManager.sendMessage(m);
             this.tokenManager.sendMessage(m);
             this.surveillanceSystem.sendMessage(m);
             this.station.sendMessage(m);
+            this.run = false;
         }
         if (m instanceof ElectricFenceDown) {
-            Message emergencyModeTriggered = new EnterEmergencyMode();
+            if (!emergencyMode) {
+                Message emergencyModeTriggered = new EnterEmergencyMode();
 
-            this.vehicleManager.sendMessage(emergencyModeTriggered);
-            this.kioskManager.sendMessage(emergencyModeTriggered);
-            this.tokenManager.sendMessage(emergencyModeTriggered);
-            this.surveillanceSystem.sendMessage(emergencyModeTriggered);
-            this.station.sendMessage(emergencyModeTriggered);
+                this.vehicleManager.sendMessage(emergencyModeTriggered);
+                this.kioskManager.sendMessage(emergencyModeTriggered);
+                this.tokenManager.sendMessage(emergencyModeTriggered);
+                this.surveillanceSystem.sendMessage(emergencyModeTriggered);
+                this.station.sendMessage(emergencyModeTriggered);
+                this.emergencyMode = true;
+            }
         }
+        if (m instanceof ExitEmergencyMode) {
+            this.emergencyMode = false;
+
+            this.vehicleManager.sendMessage(m);
+            this.surveillanceSystem.sendMessage(m);
+            this.kioskManager.sendMessage(m);
+            this.tokenManager.sendMessage(m);
+        }
+        // when cgcstation request finance info, cgc will ask from kioskManager.
+        if (m instanceof RequestFinanceInfo) {
+            this.kioskManager.sendMessage(m);
+        }
+        // kiosk manager then returns back the updated finance info.
         if (m instanceof UpdatedFinanceInfo) {
             // forward it to cgcstation.
             this.station.sendMessage(m);
@@ -110,13 +137,27 @@ public class CGC extends Thread implements Communicator {
             // forward token location, id to cgcstation.
             this.station.sendMessage(m);
         }
+        // When cgcstation request health or location.
         if (m instanceof CGCRequestHealth) {
-            // the view health button was pressed on CGCStationGUI.
-            // sendMessage to all the managers to report their health.
+            // sendMessage to all the managers to report their entities health.
             this.surveillanceSystem.sendMessage(m);
             this.kioskManager.sendMessage(m);
             this.tokenManager.sendMessage(m);
             this.vehicleManager.sendMessage(m);
+        }
+        if (m instanceof CGCRequestLocation) {
+            this.surveillanceSystem.sendMessage(m);
+            this.kioskManager.sendMessage(m);
+            this.tokenManager.sendMessage(m);
+            this.vehicleManager.sendMessage(m);
+        }
+        // no matter whether cgcstation requests health or location, the cgc will forward all
+        // the health and location info either way.
+        if (m instanceof UpdatedHealth) {
+            this.station.sendMessage(m);
+        }
+        if (m instanceof UpdatedLocation) {
+            this.station.sendMessage(m);
         }
     }
 }
