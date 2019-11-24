@@ -62,11 +62,11 @@ public class SurveillanceSystem extends Thread implements Communicator {
     }
 
     @Override
-    public void sendMessage(Message m) {
+    public synchronized void sendMessage(Message m) {
         this.messages.put(m);
     }
 
-    private void processMessage(Message m) {
+    private synchronized void processMessage(Message m) {
         if (m instanceof ShutDown) {
             this.electricFence.sendMessage(m);
             this.tRexMonitor.sendMessage(m);

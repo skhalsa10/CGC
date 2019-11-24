@@ -185,7 +185,7 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
         this.messages.put(m);
     }
 
-    private void processMessage(Message message) {
+    private synchronized void processMessage(Message message) {
         // TODO: process message using instanceof
         if (message instanceof ShutDown) {
             this.run = false;
