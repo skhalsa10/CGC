@@ -14,7 +14,7 @@ public class UpdatedLocation implements Message {
     public UpdatedLocation(Entity entityName, int ID, Point2D location) {
         this.entityName = entityName;
         this.entityID = ID;
-        this.loc = location;
+        this.loc = new Point2D(location.getX(), location.getY());
     }
 
     public Entity getEntityName() {
@@ -26,6 +26,6 @@ public class UpdatedLocation implements Message {
     }
 
     public Point2D getLoc() {
-        return loc;
+        return new Point2D(loc.getX(), loc.getY());
     }
 }

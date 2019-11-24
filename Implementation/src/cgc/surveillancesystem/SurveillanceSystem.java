@@ -91,15 +91,15 @@ public class SurveillanceSystem extends Thread implements Communicator {
             this.tRexMonitor.sendMessage(m);
         }
         if (m instanceof CGCRequestHealth) {
-            this.electricFence.checkHealth();
-            this.tRexMonitor.checkHealth();
+            this.electricFence.sendMessage(m);
+            this.tRexMonitor.sendMessage(m);
         }
         if (m instanceof UpdatedHealth) {
             this.cgc.sendMessage(m);
         }
         // cgc asking for TRex's location.
         if (m instanceof CGCRequestLocation) {
-            this.tRexMonitor.getLocation();
+            this.tRexMonitor.sendMessage(m);
         }
         // TRex giving its updated location.
         if (m instanceof UpdatedLocation) {
