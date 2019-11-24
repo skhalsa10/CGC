@@ -99,6 +99,7 @@ public class CGC extends Thread implements Communicator {
             this.surveillanceSystem.sendMessage(m);
             this.station.sendMessage(m);
             this.run = false;
+            System.out.println("CGC is shutting down.");
         }
         else if (m instanceof ElectricFenceDown) {
             if (!emergencyMode) {
