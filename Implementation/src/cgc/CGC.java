@@ -100,7 +100,7 @@ public class CGC extends Thread implements Communicator {
             this.station.sendMessage(m);
             this.run = false;
         }
-        if (m instanceof ElectricFenceDown) {
+        else if (m instanceof ElectricFenceDown) {
             if (!emergencyMode) {
                 Message emergencyModeTriggered = new EnterEmergencyMode();
 
@@ -112,7 +112,7 @@ public class CGC extends Thread implements Communicator {
                 this.emergencyMode = true;
             }
         }
-        if (m instanceof ExitEmergencyMode) {
+        else if (m instanceof ExitEmergencyMode) {
             this.emergencyMode = false;
 
             this.vehicleManager.sendMessage(m);
@@ -121,31 +121,31 @@ public class CGC extends Thread implements Communicator {
             this.tokenManager.sendMessage(m);
         }
         // when cgcstation request finance info, cgc will ask from kioskManager.
-        if (m instanceof RequestFinanceInfo) {
+        else if (m instanceof RequestFinanceInfo) {
             this.kioskManager.sendMessage(m);
         }
         // kiosk manager then returns back the updated finance info.
-        if (m instanceof UpdatedFinanceInfo) {
+        else if (m instanceof UpdatedFinanceInfo) {
             // forward it to cgcstation.
             this.station.sendMessage(m);
         }
-        if (m instanceof RequestToken) {
+        else if (m instanceof RequestToken) {
             // guest token is requested, forward it to tokenManager.
             this.tokenManager.sendMessage(m);
         }
-        if (m instanceof TokenInfo) {
+        else if (m instanceof TokenInfo) {
             // forward token location, id to cgcstation.
             this.station.sendMessage(m);
         }
         // When cgcstation request health or location.
-        if (m instanceof CGCRequestHealth) {
+        else if (m instanceof CGCRequestHealth) {
             // sendMessage to all the managers to report their entities health.
             this.surveillanceSystem.sendMessage(m);
             this.kioskManager.sendMessage(m);
             this.tokenManager.sendMessage(m);
             this.vehicleManager.sendMessage(m);
         }
-        if (m instanceof CGCRequestLocation) {
+        else if (m instanceof CGCRequestLocation) {
             this.surveillanceSystem.sendMessage(m);
             this.kioskManager.sendMessage(m);
             this.tokenManager.sendMessage(m);
@@ -153,10 +153,10 @@ public class CGC extends Thread implements Communicator {
         }
         // no matter whether cgcstation requests health or location, the cgc will forward all
         // the health and location info either way.
-        if (m instanceof UpdatedHealth) {
+        else if (m instanceof UpdatedHealth) {
             this.station.sendMessage(m);
         }
-        if (m instanceof UpdatedLocation) {
+        else if (m instanceof UpdatedLocation) {
             this.station.sendMessage(m);
         }
     }

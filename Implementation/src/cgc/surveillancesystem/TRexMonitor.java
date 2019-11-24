@@ -177,7 +177,7 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
 
     /**
      * this will take a message and store it in the blocking queue to be processed later.
-     * @param m
+     * @param m message to be stored.
      */
     @Override
     public synchronized void sendMessage(Message m) {
@@ -190,30 +190,30 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
         if (message instanceof ShutDown) {
             this.run = false;
         }
-        if (message instanceof EnterEmergencyMode) {
+        else if (message instanceof EnterEmergencyMode) {
             if (!emergencyMode) {
                 this.emergencyMode = true;
                 inject();
             }
         }
-        if (message instanceof ExitEmergencyMode) {
+        else if (message instanceof ExitEmergencyMode) {
             this.emergencyMode = false;
             this.healthStatus = true;
             // resume timer and trex movement.
             restartTimer();
         }
-        if (message instanceof CGCRequestHealth) {
+        else if (message instanceof CGCRequestHealth) {
             reportHealth(this.healthStatus);
         }
-        if (message instanceof CGCRequestLocation) {
+        else if (message instanceof CGCRequestLocation) {
             updateLocation(this.GPS);
         }
-        if (message instanceof MoveTRex) {
+        else if (message instanceof MoveTRex) {
             Point2D pointToBeChanged = changeCoordinates(this.GPS.getX(), this.GPS.getY());
             boolean isLegal = isLegalMove(pointToBeChanged.getX(), pointToBeChanged.getY());
             if (isLegal) {
                 this.GPS = pointToBeChanged;
-                // Once TRex moves, i think it should update.
+                // Once TRex moves, should update.
                 updateLocation(this.GPS);
             }
         }

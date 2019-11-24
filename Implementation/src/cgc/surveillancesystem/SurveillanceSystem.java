@@ -72,7 +72,7 @@ public class SurveillanceSystem extends Thread implements Communicator {
             this.tRexMonitor.sendMessage(m);
             this.run = false;
         }
-        if (m instanceof EnterEmergencyMode) {
+        else if (m instanceof EnterEmergencyMode) {
             if (!emergencyMode) {
                 this.emergencyMode = true;
 
@@ -81,28 +81,28 @@ public class SurveillanceSystem extends Thread implements Communicator {
             }
         }
         // electric fence may report of being down, so send to cgc so it can declare emergency.
-        if (m instanceof ElectricFenceDown) {
+        else if (m instanceof ElectricFenceDown) {
             this.cgc.sendMessage(m);
         }
-        if (m instanceof ExitEmergencyMode) {
+        else if (m instanceof ExitEmergencyMode) {
             this.emergencyMode = false;
 
             this.electricFence.sendMessage(m);
             this.tRexMonitor.sendMessage(m);
         }
-        if (m instanceof CGCRequestHealth) {
+        else if (m instanceof CGCRequestHealth) {
             this.electricFence.sendMessage(m);
             this.tRexMonitor.sendMessage(m);
         }
-        if (m instanceof UpdatedHealth) {
+        else if (m instanceof UpdatedHealth) {
             this.cgc.sendMessage(m);
         }
         // cgc asking for TRex's location.
-        if (m instanceof CGCRequestLocation) {
+        else if (m instanceof CGCRequestLocation) {
             this.tRexMonitor.sendMessage(m);
         }
         // TRex giving its updated location.
-        if (m instanceof UpdatedLocation) {
+        else if (m instanceof UpdatedLocation) {
             this.cgc.sendMessage(m);
         }
     }
