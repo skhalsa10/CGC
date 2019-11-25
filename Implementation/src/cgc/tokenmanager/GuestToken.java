@@ -1,6 +1,10 @@
 package cgc.tokenmanager;
 
+import cgc.utils.messages.EnterEmergencyMode;
+import cgc.utils.messages.ExitEmergencyMode;
 import cgc.utils.messages.Message;
+import cgc.utils.messages.ShutDown;
+import javafx.geometry.Point2D;
 
 import java.awt.*;
 
@@ -30,9 +34,11 @@ public class GuestToken extends Token
 {
 
     //TODO there may also need to be a separate timer and timer task to trigger when a guest visitor is ready to leave exhibit
+    private boolean isRunning = true;
+    private boolean emergency = false;
 
 
-    public GuestToken(int ID, TokenManager tokenManager, Point GPSLocation)
+    public GuestToken(int ID, TokenManager tokenManager, Point2D GPSLocation)
     {
 
         super(ID, tokenManager);
@@ -51,6 +57,19 @@ public class GuestToken extends Token
     {
         //TODO This should loop and wait on the message queue and shut down only if shutdown is received
         //TODO this will call processMessage(m) to respond accordingly
+        while (isRunning)
+        {
+            try
+            {
+                Message m = this.messages.take();
+                processMessage(m);
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Guest Token #"+this.tokenID+" is shutting down.");
     }
 
 
@@ -64,5 +83,17 @@ public class GuestToken extends Token
     protected void processMessage(Message m)
     {
         //TODO process m using instanceof
+        if(m instanceof ShutDown)
+        {
+            isRunning = false;
+        }
+        else if (m instanceof EnterEmergencyMode)
+        {
+            emergency = true;
+        }
+        else if (m instanceof ExitEmergencyMode)
+        {
+            emergency = false;
+        }
     }
 }
