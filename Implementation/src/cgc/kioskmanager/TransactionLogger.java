@@ -53,6 +53,12 @@ public class TransactionLogger {
         return(mensualBenefits.get(month));
     }
 
+    //Return the beneficts of every month
+    public ArrayList<Double> getMonthsBenefits(){
+        
+        return(this.mensualBenefits);
+    }
+
     //Return the totalBeneficts of the park.
     public Double getTotalBenefits(){
 

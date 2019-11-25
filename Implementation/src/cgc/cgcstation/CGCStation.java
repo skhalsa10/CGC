@@ -80,9 +80,7 @@ public class CGCStation extends Thread implements Communicator {
                 processMessage(m);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }   else if (m instanceof KioskManagerRequestHealth){
-                kioskManager.sendMessage(m);
-            }
+            } 
         }
     }
 

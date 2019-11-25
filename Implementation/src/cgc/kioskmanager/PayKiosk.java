@@ -6,6 +6,10 @@ import cgc.utils.Maintainable;
 import cgc.utils.Entity;
 import cgc.utils.messages.*;
 
+import java.util.Date;
+import java.time.LocalTime;
+import java.util.Calendar;
+
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.PriorityBlockingQueue;
@@ -76,7 +80,7 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
         if (m instanceof ShutDown){
             isRunning = false;
         }
-        else if (CGCRequestHealth){
+        else if (m instanceof CGCRequestHealth){
             //Make message to the CGC.
             Message updatedHealth = new UpdatedHealth(entity, ID, healthStatus);
             kioskManager.sendMessage(m);
@@ -91,7 +95,7 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
 
     public void buyTicket(){
         //Sends to the KioskManager that a ticket has been purchased.
-        date purchasedDate = new Date();
+        Date purchasedDate = new Date();
         Message tokenPurchased = new TokenPurchasedInfo(price, purchasedDate);
         this.kioskManager.sendMessage(tokenPurchased);
     }

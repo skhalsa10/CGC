@@ -10,9 +10,9 @@ Message send from the payKiosk to the KiosManager,and the resend to the Tansacti
 
 public class TokenPurchasedInfo implements Message {
     private double amount;
-    private date purchasedDate;
+    private Date purchasedDate;
 
-    public TokenPurchasedInfo(double amount, date purchasedDate){
+    public TokenPurchasedInfo(double amount, Date purchasedDate){
         this.amount = amount;
         this.purchasedDate = purchasedDate;
     }
@@ -21,7 +21,7 @@ public class TokenPurchasedInfo implements Message {
         return amount;
     }
 
-    public date getPurchasedDate(){
+    public Date getPurchasedDate(){
         return purchasedDate;
     }
 }
