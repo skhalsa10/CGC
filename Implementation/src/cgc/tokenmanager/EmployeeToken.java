@@ -1,6 +1,9 @@
 package cgc.tokenmanager;
 
+import cgc.utils.messages.EnterEmergencyMode;
+import cgc.utils.messages.ExitEmergencyMode;
 import cgc.utils.messages.Message;
+import cgc.utils.messages.ShutDown;
 
 import java.awt.*;
 
@@ -25,34 +28,53 @@ import java.awt.*;
  *
  *
  */
-public class EmployeeToken extends Token {
+public class EmployeeToken extends Token
+{
 
-    public EmployeeToken(int ID, TokenManager tokenManager, Point GPSLocation) {
+    public EmployeeToken(int ID, TokenManager tokenManager, Point GPSLocation)
+    {
 
         super(ID, tokenManager);
         this.GPSLocation = GPSLocation;
     }
 
     @Override
-    public synchronized void sendMessage(Message m) {
+    public synchronized void sendMessage(Message m)
+    {
         //TODO place this message in messages queue
+
     }
 
 
     @Override
-    public void run() {
+    public void run()
+    {
         //TODO This should loop and wait on the message queue and shut down only if shutdown is received
         //TODO this will call processMessage(m) to respond accordingly
     }
 
 
     @Override
-    protected void startTokenTimer() {
+    protected void startTokenTimer()
+    {
         //TODO start token timer here and use a timer task with it.
     }
 
     @Override
-    protected void processMessage(Message m) {
+    protected void processMessage(Message m)
+    {
         //TODO process m using instanceof
+        if(m instanceof ShutDown)
+        {
+            //bye bye
+        }
+        else if (m instanceof EnterEmergencyMode)
+        {
+            //enter emergency mode
+        }
+        else if (m instanceof ExitEmergencyMode)
+        {
+
+        }
     }
 }
