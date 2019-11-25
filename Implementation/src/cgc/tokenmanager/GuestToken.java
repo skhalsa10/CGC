@@ -26,37 +26,43 @@ import java.awt.*;
  *
  *
  */
-public class GuestToken extends Token {
+public class GuestToken extends Token
+{
 
-    //TODO there may also need to be a sepperate timer and timer task to trigger when a guest visitor is ready to leave exhibit
+    //TODO there may also need to be a separate timer and timer task to trigger when a guest visitor is ready to leave exhibit
 
 
-    public GuestToken(int ID, TokenManager tokenManager, Point GPSLocation) {
+    public GuestToken(int ID, TokenManager tokenManager, Point GPSLocation)
+    {
 
         super(ID, tokenManager);
         this.GPSLocation = GPSLocation;
     }
 
     @Override
-    public synchronized void sendMessage(Message m) {
+    public synchronized void sendMessage(Message m)
+    {
         //TODO place this message in messages queue
     }
 
 
     @Override
-    public void run() {
+    public void run()
+    {
         //TODO This should loop and wait on the message queue and shut down only if shutdown is received
         //TODO this will call processMessage(m) to respond accordingly
     }
 
 
     @Override
-    protected void startTokenTimer() {
+    protected void startTokenTimer()
+    {
         //TODO start token timer here and use a timer task with it.
     }
 
     @Override
-    protected void processMessage(Message m) {
+    protected void processMessage(Message m)
+    {
         //TODO process m using instanceof
     }
 }
