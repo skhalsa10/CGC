@@ -55,6 +55,7 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
         isRunning = true;
         healthStatus = true;
         isInEmergencyMode = false;
+        startTimer();
         this.start();
     }
 
@@ -100,12 +101,21 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
         this.kioskManager.sendMessage(tokenPurchased);
     }
 
+    private void restartTimer() {
+        this.timer = new Timer();
+        startTimer();
+    }
+
     /**
      * use the timer and timertask to trigger purchasing the sales of tokens overtime
      */
     private void startTimer(){
-        //TODO use the timer and timer task to purchase a token.
-
-        
+        TimerTask task = new TimerTask() {
+            public void run() {
+                buyTicket();
+            }
+        };
+        // schedules the buy of a token after 1 minute.
+        this.timer.schedule(task, 60000, 60000);
     }
 }

@@ -48,6 +48,8 @@ public class KioskManager extends Thread implements Communicator {
     private void initializePayKiosks(){
         kiosks = new ArrayList<PayKiosk>(4);
 
+        //Method that calculates the positon of the Kiosks.
+
         for(int i=0; i < 4; i++)
             kiosks.add(new PayKiosk(this, i));
     }
