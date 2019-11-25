@@ -23,8 +23,6 @@ public class PASystem  {
     private boolean isInEmergencyMode;
     private File theme;
     private File emergency;
-    private AudioInputStream themeAudio;
-    private AudioInputStream emergencyAudio;
     private Clip clip;
 
 
@@ -35,13 +33,8 @@ public class PASystem  {
         theme = Paths.get("./src/resources/theme.wav").toFile();
         emergency = Paths.get("./src/resources/emergency.wav").toFile();
         try {
-            themeAudio = AudioSystem.getAudioInputStream(theme);
-            emergencyAudio = AudioSystem.getAudioInputStream(emergency);
             clip = AudioSystem.getClip();
-            clip.open(themeAudio);
-
-
-
+            clip.open(AudioSystem.getAudioInputStream(theme));
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -60,7 +53,7 @@ public class PASystem  {
     public void enterEmergency(){
         if(!isInEmergencyMode) {
             clip.stop();
-            setAudio(emergencyAudio);
+            setAudio(emergency);
             clip.loop(LOOP_CONTINUOUSLY);
             clip.start();
             isInEmergencyMode = true;
@@ -73,7 +66,7 @@ public class PASystem  {
     public void exitEmergency(){
         if(isInEmergencyMode) {
             clip.stop();
-            setAudio(themeAudio);
+            setAudio(theme);
             clip.loop(LOOP_CONTINUOUSLY);
             clip.start();
             isInEmergencyMode = false;
@@ -83,15 +76,17 @@ public class PASystem  {
 
     /**
      * this will load the input audio stream into the Clip that is being played
-     * @param themeAudio this is the audio stream to play :)
+     * @param audio this is the audio stream to play :)
      */
-    private void setAudio(AudioInputStream themeAudio) {
+    private void setAudio(File audio) {
         clip.close();
         try {
-            clip.open(themeAudio);
+            clip.open(AudioSystem.getAudioInputStream(audio));
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         }
     }
@@ -101,11 +96,6 @@ public class PASystem  {
      */
     public void shutDown(){
         clip.close();
-        try {
-            emergencyAudio.close();
-            themeAudio.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 }

@@ -16,6 +16,7 @@ import java.util.concurrent.PriorityBlockingQueue;
  *
  * the CGCStation will receive message from CGCGui to ShutdownCGC
  *  1. The CGCStation will sendMessage to CGC to ShutdownCGC
+ *  DONE
  *
  * The CGCStation will receive Shutdown Message from CGC
  *  1. shutting down GUI
@@ -68,7 +69,7 @@ public class CGCStation extends Thread implements Communicator {
      * @param m
      */
     @Override
-    public void sendMessage(Message m) {
+    public synchronized void sendMessage(Message m) {
         messages.put(m);
     }
 
@@ -84,13 +85,13 @@ public class CGCStation extends Thread implements Communicator {
         }
     }
 
-    private void processMessage(Message m){
+    private synchronized void processMessage(Message m){
         //this handles the shutdown message
         if(m instanceof ShutDown){
-            //TODO should I be sending a shutdown message to the GUI?
             paSystem.shutDown();
             cgcgui.sendMessage(m);
             isRunning = false;
+            System.out.println("CGCSTATION is shutting down");
         }
         else if(m instanceof UpdatedFinanceInfo){
             cgcgui.sendMessage(m);
@@ -125,6 +126,9 @@ public class CGCStation extends Thread implements Communicator {
                 isInEmergencyMode = false;
             }
 
+        }
+        else{
+            System.out.println("cant candle message: " + m);
         }
 
     }

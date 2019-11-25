@@ -5,5 +5,6 @@ package cgc.utils;
  *
  */
 public interface Maintainable {
+     boolean healthStatus = true;
 
 }

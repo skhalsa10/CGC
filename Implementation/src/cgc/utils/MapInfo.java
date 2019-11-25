@@ -1,6 +1,8 @@
 package cgc.utils;
 
-import java.awt.*;
+import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
+
 
 /**
  * the following constants can be used to calculate  math related stuff with the map is needed
@@ -13,16 +15,46 @@ import java.awt.*;
  *
  */
 public final class MapInfo {
+    //colors for GUI
+    public final static Color CANVASBACKGROUND = Color.web("#313335");
+    public final static Color TREXPITSTROKE = Color.web("#c92d39");
+    public final static Color TREXPITFILL = Color.web("#666666");
+    public final static Color TREX = Color.web("#c92d39");
+    public final static Color EMPLOYEE = Color.web("#834187");
+    public final static Color GUEST = Color.web("#7ab648");
+    public final static Color TOURVEHICLE = Color.WHITE;
+    public final static Color PATROLVEHICLE = Color.web("#3aa6dd");
+    public final static Color KIOSK = Color.web("#ffc374");
+    public final static Color SOUTHSTROKE = Color.web("#834187");
+    public final static Color SOUTHFILL = Color.web("#666666");
+    public final static Color ROADCOLOR = Color.BEIGE;
 
-    public final static int MAP_WIDTH = 600;
-    public final static int MAP_HEIGHT = 1000;
-    public final static Point GUEST_SPAWN_LOCATION = new Point(MAP_WIDTH/2,MAP_HEIGHT);
-    public final static Point SOUTH_PICKUP_LOCATION = new Point();
-    public final static Point North_Pickup_Location = new Point();
-    //point in the upper left corner of square t-rex pit
-    public final static Point UPPER_LEFT_TREX_PIT = new Point(MAP_WIDTH/4,0);
-    public final static int TREX_PIT_WIDTH = MAP_WIDTH/2;
-    public final static int TREX_PIT_HEIGHT = TREX_PIT_WIDTH;
+
+    public final static double MAP_WIDTH = 600;
+    public final static double MAP_HEIGHT = 1000;
+    public final static double SOUTHBUILDING_WIDTH = MAP_WIDTH-(MAP_WIDTH/5);
+    public final static double SOUTHBUILDING_HEIGHT = MAP_HEIGHT/8;
+    public final static double TREX_PIT_WIDTH = MAP_WIDTH/2;
+    public final static double TREX_PIT_HEIGHT = TREX_PIT_WIDTH;
+
+    //PICKUP LOCATIONS
+    public final static Point2D GUEST_SPAWN_LOCATION = new Point2D(MAP_WIDTH/2,MAP_HEIGHT);
+    public final static Point2D SOUTH_PICKUP_LOCATION = new Point2D(MAP_WIDTH/2,MAP_HEIGHT-SOUTHBUILDING_HEIGHT);
+    public final static Point2D NORTH_PICKUP_LOCATION = new Point2D(MAP_WIDTH/2,TREX_PIT_HEIGHT);
+
+    //TREX STUFF
+    public final static Point2D UPPER_LEFT_TREX_PIT = new Point2D(MAP_WIDTH/4,0);
+    public final static Point2D UPPER_RIGHT_TREX_PIT = new Point2D(MAP_WIDTH/4 + TREX_PIT_WIDTH,0);
+    public final static Point2D BOTTOM_LEFT_TREX_PIT = new Point2D(MAP_WIDTH/4, TREX_PIT_HEIGHT);
+    public final static Point2D BOTTOM_RIGHT_TREX_PIT = new Point2D(MAP_WIDTH/4 + TREX_PIT_WIDTH, TREX_PIT_HEIGHT);
+    public final static Point2D CENTER_TREX_PIT = new Point2D(MAP_WIDTH/4 + TREX_PIT_WIDTH/2, TREX_PIT_HEIGHT/2);
+
+    //South BUILDING
+    public final static Point2D UPPER_LEFT_SOUTH_BULDING = new Point2D((MAP_WIDTH-SOUTHBUILDING_WIDTH)/2,MAP_HEIGHT-SOUTHBUILDING_HEIGHT);
+
+    //Vehicle path
+    public final static Point2D ROAD_SOUTH = new Point2D(MAP_WIDTH/2,MAP_HEIGHT-SOUTHBUILDING_HEIGHT);
+    public final static Point2D ROAD_NORTH = new Point2D(MAP_WIDTH/2,TREX_PIT_HEIGHT+30);
 
     //TODO add linear coordinate for the path of te highway that goes from south to north
     //two points needed
