@@ -4,6 +4,8 @@ import cgc.CGC;
 import cgc.utils.Communicator;
 import cgc.utils.messages.*;
 
+import javafx.geometry.Point2D;
+
 import java.util.LinkedList;
 import java.util.concurrent.PriorityBlockingQueue;
 
@@ -56,7 +58,8 @@ public class TokenManager extends Thread implements Communicator
     private LinkedList<GuestToken> guestTokens = new LinkedList<>();
     private LinkedList<EmployeeToken> employeeTokens = new LinkedList<>();
     private int tokenID = 0;
-    private int employee_count = 5;
+    private boolean health = true;
+    private int employee_count = 5;//will use when actually being told how many employees
 
     public  TokenManager(CGC cgc){
         messages = new PriorityBlockingQueue<>();
@@ -73,6 +76,7 @@ public class TokenManager extends Thread implements Communicator
         //create employee tokens
         for (int i = 0; i < 5; i++)
         {
+            //If you all can figure out how this is supposed to have it's coords given I would lov eto hear it
             EmployeeToken tmp = new EmployeeToken(tokenID, this,);
             tokenID++;
         }
@@ -105,16 +109,40 @@ public class TokenManager extends Thread implements Communicator
         {
             //shut down all tokens then allow for shutdown of self.
             //loop through tokens shutting them all down
+            for (GuestToken tok: guestTokens)
+            {
+                sendMessage(m);
+            }
+            for (EmployeeToken tok: employeeTokens)
+            {
+                sendMessage(m);
+            }
             isRunning = false;
         }
         else if(m instanceof EnterEmergencyMode)
         {
             emergency = true;
+            for (GuestToken tok: guestTokens)
+            {
+                sendMessage(m);
+            }
+            for (EmployeeToken tok: employeeTokens)
+            {
+                sendMessage(m);
+            }
             //loop through tokens and tell them emergency mode
         }
         else if (m instanceof ExitEmergencyMode)
         {
             emergency = false;
+            for (GuestToken tok: guestTokens)
+            {
+                sendMessage(m);
+            }
+            for (EmployeeToken tok: employeeTokens)
+            {
+                sendMessage(m);
+            }
             //loop through tokens and free them from emergency mode
         }
         else if (m instanceof RequestToken)
@@ -127,22 +155,45 @@ public class TokenManager extends Thread implements Communicator
             {
                 GuestToken tmp = new GuestToken(tokenID, this, );
                 guestTokens.add(tmp);
-                TokenInfo passInfo = new TokenInfo(tmp.tokenID, tmp.GPSLocation, true);
+                TokenInfo passInfo = new TokenInfo();
+                passInfo.tokenID = tmp.tokenID;
+                passInfo.GPSLocation = tmp.GPSLocation;
+                passInfo.healthStatus = true;
                 sendMessage(passInfo);
                 tokenID++;
             }
         }
         else if (m instanceof UpdatedLocation)
         {
-            //
+            int id = ((UpdatedLocation) m).getEntityID();
+            Point2D loc = ((UpdatedLocation) m).getLoc();
+            for (GuestToken tok:guestTokens)
+            {
+                if(id == tok.tokenID)
+                {
+                    tok.GPSLocation = loc;
+                }
+                else
+                {
+                    System.out.println("Error in attempting to update token #" + tok.tokenID + ". Token was not found.");
+                }
+            }
         }
         else if (m instanceof CGCRequestHealth)
         {
-            //
+            //loop though all components?
+            for (GuestToken tok: guestTokens)
+            {
+                sendMessage(m);
+            }
+            for (EmployeeToken tok: employeeTokens)
+            {
+                sendMessage(m);
+            }
         }
         else if (m instanceof UpdatedHealth)
         {
-            //
+            //I'm not sure how the health thing works quite yet
         }
     }
 }
