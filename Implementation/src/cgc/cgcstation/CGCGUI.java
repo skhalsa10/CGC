@@ -162,7 +162,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
 
 
         //create scene and set style sheet
-        mainScene = new Scene(mainRoot, 1000, 1000);
+        mainScene = new Scene(mainRoot, mainRoot.getMaxWidth(), MapInfo.MAP_HEIGHT);
         mainScene.getStylesheets().add("cgc/cgcstation/GUI.css");
 
         //display the stage
