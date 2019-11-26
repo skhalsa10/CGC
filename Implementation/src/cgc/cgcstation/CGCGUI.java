@@ -149,6 +149,11 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         });
         viewFinances = new Button("View\nFinances");
         viewFinances.getStyleClass().add("viewFinances-button");
+        viewHealth.setMinWidth(200);
+        viewFinances.setMinWidth(200);
+        enterEmergency.setMinWidth(200);
+        exitEmergency.setMinWidth(200);
+
 
         //populate stuff
         leftBPane.getChildren().addAll(enterEmergency,exitEmergency);
