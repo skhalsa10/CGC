@@ -4,6 +4,7 @@ import cgc.CGC;
 import cgc.utils.Communicator;
 import cgc.utils.messages.*;
 import cgc.vehiclemanager.vehicle.PatrolVehicle;
+import cgc.vehiclemanager.vehicle.TourVehicle;
 
 import java.util.HashMap;
 import java.util.concurrent.PriorityBlockingQueue;
@@ -69,6 +70,7 @@ public class VehicleManager extends Thread implements Communicator {
     private VehicleScheduler vehicleScheduler;
     private boolean isRunning;
     private HashMap<Integer, PatrolVehicle> patrolCars;
+    private HashMap<Integer, TourVehicle> tourCars;
     //TODO must make a Data structure to keep track of vehicles
     // if we only have X amount of cars it may need to keep track of the available and used cars
     // is this done with the scheduler or dispatcher?
