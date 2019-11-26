@@ -2,8 +2,10 @@ package cgc.vehiclemanager;
 
 import cgc.CGC;
 import cgc.utils.Communicator;
-import cgc.utils.messages.Message;
+import cgc.utils.messages.*;
+import cgc.vehiclemanager.vehicle.PatrolVehicle;
 
+import java.util.HashMap;
 import java.util.concurrent.PriorityBlockingQueue;
 
 /**
@@ -65,6 +67,8 @@ public class VehicleManager extends Thread implements Communicator {
     private CGC cgc;
     private Dispatcher dispatcher;
     private VehicleScheduler vehicleScheduler;
+    private boolean isRunning;
+    private HashMap<Integer, PatrolVehicle> patrolCars;
     //TODO must make a Data structure to keep track of vehicles
     // if we only have X amount of cars it may need to keep track of the available and used cars
     // is this done with the scheduler or dispatcher?
@@ -73,21 +77,59 @@ public class VehicleManager extends Thread implements Communicator {
 
 
     public VehicleManager(CGC cgc) {
+
         this.cgc = cgc;
+        messages = new PriorityBlockingQueue<>();
+        isRunning = true;
+        //lets initialize some patrol cars
+        
+
+        this.start();
     }
 
     @Override
     public void run() {
-        //TODO should loop over and wait on the messages queue this will eliminate a busy wait.
-        // when a message is received if should call processMessage(Message) to complete appropriate action
+        while(isRunning){
+            try {
+                Message m = messages.take();
+                processMessage(m);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public void sendMessage(Message m) {
-        //TODO this should just put the message in the messages queue to be processed when it can.
+        messages.put(m);
     }
 
     private void processMessage(Message m){
         //TODO use the instanceof keyword to determine what message you have and act accordingly
+        (m instanceof ShutDown){
+            //TODO shutdown all car instances
+            isRunning = false;
+        }
+        else if(m instanceof CGCRequestHealth){
+            //TODO loop over all patrol and Tour Vehicles and send message
+        }
+        else if(m instanceof CGCRequestLocation){
+            //TODO loop over all patrol and Tour Vehicles and send message
+        }
+        else if(m instanceof EnterEmergencyMode){
+            //TODO place itself in emergency mode and forward message to all vehicles
+        }
+        else if(m instanceof  ExitEmergencyMode){
+            //TODO forward message and exit emergency mode
+        }
+        else if(m instanceof UpdatedHealth){
+            cgc.sendMessage(m);
+        }
+        else if(m instanceof UpdatedLocation){
+            cgc.sendMessage(m);
+        }
+        else{
+            System.out.println("sorry vehicleManager cannot process message: ");
+        }
     }
 }
