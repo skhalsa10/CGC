@@ -161,8 +161,9 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         TRexLoc = new Point2D(MapInfo.CENTER_TREX_PIT.getX(), MapInfo.CENTER_TREX_PIT.getY());
 
 
+
         //create scene and set style sheet
-        mainScene = new Scene(mainRoot, mainRoot.getMaxWidth(), MapInfo.MAP_HEIGHT);
+        mainScene = new Scene(mainRoot, mainRoot.getMaxWidth(), MapInfo.MAP_HEIGHT-50);
         mainScene.getStylesheets().add("cgc/cgcstation/GUI.css");
 
         //display the stage
