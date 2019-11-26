@@ -5,12 +5,16 @@ This message is sent by the Kiosk Manager to the CGC because a token has been pu
 a pay kiosk.
 */
 
+import javafx.geometry.Point2D;
+
 public class RequestToken implements Message {
-    // TODO: add appropriate properties associated with requesting token.
+    private Point2D spawnPoint;
 
-    public RequestToken() {
-
+    public RequestToken(Point2D spawnPoint) {
+        spawnPoint = new Point2D(spawnPoint.getX(),spawnPoint.getY());
     }
 
-
+    public Point2D getSpawnPoint() {
+        return spawnPoint;
+    }
 }

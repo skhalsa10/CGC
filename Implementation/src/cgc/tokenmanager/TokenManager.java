@@ -71,13 +71,14 @@ public class TokenManager extends Thread implements Communicator
     @Override
     public void run()
     {
-        //TODO this will loop and wait on the messages queue and
-        // call processMessage(m) when a message arrives
+
         //create employee tokens
         for (int i = 0; i < 5; i++)
         {
             //If you all can figure out how this is supposed to have it's coords given I would lov eto hear it
             EmployeeToken tmp = new EmployeeToken(tokenID, this,);
+            //TODO place some employees outside the TREX pit and inside the south building
+            // they should just wonder around doing nothing haha conatined in their area.
             tokenID++;
         }
         while (isRunning)
@@ -98,7 +99,7 @@ public class TokenManager extends Thread implements Communicator
     @Override
     public synchronized void sendMessage(Message m)
     {
-        //TODO place Message inside of messages Queue
+
         messages.put(m);
     }
 
@@ -193,7 +194,7 @@ public class TokenManager extends Thread implements Communicator
         }
         else if (m instanceof UpdatedHealth)
         {
-            //I'm not sure how the health thing works quite yet
+            //TODO just pass this back to the CGC to take care of for you.
         }
     }
 }
