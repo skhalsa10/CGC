@@ -108,7 +108,7 @@ public class VehicleManager extends Thread implements Communicator {
 
     private void processMessage(Message m){
         //TODO use the instanceof keyword to determine what message you have and act accordingly
-        (m instanceof ShutDown){
+        if (m instanceof ShutDown){
             //TODO shutdown all car instances
             isRunning = false;
         }
