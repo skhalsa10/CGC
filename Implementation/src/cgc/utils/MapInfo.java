@@ -52,6 +52,10 @@ public final class MapInfo {
     public final static Point2D BOTTOM_RIGHT_TREX_PIT = new Point2D(MAP_WIDTH/4 + TREX_PIT_WIDTH, TREX_PIT_HEIGHT);
     public final static Point2D CENTER_TREX_PIT = new Point2D(MAP_WIDTH/4 + TREX_PIT_WIDTH/2, TREX_PIT_HEIGHT/2);
 
+    //PATROL BOX
+    public final static Point2D UPPER_LEFT_PATROL_BOX = new Point2D(0, TREX_PIT_HEIGHT+TREX_PIT_HEIGHT/4);
+    public final static Point2D BOTTOM_RIGHT_PATROL_BOX = new Point2D(MAP_WIDTH, MAP_HEIGHT-SOUTHBUILDING_HEIGHT);
+
     //South BUILDING
     public final static Point2D UPPER_LEFT_SOUTH_BULDING = new Point2D((MAP_WIDTH-SOUTHBUILDING_WIDTH)/2,MAP_HEIGHT-SOUTHBUILDING_HEIGHT);
 
