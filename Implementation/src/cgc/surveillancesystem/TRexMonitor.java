@@ -181,12 +181,10 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
      */
     @Override
     public synchronized void sendMessage(Message m) {
-        //TODO Store this message in the queue for processing later
         this.messages.put(m);
     }
 
     private synchronized void processMessage(Message message) {
-        // TODO: process message using instanceof
         if (message instanceof ShutDown) {
             this.run = false;
             this.timer.cancel();
