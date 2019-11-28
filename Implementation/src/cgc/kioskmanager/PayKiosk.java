@@ -5,6 +5,7 @@ import cgc.utils.Locatable;
 import cgc.utils.Maintainable;
 import cgc.utils.Entity;
 import cgc.utils.messages.*;
+import javafx.geometry.Point2D;
 
 import java.util.Date;
 import java.time.LocalTime;
@@ -42,12 +43,14 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
     private TimerTask timerTask;
     private boolean isRunning;
     private boolean healthStatus;
+    private Point2D location;
     private boolean isInEmergencyMode;
+
     
     //Ticket price .v1
     private static double price = 15.00;
     
-    public PayKiosk(KioskManager kioskManager, int ID){
+    public PayKiosk(KioskManager kioskManager, int ID, Point2D location){
         this.kioskManager = kioskManager;
         this.ID = ID;
         entity = Entity.KIOSK;
@@ -55,8 +58,11 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
         isRunning = true;
         healthStatus = true;
         isInEmergencyMode = false;
+        this.location = location;
+        timer = new Timer();
         startTimer();
         this.start();
+        this.updateLocation();
     }
 
     @Override
@@ -80,6 +86,7 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
         //This handels the shutdown message
         if (m instanceof ShutDown){
             isRunning = false;
+            timer.cancel();
         }
         else if (m instanceof CGCRequestHealth){
             //Make message to the CGC.
@@ -92,13 +99,26 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
         else if (m instanceof ExitEmergencyMode){
             isInEmergencyMode = false;
         }
+        else if(m instanceof BuyTicket){
+            buyTicket();
+        }
+        else if(m instanceof CGCRequestLocation){
+            Message location = new UpdatedLocation(entity, ID, this.location);
+            kioskManager.sendMessage(location);
+        }
+
     }
 
     public void buyTicket(){
         //Sends to the KioskManager that a ticket has been purchased.
         Date purchasedDate = new Date();
-        Message tokenPurchased = new TokenPurchasedInfo(price, purchasedDate);
+        Message tokenPurchased = new TokenPurchasedInfo(price, purchasedDate, location);
         this.kioskManager.sendMessage(tokenPurchased);
+    }
+
+    private void updateLocation(){
+        Message location = new UpdatedLocation(entity, ID, this.location);
+        kioskManager.sendMessage(location);
     }
 
     private void restartTimer() {
@@ -112,7 +132,8 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
     private void startTimer(){
         TimerTask task = new TimerTask() {
             public void run() {
-                buyTicket();
+                Message handleBuyTicket = new BuyTicket();
+                messages.put(handleBuyTicket);
             }
         };
         // schedules the buy of a token after 1 minute.

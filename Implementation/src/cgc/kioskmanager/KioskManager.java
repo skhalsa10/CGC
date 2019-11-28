@@ -2,6 +2,7 @@ package cgc.kioskmanager;
 
 import cgc.CGC;
 import cgc.utils.Communicator;
+import cgc.utils.MapInfo;
 import cgc.utils.messages.*;
 
 import javafx.geometry.Point2D;
@@ -49,9 +50,13 @@ public class KioskManager extends Thread implements Communicator {
         kiosks = new ArrayList<PayKiosk>(4);
 
         //Method that calculates the positon of the Kiosks.
+        double x = MapInfo.UPPER_LEFT_SOUTH_BULDING.getX() + MapInfo.SOUTHBUILDING_WIDTH/4;
+        double y = MapInfo.MAP_HEIGHT - MapInfo.SOUTHBUILDING_HEIGHT/2;
+
+        Point2D point = new Point2D(x,y);
 
         for(int i=0; i < 4; i++)
-            kiosks.add(new PayKiosk(this, i));
+            kiosks.add(new PayKiosk(this, i, point));
     }
 
     public KioskManager(CGC cgc){
@@ -103,7 +108,7 @@ public class KioskManager extends Thread implements Communicator {
             transactionLogger.registerSale(amount, purchasedDate);
 
             //Message to the GCG generate new Token
-            Message generateNewToken = new RequestToken();
+            Message generateNewToken = new RequestToken(((TokenPurchasedInfo) m).getLocation());
             cgc.sendMessage(generateNewToken);
         }
         //NEED the Benefits like per month or total or a particular month. ???
@@ -116,7 +121,6 @@ public class KioskManager extends Thread implements Communicator {
             Message financeInfo = new UpdatedFinanceInfo(total_benefits, mensual_benefits);
             cgc.sendMessage(financeInfo);
         }
-        //NEED OPINION (SYNCHRONOUS OP)
         else if (m instanceof CGCRequestHealth){
             //Request the Pay Kiosks their health
             for(int i=0; i <4; i++)
@@ -140,6 +144,15 @@ public class KioskManager extends Thread implements Communicator {
             //Notify the pay kiosks
             for(int i=0; i <4; i++)
                 kiosks.get(i).sendMessage(m);
+        }
+        else if(m instanceof CGCRequestLocation){
+
+            //Notify the pay kiosks
+            for(int i=0; i <4; i++)
+                kiosks.get(i).sendMessage(m);
+        }
+        else if(m instanceof UpdatedLocation){
+            cgc.sendMessage(m);
         }
     }
 }

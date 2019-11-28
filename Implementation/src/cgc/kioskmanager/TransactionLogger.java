@@ -43,7 +43,7 @@ public class TransactionLogger {
 
         //Set the benefits of each month to 0.
         for(int i = 0; i < 12; i++){
-            mensualBenefits.set(i, 0.0);
+            mensualBenefits.add(i, 0.0);
         }
     }
 
