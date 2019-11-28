@@ -203,6 +203,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
     private synchronized void processMessage(Message m){
         if(m instanceof UpdatedLocation){
 
+
             UpdatedLocation m2 = (UpdatedLocation) m;
 
             switch (m2.getEntityName()){
