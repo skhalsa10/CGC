@@ -39,7 +39,7 @@ public class EmployeeToken extends Token
     private boolean emergency = false;
 
     @Override
-    public synchronized void sendMessage(Message m)
+    public void sendMessage(Message m)
     {
         //TODO place this message in messages queue
     }
@@ -73,7 +73,7 @@ public class EmployeeToken extends Token
     }
 
     @Override
-    protected void processMessage(Message m)
+    protected synchronized void processMessage(Message m)
     {
         //TODO process m using instanceof
         if(m instanceof ShutDown)
