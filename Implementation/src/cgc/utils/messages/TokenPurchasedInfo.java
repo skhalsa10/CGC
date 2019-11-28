@@ -1,4 +1,5 @@
 package cgc.utils.messages;
+import cgc.kioskmanager.TicketPrice;
 import cgc.utils.Entity;
 import javafx.geometry.Point2D;
 
@@ -14,11 +15,13 @@ public class TokenPurchasedInfo implements Message {
     private double amount;
     private Date purchasedDate;
     private Point2D location;
+    private TicketPrice typeTicket;
 
-    public TokenPurchasedInfo(double amount, Date purchasedDate, Point2D location){
+    public TokenPurchasedInfo(double amount, Date purchasedDate, Point2D location, TicketPrice typeTicket){
         this.amount = amount;
         this.purchasedDate = purchasedDate;
         this.location = location;
+        this.typeTicket = typeTicket;
     }
 
     public double getAmount(){
@@ -31,5 +34,9 @@ public class TokenPurchasedInfo implements Message {
 
     public Point2D getLocation() {
         return location;
+    }
+
+    public cgc.kioskmanager.TicketPrice getTypeTicket() {
+        return typeTicket;
     }
 }
