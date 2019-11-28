@@ -69,7 +69,7 @@ public class CGC extends Thread implements Communicator {
 
 
     @Override
-    public synchronized void sendMessage(Message m) {
+    public void sendMessage(Message m) {
         this.messages.put(m);
     }
 

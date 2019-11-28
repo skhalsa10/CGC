@@ -180,7 +180,7 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
      * @param m message to be stored.
      */
     @Override
-    public synchronized void sendMessage(Message m) {
+    public void sendMessage(Message m) {
         this.messages.put(m);
     }
 
