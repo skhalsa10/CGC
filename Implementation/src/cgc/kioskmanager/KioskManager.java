@@ -110,20 +110,25 @@ public class KioskManager extends Thread implements Communicator {
             //Pass to the Transaction Log.
             double amount = ((TokenPurchasedInfo) m).getAmount();
             Date purchasedDate =((TokenPurchasedInfo) m).getPurchasedDate();
-            transactionLogger.registerSale(amount, purchasedDate);
+            TicketPrice ticketType = ((TokenPurchasedInfo) m).getTypeTicket();
+            transactionLogger.registerSale(amount, purchasedDate, ticketType);
 
             //Message to the GCG generate new Token
             Message generateNewToken = new RequestToken(((TokenPurchasedInfo) m).getLocation());
             cgc.sendMessage(generateNewToken);
         }
         //NEED the Benefits like per month or total or a particular month. ???
-        else if (m instanceof UpdatedFinanceInfo){
+        else if (m instanceof RequestFinanceInfo){
+            //TODO- WAITING FOR GUI FOR CHECKING
             //Get the Financial Information
             double total_benefits = transactionLogger.getTotalBenefits();
             ArrayList<Double> mensual_benefits = transactionLogger.getMonthsBenefits();
+            ArrayList<Integer> typeTicketsSold = transactionLogger.getTypeTicketsSold();
 
             //Message about Finances
-            Message financeInfo = new UpdatedFinanceInfo(total_benefits, mensual_benefits);
+            Message financeInfo = new UpdatedFinanceInfo(total_benefits, mensual_benefits, typeTicketsSold);
+
+            System.out.println("Kiosk Manager receives the total benefit: " + total_benefits);
             cgc.sendMessage(financeInfo);
         }
         else if (m instanceof CGCRequestHealth){
