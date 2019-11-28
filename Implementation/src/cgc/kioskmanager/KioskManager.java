@@ -86,7 +86,7 @@ public class KioskManager extends Thread implements Communicator {
         }
     }
 
-    private void processMessage(Message m){
+    private synchronized void processMessage(Message m){
         
         if (m instanceof ShutDown) {
             //Shutdown itself.
