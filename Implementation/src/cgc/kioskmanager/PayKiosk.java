@@ -40,7 +40,6 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
     private int ID;
     private Entity entity;
     private Timer timer;
-    private TimerTask timerTask;
     private boolean isRunning;
     private boolean healthStatus;
     private Point2D location;
@@ -95,10 +94,16 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
             kioskManager.sendMessage(m);
         }
         else if (m instanceof EnterEmergencyMode){
-            isInEmergencyMode = true;
+            if(!isInEmergencyMode) {
+                isInEmergencyMode = true;
+                timer.cancel();
+            }
         }
-        else if (m instanceof ExitEmergencyMode){
-            isInEmergencyMode = false;
+        else if (m instanceof ExitEmergencyMode) {
+            if (isInEmergencyMode){
+                isInEmergencyMode = false;
+                restartTimer();
+            }
         }
         else if(m instanceof BuyTicket){
             buyTicket();
