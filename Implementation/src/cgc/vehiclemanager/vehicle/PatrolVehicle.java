@@ -84,7 +84,7 @@ public class PatrolVehicle extends Vehicle {
     }
 
     @Override
-    public synchronized void sendMessage(Message m) {
+    public void sendMessage(Message m) {
         messages.put(m);
     }
 
@@ -109,7 +109,7 @@ public class PatrolVehicle extends Vehicle {
      * @param m
      */
     @Override
-    protected void processMessage(Message m) {
+    protected synchronized void processMessage(Message m) {
         if(m instanceof CGCRequestLocation){
 
             vehicleManager.sendMessage(

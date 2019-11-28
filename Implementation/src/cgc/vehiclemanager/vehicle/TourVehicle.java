@@ -47,7 +47,7 @@ public class TourVehicle extends Vehicle {
     }
 
     @Override
-    public synchronized void sendMessage(Message m) {
+    public void sendMessage(Message m) {
 
         //TODO place this message in messages queue
     }

@@ -116,7 +116,7 @@ public class VehicleManager extends Thread implements Communicator {
         messages.put(m);
     }
 
-    private void processMessage(Message m){
+    private synchronized void processMessage(Message m){
         //TODO use the instanceof keyword to determine what message you have and act accordingly
         if (m instanceof ShutDown){
             for(PatrolVehicle pv : patrolCars.values()){
