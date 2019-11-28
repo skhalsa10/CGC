@@ -6,12 +6,14 @@ import java.util.ArrayList;
  * with the financial depart ment.
  */
 public class UpdatedFinanceInfo implements Message {
-    double totalBenefits;
-    ArrayList <Double> monthBenefits;
+    private double totalBenefits;
+    private ArrayList <Double> monthBenefits;
+    private ArrayList <Integer> typeTicketsSold;
 
-    public UpdatedFinanceInfo(double totalBenefits, ArrayList <Double> monthBenefits) {
+    public UpdatedFinanceInfo(double totalBenefits, ArrayList <Double> monthBenefits, ArrayList <Integer> typeTicketsSold ) {
         this.totalBenefits = totalBenefits;
         this.monthBenefits = monthBenefits;
+        this.typeTicketsSold = typeTicketsSold;
     }
     
     //Return the beneficts from that month.
@@ -31,4 +33,11 @@ public class UpdatedFinanceInfo implements Message {
 
         return(totalBenefits);
     }
+
+    //Return the type of tickets that have been sold
+    public ArrayList<Integer> getTypeTicketsSold(){
+
+        return(this.typeTicketsSold);
+    }
+
 }

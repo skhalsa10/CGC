@@ -7,12 +7,9 @@ import cgc.utils.Entity;
 import cgc.utils.messages.*;
 import javafx.geometry.Point2D;
 
-import java.util.Date;
+import java.util.*;
 import java.time.LocalTime;
-import java.util.Calendar;
 
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.PriorityBlockingQueue;
 
 /**
@@ -47,7 +44,9 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
 
     
     //Ticket price .v1
-    private static double price = 15.00;
+    private static double adult_price = 15.00;
+    private static double children_price = 8.00;
+    private static double senior_price = 12.00;
     
     public PayKiosk(KioskManager kioskManager, int ID, Point2D location){
         this.kioskManager = kioskManager;
@@ -116,9 +115,24 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
     }
 
     public void buyTicket(){
+        //Random buy (children, adult or senior)
+        TicketPrice[] tickets = TicketPrice.values();
+        Random random = new Random();
+        TicketPrice price = tickets[random.nextInt(tickets.length)];
+
+        double priceTicket = 0.0;
+
+        if(price == TicketPrice.ADULT){
+            priceTicket = adult_price;
+        }else if(price == TicketPrice.CHILDREN){
+            priceTicket = children_price;
+        }else if (price == TicketPrice.SENIOR) {
+            priceTicket = senior_price;
+        }
+
         //Sends to the KioskManager that a ticket has been purchased.
         Date purchasedDate = new Date();
-        Message tokenPurchased = new TokenPurchasedInfo(price, purchasedDate, location);
+        Message tokenPurchased = new TokenPurchasedInfo(priceTicket, purchasedDate, location, price);
         this.kioskManager.sendMessage(tokenPurchased);
     }
 
@@ -144,6 +158,6 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
             }
         };
         // schedules the buy of a token after 1 minute.
-        this.timer.schedule(task, 60000, 60000);
+        this.timer.schedule(task, 100, 60000);
     }
 }
