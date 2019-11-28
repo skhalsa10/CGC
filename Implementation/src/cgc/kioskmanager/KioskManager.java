@@ -50,13 +50,16 @@ public class KioskManager extends Thread implements Communicator {
         kiosks = new ArrayList<PayKiosk>(4);
 
         //Method that calculates the positon of the Kiosks.
-        double x = MapInfo.UPPER_LEFT_SOUTH_BULDING.getX() + MapInfo.SOUTHBUILDING_WIDTH/4;
+        double x = MapInfo.UPPER_LEFT_SOUTH_BULDING.getX() + MapInfo.SOUTHBUILDING_WIDTH/8;
         double y = MapInfo.MAP_HEIGHT - MapInfo.SOUTHBUILDING_HEIGHT/2;
 
         Point2D point = new Point2D(x,y);
 
-        for(int i=0; i < 4; i++)
+        for(int i=0; i < 4; i++) {
             kiosks.add(new PayKiosk(this, i, point));
+            point = point.add(MapInfo.SOUTHBUILDING_WIDTH/4, 0);
+        }
+
     }
 
     public KioskManager(CGC cgc){
