@@ -148,14 +148,14 @@ public class KioskManager extends Thread implements Communicator {
                 kiosks.get(i).sendMessage(m);
         }
         else if(m instanceof CGCRequestLocation){
-            System.out.println("Entra");
+            System.out.println("CGC request KioskManager children location");
 
             //Notify the pay kiosks
             for(int i=0; i <4; i++)
                 kiosks.get(i).sendMessage(m);
         }
         else if(m instanceof UpdatedLocation){
-            System.out.println("Location gotten");
+            System.out.println("Kiosk Manager Updated Location");
             cgc.sendMessage(m);
         }
     }
