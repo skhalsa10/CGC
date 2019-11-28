@@ -81,7 +81,7 @@ public class CGCStation extends Thread implements Communicator {
                 processMessage(m);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            } 
         }
     }
 
