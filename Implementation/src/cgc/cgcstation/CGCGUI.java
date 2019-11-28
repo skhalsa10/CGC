@@ -149,6 +149,11 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         });
         viewFinances = new Button("View\nFinances");
         viewFinances.getStyleClass().add("viewFinances-button");
+        viewHealth.setMinWidth(200);
+        viewFinances.setMinWidth(200);
+        enterEmergency.setMinWidth(200);
+        exitEmergency.setMinWidth(200);
+
 
         //populate stuff
         leftBPane.getChildren().addAll(enterEmergency,exitEmergency);
@@ -161,8 +166,9 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         TRexLoc = new Point2D(MapInfo.CENTER_TREX_PIT.getX(), MapInfo.CENTER_TREX_PIT.getY());
 
 
+
         //create scene and set style sheet
-        mainScene = new Scene(mainRoot, 1000, 1000);
+        mainScene = new Scene(mainRoot, mainRoot.getMaxWidth(), MapInfo.MAP_HEIGHT-50);
         mainScene.getStylesheets().add("cgc/cgcstation/GUI.css");
 
         //display the stage

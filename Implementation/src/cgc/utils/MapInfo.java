@@ -2,6 +2,7 @@ package cgc.utils;
 
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 
 
 /**
@@ -30,12 +31,14 @@ public final class MapInfo {
     public final static Color ROADCOLOR = Color.BEIGE;
 
 
+    //public final static double MAP_WIDTH = Screen.getPrimary().getBounds().getWidth()/2;
     public final static double MAP_WIDTH = 600;
-    public final static double MAP_HEIGHT = 1000;
+    public final static double MAP_HEIGHT = Screen.getPrimary().getBounds().getHeight()-50;
     public final static double SOUTHBUILDING_WIDTH = MAP_WIDTH-(MAP_WIDTH/5);
     public final static double SOUTHBUILDING_HEIGHT = MAP_HEIGHT/8;
     public final static double TREX_PIT_WIDTH = MAP_WIDTH/2;
-    public final static double TREX_PIT_HEIGHT = TREX_PIT_WIDTH;
+    public final static double TREX_PIT_HEIGHT = MAP_HEIGHT/4;
+
 
     //PICKUP LOCATIONS
     public final static Point2D GUEST_SPAWN_LOCATION = new Point2D(MAP_WIDTH/2,MAP_HEIGHT);
