@@ -93,6 +93,8 @@ public class PatrolVehicle extends Vehicle {
      */
     @Override
     public void run() {
+        //need to first tell the manager the initial health state
+        vehicleManager.sendMessage(new UpdatedHealth(Entity.PATROL_VEHICLE, ID, healthStatus));
         while(isRunning){
             try {
                 Message m = messages.take();
