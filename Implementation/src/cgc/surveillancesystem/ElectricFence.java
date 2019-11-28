@@ -43,7 +43,7 @@ public class ElectricFence extends Thread implements Maintainable, Communicator 
     }
 
     @Override
-    public synchronized void sendMessage(Message m) {
+    public void sendMessage(Message m) {
         this.messages.put(m);
     }
 

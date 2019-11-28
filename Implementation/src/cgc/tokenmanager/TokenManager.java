@@ -77,7 +77,7 @@ public class TokenManager extends Thread implements Communicator
         for (int i = 0; i < 5; i++)
         {
             //If you all can figure out how this is supposed to have it's coords given I would lov eto hear it
-            EmployeeToken tmp = new EmployeeToken(tokenID, this,);
+            //TODO -EmployeeToken tmp = new EmployeeToken(tokenID, this);
             tokenID++;
         }
         while (isRunning)
@@ -153,7 +153,7 @@ public class TokenManager extends Thread implements Communicator
             }
             else
             {
-                GuestToken tmp = new GuestToken(tokenID, this, );
+                GuestToken tmp = new GuestToken(tokenID, this, ((RequestToken) m).getLocation() );
                 guestTokens.add(tmp);
                 TokenInfo passInfo = new TokenInfo();
                 passInfo.tokenID = tmp.tokenID;

@@ -92,7 +92,7 @@ public class EmployeeToken extends Token
         {
             //for now I'm putting true in because I don't forsee needing a health status during the simulation, at least for v1
             //also may need to outright commentout this line to make this all work for v1
-            sendMessage(new UpdatedHealth(this.getName(),this.tokenID,this.healthStatus));
+            //TODO-sendMessage(new UpdatedHealth(this.getName(),this.tokenID,this.healthStatus));
         }
     }
 }

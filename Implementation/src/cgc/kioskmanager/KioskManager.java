@@ -2,6 +2,7 @@ package cgc.kioskmanager;
 
 import cgc.CGC;
 import cgc.utils.Communicator;
+import cgc.utils.MapInfo;
 import cgc.utils.messages.*;
 
 import javafx.geometry.Point2D;
@@ -49,19 +50,26 @@ public class KioskManager extends Thread implements Communicator {
         kiosks = new ArrayList<PayKiosk>(4);
 
         //Method that calculates the positon of the Kiosks.
+        double x = MapInfo.UPPER_LEFT_SOUTH_BULDING.getX() + MapInfo.SOUTHBUILDING_WIDTH/8;
+        double y = MapInfo.MAP_HEIGHT - MapInfo.SOUTHBUILDING_HEIGHT/2;
 
-        for(int i=0; i < 4; i++)
-            kiosks.add(new PayKiosk(this, i));
+        Point2D point = new Point2D(x,y);
+
+        for(int i=0; i < 4; i++) {
+            kiosks.add(new PayKiosk(this, i, point));
+            point = point.add(MapInfo.SOUTHBUILDING_WIDTH/4, 0);
+        }
+
     }
 
     public KioskManager(CGC cgc){
         this.cgc = cgc;
         transactionLogger = new TransactionLogger();
         messages = new PriorityBlockingQueue<>();
-        this.initializePayKiosks();
         healthKiosks = new ArrayList<Boolean>(4);
         isRunning = true;
         isInEmergencyMode = false;
+        this.start();
     }
 
     /**
@@ -76,6 +84,8 @@ public class KioskManager extends Thread implements Communicator {
 
     @Override
     public void run() {
+        //Need to be here because we need first to start KioksManager before the PayKiosk send the message.
+        this.initializePayKiosks();
         while(isRunning){
             try {
                 Message m = messages.take();
@@ -100,23 +110,27 @@ public class KioskManager extends Thread implements Communicator {
             //Pass to the Transaction Log.
             double amount = ((TokenPurchasedInfo) m).getAmount();
             Date purchasedDate =((TokenPurchasedInfo) m).getPurchasedDate();
-            transactionLogger.registerSale(amount, purchasedDate);
+            TicketPrice ticketType = ((TokenPurchasedInfo) m).getTypeTicket();
+            transactionLogger.registerSale(amount, purchasedDate, ticketType);
 
             //Message to the GCG generate new Token
-            Message generateNewToken = new RequestToken();
+            Message generateNewToken = new RequestToken(((TokenPurchasedInfo) m).getLocation());
             cgc.sendMessage(generateNewToken);
         }
         //NEED the Benefits like per month or total or a particular month. ???
-        else if (m instanceof UpdatedFinanceInfo){
+        else if (m instanceof RequestFinanceInfo){
+            //TODO- WAITING FOR GUI FOR CHECKING
             //Get the Financial Information
             double total_benefits = transactionLogger.getTotalBenefits();
             ArrayList<Double> mensual_benefits = transactionLogger.getMonthsBenefits();
+            ArrayList<Integer> typeTicketsSold = transactionLogger.getTypeTicketsSold();
 
             //Message about Finances
-            Message financeInfo = new UpdatedFinanceInfo(total_benefits, mensual_benefits);
+            Message financeInfo = new UpdatedFinanceInfo(total_benefits, mensual_benefits, typeTicketsSold);
+
+            System.out.println("Kiosk Manager receives the total benefit: " + total_benefits);
             cgc.sendMessage(financeInfo);
         }
-        //NEED OPINION (SYNCHRONOUS OP)
         else if (m instanceof CGCRequestHealth){
             //Request the Pay Kiosks their health
             for(int i=0; i <4; i++)
@@ -140,6 +154,17 @@ public class KioskManager extends Thread implements Communicator {
             //Notify the pay kiosks
             for(int i=0; i <4; i++)
                 kiosks.get(i).sendMessage(m);
+        }
+        else if(m instanceof CGCRequestLocation){
+            System.out.println("CGC request KioskManager children location");
+
+            //Notify the pay kiosks
+            for(int i=0; i <4; i++)
+                kiosks.get(i).sendMessage(m);
+        }
+        else if(m instanceof UpdatedLocation){
+            System.out.println("Kiosk Manager Updated Location");
+            cgc.sendMessage(m);
         }
     }
 }

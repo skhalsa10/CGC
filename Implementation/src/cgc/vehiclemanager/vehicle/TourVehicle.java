@@ -2,8 +2,7 @@ package cgc.vehiclemanager.vehicle;
 
 import cgc.utils.messages.Message;
 import cgc.vehiclemanager.VehicleManager;
-
-import java.awt.*;
+import javafx.geometry.Point2D;
 
 /**
  * this is a speciel extension of the Vehicle class the generates Tour related behavior.
@@ -37,7 +36,7 @@ public class TourVehicle extends Vehicle {
 
 
 
-    public TourVehicle(int ID, VehicleManager vehicleManager, Point location) {
+    public TourVehicle(int ID, VehicleManager vehicleManager, Point2D location) {
         super(ID, vehicleManager, location);
     }
 
@@ -48,12 +47,7 @@ public class TourVehicle extends Vehicle {
     }
 
     @Override
-    protected void stopVehicleTimer() {
-      //TODO in case you need to kill the current timer and task
-    }
-
-    @Override
-    public synchronized void sendMessage(Message m) {
+    public void sendMessage(Message m) {
 
         //TODO place this message in messages queue
     }

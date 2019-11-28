@@ -5,8 +5,9 @@ import cgc.utils.Locatable;
 import cgc.utils.Maintainable;
 import cgc.utils.messages.Message;
 import cgc.vehiclemanager.VehicleManager;
+import javafx.geometry.Point2D;
 
-import java.awt.*;
+
 import java.util.Timer;
 import java.util.concurrent.PriorityBlockingQueue;
 
@@ -35,20 +36,20 @@ public abstract class Vehicle extends Thread implements Maintainable, Communicat
     protected VehicleManager vehicleManager;
     //The health will be simple in this version right now it has a boolean value of true or false
     protected boolean healthStatus;
-    protected Point location;
+    protected Point2D location;
     protected Timer timer;
-    private PriorityBlockingQueue<Message> messages;
+    protected PriorityBlockingQueue<Message> messages;
 
-    public Vehicle(int ID, VehicleManager vehicleManager, Point location) {
+    public Vehicle(int ID, VehicleManager vehicleManager, Point2D location) {
         this.ID = ID;
         this.vehicleManager = vehicleManager;
-        healthStatus = true;
+        this.healthStatus = true;
         this.location = location;
-        messages = new PriorityBlockingQueue<>();
+        this.messages = new PriorityBlockingQueue<>();
+        this.timer = new Timer();
 
     }
 
     protected abstract void startVehicleTimer();
-    protected abstract void stopVehicleTimer();
     protected abstract void processMessage(Message m);
 }

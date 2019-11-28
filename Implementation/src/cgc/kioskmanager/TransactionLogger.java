@@ -16,15 +16,22 @@ public class TransactionLogger {
     //Variables related with finances.
     private Double totalBenefits;
     private ArrayList<Double> mensualBenefits;
+    //0: CHILDREN, 1: ADULT, 2: SENIOR
+    private ArrayList<Integer> typeTicketsSold;
+
+    //TODO - minutesBenefits will calculate benefits per minute
+    private ArrayList<Double> minutesBenefits;
     
     public TransactionLogger() {
         initializeMensualBenefits();
+        initializeTypeTicketsSold();
         totalBenefits = 0.0;
     }
 
     //Register the sale of a ticket.
-    public void registerSale(double amount, Date purcharseDate){
+    public void registerSale(double amount, Date purcharseDate, TicketPrice typeTicket ){
         totalBenefits+= amount;
+        System.out.println("Total register sale right now is: " + totalBenefits);
 
         //Mensual approach
         Calendar cal = Calendar.getInstance();
@@ -34,16 +41,32 @@ public class TransactionLogger {
 
         //Setting the amount in the corresponding month
         mensualBenefits.set(month, month_amount);
+        System.out.println("Month: " + (month + 1) + " benefits: " + mensualBenefits.get(month));
+
+        //Setting ticket sold type visitor
+        int index = typeTicket.ordinal();
+        typeTicketsSold.set(index, typeTicketsSold.get(index)+1);
+        System.out.println("Type: " + typeTicket);
     }
 
 
     //Initialize the Mensual Benefits Array to 0.
-    private void initializeMensualBenefits(){
+    private void initializeTypeTicketsSold(){
         mensualBenefits = new ArrayList<>(12);
 
         //Set the benefits of each month to 0.
         for(int i = 0; i < 12; i++){
-            mensualBenefits.set(i, 0.0);
+            mensualBenefits.add(i, 0.0);
+        }
+    }
+
+    //Initialize the types ticket array to 3.
+    private void initializeMensualBenefits(){
+        typeTicketsSold = new ArrayList<>(3);
+
+        //Set the benefits of each month to 0.
+        for(int i = 0; i < 3; i++){
+            typeTicketsSold.add(i, 0);
         }
     }
 
@@ -57,6 +80,12 @@ public class TransactionLogger {
     public ArrayList<Double> getMonthsBenefits(){
         
         return(this.mensualBenefits);
+    }
+
+    //Return the type of tickets sold
+    public ArrayList<Integer> getTypeTicketsSold(){
+
+        return(this.typeTicketsSold);
     }
 
     //Return the totalBeneficts of the park.
