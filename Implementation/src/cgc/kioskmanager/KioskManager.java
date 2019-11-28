@@ -63,10 +63,10 @@ public class KioskManager extends Thread implements Communicator {
         this.cgc = cgc;
         transactionLogger = new TransactionLogger();
         messages = new PriorityBlockingQueue<>();
-        this.initializePayKiosks();
         healthKiosks = new ArrayList<Boolean>(4);
         isRunning = true;
         isInEmergencyMode = false;
+        this.start();
     }
 
     /**
@@ -81,6 +81,8 @@ public class KioskManager extends Thread implements Communicator {
 
     @Override
     public void run() {
+        //Need to be here because we need first to start KioksManager before the PayKiosk send the message.
+        this.initializePayKiosks();
         while(isRunning){
             try {
                 Message m = messages.take();
@@ -146,12 +148,14 @@ public class KioskManager extends Thread implements Communicator {
                 kiosks.get(i).sendMessage(m);
         }
         else if(m instanceof CGCRequestLocation){
+            System.out.println("Entra");
 
             //Notify the pay kiosks
             for(int i=0; i <4; i++)
                 kiosks.get(i).sendMessage(m);
         }
         else if(m instanceof UpdatedLocation){
+            System.out.println("Location gotten");
             cgc.sendMessage(m);
         }
     }

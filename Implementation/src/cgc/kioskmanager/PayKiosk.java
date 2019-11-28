@@ -62,7 +62,7 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
         timer = new Timer();
         startTimer();
         this.start();
-        this.updateLocation();
+
     }
 
     @Override
@@ -72,6 +72,7 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
 
     @Override
     public void run() {
+        this.updateLocation();
         while(isRunning){
             try {
                 Message m = messages.take();
@@ -117,6 +118,7 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
     }
 
     private void updateLocation(){
+        System.out.println("Entra PayKiosk");
         Message location = new UpdatedLocation(entity, ID, this.location);
         kioskManager.sendMessage(location);
     }
