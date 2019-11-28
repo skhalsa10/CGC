@@ -96,13 +96,13 @@ public class TokenManager extends Thread implements Communicator
     }
 
     @Override
-    public synchronized void sendMessage(Message m)
+    public void sendMessage(Message m)
     {
         //TODO place Message inside of messages Queue
         messages.put(m);
     }
 
-    private void processMessage(Message m)
+    private synchronized void processMessage(Message m)
     {
         //TODO  respond accordingly to m using instanceof
         if (m instanceof ShutDown)
