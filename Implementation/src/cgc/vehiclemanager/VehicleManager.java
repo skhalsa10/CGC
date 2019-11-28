@@ -89,18 +89,18 @@ public class VehicleManager extends Thread implements Communicator {
         isRunning = true;
         //lets initialize some patrol cars
         patrolCars = new HashMap<>();
-        for (int i = 1;i<6;i++){
-            Point2D p = new Point2D((MapInfo.MAP_WIDTH/4)*3,MapInfo.MAP_HEIGHT-MapInfo.SOUTHBUILDING_HEIGHT);
-            patrolCars.put(i,
-                    new PatrolVehicle(i, this, p));
-        }
-        
 
         this.start();
     }
 
     @Override
     public void run() {
+        //initialize here insgtead of constructor
+        for (int i = 1;i<6;i++){
+            Point2D p = new Point2D((MapInfo.MAP_WIDTH/4)*3,MapInfo.MAP_HEIGHT-MapInfo.SOUTHBUILDING_HEIGHT);
+            patrolCars.put(i,
+                    new PatrolVehicle(i, this, p));
+        }
         while(isRunning){
             try {
                 Message m = messages.take();
@@ -151,9 +151,9 @@ public class VehicleManager extends Thread implements Communicator {
         else if(m instanceof  ExitEmergencyMode){
             if(isInEmergency) {
                 for (PatrolVehicle pv : patrolCars.values()) {
-                    pv.sendMessage(m);
+                    pv.sendMessage(new ExitEmergencyMode());
                 }
-                //TODO Guest Vehicles
+//                //TODO Guest Vehicles
                 isInEmergency = false;
             }
 
@@ -165,7 +165,7 @@ public class VehicleManager extends Thread implements Communicator {
             cgc.sendMessage(m);
         }
         else{
-            System.out.println("sorry vehicleManager cannot process message: ");
+            System.out.println("sorry vehicle Manager cannot process message: ");
         }
     }
 }
