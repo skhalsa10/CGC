@@ -229,6 +229,10 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
                     break;
 
                 }
+                case KIOSK:{
+                    kioskLocations.put(m2.getEntityID(), m2.getLoc());
+                    break;
+                }
             }
         }
         else if(m instanceof UpdatedHealth){
