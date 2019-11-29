@@ -144,6 +144,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         viewHealth.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                cgcStation.sendMessage(new CGCRequestHealth());
                 healthOverlayIsOn = !healthOverlayIsOn;
             }
         });
@@ -257,9 +258,14 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
                     break;
                 }
                 case PATROL_VEHICLE:{
+                    System.out.println("UPDATED PATROL HEALTH");
                     patrolHealth.put(m2.getEntityID(), m2.isHealthStatus());
                     break;
 
+                }
+                case KIOSK:{
+                    kioskHealth.put(m2.getEntityID(), m2.isHealthStatus());
+                    break;
                 }
             }
         }
@@ -360,39 +366,42 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         }
 
         //DRAW KIOSKS
-        gc.setFill(MapInfo.KIOSK);
-        for(Point2D p: kioskLocations.values()){
-            gc.fillRect(p.getX(),p.getY(),8,8);
-            //TODO add the health overlay
+        for(Integer i:kioskLocations.keySet()){
+            gc.setFill(MapInfo.KIOSK);
+            Point2D p = kioskLocations.get(i);
+            gc.fillRect(p.getX(),p.getY(),12,8);
+            if(kioskHealth.get(i)!= null) {
+                renderHealth(kioskHealth.get(i), p.getX(), p.getY());
+            }else{
+                System.out.println("cant render health for this node...");
+            }
         }
 
 
-//        tourLocations = new HashMap<>();
+        //Draw guest tokens
+        for(Integer i:guestLocations.keySet()){
+            gc.setFill(MapInfo.GUEST);
+            renderNodeAndHealth(i, guestLocations, guestHealth);
+        }
+
+
         //DRAW TOUR VEHICLES
-        gc.setFill(MapInfo.TOURVEHICLE);
-        for(Point2D p: tourLocations.values()){
-            gc.fillOval(p.getX(),p.getY(),6,6);
-            //TODO add the health overlay
+        for(Integer i:tourLocations.keySet()){
+            gc.setFill(MapInfo.TOURVEHICLE);
+            renderNodeAndHealth(i, tourLocations, tourHealth);
         }
+
+
 //        patrolLocations = new HashMap<>();
-        //DRAW patrol VEHICLES
-        gc.setFill(MapInfo.PATROLVEHICLE);
-        for(Point2D p: patrolLocations.values()){
-            gc.fillOval(p.getX(),p.getY(),6,6);
-            //TODO add the health overlay
+        for(Integer i:patrolLocations.keySet()){
+            gc.setFill(MapInfo.PATROLVEHICLE);
+            renderNodeAndHealth(i, patrolLocations, patrolHealth);
         }
-//        employeeLocations = new HashMap<>();
+
         //DRAW employee tokens
-        gc.setFill(MapInfo.EMPLOYEE);
-        for(Point2D p: employeeLocations.values()){
-            gc.fillOval(p.getX(),p.getY(),6,6);
-            //TODO add the health overlay
-        }
-//        guestLocations = new HashMap<>();
-        gc.setFill(MapInfo.GUEST);
-        for(Point2D p: guestLocations.values()){
-            gc.fillOval(p.getX(),p.getY(),6,6);
-            //TODO add the health overlay
+        for(Integer i:employeeLocations.keySet()){
+            gc.setFill(MapInfo.EMPLOYEE);
+            renderNodeAndHealth(i, employeeLocations, employeeHealth);
         }
 
         if(isInEmergency){
@@ -410,4 +419,28 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
 
 
     }
+
+    private void renderNodeAndHealth(Integer i, HashMap<Integer, Point2D> locations, HashMap<Integer, Boolean> health) {
+        Point2D p = locations.get(i);
+        gc.fillOval(p.getX(),p.getY(),6,6);
+        if(health.get(i)!= null) {
+            renderHealth(health.get(i), p.getX(), p.getY());
+        }else{
+            System.out.println("cant render health for this node...");
+        }
+    }
+
+    private void renderHealth(Boolean healthStatus, double x, double y) {
+        if(healthOverlayIsOn){
+
+            if(healthStatus) {
+                gc.setFill(Color.LIME);
+                gc.fillText("Healthy",x,y);
+            }else{
+                gc.setFill(Color.LIGHTSALMON);
+                gc.fillText("Not Healthy",x,y);
+            }
+        }
+    }
+
 }

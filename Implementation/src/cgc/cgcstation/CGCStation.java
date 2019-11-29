@@ -103,7 +103,8 @@ public class CGCStation extends Thread implements Communicator {
             cgcgui.sendMessage(m);
         }
         else if(m instanceof CGCRequestHealth){
-            cgc.sendMessage(m);
+            System.out.println("CGC STATION WILL BE FORWARDING request for health");
+            cgc.sendMessage(new CGCRequestHealth());
         }
         else if(m instanceof CGCRequestLocation){
             cgc.sendMessage(m);
