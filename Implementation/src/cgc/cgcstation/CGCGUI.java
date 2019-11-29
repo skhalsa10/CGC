@@ -203,6 +203,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
     private synchronized void processMessage(Message m){
         if(m instanceof UpdatedLocation){
 
+
             UpdatedLocation m2 = (UpdatedLocation) m;
 
             switch (m2.getEntityName()){
@@ -228,6 +229,10 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
                     patrolLocations.put(m2.getEntityID(), m2.getLoc());
                     break;
 
+                }
+                case KIOSK:{
+                    kioskLocations.put(m2.getEntityID(), m2.getLoc());
+                    break;
                 }
             }
         }

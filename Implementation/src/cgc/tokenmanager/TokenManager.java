@@ -2,8 +2,11 @@ package cgc.tokenmanager;
 
 import cgc.CGC;
 import cgc.utils.Communicator;
-import cgc.utils.messages.Message;
+import cgc.utils.messages.*;
 
+import javafx.geometry.Point2D;
+
+import java.util.LinkedList;
 import java.util.concurrent.PriorityBlockingQueue;
 
 /**
@@ -43,10 +46,20 @@ import java.util.concurrent.PriorityBlockingQueue;
  *      1. It will respond with a message with the current health of all tokens
  *
  */
-public class TokenManager extends Thread implements Communicator {
+public class TokenManager extends Thread implements Communicator
+{
 
     private CGC cgc;
     private PriorityBlockingQueue<Message> messages;
+
+    //variables I added
+    private boolean isRunning = true;
+    private boolean emergency = false;
+    private LinkedList<GuestToken> guestTokens = new LinkedList<>();
+    private LinkedList<EmployeeToken> employeeTokens = new LinkedList<>();
+    private int tokenID = 0;
+    private boolean health = true;
+    private int employee_count = 5;//will use when actually being told how many employees
 
     public  TokenManager(CGC cgc){
         messages = new PriorityBlockingQueue<>();
@@ -56,17 +69,131 @@ public class TokenManager extends Thread implements Communicator {
 
 
     @Override
-    public void run() {
+    public void run()
+    {
         //TODO this will loop and wait on the messages queue and
         // call processMessage(m) when a message arrives
+        //create employee tokens
+        for (int i = 0; i < 5; i++)
+        {
+            //If you all can figure out how this is supposed to have it's coords given I would lov eto hear it
+            //TODO -EmployeeToken tmp = new EmployeeToken(tokenID, this);
+            tokenID++;
+        }
+        while (isRunning)
+        {
+            try
+            {
+                Message m = this.messages.take();
+                processMessage(m);
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("TokenManager shutting down.");
     }
 
     @Override
-    public synchronized void sendMessage(Message m) {
+    public void sendMessage(Message m)
+    {
         //TODO place Message inside of messages Queue
+        messages.put(m);
     }
 
-    private void processMessage(Message m){
+    private synchronized void processMessage(Message m)
+    {
         //TODO  respond accordingly to m using instanceof
+        if (m instanceof ShutDown)
+        {
+            //shut down all tokens then allow for shutdown of self.
+            //loop through tokens shutting them all down
+            for (GuestToken tok: guestTokens)
+            {
+                sendMessage(m);
+            }
+            for (EmployeeToken tok: employeeTokens)
+            {
+                sendMessage(m);
+            }
+            isRunning = false;
+        }
+        else if(m instanceof EnterEmergencyMode)
+        {
+            emergency = true;
+            for (GuestToken tok: guestTokens)
+            {
+                sendMessage(m);
+            }
+            for (EmployeeToken tok: employeeTokens)
+            {
+                sendMessage(m);
+            }
+            //loop through tokens and tell them emergency mode
+        }
+        else if (m instanceof ExitEmergencyMode)
+        {
+            emergency = false;
+            for (GuestToken tok: guestTokens)
+            {
+                sendMessage(m);
+            }
+            for (EmployeeToken tok: employeeTokens)
+            {
+                sendMessage(m);
+            }
+            //loop through tokens and free them from emergency mode
+        }
+        else if (m instanceof RequestToken)
+        {
+            if (emergency)
+            {
+                System.out.println("Attempted to create token but didn't because the system is in emergency mode");
+            }
+            else
+            {
+                GuestToken tmp = new GuestToken(tokenID, this, ((RequestToken) m).getLocation() );
+                guestTokens.add(tmp);
+                TokenInfo passInfo = new TokenInfo();
+                passInfo.tokenID = tmp.tokenID;
+                passInfo.GPSLocation = tmp.GPSLocation;
+                passInfo.healthStatus = true;
+                sendMessage(passInfo);
+                tokenID++;
+            }
+        }
+        else if (m instanceof UpdatedLocation)
+        {
+            int id = ((UpdatedLocation) m).getEntityID();
+            Point2D loc = ((UpdatedLocation) m).getLoc();
+            for (GuestToken tok:guestTokens)
+            {
+                if(id == tok.tokenID)
+                {
+                    tok.GPSLocation = loc;
+                }
+                else
+                {
+                    System.out.println("Error in attempting to update token #" + tok.tokenID + ". Token was not found.");
+                }
+            }
+        }
+        else if (m instanceof CGCRequestHealth)
+        {
+            //loop though all components?
+            for (GuestToken tok: guestTokens)
+            {
+                sendMessage(m);
+            }
+            for (EmployeeToken tok: employeeTokens)
+            {
+                sendMessage(m);
+            }
+        }
+        else if (m instanceof UpdatedHealth)
+        {
+            //I'm not sure how the health thing works quite yet
+        }
     }
 }

@@ -3,10 +3,13 @@ package cgc.kioskmanager;
 import cgc.utils.Communicator;
 import cgc.utils.Locatable;
 import cgc.utils.Maintainable;
-import cgc.utils.messages.Message;
+import cgc.utils.Entity;
+import cgc.utils.messages.*;
+import javafx.geometry.Point2D;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
+import java.time.LocalTime;
+
 import java.util.concurrent.PriorityBlockingQueue;
 
 /**
@@ -32,35 +35,129 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
     private KioskManager kioskManager;
     private PriorityBlockingQueue<Message> messages;
     private int ID;
+    private Entity entity;
     private Timer timer;
-    private TimerTask timerTask;
+    private boolean isRunning;
     private boolean healthStatus;
+    private Point2D location;
+    private boolean isInEmergencyMode;
 
-    public PayKiosk(KioskManager kioskManager, int ID){
+    
+    //Ticket price .v1
+    private static double adult_price = 15.00;
+    private static double children_price = 8.00;
+    private static double senior_price = 12.00;
+    
+    public PayKiosk(KioskManager kioskManager, int ID, Point2D location){
         this.kioskManager = kioskManager;
         this.ID = ID;
+        entity = Entity.KIOSK;
+        messages = new PriorityBlockingQueue<>();
+        isRunning = true;
+        healthStatus = true;
+        isInEmergencyMode = false;
+        this.location = location;
+        timer = new Timer();
+        startTimer();
+        this.start();
+
     }
 
     @Override
     public void sendMessage(Message m) {
-        //TODO Put Message m into the messages queue
+        messages.put(m);
     }
 
     @Override
     public void run() {
-        //TODO loop and wait on blocking queue until Shutdown message received.
-        //TODO when a message is receive it will call processMessage(m)
+        this.updateLocation();
+        while(isRunning){
+            try {
+                Message m = messages.take();
+                processMessage(m);
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     private synchronized void processMessage(Message m){
-        //TODO check what instance m is and take appropriate action
+        //This handels the shutdown message
+        if (m instanceof ShutDown){
+            isRunning = false;
+            timer.cancel();
+        }
+        else if (m instanceof CGCRequestHealth){
+            //Make message to the CGC.
+            Message updatedHealth = new UpdatedHealth(entity, ID, healthStatus);
+            kioskManager.sendMessage(updatedHealth);
+        }
+        else if (m instanceof EnterEmergencyMode){
+            if(!isInEmergencyMode) {
+                isInEmergencyMode = true;
+                timer.cancel();
+            }
+        }
+        else if (m instanceof ExitEmergencyMode) {
+            if (isInEmergencyMode){
+                isInEmergencyMode = false;
+                restartTimer();
+            }
+        }
+        else if(m instanceof BuyTicket){
+            buyTicket();
+        }
+        else if(m instanceof CGCRequestLocation){
+            Message location = new UpdatedLocation(entity, ID, this.location);
+            kioskManager.sendMessage(location);
+        }
+
+    }
+
+    public void buyTicket(){
+        //Random buy (children, adult or senior)
+        TicketPrice[] tickets = TicketPrice.values();
+        Random random = new Random();
+        TicketPrice price = tickets[random.nextInt(tickets.length)];
+
+        double priceTicket = 0.0;
+
+        if(price == TicketPrice.ADULT){
+            priceTicket = adult_price;
+        }else if(price == TicketPrice.CHILDREN){
+            priceTicket = children_price;
+        }else if (price == TicketPrice.SENIOR) {
+            priceTicket = senior_price;
+        }
+
+        //Sends to the KioskManager that a ticket has been purchased.
+        Date purchasedDate = new Date();
+        Message tokenPurchased = new TokenPurchasedInfo(priceTicket, purchasedDate, location, price);
+        this.kioskManager.sendMessage(tokenPurchased);
+    }
+
+    private void updateLocation(){
+        System.out.println("Entra PayKiosk");
+        Message location = new UpdatedLocation(entity, ID, this.location);
+        kioskManager.sendMessage(location);
+    }
+
+    private void restartTimer() {
+        this.timer = new Timer();
+        startTimer();
     }
 
     /**
      * use the timer and timertask to trigger purchasing the sales of tokens overtime
      */
     private void startTimer(){
-        //TODO use the timer and timer task to purchase a token.
-        // e
+        TimerTask task = new TimerTask() {
+            public void run() {
+                Message handleBuyTicket = new BuyTicket();
+                messages.put(handleBuyTicket);
+            }
+        };
+        // schedules the buy of a token after 1 minute.
+        this.timer.schedule(task, 100, 60000);
     }
 }
