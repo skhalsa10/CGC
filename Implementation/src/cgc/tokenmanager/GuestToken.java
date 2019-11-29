@@ -46,7 +46,7 @@ public class GuestToken extends Token
     }
 
     @Override
-    public synchronized void sendMessage(Message m)
+    public void sendMessage(Message m)
     {
         //TODO place this message in messages queue
     }
@@ -80,7 +80,7 @@ public class GuestToken extends Token
     }
 
     @Override
-    protected void processMessage(Message m)
+    protected synchronized void processMessage(Message m)
     {
         //TODO process m using instanceof
         if(m instanceof ShutDown)
