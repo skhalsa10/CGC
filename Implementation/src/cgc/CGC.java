@@ -160,5 +160,11 @@ public class CGC extends Thread implements Communicator {
         else if (m instanceof UpdatedLocation) {
             this.station.sendMessage(m);
         }
+        else if(m instanceof SaleLog){
+            station.sendMessage(m);
+        }
+        else{
+            System.out.println("CGC cannot process Message: " + m);
+        }
     }
 }
