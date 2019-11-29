@@ -71,6 +71,7 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
     @Override
     public void run() {
         this.updateLocation();
+        kioskManager.sendMessage(new UpdatedHealth(Entity.KIOSK,ID,healthStatus));
         while(isRunning){
             try {
                 Message m = messages.take();
