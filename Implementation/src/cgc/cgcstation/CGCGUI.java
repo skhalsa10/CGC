@@ -1,6 +1,7 @@
 package cgc.cgcstation;
 
 import cgc.utils.Communicator;
+import cgc.utils.Entity;
 import cgc.utils.MapInfo;
 import cgc.utils.messages.*;
 import javafx.animation.AnimationTimer;
@@ -13,6 +14,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -37,6 +39,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
     private boolean emergencyBorderOn=true;
     private boolean emergencyByGUI = false;
     private double emergencyFenceWidth = 0;
+    private boolean isBasicRender;
 
     //GUI stuff
     private Stage stage;
@@ -75,7 +78,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
     private Button viewHealth;
     private Button viewFinances;
     private Button viewMain;
-    private Button financeRefresh;
+
 
     //State stuff
     private Point2D  TRexLoc;
@@ -93,11 +96,21 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
     private ConcurrentHashMap<Integer,Boolean> kioskHealth;
     private LinkedBlockingQueue<SaleLog> financeState;
 
+    //Images to render
+    private Image trex;
+    private Image kiosk;
+    private Image patrol;
+
 
 
     public CGCGUI(Stage primaryStage, CGCStation cgcStation) {
 
         //initialize non GUI stuff
+        isBasicRender = false;
+        trex = new Image("file:./src/resources/trex2.png", MapInfo.TREX_PIT_WIDTH/6,0,true,true);
+        kiosk = new Image("file:./src/resources/kiosk1.png", 30,0,true,true);
+        patrol = new Image("file:./src/resources/patrol4.png", 20,0,true,true);
+
         healthOverlayIsOn = false;
         isRunning = true;
         isInEmergency = false;
@@ -542,7 +555,13 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
 
         //DRAW TREX
         gc.setFill(MapInfo.TREX);
-        gc.fillOval(TRexLoc.getX(),TRexLoc.getY(),8,8);
+        if(isBasicRender){
+            gc.fillOval(TRexLoc.getX(),TRexLoc.getY(),8,8);
+        }
+        else{
+            gc.drawImage(trex,TRexLoc.getX()-trex.getWidth()/2,TRexLoc.getY()-trex.getHeight()/2);
+        }
+
         if(healthOverlayIsOn){
             if(TRexHealth) {
                 gc.setFill(Color.LIME);
@@ -557,7 +576,12 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         for(Integer i:kioskLocations.keySet()){
             gc.setFill(MapInfo.KIOSK);
             Point2D p = kioskLocations.get(i);
-            gc.fillRect(p.getX(),p.getY(),12,8);
+            if(isBasicRender){
+                gc.fillRect(p.getX(),p.getY(),12,8);
+            }else {
+
+                gc.drawImage(kiosk, p.getX() - kiosk.getWidth() / 2, p.getY() - (kiosk.getHeight() - 8));
+            }
             if(kioskHealth.get(i)!= null) {
                 renderHealth(kioskHealth.get(i), p.getX(), p.getY());
             }else{
@@ -569,27 +593,27 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         //Draw guest tokens
         for(Integer i:guestLocations.keySet()){
             gc.setFill(MapInfo.GUEST);
-            renderNodeAndHealth(i, guestLocations, guestHealth);
+            renderNodeAndHealth(i, guestLocations, guestHealth, Entity.GUEST_TOKEN);
         }
 
 
         //DRAW TOUR VEHICLES
         for(Integer i:tourLocations.keySet()){
             gc.setFill(MapInfo.TOURVEHICLE);
-            renderNodeAndHealth(i, tourLocations, tourHealth);
+            renderNodeAndHealth(i, tourLocations, tourHealth, Entity.TOUR_VEHICLE);
         }
 
 
 //        patrolLocations = new HashMap<>();
         for(Integer i:patrolLocations.keySet()){
             gc.setFill(MapInfo.PATROLVEHICLE);
-            renderNodeAndHealth(i, patrolLocations, patrolHealth);
+            renderNodeAndHealth(i, patrolLocations, patrolHealth, Entity.PATROL_VEHICLE);
         }
 
         //DRAW employee tokens
         for(Integer i:employeeLocations.keySet()){
             gc.setFill(MapInfo.EMPLOYEE);
-            renderNodeAndHealth(i, employeeLocations, employeeHealth);
+            renderNodeAndHealth(i, employeeLocations, employeeHealth, Entity.EMPLOYEE_TOKEN);
         }
 
         if(isInEmergency){
@@ -613,10 +637,20 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
      * @param i
      * @param locations
      * @param health
+     * @param entity
      */
-    private void renderNodeAndHealth(Integer i, ConcurrentHashMap<Integer, Point2D> locations, ConcurrentHashMap<Integer, Boolean> health) {
+    private void renderNodeAndHealth(Integer i, ConcurrentHashMap<Integer, Point2D> locations, ConcurrentHashMap<Integer, Boolean> health, Entity entity) {
         Point2D p = locations.get(i);
-        gc.fillOval(p.getX(),p.getY(),6,6);
+        if(isBasicRender) {
+            gc.fillOval(p.getX(), p.getY(), 6, 6);
+        }else{
+            switch (entity){
+                case PATROL_VEHICLE:{
+                    gc.drawImage(patrol,p.getX()-patrol.getWidth()/2,p.getY()-patrol.getHeight()/2);
+                    break;
+                }
+            }
+        }
         if(health.get(i)!= null) {
             renderHealth(health.get(i), p.getX(), p.getY());
         }else{
