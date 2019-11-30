@@ -95,11 +95,60 @@
     -fx-font-size: 25px;
     -fx-border: #5d6264;
     -fx-background: #313335;
+    -fx-padding: 5;
+
 
 }
 .Finance-Text{
     -fx-fill: #ff9264;
     -fx-font-size: 15px;
     -fx-border-color: #5d6264;
+    -fx-background-color: #313335;
+}
+
+.log-box{
+    -fx-fill: #e47a60;
+    -fx-font-size: 25px;
+    -fx-border-color: #5d6264;
+    -fx-background-color: #313335;
+}
+
+
+
+.scroll-bar{
+    -fx-background-color: #313335;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #e47a60;
+    -fx-background-radius: 5em;
+}
+
+
+
+.scroll-bar:horizontal{
+    -fx-padding: .02;
+    -fx-pref-height: 16.5;
+}
+.scroll-bar:vertical{
+    -fx-padding: .02;
+    -fx-pref-height: 16.5;
+}
+
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: #313335;
+    -fx-border-color: #313335;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar > .increment-button > .increment-arrow,
+.scroll-bar > .decrement-button > .decrement-arrow {
+    -fx-background-color: #e47a60;
+}
+.scroll-bar > .increment-button ,
+.scroll-bar > .decrement-button {
     -fx-background-color: #313335;
 }
