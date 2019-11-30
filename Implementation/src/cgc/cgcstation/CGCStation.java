@@ -128,6 +128,9 @@ public class CGCStation extends Thread implements Communicator {
             }
 
         }
+        else if(m instanceof RequestFinanceInfo){
+            cgc.sendMessage(m);
+        }
         else{
             System.out.println("cant candle message: " + m);
         }

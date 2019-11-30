@@ -67,3 +67,39 @@
     -fx-border-color: #5d6264;
     -fx-background-color: #ff9264;
 }
+
+.viewMain-button{
+    -fx-text-fill: #ff9264;
+    -fx-font-size: 25px;
+    -fx-border-color: #3c3f41;
+    -fx-background-color: #3c3f41;
+
+}
+
+.viewMain-button:pressed{
+    -fx-text-fill: #313335;
+    -fx-font-size: 25px;
+    -fx-border-color: #5d6264;
+    -fx-background-color: #ff9264;
+}
+
+.financeTitle{
+    -fx-fill: #ff9264;
+    -fx-font-size: 35px;
+    -fx-border-color: #5d6264;
+    -fx-background-color: #313335;
+}
+
+.financeScrollPane{
+    -fx-text-fill: #ff9264;
+    -fx-font-size: 25px;
+    -fx-border: #5d6264;
+    -fx-background: #313335;
+
+}
+.Finance-Text{
+    -fx-fill: #ff9264;
+    -fx-font-size: 15px;
+    -fx-border-color: #5d6264;
+    -fx-background-color: #313335;
+}

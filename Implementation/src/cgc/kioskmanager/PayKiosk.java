@@ -8,7 +8,6 @@ import cgc.utils.messages.*;
 import javafx.geometry.Point2D;
 
 import java.util.*;
-import java.time.LocalTime;
 
 import java.util.concurrent.PriorityBlockingQueue;
 
@@ -63,14 +62,25 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
 
     }
 
+    /**
+     * dumps message m into the queue for processing when there is time.
+     * @param m
+     */
     @Override
     public void sendMessage(Message m) {
         messages.put(m);
     }
 
+    /**
+     * This will just loop on messaging queue responding to messages
+     * @version 1
+     * @author Santi
+     */
     @Override
     public void run() {
+        //This will update the Kiosk Manager with its location upon its initial creation
         this.updateLocation();
+        //loop on blocking queue until shutdown
         while(isRunning){
             try {
                 Message m = messages.take();
@@ -81,6 +91,10 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
         }
     }
 
+    /**
+     * This method contains the specific logic for the messages the Pay kiosk responds to
+     * @param m is the message to respond to
+     */
     private synchronized void processMessage(Message m){
         //This handels the shutdown message
         if (m instanceof ShutDown){
@@ -111,9 +125,17 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
             Message location = new UpdatedLocation(entity, ID, this.location);
             kioskManager.sendMessage(location);
         }
+        else{
+            System.out.println("Pay kiosk cannot handle Message: " + m);
+        }
 
     }
 
+    /**
+     * this function will just randomize what tickets end up
+     * getting sold whether it be a child or an adult or senior
+     * it then sends a token purchase request to the kiosk Manager to handle the sale
+     */
     public void buyTicket(){
         //Random buy (children, adult or senior)
         TicketPrice[] tickets = TicketPrice.values();
@@ -136,8 +158,10 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
         this.kioskManager.sendMessage(tokenPurchased);
     }
 
+    /**
+     * this will just send the Kiosk manager the current location of this kiosk
+     */
     private void updateLocation(){
-        System.out.println("Entra PayKiosk");
         Message location = new UpdatedLocation(entity, ID, this.location);
         kioskManager.sendMessage(location);
     }
@@ -153,11 +177,11 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
     private void startTimer(){
         TimerTask task = new TimerTask() {
             public void run() {
-                Message handleBuyTicket = new BuyTicket();
+                BuyTicket handleBuyTicket = new BuyTicket();
                 messages.put(handleBuyTicket);
             }
         };
         // schedules the buy of a token after 1 minute.
-        this.timer.schedule(task, 100, 60000);
+        this.timer.schedule(task, 100, 30000);
     }
 }
