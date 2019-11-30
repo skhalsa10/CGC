@@ -1,25 +1,29 @@
 package cgc.utils.messages;
 
-import javafx.geometry.Point2D;
+import cgc.utils.LocationStatus;
 
 /**
  * Whenever the guest token is build, it should send the message to tokenManager and tokenManager should
  * send a message to CGC so that the vehicle manager can receive this message.
+ * The LocationStatus is an enum which is used both for cars and token.
+ * It represents on which end the token is (ignore DRIVING in that enum class, that's for car).
+ * Also, for the actual south or norht end location (a Point2D), please refer to MapInfo, it has those south/north
+ * pickup locations defined.
  */
 public class TokenReadyToLeave implements Message {
     private int tokenId;
-    private Point2D tokenLocation;
+    private LocationStatus tokenEnd;
 
-    public TokenReadyToLeave(int tokenId, Point2D tokenLocation) {
+    public TokenReadyToLeave(int tokenId, LocationStatus tokenLocation) {
         this.tokenId = tokenId;
-        this.tokenLocation = tokenLocation;
+        this.tokenEnd = tokenLocation;
     }
 
     public int getTokenId() {
         return tokenId;
     }
 
-    public Point2D getTokenLocation() {
-        return tokenLocation;
+    public LocationStatus getTokenEnd() {
+        return tokenEnd;
     }
 }
