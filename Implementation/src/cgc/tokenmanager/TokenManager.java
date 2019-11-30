@@ -2,6 +2,7 @@ package cgc.tokenmanager;
 
 import cgc.CGC;
 import cgc.utils.Communicator;
+import cgc.utils.MapInfo;
 import cgc.utils.messages.*;
 
 import javafx.geometry.Point2D;
@@ -58,10 +59,8 @@ public class TokenManager extends Thread implements Communicator
     private LinkedList<GuestToken> guestTokens = new LinkedList<>();
     private LinkedList<EmployeeToken> employeeTokens = new LinkedList<>();
     private int tokenID = 0;
-    private boolean health = true;
-    private int employee_count = 5;//will use when actually being told how many employees
 
-    public  TokenManager(CGC cgc){
+    public TokenManager(CGC cgc){
         messages = new PriorityBlockingQueue<>();
         this.cgc = cgc;
 
@@ -76,8 +75,8 @@ public class TokenManager extends Thread implements Communicator
         //create employee tokens
         for (int i = 0; i < 5; i++)
         {
-            //If you all can figure out how this is supposed to have it's coords given I would lov eto hear it
             //TODO -EmployeeToken tmp = new EmployeeToken(tokenID, this);
+            EmployeeToken tmp = new EmployeeToken(tokenID, this, MapInfo.ENTRANCE);
             tokenID++;
         }
         while (isRunning)
@@ -149,11 +148,11 @@ public class TokenManager extends Thread implements Communicator
         {
             if (emergency)
             {
-                System.out.println("Attempted to create token but didn't because the system is in emergency mode");
+                System.out.println("Cannot create a token in emergency mode.");
             }
             else
             {
-                GuestToken tmp = new GuestToken(tokenID, this, ((RequestToken) m).getLocation() );
+                GuestToken tmp = new GuestToken(tokenID, this, MapInfo.GUEST_SPAWN_LOCATION);
                 guestTokens.add(tmp);
                 TokenInfo passInfo = new TokenInfo();
                 passInfo.tokenID = tmp.tokenID;
@@ -163,19 +162,17 @@ public class TokenManager extends Thread implements Communicator
                 tokenID++;
             }
         }
-        else if (m instanceof UpdatedLocation)
+        else if (m instanceof CGCRequestLocation)
         {
-            int id = ((UpdatedLocation) m).getEntityID();
-            Point2D loc = ((UpdatedLocation) m).getLoc();
             for (GuestToken tok:guestTokens)
             {
-                if(id == tok.tokenID)
+                for (GuestToken toke: guestTokens)
                 {
-                    tok.GPSLocation = loc;
+                    sendMessage(m);
                 }
-                else
+                for (EmployeeToken toke: employeeTokens)
                 {
-                    System.out.println("Error in attempting to update token #" + tok.tokenID + ". Token was not found.");
+                    sendMessage(m);
                 }
             }
         }
@@ -190,10 +187,6 @@ public class TokenManager extends Thread implements Communicator
             {
                 sendMessage(m);
             }
-        }
-        else if (m instanceof UpdatedHealth)
-        {
-            //I'm not sure how the health thing works quite yet
         }
     }
 }
