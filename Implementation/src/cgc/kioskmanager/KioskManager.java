@@ -108,18 +108,20 @@ public class KioskManager extends Thread implements Communicator {
         }
         else if (m instanceof TokenPurchasedInfo){
             //Pass to the Transaction Log.
-            double amount = ((TokenPurchasedInfo) m).getAmount();
-            Date purchasedDate =((TokenPurchasedInfo) m).getPurchasedDate();
-            TicketPrice ticketType = ((TokenPurchasedInfo) m).getTypeTicket();
+            TokenPurchasedInfo m2 = (TokenPurchasedInfo)m;
+            double amount = m2.getAmount();
+            Date purchasedDate =m2.getPurchasedDate();
+            TicketPrice ticketType = m2.getTypeTicket();
             transactionLogger.registerSale(amount, purchasedDate, ticketType);
 
             //Message to the GCG generate new Token
             Message generateNewToken = new RequestToken(((TokenPurchasedInfo) m).getLocation());
             cgc.sendMessage(generateNewToken);
+            // this message is needed for the GUI log
+            cgc.sendMessage(new SaleLog(m2.getAmount(),m2.getPurchasedDate(),m2.getTypeTicket()));
         }
         //NEED the Benefits like per month or total or a particular month. ???
         else if (m instanceof RequestFinanceInfo){
-            //TODO- WAITING FOR GUI FOR CHECKING
             //Get the Financial Information
             double total_benefits = transactionLogger.getTotalBenefits();
             ArrayList<Double> mensual_benefits = transactionLogger.getMonthsBenefits();
@@ -127,44 +129,51 @@ public class KioskManager extends Thread implements Communicator {
 
             //Message about Finances
             Message financeInfo = new UpdatedFinanceInfo(total_benefits, mensual_benefits, typeTicketsSold);
-
-            System.out.println("Kiosk Manager receives the total benefit: " + total_benefits);
             cgc.sendMessage(financeInfo);
         }
         else if (m instanceof CGCRequestHealth){
             //Request the Pay Kiosks their health
-            for(int i=0; i <4; i++)
+            for(int i=0; i <4; i++) {
                 kiosks.get(i).sendMessage(m);
+            }
         }
         else if (m instanceof UpdatedHealth){
+            //forward to CGC
             cgc.sendMessage(m);
         }
         else if( m instanceof EnterEmergencyMode){
-            //Enter emergency mode
-            isInEmergencyMode = true;
+            //Enter emergency mode if needed
+            if(!isInEmergencyMode) {
+                isInEmergencyMode = true;
 
-            //Notify the pay kiosks
-            for(int i=0; i <4; i++)
-                kiosks.get(i).sendMessage(m);
+                //Notify the pay kiosks
+                for (int i = 0; i < 4; i++) {
+                    kiosks.get(i).sendMessage(m);
+                }
+            }
         }
         else if( m instanceof ExitEmergencyMode){
-            //Exit emergency mode
-            isInEmergencyMode = false;
+            //Exit emergency mode if we are in emergency mode
+            if(isInEmergencyMode) {
+                isInEmergencyMode = false;
 
-            //Notify the pay kiosks
-            for(int i=0; i <4; i++)
-                kiosks.get(i).sendMessage(m);
+                //Notify the pay kiosks
+                for (int i = 0; i < 4; i++) {
+                    kiosks.get(i).sendMessage(m);
+                }
+            }
         }
         else if(m instanceof CGCRequestLocation){
-            System.out.println("CGC request KioskManager children location");
-
-            //Notify the pay kiosks
-            for(int i=0; i <4; i++)
+            //Notify the pay kiosks to send their location
+            for(int i=0; i <4; i++) {
                 kiosks.get(i).sendMessage(m);
+            }
         }
         else if(m instanceof UpdatedLocation){
-            System.out.println("Kiosk Manager Updated Location");
             cgc.sendMessage(m);
+        }
+        else{
+            System.out.println("Kiosk Manager cannot handle message: " + m);
         }
     }
 }
