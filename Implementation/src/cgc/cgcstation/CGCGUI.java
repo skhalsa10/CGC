@@ -1,6 +1,5 @@
 package cgc.cgcstation;
 
-import cgc.kioskmanager.TicketPrice;
 import cgc.utils.Communicator;
 import cgc.utils.MapInfo;
 import cgc.utils.messages.*;
@@ -21,8 +20,6 @@ import javafx.scene.paint.Color;
 
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
@@ -53,12 +50,15 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
     private VBox financeRoot;
     private HBox finBtnBox;
     private HBox titleBox;
+    private HBox columnTitles;
     private Text financeTitle;
     private ScrollPane financeScrollPane;
+    private VBox logBox;
     private HBox totalBox;
-    private Text childTokensSold;
-    private Text adultTokensSold;
-    private Text seniorTokensSold;
+    private int childTokensSold;
+    private int adultTokensSold;
+    private int seniorTokensSold;
+    private double totalSales;
 
 
     //animated map
@@ -91,12 +91,13 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
     private ConcurrentHashMap<Integer,Boolean> employeeHealth;
     private ConcurrentHashMap<Integer,Boolean> guestHealth;
     private ConcurrentHashMap<Integer,Boolean> kioskHealth;
-    private LinkedBlockingQueue<UpdatedFinanceInfo> financeState;
+    private LinkedBlockingQueue<SaleLog> financeState;
 
 
 
     public CGCGUI(Stage primaryStage, CGCStation cgcStation) {
 
+        //initialize non GUI stuff
         healthOverlayIsOn = false;
         isRunning = true;
         isInEmergency = false;
@@ -105,6 +106,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         financeState = new LinkedBlockingQueue<>();
         currentScreen = Screen.MAIN;
 
+        //state related stuff
         tourLocations = new ConcurrentHashMap<>();
         patrolLocations = new ConcurrentHashMap<>();
         employeeLocations = new ConcurrentHashMap<>();
@@ -117,7 +119,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         guestHealth = new ConcurrentHashMap<>();
         kioskHealth = new ConcurrentHashMap<>();
 
-        //GUI
+        //GUI stuff
         this.stage = primaryStage;
         stage.setTitle("Cretaceous Gardens Controller");
 
@@ -176,20 +178,16 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         viewFinances.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                cgcStation.sendMessage(new RequestFinanceInfo());
+                //cgcStation.sendMessage(new RequestFinanceInfo());
                 currentScreen = Screen.FINANCES;
             }
         });
-
-
-
 
 
         viewHealth.setMinWidth(200);
         viewFinances.setMinWidth(200);
         enterEmergency.setMinWidth(200);
         exitEmergency.setMinWidth(200);
-
 
 
         //populate stuff
@@ -200,14 +198,25 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         mainRoot.getChildren().addAll(leftBPane,canvasContainer,rightBPane);
 
         //initializethe Finance stuff
+        //layout stuff
         financeRoot = new VBox();
         titleBox = new HBox();
+        logBox = new VBox();
+        columnTitles = new HBox();
+        //init scroll pan and add the log box
         financeScrollPane = new ScrollPane();
         financeScrollPane.getStyleClass().add("financeScrollPane");
+        financeScrollPane.setContent(logBox);
+        logBox.minWidthProperty().bind(financeScrollPane.widthProperty());
+
+        //non gui related state needed for finance screen
+        childTokensSold = 0;
+        adultTokensSold = 0;
+        seniorTokensSold = 0;
+        totalSales = 0;
 
         //totals box set up
         totalBox = new HBox();
-
 
         viewMain = new Button("<");
         viewMain.getStyleClass().add("viewMain-button");
@@ -218,29 +227,38 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
                 currentScreen = Screen.MAIN;
             }
         });
-        financeRefresh = new Button("\u21BB");
-        financeRefresh.getStyleClass().add("viewMain-button");
-        financeRefresh.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                cgcStation.sendMessage(new RequestFinanceInfo());
-
-            }
-        });
         finBtnBox = new HBox();
-        Pane s3 = new Pane();
-        finBtnBox.getChildren().addAll(viewMain,s3,financeRefresh);
-        finBtnBox.setHgrow(s3, Priority.ALWAYS);
+        //Pane s3 = new Pane();
+        finBtnBox.getChildren().addAll(viewMain);
+        //finBtnBox.setHgrow(s3, Priority.ALWAYS);
 
         financeTitle = new Text("Finances");
         financeTitle.getStyleClass().add("financeTitle");
         Pane s1 = new Pane();
         Pane s2 = new Pane();
-        titleBox.getChildren().addAll(s1, financeTitle,s2);
-        titleBox.setAlignment(Pos.BOTTOM_CENTER);
-        titleBox.setHgrow(s1, Priority.ALWAYS);
-        titleBox.setHgrow(s2, Priority.ALWAYS);
-        financeRoot.getChildren().addAll(finBtnBox,titleBox, financeScrollPane,totalBox);
+        Pane s3 = new Pane();
+        Pane s4 = new Pane();
+        Text date=new Text("Date Purchased");
+        date.getStyleClass().add("log-box");
+        Text ticketType = new Text("Ticket Type");
+        ticketType.getStyleClass().add("log-box");
+        Text price = new Text("Ticket Price");
+        price.getStyleClass().add("log-box");
+
+        columnTitles.getChildren().addAll(s4,date,s1,ticketType,s2,price,s3);
+        columnTitles.setHgrow(s1, Priority.ALWAYS);
+        columnTitles.setHgrow(s2, Priority.ALWAYS);
+        columnTitles.setHgrow(s3, Priority.ALWAYS);
+        columnTitles.setHgrow(s4, Priority.ALWAYS);
+        columnTitles.setAlignment(Pos.BASELINE_CENTER);
+
+        Pane space1 = new Pane();
+        Pane space2 = new Pane();
+        titleBox.getChildren().addAll(space1, financeTitle,space2);
+        titleBox.setAlignment(Pos.TOP_CENTER);
+        titleBox.setHgrow(space1, Priority.ALWAYS);
+        titleBox.setHgrow(space2, Priority.ALWAYS);
+        financeRoot.getChildren().addAll(finBtnBox,titleBox, columnTitles, financeScrollPane,totalBox);
         financeRoot.setVgrow(financeScrollPane,Priority.ALWAYS);
 
 
@@ -289,7 +307,6 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
 
     private synchronized void processMessage(Message m){
         if(m instanceof UpdatedLocation){
-
 
             UpdatedLocation m2 = (UpdatedLocation) m;
 
@@ -361,15 +378,12 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
             //TODO MAKE SURE to do anythign else I need
             isInEmergency = true;
         }
-        else if(m instanceof UpdatedFinanceInfo){
-            System.out.println("Received Updated Finance info in GUI");
-            UpdatedFinanceInfo m2 = (UpdatedFinanceInfo)m;
+        else if(m instanceof SaleLog){
             try {
-                financeState.put(m2);
+                financeState.put((SaleLog)m);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
         else if(m instanceof ShutDown){
             System.out.println("GUI is Shutting down");
@@ -381,26 +395,6 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         }
     }
 
-    private void buildTotalBox(ArrayList<Integer> typeTicketsSold, Double total) {
-        int childTicks = typeTicketsSold.get(TicketPrice.CHILDREN.ordinal());
-        int adultTicks = typeTicketsSold.get(TicketPrice.ADULT.ordinal());
-        int seniorTicks = typeTicketsSold.get(TicketPrice.SENIOR.ordinal());
-        Text c = new Text("Total Tokens: Child - "+ childTicks+" , ");
-        Text a = new Text("Adult - "+adultTicks+" , ");
-        Text s = new Text("Senior - "+seniorTicks);
-        DecimalFormat format = new DecimalFormat("#,###.00");
-        Text t = new Text("Total Sales: $" + format.format(total));
-        c.getStyleClass().add("Finance-Text");
-        a.getStyleClass().add("Finance-Text");
-        s.getStyleClass().add("Finance-Text");
-        t.getStyleClass().add("Finance-Text");
-        Pane spacer = new Pane();
-        //clear the box
-        totalBox.getChildren().clear();
-        //read with updated info
-        totalBox.getChildren().addAll(c,a,s, spacer,t);
-        totalBox.setHgrow(spacer,Priority.ALWAYS);
-    }
 
 
     /**
@@ -430,16 +424,82 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
 
     private void renderFinanceScreen() {
         stage.setScene(financeScene);
-        UpdatedFinanceInfo m;
-        if((m= financeState.poll())!=null){
-             buildTotalBox(m.getTypeTicketsSold(),m.getTotalBenefits());
-             buildItemizedList(m.getMonthsBenefits());
+        SaleLog m;
+        if((m = financeState.poll())!=null){
+            buildItemizedList(m);
+            buildTotalBox();
         }
     }
 
-    private void buildItemizedList(ArrayList<Double> monthsBenefits) {
+    /**
+     * when a Sale Log message comes in it will get parsed and a new row will be added to the scroll list
+     * total numbers also get incremented so the total box can be built
+     * @param loginfo
+     */
+    private void buildItemizedList(SaleLog loginfo) {
+        DecimalFormat format = new DecimalFormat("#,###.00");
+        HBox row = new HBox();
+        totalSales += loginfo.getAmount();
+        Text type = new Text();
+        //increment ticket counter and update type text
+        switch (loginfo.getTicketType()){
+            case CHILDREN:{
+                type.setText("Child");
+                childTokensSold++;
+                break;
+            }
+            case ADULT:{
+                type.setText(" Adult ");
+                adultTokensSold++;
+                break;
+            }
+            case SENIOR:{
+                type.setText("Senior");
+                seniorTokensSold++;
+                break;
+            }
+
+        }
+        type.getStyleClass().add("log-box");
+        Text date = new Text(loginfo.getPurchasedDate().toString());
+        date.getStyleClass().add("log-box");
+        Text amount = new Text("$"+format.format(loginfo.getAmount()));
+        amount.getStyleClass().add("log-box");
+
+        Pane s2 = new Pane();
+        Pane s6 = new Pane();
+        Pane s7 = new Pane();
+
+        row.getChildren().addAll(date,s2, type,s6, amount, s7);
+        row.setHgrow(s2,Priority.ALWAYS);
+        row.setHgrow(s6,Priority.ALWAYS);
+        row.setHgrow(s7,Priority.ALWAYS);
+        //row.setHgrow(amount,Priority.ALWAYS);
+        logBox.getChildren().add(row);
 
     }
+
+    /**
+     * this build the horizontal box at the bottom of the screen
+     */
+    private void buildTotalBox() {
+        Text c = new Text("Total Tokens: Child - "+ childTokensSold+" , ");
+        Text a = new Text("Adult - "+adultTokensSold+" , ");
+        Text s = new Text("Senior - "+seniorTokensSold);
+        DecimalFormat format = new DecimalFormat("#,###,###.00");
+        Text t = new Text("Total Sales: $" + format.format(totalSales));
+        c.getStyleClass().add("Finance-Text");
+        a.getStyleClass().add("Finance-Text");
+        s.getStyleClass().add("Finance-Text");
+        t.getStyleClass().add("Finance-Text");
+        Pane spacer = new Pane();
+        //clear the box
+        totalBox.getChildren().clear();
+        //read with updated info
+        totalBox.getChildren().addAll(c,a,s, spacer,t);
+        totalBox.setHgrow(spacer,Priority.ALWAYS);
+    }
+
 
     private synchronized void renderMainScreen() {
         stage.setScene(mainScene);
