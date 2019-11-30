@@ -201,31 +201,31 @@ fields are treated analogously.}
 \begin{tabularx}{\hsize}{|X|X|}
     \hline
     \rowcolor{cgcgrey}
-    \multicolumn{2}{|c|}{\textbf{\texttt{CGC}}} \\
+    \multicolumn{2}{|c|}{\textbf{CGC}} \\
     \hline
     \hline
     \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
     \hline
-    \textbf{RegisteredTokens} & number of registered tokens. \\
-    \textbf{ActiveStation} & boolean station status \\
-    \textbf{ActivePayKiosks} & number of active kiosks  \\
-    \textbf{ActiveCars} &  number of active cars\\
-    \textbf{InactiveCars} & number of inactive cars. \\
+    \texttt{messages} & number of registered tokens. \\
+    \texttt{station} & boolean station status \\
+    \texttt{kioskManager} & number of active kiosks  \\
+    \texttt{vehicleManager} &  number of active cars\\
+    \texttt{surveillanceSystem} & things \\
     \hline
     \multicolumn{2}{|c|}{\textbf{Functions}} \\
     \hline
-    \textbf{logTransaction(transaction)} & $\rightarrow$ write to finance controller. \\
-    \textbf{queryFinanceState(SQLScript)} & $\rightarrow$ query financial data. \\
-    \textbf{queryHealthState(SQLScript)} & $\rightarrow$ query health data \\
-    \textbf{getAllGPSLocations()} & $\rightarrow$ get all current GPS locations. \\
-    \textbf{registerToken(tokenID) } & $\rightarrow$ register token. \\
-    \textbf{retireToken(tokenID)} & $\rightarrow$  remove token from registered list\\
-    \textbf{relayStream(cameraID,stationID)} & $\rightarrow$ relay video stream to station\\
-    \textbf{enterEmergencyMode()} & $\rightarrow$ enter emergency mode\\
-    \textbf{enterNormalMode()} & $\rightarrow$ enter normal mode\\
-    \textbf{activateCar()} & $\rightarrow$ activate new car from parking lot\\
-    \textbf{bridgeIntercom(carID,stationID)} & $\rightarrow$ open communication link\\
-    \textbf{connectToPA(stationID)} & $\rightarrow$ connects station to island speakers\\
+    \texttt{logTransaction(transaction)} & $\rightarrow$ write to finance controller. \\
+    \texttt{queryFinanceState(SQLScript)} & $\rightarrow$ query financial data. \\
+    \texttt{queryHealthState(SQLScript)} & $\rightarrow$ query health data \\
+    \texttt{getAllGPSLocations()} & $\rightarrow$ get all current GPS locations. \\
+    \texttt{registerToken(tokenID) } & $\rightarrow$ register token. \\
+    \texttt{retireToken(tokenID)} & $\rightarrow$  remove token from registered list\\
+    \texttt{relayStream(cameraID,stationID)} & $\rightarrow$ relay video stream to station\\
+    \texttt{enterEmergencyMode()} & $\rightarrow$ enter emergency mode\\
+    \texttt{enterNormalMode()} & $\rightarrow$ enter normal mode\\
+    \texttt{activateCar()} & $\rightarrow$ activate new car from parking lot\\
+    \texttt{bridgeIntercom(carID,stationID)} & $\rightarrow$ open communication link\\
+    \texttt{connectToPA(stationID)} & $\rightarrow$ connects station to island speakers\\
     \hline
 
 \end{tabularx}
