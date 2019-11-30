@@ -2,8 +2,13 @@ package cgc.vehiclemanager;
 
 import cgc.CGC;
 import cgc.utils.Communicator;
-import cgc.utils.messages.Message;
+import cgc.utils.MapInfo;
+import cgc.utils.messages.*;
+import cgc.vehiclemanager.vehicle.PatrolVehicle;
+import cgc.vehiclemanager.vehicle.TourVehicle;
+import javafx.geometry.Point2D;
 
+import java.util.HashMap;
 import java.util.concurrent.PriorityBlockingQueue;
 
 /**
@@ -65,6 +70,10 @@ public class VehicleManager extends Thread implements Communicator {
     private CGC cgc;
     private Dispatcher dispatcher;
     private VehicleScheduler vehicleScheduler;
+    private boolean isRunning;
+    private boolean isInEmergency;
+    private HashMap<Integer, PatrolVehicle> patrolCars;
+    private HashMap<Integer, TourVehicle> tourCars;
     //TODO must make a Data structure to keep track of vehicles
     // if we only have X amount of cars it may need to keep track of the available and used cars
     // is this done with the scheduler or dispatcher?
@@ -73,21 +82,90 @@ public class VehicleManager extends Thread implements Communicator {
 
 
     public VehicleManager(CGC cgc) {
+
         this.cgc = cgc;
+        this.isInEmergency = false;
+        messages = new PriorityBlockingQueue<>();
+        isRunning = true;
+        //lets initialize some patrol cars
+        patrolCars = new HashMap<>();
+
+        this.start();
     }
 
     @Override
     public void run() {
-        //TODO should loop over and wait on the messages queue this will eliminate a busy wait.
-        // when a message is received if should call processMessage(Message) to complete appropriate action
+        //initialize here insgtead of constructor
+        for (int i = 1;i<6;i++){
+            Point2D p = new Point2D((MapInfo.MAP_WIDTH/4)*3,MapInfo.MAP_HEIGHT-MapInfo.SOUTHBUILDING_HEIGHT);
+            patrolCars.put(i,
+                    new PatrolVehicle(i, this, p));
+        }
+        while(isRunning){
+            try {
+                Message m = messages.take();
+                processMessage(m);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public void sendMessage(Message m) {
-        //TODO this should just put the message in the messages queue to be processed when it can.
+        messages.put(m);
     }
 
-    private void processMessage(Message m){
+    private synchronized void processMessage(Message m){
         //TODO use the instanceof keyword to determine what message you have and act accordingly
+        if (m instanceof ShutDown){
+            for(PatrolVehicle pv : patrolCars.values()){
+                pv.sendMessage(m);
+            }
+            //TODO Guest Vehicles
+            isRunning = false;
+        }
+        else if(m instanceof CGCRequestHealth){
+            for(PatrolVehicle pv : patrolCars.values()){
+                pv.sendMessage(m);
+            }
+            //TODO loop over  Tour Vehicles and send message
+        }
+        else if(m instanceof CGCRequestLocation){
+            for(PatrolVehicle pv : patrolCars.values()){
+                pv.sendMessage(m);
+            }
+            //TODO loop over all Tour Vehicles and send message
+        }
+        else if(m instanceof EnterEmergencyMode){
+            if(!isInEmergency) {
+                for (PatrolVehicle pv : patrolCars.values()) {
+                    pv.sendMessage(m);
+                }
+                //TODO Guest Vehicles
+                isInEmergency = true;
+            }
+
+
+        }
+        else if(m instanceof  ExitEmergencyMode){
+            if(isInEmergency) {
+                for (PatrolVehicle pv : patrolCars.values()) {
+                    pv.sendMessage(new ExitEmergencyMode());
+                }
+//                //TODO Guest Vehicles
+                isInEmergency = false;
+            }
+
+        }
+        else if(m instanceof UpdatedHealth){
+            cgc.sendMessage(m);
+        }
+        else if(m instanceof UpdatedLocation){
+            cgc.sendMessage(m);
+        }
+        else{
+            System.out.println("sorry vehicle Manager cannot process message: ");
+        }
     }
 }
