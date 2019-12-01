@@ -1,11 +1,11 @@
 package cgc.tokenmanager;
 
 import cgc.utils.Entity;
+import cgc.utils.LocationStatus;
 import cgc.utils.MapInfo;
 import cgc.utils.messages.*;
 import javafx.geometry.Point2D;
 
-import java.awt.*;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -33,37 +33,48 @@ import java.util.TimerTask;
  */
 public class EmployeeToken extends Token
 {
+    private boolean isRunning;
+    private boolean isInEmergency;
+    private boolean isWorkingNorth;
+    private LocationStatus currentArea;
+    private int counter = 0;
+    private Random rand;
+    private Point2D walkDest;
+    private boolean readyForPickup;
+
 
     public EmployeeToken(int ID, TokenManager tokenManager, Point2D GPSLocation)
     {
 
         super(ID, tokenManager);
-        this.GPSLocation = GPSLocation;
-    }
-    private boolean isRunning = true;
-    private boolean emergency = false;
-
-    //my variables
-    private Timer timer;
-
-    //Borrowed stuff
-    private enum Direction {
-        EAST, WEST, NORTH, SOUTH, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST
+        rand = new Random();
+        readyForPickup = false;
+        double x = rand.nextDouble()*MapInfo.SOUTHBUILDING_WIDTH+MapInfo.UPPER_LEFT_SOUTH_BULDING.getX();
+        double y = rand.nextDouble()*MapInfo.SOUTHBUILDING_HEIGHT+MapInfo.UPPER_LEFT_SOUTH_BULDING.getY();
+        walkDest = new Point2D(x,y);
+        isRunning = true;
+        isInEmergency = false;
+        if(ID%2==0){
+            isWorkingNorth = true;
+        }
+        else{
+            isWorkingNorth = false;
+        }
+        this.location = GPSLocation;
+        currentArea = LocationStatus.SOUTH_END;
+        this.startTokenTimer();
+        this.run();
     }
 
     @Override
-    public void sendMessage(Message m)
-    {
-        //TODO place this message in messages queue
-        tokenManager.sendMessage(m);
+    public void sendMessage(Message m) {
+        messages.put(m);
     }
 
 
     @Override
-    public void run()
-    {
-        //TODO This should loop and wait on the message queue and shut down only if shutdown is received
-        //TODO this will call processMessage(m) to respond accordingly
+    public void run() {
+
         while (isRunning)
         {
             try
@@ -81,105 +92,89 @@ public class EmployeeToken extends Token
 
 
     @Override
-    protected void startTokenTimer()
-    {
-        //TODO start token timer here and use a timer task with it.
+    protected void startTokenTimer() {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                MoveTRex move = new MoveTRex();
-                messages.put(move);
+                sendMessage(new TokenTimerTask());
             }
         };
-        // schedules after every second.
-        this.timer.schedule(task, 0, 1000);
+
+        this.timer.schedule(task, 0, 17);
     }
 
-    //=========================================================================
-    //borrowed
-    private Direction randomDirection() {
-        Direction[] dir = Direction.values();
-        Random rand = new Random();
-        // generate random number between 0-7.
-        return dir[rand.nextInt(dir.length)];
-    }
-
-    private Point2D changeCoordinates(double oldX, double oldY) {
-        Direction directionToMove = randomDirection();
-        Point2D changedPoint = null;
-
-        switch (directionToMove) {
-            case EAST:
-                changedPoint = new Point2D(oldX + 3.0, oldY);
-                break;
-            case WEST:
-                changedPoint = new Point2D(oldX - 3.0, oldY);
-                break;
-            case NORTH:
-                changedPoint = new Point2D(oldX, oldY + 3.0);
-                break;
-            case SOUTH:
-                changedPoint = new Point2D(oldX, oldY - 3.0);
-                break;
-            case NORTHEAST:
-                changedPoint = new Point2D(oldX + 3.0, oldY + 3.0);
-                break;
-            case NORTHWEST:
-                changedPoint = new Point2D(oldX - 3.0, oldY + 3.0);
-                break;
-            case SOUTHEAST:
-                changedPoint = new Point2D(oldX + 3.0, oldY - 3.0);
-                break;
-            case SOUTHWEST:
-                changedPoint = new Point2D(oldX - 3.0, oldY - 3.0);
-                break;
+    private void handleTimerTask() {
+        //first check to see if we are ready for pickup
+        if(readyForPickup){
+            //we can ignore this message and return:
+            //this was generated before we could cancel the timer;
+            return;
         }
-        return changedPoint;
-    }
+        //if the employee is working the north end but at south it should walk to the pickup location
+        else if(currentArea== LocationStatus.SOUTH_END && isWorkingNorth){
+            //but only after some time has gone by
+            Point2D sp =MapInfo.SOUTH_PICKUP_LOCATION;
+            if(counter % 3309 ==0){
+                if(walkDest!= sp){
+                    walkDest = sp;
+                }
+            }
+            //if the walk dest is the pickup location and we are close enough to it
+            //we should send tokenready message and cancel the timer
+            if(walkDest == sp){
+                //check how close we are
+                if(walkDest.getX()<sp.getX()+1 &&walkDest.getX()>sp.getX()-1 &&
+                walkDest.getY()>sp.getY()-1&&walkDest.getY()<sp.getY()+1){
+                    readyForPickup = true;
+                    
+                    timer.cancel();
+                }
+            }
+        }
+        else if(currentArea == LocationStatus.SOUTH_END){
 
-    private boolean isLegalMove(double x, double y) {
-        // creating bounds.
-        double leftX = MapInfo.UPPER_LEFT_TREX_PIT.getX();
-        double rightX = MapInfo.UPPER_RIGHT_TREX_PIT.getX();
+        }
+        else{
 
-        if (x < leftX || x > rightX || y < 0 || y > MapInfo.TREX_PIT_HEIGHT) {
-            return false;
         }
 
-        return true;
+        counter++;
     }
-    //=============================================================
+
 
     @Override
     protected synchronized void processMessage(Message m)
     {
-        //TODO process m using instanceof
-        if(m instanceof ShutDown)
-        {
+
+        if(m instanceof ShutDown) {
             isRunning = false;
         }
-        else if (m instanceof EnterEmergencyMode)
-        {
-            emergency = true;
+        else if (m instanceof EnterEmergencyMode) {
+            if(!isInEmergency){
+                isInEmergency = true;
+                //TODO here we wmay need to do more
+            }
         }
-        else if (m instanceof ExitEmergencyMode)
-        {
-            emergency = false;
+        else if (m instanceof ExitEmergencyMode) {
+            if(isInEmergency){
+                isInEmergency=false;
+            }
         }
-        else if (m instanceof CGCRequestHealth)
-        {
-            //TODO-sendMessage(new UpdatedHealth(this.getName(),this.tokenID,this.healthStatus));
-            tokenManager.sendMessage(new UpdatedHealth(Entity.EMPLOYEE_TOKEN,this.tokenID,true));
+        else if (m instanceof CGCRequestHealth) {
+            tokenManager.sendMessage(new UpdatedHealth(Entity.EMPLOYEE_TOKEN,this.tokenID,healthStatus));
+        }
+        else if(m instanceof CGCRequestLocation){
+            tokenManager.sendMessage(new UpdatedLocation(Entity.EMPLOYEE_TOKEN,this.tokenID,this.location));
         }
         //borrowed to try and get random movement going, honestly It's patchwork to get things working.
-        else if (m instanceof MoveToken)
-        {
-        Point2D pointToBeChanged = changeCoordinates(this.GPSLocation.getX(), this.GPSLocation.getY());
-        boolean isLegal = isLegalMove(pointToBeChanged.getX(), pointToBeChanged.getY());
-        if (isLegal) {
-            this.GPSLocation = pointToBeChanged;
-            tokenManager.sendMessage(new UpdatedLocation(Entity.GUEST_TOKEN, this.tokenID, this.GPSLocation));
+        else if(m instanceof TokenTimerTask){
+            handleTimerTask();
         }
-    }
+        else if (m instanceof MoveToken) {
+
+        }
+        else {
+            System.out.println("The employee Token can not handle Message: " + m);
+        }
     }
 }

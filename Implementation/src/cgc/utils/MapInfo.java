@@ -44,6 +44,7 @@ public final class MapInfo {
     public final static Point2D GUEST_SPAWN_LOCATION = new Point2D(MAP_WIDTH/2,MAP_HEIGHT);
     public final static Point2D SOUTH_PICKUP_LOCATION = new Point2D(MAP_WIDTH/2,MAP_HEIGHT-SOUTHBUILDING_HEIGHT);
     public final static Point2D NORTH_PICKUP_LOCATION = new Point2D(MAP_WIDTH/2,TREX_PIT_HEIGHT);
+    public final static Point2D ENTRANCE = new Point2D(MAP_WIDTH/2,MAP_HEIGHT);
 
     //TREX STUFF
     public final static Point2D UPPER_LEFT_TREX_PIT = new Point2D(MAP_WIDTH/4,0);
