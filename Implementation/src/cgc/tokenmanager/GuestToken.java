@@ -50,7 +50,7 @@ public class GuestToken extends Token
     public GuestToken(int ID, TokenManager tokenManager, Point2D GPSLocation)
     {
         super(ID, tokenManager);
-        this.GPSLocation = GPSLocation;
+        this.location = GPSLocation;
         this.healthStatus = true;
         this.timer = new Timer();
         startTokenTimer();

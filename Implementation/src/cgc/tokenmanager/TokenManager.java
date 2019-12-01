@@ -150,6 +150,28 @@ public class TokenManager extends Thread implements Communicator
         else if(m instanceof UpdatedHealth){
             cgc.sendMessage(m);
         }
+        else if(m instanceof UpdatedDrivingLocation){
+            //forward message to tokens that are in car:
+            UpdatedDrivingLocation m2 = (UpdatedDrivingLocation) m;
+            for(Integer id:m2.getTokenIds()){
+                if(guestTokens.get(id) != null){
+                    guestTokens.get(id).sendMessage(m);
+                }else if(employeeTokens.get(id)!=null){
+                    guestTokens.get(id).sendMessage(m);
+                }
+            }
+        }
+        else if(m instanceof TourCarArrivedAtDropOff){
+            // forward to all tokens
+            TourCarArrivedAtDropOff m2 = (TourCarArrivedAtDropOff) m;
+            for(Integer id:m2.getTokenIds()){
+                if(guestTokens.get(id) != null){
+                    guestTokens.get(id).sendMessage(m);
+                }else if(employeeTokens.get(id)!=null){
+                    guestTokens.get(id).sendMessage(m);
+                }
+            }
+        }
         else{
             System.out.println("Token Manager can not respond to message " + m);
         }
