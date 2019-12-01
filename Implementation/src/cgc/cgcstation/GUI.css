@@ -96,8 +96,9 @@
     -fx-border: #5d6264;
     -fx-background: #313335;
     -fx-padding: 5;
-
-
+}
+.scroll-pane > .corner {
+    -fx-background-color:  #313335;
 }
 .Finance-Text{
     -fx-fill: #ff9264;
