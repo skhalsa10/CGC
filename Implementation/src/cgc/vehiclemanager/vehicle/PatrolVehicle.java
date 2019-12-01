@@ -140,7 +140,7 @@ public class PatrolVehicle extends Vehicle {
             this.isInEmergency = false;
         }
         else if(m instanceof ShutDown){
-            System.out.println("Patrol vehicle " + ID + "is shutting down");
+            System.out.println("Patrol vehicle " + ID + " is shutting down");
             isRunning = false;
             timer.cancel();
         }

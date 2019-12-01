@@ -10,6 +10,7 @@ import javafx.geometry.Point2D;
 
 import java.util.HashMap;
 import java.util.concurrent.PriorityBlockingQueue;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * The Vehicle Manager will manage all aspects of all vehicles. It will also act as a communicator with the CGC
@@ -89,18 +90,16 @@ public class VehicleManager extends Thread implements Communicator {
         isRunning = true;
         //lets initialize some patrol cars
         patrolCars = new HashMap<>();
+        tourCars = new HashMap<>();
 
         this.start();
     }
 
     @Override
     public void run() {
-        //initialize here insgtead of constructor
-        for (int i = 1;i<6;i++){
-            Point2D p = new Point2D((MapInfo.MAP_WIDTH/4)*3,MapInfo.MAP_HEIGHT-MapInfo.SOUTHBUILDING_HEIGHT);
-            patrolCars.put(i,
-                    new PatrolVehicle(i, this, p));
-        }
+        //initialize here instead of constructor
+        initializePatrolCars();
+        initializeTourCars();
         while(isRunning){
             try {
                 Message m = messages.take();
@@ -111,50 +110,75 @@ public class VehicleManager extends Thread implements Communicator {
         }
     }
 
+    private void initializePatrolCars() {
+        for (int id = 1; id < 6; id++){
+            Point2D p = new Point2D((MapInfo.MAP_WIDTH/4)*3,MapInfo.MAP_HEIGHT-MapInfo.SOUTHBUILDING_HEIGHT);
+            patrolCars.put(id,
+                    new PatrolVehicle(id, this, p));
+        }
+    }
+
+    // initializing tour cars on the south end garage.
+    private void initializeTourCars() {
+        // incrementing by 2 to (inclusive) random bounds just so the random numbers dont end up at the
+        // corner of the garage box and we can't see the car.
+        ThreadLocalRandom randomBounds = ThreadLocalRandom.current();
+        double xLeftBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getX() + 2;
+        double xRightBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getX() + MapInfo.GARAGE_WIDTH;
+        double yMinBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getY() + 2;
+        double yMaxBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getY() + MapInfo.GARAGE_HEIGHT;
+
+        // creating 10 cars at random locations inside the south garage.
+        for (int id = 1; id < 11; id++) {
+            Point2D location = new Point2D(randomBounds.nextDouble(xLeftBound, xRightBound),
+                                           randomBounds.nextDouble(yMinBound, yMaxBound));
+            tourCars.put(id, new TourVehicle(id, this, location));
+        }
+    }
+
+    private void sendMessageToPatrolVehicles(Message m) {
+        for(PatrolVehicle pv : patrolCars.values()){
+            pv.sendMessage(m);
+        }
+    }
+
+    private void sendMessageToTourVehicles(Message m) {
+        for (TourVehicle tourVehicle : tourCars.values()) {
+            tourVehicle.sendMessage(m);
+        }
+    }
+
     @Override
     public void sendMessage(Message m) {
         messages.put(m);
     }
 
     private synchronized void processMessage(Message m){
-        //TODO use the instanceof keyword to determine what message you have and act accordingly
         if (m instanceof ShutDown){
-            for(PatrolVehicle pv : patrolCars.values()){
-                pv.sendMessage(m);
-            }
-            //TODO Guest Vehicles
+            sendMessageToPatrolVehicles(m);
+            sendMessageToTourVehicles(m);
             isRunning = false;
         }
         else if(m instanceof CGCRequestHealth){
-            for(PatrolVehicle pv : patrolCars.values()){
-                pv.sendMessage(m);
-            }
-            //TODO loop over  Tour Vehicles and send message
+            sendMessageToPatrolVehicles(m);
+            sendMessageToTourVehicles(m);
         }
         else if(m instanceof CGCRequestLocation){
-            for(PatrolVehicle pv : patrolCars.values()){
-                pv.sendMessage(m);
-            }
-            //TODO loop over all Tour Vehicles and send message
+            sendMessageToPatrolVehicles(m);
+            sendMessageToTourVehicles(m);
         }
         else if(m instanceof EnterEmergencyMode){
             if(!isInEmergency) {
-                for (PatrolVehicle pv : patrolCars.values()) {
-                    pv.sendMessage(m);
-                }
-                //TODO Guest Vehicles
                 isInEmergency = true;
+                sendMessageToPatrolVehicles(m);
+                sendMessageToTourVehicles(m);
             }
-
-
         }
-        else if(m instanceof  ExitEmergencyMode){
+        else if(m instanceof ExitEmergencyMode){
             if(isInEmergency) {
-                for (PatrolVehicle pv : patrolCars.values()) {
-                    pv.sendMessage(new ExitEmergencyMode());
-                }
-//                //TODO Guest Vehicles
                 isInEmergency = false;
+                sendMessageToPatrolVehicles(m);
+                sendMessageToTourVehicles(m);
             }
 
         }

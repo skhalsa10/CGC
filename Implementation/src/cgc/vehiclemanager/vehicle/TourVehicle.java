@@ -1,6 +1,7 @@
 package cgc.vehiclemanager.vehicle;
 
-import cgc.utils.messages.Message;
+import cgc.utils.Entity;
+import cgc.utils.messages.*;
 import cgc.vehiclemanager.VehicleManager;
 import javafx.geometry.Point2D;
 
@@ -34,10 +35,27 @@ import javafx.geometry.Point2D;
  */
 public class TourVehicle extends Vehicle {
 
-
+    private boolean run;
+    private boolean emergencyMode;
 
     public TourVehicle(int ID, VehicleManager vehicleManager, Point2D location) {
         super(ID, vehicleManager, location);
+        this.run = true;
+        this.emergencyMode = false;
+        startVehicleTimer();
+        this.start();
+    }
+
+    @Override
+    public void run() {
+        while (run) {
+            try {
+                Message m = this.messages.take();
+                processMessage(m);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -48,20 +66,36 @@ public class TourVehicle extends Vehicle {
 
     @Override
     public void sendMessage(Message m) {
-
-        //TODO place this message in messages queue
+        this.messages.put(m);
     }
 
-
     @Override
-    public void run() {
-        //TODO This should loop and wait on the message queue and shut down only if shutdown is received
-        //TODO this will call processMessage(m) to respond accordingly
-    }
-
-
-    @Override
-    protected void processMessage(Message m) {
-        //TODO process m using instanceof
+    protected synchronized void processMessage(Message m) {
+        if (m instanceof ShutDown) {
+            System.out.println("Tour Vehicle " + this.ID + " is shutting down.");
+            this.run = false;
+            this.timer.cancel();
+        }
+        else if(m instanceof CGCRequestHealth) {
+            Message updatedHealth = new UpdatedHealth(Entity.TOUR_VEHICLE, this.ID, this.healthStatus);
+            this.vehicleManager.sendMessage(updatedHealth);
+        }
+        else if(m instanceof CGCRequestLocation) {
+            Message updatedLocation = new UpdatedLocation(
+                    Entity.TOUR_VEHICLE, this.ID, new Point2D(this.location.getX(), this.location.getY()));
+            this.vehicleManager.sendMessage(updatedLocation);
+        }
+        else if(m instanceof EnterEmergencyMode) {
+            if (!this.emergencyMode) {
+                this.emergencyMode = true;
+                // TODO: Handle the cases in emergency mode.
+            }
+        }
+        else if(m instanceof ExitEmergencyMode) {
+            if (this.emergencyMode) {
+                this.emergencyMode = false;
+                // TODO: Handle the cases of resuming the timer and going back to normal mode.
+            }
+        }
     }
 }
