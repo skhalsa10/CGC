@@ -9,6 +9,7 @@ import cgc.vehiclemanager.vehicle.TourVehicle;
 import javafx.geometry.Point2D;
 
 import java.util.HashMap;
+import java.util.Random;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -123,7 +124,7 @@ public class VehicleManager extends Thread implements Communicator {
     private void initializeTourCars() {
         // incrementing by 2 to (inclusive) random bounds just so the random numbers dont end up at the
         // corner of the garage box and we can't see the car.
-        ThreadLocalRandom randomBounds = ThreadLocalRandom.current();
+        Random randomBounds = new Random();
         double xLeftBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getX() + 2;
         double xRightBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getX() + MapInfo.GARAGE_WIDTH;
         double yMinBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getY() + 2;
@@ -131,8 +132,8 @@ public class VehicleManager extends Thread implements Communicator {
 
         // creating 10 cars at random locations inside the south garage.
         for (int id = 1; id < 11; id++) {
-            Point2D location = new Point2D(randomBounds.nextDouble(xLeftBound, xRightBound),
-                                           randomBounds.nextDouble(yMinBound, yMaxBound));
+            Point2D location = new Point2D(xLeftBound + (xRightBound - xLeftBound) * randomBounds.nextDouble(),
+                                           yMinBound + (yMaxBound - yMinBound) * randomBounds.nextDouble());
             tourCars.put(id, new TourVehicle(id, this, location));
             // send the car info to dispatcher so it can update its list.
             Message southCarId = new SouthCarId(id);
@@ -217,6 +218,7 @@ public class VehicleManager extends Thread implements Communicator {
         }
         else if (m instanceof TourCarArrivedAtDropOff) {
             this.vehicleDispatcher.sendMessage(m);
+            cgc.sendMessage(m);
         }
         else if (m instanceof TourCarArrivedAtGarage) {
             this.vehicleDispatcher.sendMessage(m);
@@ -225,6 +227,9 @@ public class VehicleManager extends Thread implements Communicator {
             cgc.sendMessage(m);
         }
         else if(m instanceof UpdatedLocation){
+            cgc.sendMessage(m);
+        }
+        else if (m instanceof UpdatedDrivingLocation) {
             cgc.sendMessage(m);
         }
         else{
