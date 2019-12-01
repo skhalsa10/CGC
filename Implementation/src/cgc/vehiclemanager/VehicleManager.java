@@ -69,7 +69,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class VehicleManager extends Thread implements Communicator {
     private PriorityBlockingQueue<Message> messages;
     private CGC cgc;
-    private Dispatcher dispatcher;
+    private VehicleDispatcher vehicleDispatcher;
     private VehicleScheduler vehicleScheduler;
     private boolean isRunning;
     private boolean isInEmergency;
@@ -98,6 +98,7 @@ public class VehicleManager extends Thread implements Communicator {
     @Override
     public void run() {
         //initialize here instead of constructor
+        this.vehicleDispatcher = new VehicleDispatcher(this);
         initializePatrolCars();
         initializeTourCars();
         while(isRunning){
@@ -133,6 +134,9 @@ public class VehicleManager extends Thread implements Communicator {
             Point2D location = new Point2D(randomBounds.nextDouble(xLeftBound, xRightBound),
                                            randomBounds.nextDouble(yMinBound, yMaxBound));
             tourCars.put(id, new TourVehicle(id, this, location));
+            // send the car info to dispatcher so it can update its list.
+            Message southCarId = new SouthCarId(id);
+            this.vehicleDispatcher.sendMessage(southCarId);
         }
     }
 
@@ -155,6 +159,7 @@ public class VehicleManager extends Thread implements Communicator {
 
     private synchronized void processMessage(Message m){
         if (m instanceof ShutDown){
+            this.vehicleDispatcher.sendMessage(m);
             sendMessageToPatrolVehicles(m);
             sendMessageToTourVehicles(m);
             isRunning = false;
@@ -170,6 +175,7 @@ public class VehicleManager extends Thread implements Communicator {
         else if(m instanceof EnterEmergencyMode){
             if(!isInEmergency) {
                 isInEmergency = true;
+                this.vehicleDispatcher.sendMessage(m);
                 sendMessageToPatrolVehicles(m);
                 sendMessageToTourVehicles(m);
             }
@@ -177,10 +183,43 @@ public class VehicleManager extends Thread implements Communicator {
         else if(m instanceof ExitEmergencyMode){
             if(isInEmergency) {
                 isInEmergency = false;
+                this.vehicleDispatcher.sendMessage(m);
                 sendMessageToPatrolVehicles(m);
                 sendMessageToTourVehicles(m);
             }
+        }
+        else if (m instanceof TokenReadyToLeave) {
+            this.vehicleDispatcher.sendMessage(m);
+        }
+        else if (m instanceof DispatchCarToPickup) {
+            DispatchCarToPickup m2 = (DispatchCarToPickup) m;
+            TourVehicle currentCar = tourCars.get(m2.getCarId());
 
+            Message driveToPickUp = new BeginDrivingToPickup(m2.getCarLocation());
+            currentCar.sendMessage(driveToPickUp);
+        }
+        else if (m instanceof DispatchCar) {
+            DispatchCar m2 = (DispatchCar) m;
+            TourVehicle carToBeginDriving = tourCars.get(m2.getCarId());
+
+            Message driveToDropOff = new BeginDrivingToDropOff(m2.getTokensId());
+            carToBeginDriving.sendMessage(driveToDropOff);
+        }
+        else if (m instanceof DispatchCarToGarage) {
+            DispatchCarToGarage m2 = (DispatchCarToGarage) m;
+            TourVehicle carToDriveToGarage = tourCars.get(m2.getCarId());
+
+            Message driveToGarage = new BeginDrivingToGarage(m2.getGarageLocation());
+            carToDriveToGarage.sendMessage(driveToGarage);
+        }
+        else if (m instanceof TourCarArrivedAtPickup) {
+            this.vehicleDispatcher.sendMessage(m);
+        }
+        else if (m instanceof TourCarArrivedAtDropOff) {
+            this.vehicleDispatcher.sendMessage(m);
+        }
+        else if (m instanceof TourCarArrivedAtGarage) {
+            this.vehicleDispatcher.sendMessage(m);
         }
         else if(m instanceof UpdatedHealth){
             cgc.sendMessage(m);

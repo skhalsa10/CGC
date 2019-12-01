@@ -1,9 +1,12 @@
 package cgc.vehiclemanager.vehicle;
 
 import cgc.utils.Entity;
+import cgc.utils.LocationStatus;
 import cgc.utils.messages.*;
 import cgc.vehiclemanager.VehicleManager;
 import javafx.geometry.Point2D;
+
+import java.util.LinkedList;
 
 /**
  * this is a speciel extension of the Vehicle class the generates Tour related behavior.
@@ -37,11 +40,17 @@ public class TourVehicle extends Vehicle {
 
     private boolean run;
     private boolean emergencyMode;
+    private boolean isDriving;
+    private LocationStatus carEnd;
+    // keep track when driving, when it arrives, empty the queue.
+    private LinkedList<Integer> tokensInCar;
+    // Message of updatedDrivingLocation needs to be sent to tokenManager.
 
     public TourVehicle(int ID, VehicleManager vehicleManager, Point2D location) {
         super(ID, vehicleManager, location);
         this.run = true;
         this.emergencyMode = false;
+        this.isDriving = false;
         startVehicleTimer();
         this.start();
     }
@@ -96,6 +105,22 @@ public class TourVehicle extends Vehicle {
                 this.emergencyMode = false;
                 // TODO: Handle the cases of resuming the timer and going back to normal mode.
             }
+        }
+        else if (m instanceof BeginDrivingToPickup) {
+            // TODO: Check if its already driving, then ignore. Otherwise, needs to go to pickup location, changing your Point
+            // as soon as the car arrive at the pickup location, then create message TourCarArrivedAtPickup to send it
+            // to vehicle manager.
+        }
+        else if (m instanceof BeginDrivingToDropOff) {
+            // TODO: Check if its already driving, then ignore. Otherwise, needs to go to dropoff location, changing your Point
+            // as soon as the car arrive at the dropoff location, then create message TourCarArrivedAtDropOff to send it
+            // to vehicle manager.
+
+        }
+        else if (m instanceof BeginDrivingToGarage) {
+            // TODO: Check if its already driving, then ignore. Otherwise, needs to go to garage location, changing your Point
+            // as soon as the car arrive at the garage location, then create message TourCarArrivedAtGarage to send it
+            // to vehicle manager.
         }
     }
 }
