@@ -1,6 +1,7 @@
 package cgc.tokenmanager;
 
 import cgc.utils.Entity;
+import cgc.utils.LocationStatus;
 import cgc.utils.MapInfo;
 import cgc.utils.messages.*;
 import javafx.geometry.Point2D;
@@ -34,22 +35,33 @@ import java.util.TimerTask;
 public class GuestToken extends Token
 {
 
+    private  int viewingTRexTrigger;
     //TODO there may also need to be a separate timer and timer task to trigger when a guest visitor is ready to leave exhibit
-    private boolean isRunning = true;
-    private boolean emergency = false;
-
-    //my variables
-    private Timer timer;
-
-    //Borrowed stuff
-    private enum Direction {
-        EAST, WEST, NORTH, SOUTH, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST
-    }
+    private boolean isRunning;
+    private boolean isInEmergency;
+    private boolean readyToDeactivate;
+    private LocationStatus currentArea;
+    private int counter = 0;
+    private Random rand;
+    private Point2D walkDest;
+    private boolean readyForPickup;
+    private boolean isDriving;
+    private boolean doneViewingTRex;
+    private double distance;
 
 
     public GuestToken(int ID, TokenManager tokenManager, Point2D GPSLocation)
     {
         super(ID, tokenManager);
+        this.isInEmergency=false;
+        this.readyToDeactivate = false;
+        this.doneViewingTRex = false;
+        this.viewingTRexTrigger = 7200; //we will add current counter to this
+        this.currentArea = LocationStatus.SOUTH_END;
+        rand = new Random();
+        setRandomSouthDest();
+        this.readyForPickup=false;
+        this.isDriving = false;
         this.location = GPSLocation;
         this.healthStatus = true;
         this.timer = new Timer();
@@ -57,21 +69,23 @@ public class GuestToken extends Token
         start();
     }
 
+    private void setRandomSouthDest() {
+        double x = rand.nextDouble() * MapInfo.SOUTHBUILDING_WIDTH + MapInfo.UPPER_LEFT_SOUTH_BULDING.getX();
+        double y = rand.nextDouble() * MapInfo.SOUTHBUILDING_HEIGHT + MapInfo.UPPER_LEFT_SOUTH_BULDING.getY();
+        walkDest = new Point2D(x, y);
+    }
+
     @Override
     public void sendMessage(Message m)
     {
         //TODO place this message in messages queue
-        tokenManager.sendMessage(m);
+        messages.put(m);
     }
 
 
     @Override
-    public void run()
-    {
-        //TODO This should loop and wait on the message queue and shut down only if shutdown is received
-        //TODO this will call processMessage(m) to respond accordingly
-        while (isRunning)
-        {
+    public void run() {
+        while (isRunning) {
             try
             {
                 Message m = this.messages.take();
@@ -86,115 +100,197 @@ public class GuestToken extends Token
     }
 
 
-    //Totally "borrowing" code from TRexMonitor for this.
-    //I suppose I would want to have this go to the vehicles from the spawnpoint, then how do they ride in the car?
-    //For now I guess I can have them bumble around? Yup for now it will randomly move. Because it's 7 AM and I want sleep.
+
     @Override
-    protected void startTokenTimer()
-    {
-        //TODO start token timer here and use a timer task with it.
+    protected void startTokenTimer() {
         TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                MoveTRex move = new MoveTRex();
-                messages.put(move);
-            }
-        };
-        // schedules after every second.
-        this.timer.schedule(task, 0, 1000);
-    }
-
-    //=========================================================================
-    //borrowed
-    private Direction randomDirection() {
-        Direction[] dir = Direction.values();
-        Random rand = new Random();
-        // generate random number between 0-7.
-        return dir[rand.nextInt(dir.length)];
-    }
-
-    private Point2D changeCoordinates(double oldX, double oldY) {
-        Direction directionToMove = randomDirection();
-        Point2D changedPoint = null;
-
-        switch (directionToMove) {
-            case EAST:
-                changedPoint = new Point2D(oldX + 3.0, oldY);
-                break;
-            case WEST:
-                changedPoint = new Point2D(oldX - 3.0, oldY);
-                break;
-            case NORTH:
-                changedPoint = new Point2D(oldX, oldY + 3.0);
-                break;
-            case SOUTH:
-                changedPoint = new Point2D(oldX, oldY - 3.0);
-                break;
-            case NORTHEAST:
-                changedPoint = new Point2D(oldX + 3.0, oldY + 3.0);
-                break;
-            case NORTHWEST:
-                changedPoint = new Point2D(oldX - 3.0, oldY + 3.0);
-                break;
-            case SOUTHEAST:
-                changedPoint = new Point2D(oldX + 3.0, oldY - 3.0);
-                break;
-            case SOUTHWEST:
-                changedPoint = new Point2D(oldX - 3.0, oldY - 3.0);
-                break;
+        @Override
+        public void run() {
+            messages.put(new MoveToken());
         }
-        return changedPoint;
+    };
+
+        this.timer.schedule(task, 17, 17);
     }
 
-    private boolean isLegalMove(double x, double y) {
-        // creating bounds.
-        double leftX = MapInfo.UPPER_LEFT_TREX_PIT.getX();
-        double rightX = MapInfo.UPPER_RIGHT_TREX_PIT.getX();
-
-        if (x < leftX || x > rightX || y < 0 || y > MapInfo.TREX_PIT_HEIGHT) {
-            return false;
-        }
-
-        return true;
-    }
-    //=============================================================
 
 
 
     @Override
     protected synchronized void processMessage(Message m)
     {
-        //TODO process m using instanceof
-        if(m instanceof ShutDown)
-        {
+
+        if(m instanceof ShutDown) {
             isRunning = false;
         }
-        else if (m instanceof EnterEmergencyMode)
-        {
-            emergency = true;
+        else if (m instanceof EnterEmergencyMode) {
+            if(!isInEmergency){
+                isInEmergency = true;
+                //TODO here we may need to do more
+            }
         }
-        else if (m instanceof ExitEmergencyMode)
-        {
-            emergency = false;
+        else if (m instanceof ExitEmergencyMode) {
+            if(isInEmergency){
+                isInEmergency=false;
+            }
         }
         else if (m instanceof CGCRequestHealth)
         {
-            //TODO-sendMessage(new UpdatedHealth(this.getName(),this.tokenID,this.healthStatus));
-            sendMessage(new UpdatedHealth(Entity.GUEST_TOKEN,this.tokenID,true));
+
+            tokenManager.sendMessage(new UpdatedHealth(Entity.GUEST_TOKEN,this.tokenID,healthStatus));
         }
         else if(m instanceof CGCRequestLocation)
         {
-            sendMessage(new UpdatedLocation(Entity.GUEST_TOKEN,this.tokenID, this.GPSLocation));
+            tokenManager.sendMessage(new UpdatedLocation(Entity.GUEST_TOKEN,this.tokenID, this.location));
         }
         //borrowed to try and get random movement going, honestly It's patchwork to get things working.
-        else if (m instanceof MoveToken)
-        {
-            Point2D pointToBeChanged = changeCoordinates(this.GPSLocation.getX(), this.GPSLocation.getY());
-            boolean isLegal = isLegalMove(pointToBeChanged.getX(), pointToBeChanged.getY());
-            if (isLegal) {
-                this.GPSLocation = pointToBeChanged;
-                tokenManager.sendMessage(new UpdatedLocation(Entity.GUEST_TOKEN, this.tokenID, this.GPSLocation));
+        else if (m instanceof MoveToken) {
+            //ignore if driving
+            if(isDriving || readyForPickup){
+                return;
+            }
+            handleMoveToken();
+        }
+        else if(m instanceof UpdatedDrivingLocation){
+            UpdatedDrivingLocation m2 = (UpdatedDrivingLocation)m;
+            isDriving = true;
+            location = new Point2D(m2.getCurrentCarLocation().getX(),m2.getCurrentCarLocation().getY());
+            tokenManager.sendMessage(new UpdatedLocation(Entity.GUEST_TOKEN,tokenID, location));
+        }
+        else if(m instanceof TourCarArrivedAtDropOff){
+            TourCarArrivedAtDropOff m2 = (TourCarArrivedAtDropOff)m;
+            isDriving=false;
+            if(m2.getDropOffLocation()==LocationStatus.NORTH_END){
+                currentArea = LocationStatus.NORTH_END;
+                location = MapInfo.NORTH_PICKUP_LOCATION;
+                tokenManager.sendMessage(new UpdatedLocation(Entity.GUEST_TOKEN,tokenID, location));
+                setRandomNorthDest();
+                viewingTRexTrigger+=counter;
+                this.startTokenTimer();
+            }else{
+                currentArea = LocationStatus.SOUTH_END;
+                location = MapInfo.SOUTH_PICKUP_LOCATION;
+                tokenManager.sendMessage(new UpdatedLocation(Entity.GUEST_TOKEN,tokenID, location));
+                readyToDeactivate = true;
+                walkDest = MapInfo.ENTRANCE.add(0,50);
+                startTokenTimer();
             }
         }
+    }
+
+    /**
+     * when a guest arrive to the north end they will hover around the fence
+     */
+    private void setRandomNorthDest() {
+        int side = rand.nextInt(3);
+        double x;
+        double y;
+        if(side ==0){
+            x = MapInfo.UPPER_LEFT_TREX_PIT.getX()-10;
+            y = rand.nextDouble() * MapInfo.TREX_PIT_HEIGHT;
+        }else if(side ==1){
+            x= rand.nextDouble()*MapInfo.TREX_PIT_WIDTH+MapInfo.UPPER_LEFT_TREX_PIT.getX();
+            y= MapInfo.BOTTOM_RIGHT_TREX_PIT.getY()+10;
+        }else{
+            x = MapInfo.UPPER_RIGHT_TREX_PIT.getX()+10;
+            y = rand.nextDouble() * MapInfo.TREX_PIT_HEIGHT;
+        }
+        walkDest = new Point2D(x,y);
+    }
+
+    private void handleMoveToken() {
+        //if the guest is on the south side and not ready to deactivate it
+        // should explore the building before getting ready to leave to the north end
+        if(currentArea == LocationStatus.SOUTH_END&&!readyToDeactivate){
+            Point2D sp =MapInfo.SOUTH_PICKUP_LOCATION;
+            if(counter % 3309 ==0){
+                if(walkDest != sp){
+                    walkDest = sp;
+                    distance = location.distance(walkDest);
+                }
+            }
+            //if the walk dest is the pickup location and we are close enough to it
+            //we should send tokenready message and cancel the timer
+            if(walkDest == sp){
+                //check how close we are
+                if(isCloseToLoc(sp)){
+                    readyForPickup = true;
+                    tokenManager.sendMessage(new TokenReadyToLeave(this.tokenID,currentArea));
+                    timer.cancel();
+                    return;
+                }
+            }
+        }
+        //will perform similar check for if we ar eon the north end.
+        if(currentArea == LocationStatus.NORTH_END){
+            Point2D np = MapInfo.NORTH_PICKUP_LOCATION;
+            //first check to see if we are done seeing the trex
+            if(counter %viewingTRexTrigger==0){
+                if(walkDest != np){
+                    walkDest = np;
+                    distance = location.distance(walkDest);
+                }
+            }
+
+            if(isCloseToLoc(np)){
+                readyForPickup = true;
+                tokenManager.sendMessage(new TokenReadyToLeave(this.tokenID,currentArea));
+                timer.cancel();
+                return;
+            }
+
+        }
+        moveToken();
+        tokenManager.sendMessage(new UpdatedLocation(Entity.GUEST_TOKEN,tokenID, location));
+        counter++;
+    }
+
+    private void moveToken() {
+       if(currentArea==LocationStatus.SOUTH_END) {
+           location = location.add((location.getX()-walkDest.getX())/distance,(location.getY()-walkDest.getY())/distance);
+           //lets see if we can deactivate the token
+           if(isCloseToLoc(walkDest)) {
+               if (readyToDeactivate) {
+                   tokenManager.sendMessage(new DeactivateToken(this.tokenID, Entity.GUEST_TOKEN));
+                   this.timer.cancel();
+                   this.isRunning = false;
+               } else {
+                   //if we are not ready to deactivate pick a random dest
+                   setRandomSouthDest();
+                   distance = location.distance(walkDest);
+
+               }
+           }
+       }else if(currentArea==LocationStatus.NORTH_END){
+          double xinc = getNorthX();
+          double yinc = getNorthY();
+          location = location.add(xinc,yinc);
+       }else{
+            System.out.println("Error in Move token for guest");
+        }
+
+
+
+    }
+
+    private double getNorthY() {
+        double xinc = (location.getX()-walkDest.getX())/distance*3;
+        double yinc = (location.getY()-walkDest.getY())/distance;
+        if(location.getX()+xinc<MapInfo.UPPER_RIGHT_TREX_PIT.getX()&& location.getX()+xinc>MapInfo.UPPER_LEFT_TREX_PIT.getX()){
+            if(location.getY()+yinc<MapInfo.TREX_PIT_HEIGHT+10){
+                return 0;
+            }
+        }
+        return yinc;
+    }
+
+    private double getNorthX() {
+        return (location.getX()-walkDest.getX())/distance*3;
+
+    }
+
+    private boolean isCloseToLoc(Point2D np) {
+        return location.getX() < np.getX() + 1 && location.getX() > np.getX() - 1 &&
+                location.getY() > np.getY() - 1 && location.getY() < np.getY() + 1;
     }
 }

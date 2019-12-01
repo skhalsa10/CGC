@@ -50,9 +50,7 @@ public class EmployeeToken extends Token
         rand = new Random();
         readyForPickup = false;
         isDriving = false;
-        double x = rand.nextDouble()*MapInfo.SOUTHBUILDING_WIDTH+MapInfo.UPPER_LEFT_SOUTH_BULDING.getX();
-        double y = rand.nextDouble()*MapInfo.SOUTHBUILDING_HEIGHT+MapInfo.UPPER_LEFT_SOUTH_BULDING.getY();
-        walkDest = new Point2D(x,y);
+        setRandomSouthDest();
         isRunning = true;
         isInEmergency = false;
         if(ID%2==0){
@@ -97,7 +95,7 @@ public class EmployeeToken extends Token
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                messages.put(new TokenTimerTask());
+                messages.put(new MoveToken());
             }
         };
 
@@ -105,7 +103,19 @@ public class EmployeeToken extends Token
     }
 
     /**
-     * explain
+     * Here is the main Logic for the employee behavior
+     *
+     * what the goal is to do
+     *
+     * 1. the employee gets spawned at the entrance location
+     * 2. an employee will be randomly assigned to work on north or south end
+     * 3. if at south end since it is already here it will just walk around randomly
+     * 4. if the token works at north end
+     *      a it walks around for 30 seconds before making its way to the pickup location
+     *      b. it requests a pickup
+     *      c. it waits here until it can get in a car
+     *      d. it gets in the car and drives to the North end
+     * 5. once at north it it just performs a random walk
      */
     private void handleTimerTask() {
         //first check to see if we are ready for pickup
@@ -142,6 +152,9 @@ public class EmployeeToken extends Token
         counter++;
     }
 
+    /**
+     * move the token around
+     */
     private void moveToken() {
 
         double xinc;
@@ -163,9 +176,7 @@ public class EmployeeToken extends Token
             //get a new walk dest
             if(location.getX()<walkDest.getX()+1 &&location.getX()>walkDest.getX()-1 &&
                     location.getY()>walkDest.getY()-1&&location.getY()<walkDest.getY()+1) {
-                double x = rand.nextDouble()*MapInfo.SOUTHBUILDING_WIDTH+MapInfo.UPPER_LEFT_SOUTH_BULDING.getX();
-                double y = rand.nextDouble()*MapInfo.SOUTHBUILDING_HEIGHT+MapInfo.UPPER_LEFT_SOUTH_BULDING.getY();
-                walkDest = new Point2D(x,y);
+                setRandomSouthDest();
             }
 
         }
@@ -175,15 +186,22 @@ public class EmployeeToken extends Token
             //get a new walk dest
             if(location.getX()<walkDest.getX()+1 &&location.getX()>walkDest.getX()-1 &&
                     location.getY()>walkDest.getY()-1&&location.getY()<walkDest.getY()+1) {
-                double x = rand.nextDouble()*MapInfo.MAP_WIDTH;
-                double y = rand.nextDouble()*(MapInfo.UPPER_LEFT_PATROL_BOX.getY()-MapInfo.BOTTOM_RIGHT_TREX_PIT.getY())+MapInfo.BOTTOM_RIGHT_TREX_PIT.getY();
-                walkDest = new Point2D(x,y);
+                setRandomNorthDest();
             }
 
         }
     }
 
+    private void setRandomSouthDest() {
+        double x = rand.nextDouble() * MapInfo.SOUTHBUILDING_WIDTH + MapInfo.UPPER_LEFT_SOUTH_BULDING.getX();
+        double y = rand.nextDouble() * MapInfo.SOUTHBUILDING_HEIGHT + MapInfo.UPPER_LEFT_SOUTH_BULDING.getY();
+        walkDest = new Point2D(x, y);
+    }
 
+    /**
+     * process the input message accordingly
+     * @param m
+     */
     @Override
     protected synchronized void processMessage(Message m)
     {
@@ -208,8 +226,11 @@ public class EmployeeToken extends Token
         else if(m instanceof CGCRequestLocation){
             tokenManager.sendMessage(new UpdatedLocation(Entity.EMPLOYEE_TOKEN,this.tokenID,this.location));
         }
-        //Please view Documentation in TokenTimerTask
-        else if(m instanceof TokenTimerTask){
+        else if(m instanceof MoveToken){
+            //ignore if driving
+            if(isDriving){
+                return;
+            }
             handleTimerTask();
         }
         else if(m instanceof UpdatedDrivingLocation){
@@ -220,15 +241,31 @@ public class EmployeeToken extends Token
         }
         else if(m instanceof TourCarArrivedAtDropOff){
             TourCarArrivedAtDropOff m2 = (TourCarArrivedAtDropOff)m;
+            isDriving=false;
             if(m2.getDropOffLocation()==LocationStatus.NORTH_END){
                 location = MapInfo.NORTH_PICKUP_LOCATION;
+                currentArea = LocationStatus.NORTH_END;
+                tokenManager.sendMessage(new UpdatedLocation(Entity.EMPLOYEE_TOKEN,tokenID, location));
+                setRandomNorthDest();
+                this.startTokenTimer();
+            }else{
+                location = MapInfo.SOUTH_PICKUP_LOCATION;
+                currentArea = LocationStatus.SOUTH_END;
+                tokenManager.sendMessage(new UpdatedLocation(Entity.EMPLOYEE_TOKEN,tokenID, location));
+                //TODO something here
             }
-        }
-        else if (m instanceof MoveToken) {
-            //TODO ?
         }
         else {
             System.out.println("The employee Token can not handle Message: " + m);
         }
+    }
+
+    /**
+     * this should set the walkDest to a random destination allowed on the north end.
+     */
+    private void setRandomNorthDest() {
+        double x = rand.nextDouble()*MapInfo.MAP_WIDTH;
+        double y = rand.nextDouble()*(MapInfo.UPPER_LEFT_PATROL_BOX.getY()-MapInfo.BOTTOM_RIGHT_TREX_PIT.getY())+MapInfo.BOTTOM_RIGHT_TREX_PIT.getY();
+        walkDest = new Point2D(x,y);
     }
 }
