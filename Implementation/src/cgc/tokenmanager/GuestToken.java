@@ -217,7 +217,6 @@ public class GuestToken extends Token
             Point2D sp = MapInfo.SOUTH_PICKUP_LOCATION;
 
             if((counter % 3309) ==0){
-                System.out.println("SouthPickUp is "+sp+ "and the Counter is "+ counter);
                 if(walkDest != sp){
                     walkDest = sp;
                     distance = location.distance(walkDest);

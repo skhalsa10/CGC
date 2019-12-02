@@ -78,6 +78,7 @@ public class VehicleDispatcher extends Thread implements Communicator {
                     messages.put(readyToDispatch);
                     southTimer.cancel();
                 }
+                System.out.println("SouthTimer is shutting down." + run);
             }
         };
         // runs the task after each second.
@@ -102,6 +103,7 @@ public class VehicleDispatcher extends Thread implements Communicator {
                     messages.put(readyToDispatch);
                     northTimer.cancel();
                 }
+                System.out.println("NorthTimer is shutting down." + run);
             }
         };
         // runs the task after each second.
@@ -237,7 +239,6 @@ public class VehicleDispatcher extends Thread implements Communicator {
                             resetSouthDispatcherTimer();
                         }
                     }
-                    System.out.println("Dispatcher has the followign south tokens "+ southTokensIds);
                     break;
             }
         }
@@ -334,7 +335,6 @@ public class VehicleDispatcher extends Thread implements Communicator {
                         for (Integer id : this.southTokensIds) {
                             tokensToBeAssigned.add(id);
                         }
-                        System.out.println("Dispatcher is dispatching car with tokens:  "+ tokensToBeAssigned);
                         Message dispatchCar = new DispatchCar(activeSouthCar, tokensToBeAssigned);
                         this.vehicleManager.sendMessage(dispatchCar);
 
