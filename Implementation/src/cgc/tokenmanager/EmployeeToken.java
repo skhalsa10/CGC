@@ -131,19 +131,19 @@ public class EmployeeToken extends Token
             Point2D sp =MapInfo.SOUTH_PICKUP_LOCATION;
             //System.out.println("");
             if(counter % 9 ==0){
-                System.out.println("walkdest " + walkDest + " and SP IS "+sp);
+                //System.out.println("walkdest " + walkDest + " and SP IS "+sp);
                 if(walkDest != sp){
-                    System.out.println("reeadyForPickup? " + readyForPickup);
+                    //System.out.println("reeadyForPickup? " + readyForPickup);
                     walkDest = sp;
-                    System.out.println("the employee dest was set to the pickup destination");
+                    //System.out.println("the employee dest was set to the pickup destination");
                 }
             }
             //if the walk dest is the pickup location and we are close enough to it
             //we should send tokenready message and cancel the timer
             if(walkDest == sp){
                 //check how close we are
-                System.out.println("are We close to the pickup? "+ isCloseToLoc(sp));
-                System.out.println("are We close to the walkdest? "+ isCloseToLoc(walkDest));
+                //System.out.println("are We close to the pickup? "+ isCloseToLoc(sp));
+                //System.out.println("are We close to the walkdest? "+ isCloseToLoc(walkDest));
                 if(location.getX()<sp.getX()+1 &&location.getX()>sp.getX()-1 &&
                 location.getY()>sp.getY()-1&&location.getY()<sp.getY()+1){
                     readyForPickup = true;

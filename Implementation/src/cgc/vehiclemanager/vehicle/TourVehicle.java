@@ -240,7 +240,7 @@ public class TourVehicle extends Vehicle {
             // no need to change x since its straight vertical line.
             Point2D dest = MapInfo.NORTH_PICKUP_LOCATION;
 
-            location = location.add((location.getX()-dest.getX())/DISTANCE*2, (location.getY()-dest.getY())/DISTANCE*2);
+            location = location.add((dest.getX()-location.getX())/DISTANCE*2, (dest.getY()-location.getY())/DISTANCE*2);
             // check if we are close to the destination, inside a 1 pixel circle of radius, then we have arrived.
             if(dest.getX()-1<location.getX() &&
                     location.getX()<dest.getX()+1 &&
@@ -263,7 +263,7 @@ public class TourVehicle extends Vehicle {
             // the car's current location is at south garage.
             Point2D dest = MapInfo.SOUTH_PICKUP_LOCATION;
 
-            location = location.add((location.getX()-dest.getX())/DISTANCE*2, (location.getY()-dest.getY())/DISTANCE*2);
+            location = location.add((dest.getX()-location.getX())/DISTANCE*2, (dest.getY()-location.getY())/DISTANCE*2);
 
             if(dest.getX()-1<location.getX() &&
                     location.getX()<dest.getX()+1 &&
@@ -308,7 +308,7 @@ public class TourVehicle extends Vehicle {
             Point2D dest = MapInfo.NORTH_PICKUP_LOCATION;
             LinkedList<Integer> tokensInsideCar = this.tokensInCar;
 
-            location = location.add((location.getX()-dest.getX())/DISTANCE*2, (location.getY()-dest.getY())/DISTANCE*2);
+            location = location.add((dest.getX()-location.getX())/DISTANCE*2, (dest.getY()-location.getY())/DISTANCE*2);
 
             // close to north drop off location.
             if(dest.getX()-1<location.getX() &&
@@ -340,7 +340,7 @@ public class TourVehicle extends Vehicle {
             Point2D dest = MapInfo.SOUTH_PICKUP_LOCATION;
             LinkedList<Integer> tokensInsideCar = this.tokensInCar;
 
-            location = location.add((location.getX()-dest.getX())/DISTANCE*2, (location.getY()-dest.getY())/DISTANCE*2);
+            location = location.add((dest.getX()-location.getX())/DISTANCE*2, (dest.getY()-location.getY())/DISTANCE*2);
 
             // close to south drop off location.
             if(dest.getX()-1<location.getX() &&
@@ -392,7 +392,7 @@ public class TourVehicle extends Vehicle {
             // dest should be random location inside north garage, its fixed for this message triggering events.
             Point2D dest = this.randomGarageDestination;
 
-            location = location.add((location.getX()-dest.getX())/DISTANCE*2, (location.getY()-dest.getY())/DISTANCE*2);
+            location = location.add((dest.getX()-location.getX())/DISTANCE*2, (dest.getY()-location.getY())/DISTANCE*2);
 
             // close to north garage location.
             if(dest.getX()-1<location.getX() &&
@@ -417,7 +417,7 @@ public class TourVehicle extends Vehicle {
             // destination should be random location inside south garage, its fixed for this message triggering events.
             Point2D dest = this.randomGarageDestination;
 
-            location = location.add((location.getX()-dest.getX())/DISTANCE*2, (location.getY()-dest.getY())/DISTANCE*2);
+            location = location.add((dest.getX()-location.getX())/DISTANCE*2, (dest.getY()-location.getY())/DISTANCE*2);
 
             // close to south garage location.
             if(dest.getX()-1<location.getX() &&
