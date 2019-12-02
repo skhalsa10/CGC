@@ -305,15 +305,19 @@ public class VehicleDispatcher extends Thread implements Communicator {
                     if (this.northTokensIds.size() < 10) {
                         this.northTimer.cancel();
 
+                        // the car is ready to dispatch, so we need to assign tokens to the car.
                         LinkedList<Integer> tokensToBeAssigned = new LinkedList<>();
 
-                        for (int i = 0; i < northTokensIds.size(); i++) {
-                            Integer removedToken = this.northTokensIds.poll();
-                            tokensToBeAssigned.add(removedToken);
+                        // making a copy/clone of all tokens before clearing the list.
+                        for (Integer id : this.northTokensIds) {
+                            tokensToBeAssigned.add(id);
                         }
 
                         Message dispatchCar = new DispatchCar(activeNorthCar, tokensToBeAssigned);
                         this.vehicleManager.sendMessage(dispatchCar);
+
+                        // remove everything from this list as the car has all those now.
+                        northTokensIds.clear();
 
                         activeNorthCar = null;
                     }
@@ -323,15 +327,19 @@ public class VehicleDispatcher extends Thread implements Communicator {
                     if (this.southTokensIds.size() < 10) {
                         this.southTimer.cancel();
 
+                        // the car is ready to dispatch, so we need to assign tokens to the car.
                         LinkedList<Integer> tokensToBeAssigned = new LinkedList<>();
 
-                        for (int i = 0; i < southTokensIds.size(); i++) {
-                            Integer removedToken = this.southTokensIds.poll();
-                            tokensToBeAssigned.add(removedToken);
+                        // making a copy/clone of all tokens before clearing the list.
+                        for (Integer id : this.southTokensIds) {
+                            tokensToBeAssigned.add(id);
                         }
-                        System.out.println("DISPATCHER is dispatching car with TOKENS: " + tokensToBeAssigned);
+                        System.out.println("Dispatcher is dispatching car with tokens:  "+ tokensToBeAssigned);
                         Message dispatchCar = new DispatchCar(activeSouthCar, tokensToBeAssigned);
                         this.vehicleManager.sendMessage(dispatchCar);
+
+                        // remove everything from this list as the car has all those now.
+                        southTokensIds.clear();
 
                         activeSouthCar = null;
                     }
