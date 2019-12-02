@@ -409,7 +409,8 @@ public class TourVehicle extends Vehicle {
                 isDriving = false;
                 this.timer.cancel();
 
-                Message carArrivedAtDropOff = new TourCarArrivedAtGarage(this.ID,LocationStatus.SOUTH_END);
+                Message carArrivedAtDropOff = new TourCarArrivedAtGarage(this.ID,LocationStatus.NORTH_GARAGE);
+
                 vehicleManager.sendMessage(carArrivedAtDropOff);
             }
             // update driving location as the car moves to south dropoff with all the tokens in the car.

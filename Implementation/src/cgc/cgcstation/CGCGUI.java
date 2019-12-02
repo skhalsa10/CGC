@@ -390,7 +390,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         }else if (m instanceof UpdatedDrivingLocation){
             UpdatedDrivingLocation m2 = (UpdatedDrivingLocation) m;
 
-            System.out.println("the UpdatedDriving Location in GUI is " + m2.getCurrentCarLocation()+ "for car id " + m2.getCarId());
+            //System.out.println("the UpdatedDriving Location in GUI is " + m2.getCurrentCarLocation()+ "for car id " + m2.getCarId());
             System.out.println("...oh by the way the token list is " + m2.getTokenIds());
             //need to update the car location as well as all the token in the list
             tourLocations.put(m2.getCarId(),m2.getCurrentCarLocation());
