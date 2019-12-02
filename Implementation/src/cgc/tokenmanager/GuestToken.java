@@ -41,7 +41,7 @@ public class GuestToken extends Token
     private boolean isInEmergency;
     private boolean readyToDeactivate;
     private LocationStatus currentArea;
-    private int counter = 0;
+    private int counter = 1;
     private Random rand;
     private Point2D walkDest;
     private boolean readyForPickup;
@@ -54,25 +54,34 @@ public class GuestToken extends Token
     {
         super(ID, tokenManager);
         this.isInEmergency=false;
+        this.isRunning = true;
         this.readyToDeactivate = false;
         this.doneViewingTRex = false;
         this.viewingTRexTrigger = 7200; //we will add current counter to this
         this.currentArea = LocationStatus.SOUTH_END;
         rand = new Random();
-        setRandomSouthDest();
         this.readyForPickup=false;
         this.isDriving = false;
         this.location = GPSLocation;
         this.healthStatus = true;
+        setRandomSouthDest();
         this.timer = new Timer();
-        startTokenTimer();
-        start();
+        this.startTokenTimer();
+        this.start();
     }
 
     private void setRandomSouthDest() {
-        double x = rand.nextDouble() * MapInfo.SOUTHBUILDING_WIDTH + MapInfo.UPPER_LEFT_SOUTH_BULDING.getX();
-        double y = rand.nextDouble() * MapInfo.SOUTHBUILDING_HEIGHT + MapInfo.UPPER_LEFT_SOUTH_BULDING.getY();
-        walkDest = new Point2D(x, y);
+
+        double xLeftBound = MapInfo.UPPER_LEFT_SOUTH_BULDING.getX()+2;
+        double xRightBound = MapInfo.UPPER_LEFT_SOUTH_BULDING.getX() + MapInfo.SOUTHBUILDING_WIDTH;
+        double yMinBound = MapInfo.UPPER_LEFT_SOUTH_BULDING.getY() + 2;
+        double yMaxBound = MapInfo.UPPER_LEFT_SOUTH_BULDING.getY() + MapInfo.SOUTHBUILDING_HEIGHT;
+
+        walkDest =new Point2D(xLeftBound + (xRightBound - xLeftBound) * rand.nextDouble(),
+                yMinBound + (yMaxBound - yMinBound) * rand.nextDouble());
+
+        System.out.println("Walk Dest initialized to: "+ walkDest);
+        distance = location.distance(walkDest);
     }
 
     @Override
@@ -85,7 +94,9 @@ public class GuestToken extends Token
 
     @Override
     public void run() {
+        tokenManager.sendMessage(new UpdatedLocation(Entity.GUEST_TOKEN,this.tokenID,location));
         while (isRunning) {
+            //System.out.println("inside guest token run at count " + counter);
             try
             {
                 Message m = this.messages.take();
@@ -96,7 +107,7 @@ public class GuestToken extends Token
                 e.printStackTrace();
             }
         }
-        System.out.println("Guest Token #"+this.tokenID+" is shutting down.");
+        System.out.println("Guest Token #"+this.tokenID+" is shutting down. at count " + counter);
     }
 
 
@@ -201,9 +212,11 @@ public class GuestToken extends Token
     private void handleMoveToken() {
         //if the guest is on the south side and not ready to deactivate it
         // should explore the building before getting ready to leave to the north end
-        if(currentArea == LocationStatus.SOUTH_END&&!readyToDeactivate){
-            Point2D sp =MapInfo.SOUTH_PICKUP_LOCATION;
-            if(counter % 3309 ==0){
+        if(currentArea == LocationStatus.SOUTH_END&& !readyToDeactivate){
+            Point2D sp = MapInfo.SOUTH_PICKUP_LOCATION;
+
+            if((counter % 3309) ==0){
+                System.out.println("SouthPickUp is "+sp+ "and the Counter is "+ counter);
                 if(walkDest != sp){
                     walkDest = sp;
                     distance = location.distance(walkDest);
@@ -246,8 +259,12 @@ public class GuestToken extends Token
     }
 
     private void moveToken() {
+        System.out.println("moving guest token current loc: " +location + "and Walkdest" +walkDest);
        if(currentArea==LocationStatus.SOUTH_END) {
-           location = location.add((location.getX()-walkDest.getX())/distance,(location.getY()-walkDest.getY())/distance);
+           double xinc = (walkDest.getX()-location.getX())/distance;
+           double yinc = (walkDest.getY()-location.getY())/distance;
+           System.out.println("distance is "+distance + " xinc "+xinc);
+           location = location.add(xinc,yinc);
            //lets see if we can deactivate the token
            if(isCloseToLoc(walkDest)) {
                if (readyToDeactivate) {

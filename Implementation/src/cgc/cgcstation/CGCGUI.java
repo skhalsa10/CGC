@@ -106,7 +106,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
     public CGCGUI(Stage primaryStage, CGCStation cgcStation) {
 
         //initialize non GUI stuff
-        isBasicRender = false;
+        isBasicRender = true;
         trex = new Image("file:./src/resources/trex2.png", MapInfo.TREX_PIT_WIDTH/6,0,true,true);
         kiosk = new Image("file:./src/resources/kiosk1.png", 30,0,true,true);
         patrol = new Image("file:./src/resources/patrol4.png", 20,0,true,true);
@@ -142,6 +142,8 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         mainRoot.setAlignment(Pos.CENTER);
         canvasContainer = new StackPane();
         canvas = new Canvas(MapInfo.MAP_WIDTH,MapInfo.MAP_HEIGHT);
+        canvas.maxWidth(MapInfo.MAP_WIDTH);
+        canvas.maxHeight(MapInfo.MAP_HEIGHT);
         gc = canvas.getGraphicsContext2D();
 
 
@@ -339,6 +341,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
                     break;
                 }
                 case EMPLOYEE_TOKEN:{
+                    //System.out.println("employee token location registered");
                     employeeLocations.put(m2.getEntityID(), m2.getLoc());
                     break;
                 }
@@ -585,7 +588,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
             if(kioskHealth.get(i)!= null) {
                 renderHealth(kioskHealth.get(i), p.getX(), p.getY());
             }else{
-                System.out.println("cant render health for this node...");
+                //System.out.println("cant render health for this node...");
             }
         }
 
@@ -598,13 +601,14 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
 
 
         //DRAW TOUR VEHICLES
+        //System.out.println("The Tour Vehicle Location: " + tourLocations.size());
         for(Integer i:tourLocations.keySet()){
             gc.setFill(MapInfo.TOURVEHICLE);
             renderNodeAndHealth(i, tourLocations, tourHealth, Entity.TOUR_VEHICLE);
         }
 
 
-//        patrolLocations = new HashMap<>();
+//
         for(Integer i:patrolLocations.keySet()){
             gc.setFill(MapInfo.PATROLVEHICLE);
             renderNodeAndHealth(i, patrolLocations, patrolHealth, Entity.PATROL_VEHICLE);
@@ -654,7 +658,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         if(health.get(i)!= null) {
             renderHealth(health.get(i), p.getX(), p.getY());
         }else{
-            System.out.println("cant render health for this node...");
+            //System.out.println("cant render health for this node...");
         }
     }
 

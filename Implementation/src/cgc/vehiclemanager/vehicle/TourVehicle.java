@@ -65,6 +65,8 @@ public class TourVehicle extends Vehicle {
 
     @Override
     public void run() {
+        vehicleManager.sendMessage(new UpdatedLocation(Entity.TOUR_VEHICLE,this.ID,location));
+
         while (run) {
             try {
                 Message m = this.messages.take();

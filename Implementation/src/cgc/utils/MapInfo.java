@@ -35,7 +35,7 @@ public final class MapInfo {
 
     //public final static double MAP_WIDTH  = Screen.getPrimary().getBounds().getWidth()/2;
     public final static double MAP_WIDTH = 600;
-    public final static double MAP_HEIGHT = Screen.getPrimary().getBounds().getHeight()-50;
+    public final static double MAP_HEIGHT = Screen.getPrimary().getBounds().getHeight()-200;
     public final static double SOUTHBUILDING_WIDTH = MAP_WIDTH-(MAP_WIDTH/5);
     public final static double SOUTHBUILDING_HEIGHT = MAP_HEIGHT/8;
     public final static double TREX_PIT_WIDTH = MAP_WIDTH/2;

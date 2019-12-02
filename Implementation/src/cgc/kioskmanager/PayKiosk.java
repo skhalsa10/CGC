@@ -155,6 +155,7 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
         //Sends to the KioskManager that a ticket has been purchased.
         Date purchasedDate = new Date();
         Message tokenPurchased = new TokenPurchasedInfo(priceTicket, purchasedDate, location, price);
+        System.out.println("PAYKIOSK PURCHASE LOCATION: " + location);
         this.kioskManager.sendMessage(tokenPurchased);
     }
 

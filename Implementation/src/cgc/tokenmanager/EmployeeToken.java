@@ -62,7 +62,7 @@ public class EmployeeToken extends Token
         this.location = GPSLocation;
         currentArea = LocationStatus.SOUTH_END;
         this.startTokenTimer();
-        this.run();
+        this.start();
     }
 
     @Override
@@ -73,6 +73,7 @@ public class EmployeeToken extends Token
 
     @Override
     public void run() {
+        tokenManager.sendMessage(new UpdatedLocation(Entity.EMPLOYEE_TOKEN,this.tokenID,location));
 
         while (isRunning)
         {
