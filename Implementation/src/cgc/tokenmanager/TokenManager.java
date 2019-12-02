@@ -178,6 +178,9 @@ public class TokenManager extends Thread implements Communicator
             guestTokens.remove(m2.getID());
             cgc.sendMessage(m2);
         }
+        else if(m instanceof TokenReadyToLeave){
+            cgc.sendMessage(m);
+        }
         else{
             System.out.println("Token Manager can not respond to message " + m);
         }

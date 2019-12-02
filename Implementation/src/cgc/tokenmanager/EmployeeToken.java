@@ -129,15 +129,21 @@ public class EmployeeToken extends Token
         else if(currentArea== LocationStatus.SOUTH_END && isWorkingNorth){
             //but only after some time has gone by
             Point2D sp =MapInfo.SOUTH_PICKUP_LOCATION;
-            if(counter % 1809 ==0){
-                if(walkDest!= sp){
+            //System.out.println("");
+            if(counter % 9 ==0){
+                System.out.println("walkdest " + walkDest + " and SP IS "+sp);
+                if(walkDest != sp){
+                    System.out.println("reeadyForPickup? " + readyForPickup);
                     walkDest = sp;
+                    System.out.println("the employee dest was set to the pickup destination");
                 }
             }
             //if the walk dest is the pickup location and we are close enough to it
             //we should send tokenready message and cancel the timer
             if(walkDest == sp){
                 //check how close we are
+                System.out.println("are We close to the pickup? "+ isCloseToLoc(sp));
+                System.out.println("are We close to the walkdest? "+ isCloseToLoc(walkDest));
                 if(location.getX()<sp.getX()+1 &&location.getX()>sp.getX()-1 &&
                 location.getY()>sp.getY()-1&&location.getY()<sp.getY()+1){
                     readyForPickup = true;
@@ -173,13 +179,16 @@ public class EmployeeToken extends Token
         }else{
             yinc = -.1;
         }
-        location = location.add(xinc,yinc);
+
 
 
         if(currentArea == LocationStatus.SOUTH_END){
             //get a new walk dest
+            //System.out.println("are we close to walkdest after stepping? " +isCloseToLoc(walkDest));
             if(location.getX()<walkDest.getX()+1 &&location.getX()>walkDest.getX()-1 &&
                     location.getY()>walkDest.getY()-1&&location.getY()<walkDest.getY()+1) {
+                //System.out.println("we are setting the new point?");
+
                 setRandomSouthDest();
             }
 
@@ -194,6 +203,8 @@ public class EmployeeToken extends Token
             }
 
         }
+
+        location = location.add(xinc,yinc);
     }
 
     private void setRandomSouthDest() {
@@ -272,5 +283,12 @@ public class EmployeeToken extends Token
         double x = rand.nextDouble()*MapInfo.MAP_WIDTH;
         double y = rand.nextDouble()*(MapInfo.UPPER_LEFT_PATROL_BOX.getY()-MapInfo.BOTTOM_RIGHT_TREX_PIT.getY())+MapInfo.BOTTOM_RIGHT_TREX_PIT.getY();
         walkDest = new Point2D(x,y);
+    }
+
+    private boolean isCloseToLoc(Point2D p) {
+
+
+        return ((location.getX() < p.getX() + 1) && (location.getX() > p.getX() - 1) &&
+                (location.getY() > p.getY() - 1) && (location.getY() < p.getY() + 1));
     }
 }
