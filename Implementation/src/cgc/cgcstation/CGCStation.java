@@ -134,6 +134,9 @@ public class CGCStation extends Thread implements Communicator {
         else if(m instanceof SaleLog){
             cgcgui.sendMessage(m);
         }
+        else if(m instanceof UpdatedDrivingLocation){
+            cgcgui.sendMessage(m);
+        }
         else{
             System.out.println("Station cant candle message: " + m);
         }

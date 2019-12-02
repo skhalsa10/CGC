@@ -387,6 +387,20 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
                     break;
                 }
             }
+        }else if (m instanceof UpdatedDrivingLocation){
+            UpdatedDrivingLocation m2 = (UpdatedDrivingLocation) m;
+            //need to update the car location as well as all the token in the list
+            tourLocations.put(m2.getCarId(),m2.getCurrentCarLocation());
+            for(Integer tokenId:m2.getTokenIds()){
+                if(guestLocations.get(tokenId) != null){
+                    guestLocations.put(tokenId,m2.getCurrentCarLocation());
+                }else if(employeeLocations.get(tokenId)!=null){
+                    employeeLocations.put(tokenId,m2.getCurrentCarLocation());
+                }else{
+                    System.out.println("ERROR CGCGUI processing UpdatedDrivingLocation");
+                }
+            }
+
         }
         else if(m instanceof EnterEmergencyMode){
             EnterEmergencyMode m2 = (EnterEmergencyMode) m;
