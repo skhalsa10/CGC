@@ -307,7 +307,7 @@ public class TourVehicle extends Vehicle {
             }
         }
         else if (m instanceof MoveCarToNorthDropOff) {
-            System.out.println("MoveCarToNorthDropOff has been received by car " + ID);
+            //System.out.println("MoveCarToNorthDropOff has been received by car " + ID);
             // car's initial location is the South_PickUp_location when this message is called initially.
             Point2D dest = MapInfo.NORTH_PICKUP_LOCATION;
 
@@ -334,8 +334,7 @@ public class TourVehicle extends Vehicle {
                 // load of passengers (tokens) inside the car, need to remove member variable list here
                 // that's why stored inside the local list, so later i can send message with updatedDrivingLocation.
                 if (tokensInCar.size() > 0) {
-                    //TODO can this just be? tokensInCar.clear?
-                    tokensInCar.subList(0, tokensInCar.size()).clear();
+                    tokensInCar.clear();
                 }
             }
 
@@ -367,7 +366,7 @@ public class TourVehicle extends Vehicle {
                 // load of passengers (tokens) inside the car, need to remove member variable list here
                 // that's why stored inside the local list, so later i can send message with updatedDrivingLocation.
                 if (tokensInCar.size() > 0) {
-                    tokensInCar.subList(0, tokensInCar.size()).clear();
+                    tokensInCar.clear();
                 }
             }
             // update driving location as the car moves to south dropoff with all the tokens in the car.

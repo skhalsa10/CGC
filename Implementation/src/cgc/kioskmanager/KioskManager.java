@@ -116,7 +116,7 @@ public class KioskManager extends Thread implements Communicator {
 
             //Message to the GCG generate new Token
             Message generateNewToken = new RequestToken(((TokenPurchasedInfo) m).getLocation());
-            System.out.println("KIOSK MANAGER REQUEST LOCATION: "+((TokenPurchasedInfo) m).getLocation());
+            //System.out.println("KIOSK MANAGER REQUEST LOCATION: "+((TokenPurchasedInfo) m).getLocation());
             cgc.sendMessage(generateNewToken);
             // this message is needed for the GUI log
             cgc.sendMessage(new SaleLog(m2.getAmount(),m2.getPurchasedDate(),m2.getTypeTicket()));

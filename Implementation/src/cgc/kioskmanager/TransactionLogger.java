@@ -31,7 +31,7 @@ public class TransactionLogger {
     //Register the sale of a ticket.
     public void registerSale(double amount, Date purcharseDate, TicketPrice typeTicket ){
         totalBenefits+= amount;
-        System.out.println("Total register sale right now is: " + totalBenefits);
+        //System.out.println("Total register sale right now is: " + totalBenefits);
 
         //Mensual approach
         Calendar cal = Calendar.getInstance();
@@ -41,12 +41,12 @@ public class TransactionLogger {
 
         //Setting the amount in the corresponding month
         mensualBenefits.set(month, month_amount);
-        System.out.println("Month: " + (month + 1) + " benefits: " + mensualBenefits.get(month));
+        //System.out.println("Month: " + (month + 1) + " benefits: " + mensualBenefits.get(month));
 
         //Setting ticket sold type visitor
         int index = typeTicket.ordinal();
         typeTicketsSold.set(index, typeTicketsSold.get(index)+1);
-        System.out.println("Type: " + typeTicket);
+        //System.out.println("Type: " + typeTicket);
     }
 
 

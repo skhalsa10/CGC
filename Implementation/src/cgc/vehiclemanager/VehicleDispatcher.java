@@ -143,6 +143,7 @@ public class VehicleDispatcher extends Thread implements Communicator {
         else if (m instanceof TokenReadyToLeave) {
             TokenReadyToLeave m2 = (TokenReadyToLeave) m;
             LocationStatus tokenDirection = m2.getTokenEnd();
+            //System.out.println("DISPATCHER TOKENREADYTOLEAVE for ID: " + m2.getTokenId());
 
             switch (tokenDirection) {
                 case NORTH_END:
@@ -236,6 +237,7 @@ public class VehicleDispatcher extends Thread implements Communicator {
                             resetSouthDispatcherTimer();
                         }
                     }
+                    System.out.println("Dispatcher has the followign south tokens "+ southTokensIds);
                     break;
             }
         }
@@ -327,7 +329,7 @@ public class VehicleDispatcher extends Thread implements Communicator {
                             Integer removedToken = this.southTokensIds.poll();
                             tokensToBeAssigned.add(removedToken);
                         }
-
+                        System.out.println("DISPATCHER is dispatching car with TOKENS: " + tokensToBeAssigned);
                         Message dispatchCar = new DispatchCar(activeSouthCar, tokensToBeAssigned);
                         this.vehicleManager.sendMessage(dispatchCar);
 
