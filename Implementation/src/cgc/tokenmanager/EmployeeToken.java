@@ -36,7 +36,7 @@ public class EmployeeToken extends Token
     private boolean isInEmergency;
     private boolean isWorkingNorth;
     private LocationStatus currentArea;
-    private int counter = 0;
+    private int counter = 1;
     private Random rand;
     private Point2D walkDest;
     private boolean readyForPickup;
@@ -151,6 +151,9 @@ public class EmployeeToken extends Token
         moveToken();
         tokenManager.sendMessage(new UpdatedLocation(Entity.EMPLOYEE_TOKEN,tokenID, location));
         counter++;
+        if(counter ==0 ){
+            counter =1;
+        }
     }
 
     /**
@@ -209,6 +212,7 @@ public class EmployeeToken extends Token
 
         if(m instanceof ShutDown) {
             isRunning = false;
+            timer.cancel();
         }
         else if (m instanceof EnterEmergencyMode) {
             if(!isInEmergency){

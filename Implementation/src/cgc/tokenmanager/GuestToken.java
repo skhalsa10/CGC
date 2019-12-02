@@ -133,6 +133,7 @@ public class GuestToken extends Token
 
         if(m instanceof ShutDown) {
             isRunning = false;
+            timer.cancel();
         }
         else if (m instanceof EnterEmergencyMode) {
             if(!isInEmergency){
@@ -256,14 +257,17 @@ public class GuestToken extends Token
         moveToken();
         tokenManager.sendMessage(new UpdatedLocation(Entity.GUEST_TOKEN,tokenID, location));
         counter++;
+        if(counter ==0 ){
+            counter =1;
+        }
     }
 
     private void moveToken() {
-        System.out.println("moving guest token current loc: " +location + "and Walkdest" +walkDest);
+       // System.out.println("moving guest token current loc: " +location + "and Walkdest" +walkDest);
        if(currentArea==LocationStatus.SOUTH_END) {
            double xinc = (walkDest.getX()-location.getX())/distance;
            double yinc = (walkDest.getY()-location.getY())/distance;
-           System.out.println("distance is "+distance + " xinc "+xinc);
+           //System.out.println("distance is "+distance + " xinc "+xinc);
            location = location.add(xinc,yinc);
            //lets see if we can deactivate the token
            if(isCloseToLoc(walkDest)) {
