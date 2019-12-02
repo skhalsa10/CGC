@@ -80,7 +80,7 @@ public class GuestToken extends Token
         walkDest =new Point2D(xLeftBound + (xRightBound - xLeftBound) * rand.nextDouble(),
                 yMinBound + (yMaxBound - yMinBound) * rand.nextDouble());
 
-        System.out.println("Walk Dest initialized to: "+ walkDest);
+        //System.out.println("Walk Dest initialized to: "+ walkDest);
         distance = location.distance(walkDest);
     }
 

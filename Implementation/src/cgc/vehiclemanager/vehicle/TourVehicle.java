@@ -7,10 +7,7 @@ import cgc.utils.messages.*;
 import cgc.vehiclemanager.VehicleManager;
 import javafx.geometry.Point2D;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Random;
-import java.util.TimerTask;
+import java.util.*;
 
 /**
  * this is a speciel extension of the Vehicle class the generates Tour related behavior.
@@ -84,6 +81,7 @@ public class TourVehicle extends Vehicle {
     }
 
     private void startDrivingToNorthPickupTimer() {
+        timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -96,6 +94,7 @@ public class TourVehicle extends Vehicle {
     }
 
     private void startDrivingToSouthPickupTimer() {
+        timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -108,6 +107,7 @@ public class TourVehicle extends Vehicle {
     }
 
     private void startDrivingToNorthDropOffTimer() {
+        timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -120,6 +120,7 @@ public class TourVehicle extends Vehicle {
     }
 
     private void startDrivingToSouthDropOffTimer() {
+        timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -132,6 +133,7 @@ public class TourVehicle extends Vehicle {
     }
 
     private void startDrivingToNorthGarageTimer() {
+        timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -144,6 +146,7 @@ public class TourVehicle extends Vehicle {
     }
 
     private void startDrivingToSouthGarageTimer() {
+        timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -292,18 +295,19 @@ public class TourVehicle extends Vehicle {
                 case NORTH_PICKUP:
                     if (!isDriving) {
                         isDriving = true;
-                        startDrivingToNorthDropOffTimer();
+                        startDrivingToSouthDropOffTimer();
                     }
                     break;
                 case SOUTH_PICKUP:
                     if (!isDriving) {
                         isDriving = true;
-                        startDrivingToSouthDropOffTimer();
+                        startDrivingToNorthDropOffTimer();
                     }
                     break;
             }
         }
         else if (m instanceof MoveCarToNorthDropOff) {
+            System.out.println("MoveCarToNorthDropOff has been received by car " + ID);
             // car's initial location is the South_PickUp_location when this message is called initially.
             Point2D dest = MapInfo.NORTH_PICKUP_LOCATION;
             LinkedList<Integer> tokensInsideCar = this.tokensInCar;

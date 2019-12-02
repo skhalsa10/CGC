@@ -133,10 +133,11 @@ public class TokenManager extends Thread implements Communicator
 
         }
         else if (m instanceof RequestToken) {
-            RequestToken m2 = (RequestToken) m;
-            GuestToken tmp = new GuestToken(tokenID, this, m2.getLocation());
-            guestTokens.put(tokenID,tmp);
-            tokenID++;
+
+//            RequestToken m2 = (RequestToken) m;
+//            GuestToken tmp = new GuestToken(tokenID, this, m2.getLocation());
+//            guestTokens.put(tokenID,tmp);
+//            tokenID++;
         }
         else if (m instanceof CGCRequestLocation) {
             forwardMessageToAll(m);
