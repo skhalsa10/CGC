@@ -16,7 +16,15 @@ public class TourCarArrivedAtDropOff implements Message {
     public TourCarArrivedAtDropOff(int carId, LocationStatus dropOffLocation, LinkedList<Integer> tokensId) {
         this.carId = carId;
         this.dropOffLocation = dropOffLocation;
-        this.tokensId = tokensId;
+        this.tokensId = cloneList(tokensId);
+    }
+
+    private LinkedList<Integer> cloneList(LinkedList<Integer> tokensId) {
+        LinkedList<Integer> temp = new LinkedList<>();
+        for(Integer id:tokensId){
+            temp.add(id);
+        }
+        return temp;
     }
 
     public int getCarId() {

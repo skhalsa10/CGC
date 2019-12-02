@@ -217,6 +217,7 @@ public class VehicleManager extends Thread implements Communicator {
             this.vehicleDispatcher.sendMessage(m);
         }
         else if (m instanceof TourCarArrivedAtDropOff) {
+            System.out.println("Vehicle Manager processed TourCarArrivedAtDropOff and it has I");
             this.vehicleDispatcher.sendMessage(m);
             cgc.sendMessage(m);
         }

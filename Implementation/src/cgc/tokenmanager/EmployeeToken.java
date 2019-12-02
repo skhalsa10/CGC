@@ -7,6 +7,7 @@ import cgc.utils.messages.*;
 import javafx.geometry.Point2D;
 
 import java.util.Random;
+import java.util.Timer;
 import java.util.TimerTask;
 
 /**
@@ -93,6 +94,7 @@ public class EmployeeToken extends Token
 
     @Override
     protected void startTokenTimer() {
+        timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -256,13 +258,16 @@ public class EmployeeToken extends Token
             tokenManager.sendMessage(new UpdatedLocation(Entity.EMPLOYEE_TOKEN,tokenID, location));
         }
         else if(m instanceof TourCarArrivedAtDropOff){
+            System.out.println("employee Token" + tokenID +"received TourCarArrivedAtDropOff");
             TourCarArrivedAtDropOff m2 = (TourCarArrivedAtDropOff)m;
             isDriving=false;
+            readyForPickup=false;
             if(m2.getDropOffLocation()==LocationStatus.NORTH_END){
                 location = MapInfo.NORTH_PICKUP_LOCATION;
                 currentArea = LocationStatus.NORTH_END;
                 tokenManager.sendMessage(new UpdatedLocation(Entity.EMPLOYEE_TOKEN,tokenID, location));
                 setRandomNorthDest();
+                System.out.println("new north destination is: " + walkDest);
                 this.startTokenTimer();
             }else{
                 location = MapInfo.SOUTH_PICKUP_LOCATION;

@@ -391,7 +391,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
             UpdatedDrivingLocation m2 = (UpdatedDrivingLocation) m;
 
             //System.out.println("the UpdatedDriving Location in GUI is " + m2.getCurrentCarLocation()+ "for car id " + m2.getCarId());
-            System.out.println("...oh by the way the token list is " + m2.getTokenIds());
+            //System.out.println("...oh by the way the token list is " + m2.getTokenIds());
             //need to update the car location as well as all the token in the list
             tourLocations.put(m2.getCarId(),m2.getCurrentCarLocation());
 
@@ -545,7 +545,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         gc.setStroke(MapInfo.ROADCOLOR);
         gc.setLineWidth(16);
         gc.strokeLine(MapInfo.ROAD_SOUTH.getX(), MapInfo.ROAD_SOUTH.getY(), MapInfo.ROAD_NORTH.getX(), MapInfo.ROAD_NORTH.getY());
-        gc.setStroke(Color.BLACK);
+        gc.setStroke(Color.WHITE);
         gc.setLineWidth(2);
         gc.strokeLine(MapInfo.ROAD_SOUTH.getX(), MapInfo.ROAD_SOUTH.getY(), MapInfo.ROAD_NORTH.getX(), MapInfo.ROAD_NORTH.getY());
 
@@ -573,6 +573,12 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         gc.fillRect(MapInfo.UPPER_LEFT_SOUTH_BULDING.getX(), MapInfo.UPPER_LEFT_SOUTH_BULDING.getY(),MapInfo.SOUTHBUILDING_WIDTH, MapInfo.SOUTHBUILDING_HEIGHT);
         gc.strokeRect(MapInfo.UPPER_LEFT_SOUTH_BULDING.getX(), MapInfo.UPPER_LEFT_SOUTH_BULDING.getY(),MapInfo.SOUTHBUILDING_WIDTH, MapInfo.SOUTHBUILDING_HEIGHT);
 
+        //draw both Garages
+        gc.setFill(MapInfo.GARAGEFILL);
+        //here we do south
+        gc.fillRect(MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getX(),MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getY(), MapInfo.GARAGE_WIDTH,MapInfo.GARAGE_HEIGHT);
+        //here we do north
+        gc.fillRect(MapInfo.UPPER_LEFT_TOURVEHICLE_NORTH_GARAGE.getX(),MapInfo.UPPER_LEFT_TOURVEHICLE_NORTH_GARAGE.getY(), MapInfo.GARAGE_WIDTH,MapInfo.GARAGE_HEIGHT);
 
         //DRAW TREX
         gc.setFill(MapInfo.TREX);

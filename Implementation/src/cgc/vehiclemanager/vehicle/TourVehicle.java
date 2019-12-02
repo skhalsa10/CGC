@@ -310,7 +310,9 @@ public class TourVehicle extends Vehicle {
             System.out.println("MoveCarToNorthDropOff has been received by car " + ID);
             // car's initial location is the South_PickUp_location when this message is called initially.
             Point2D dest = MapInfo.NORTH_PICKUP_LOCATION;
+
             LinkedList<Integer> tokensInsideCar = this.tokensInCar;
+
 
             location = location.add((dest.getX()-location.getX())/DISTANCE*2, (dest.getY()-location.getY())/DISTANCE*2);
 
@@ -325,12 +327,14 @@ public class TourVehicle extends Vehicle {
                 isDriving = false;
                 this.timer.cancel();
 
+                System.out.println("ABout to generate the TourCarArrivedAtDropOff with list of ids: " + tokensInsideCar);
                 Message carArrivedAtDropOff = new TourCarArrivedAtDropOff(this.ID,LocationStatus.NORTH_END, tokensInsideCar);
                 vehicleManager.sendMessage(carArrivedAtDropOff);
 
                 // load of passengers (tokens) inside the car, need to remove member variable list here
                 // that's why stored inside the local list, so later i can send message with updatedDrivingLocation.
                 if (tokensInCar.size() > 0) {
+                    //TODO can this just be? tokensInCar.clear?
                     tokensInCar.subList(0, tokensInCar.size()).clear();
                 }
             }
