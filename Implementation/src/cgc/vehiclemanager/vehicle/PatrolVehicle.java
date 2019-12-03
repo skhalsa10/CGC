@@ -49,10 +49,12 @@ public class PatrolVehicle extends Vehicle {
     private boolean isRunning = true;
     private double distance;
     private boolean isInEmergency = false;
+    private Timer timer;
 
 
     public PatrolVehicle(int ID, VehicleManager vehicleManager, Point2D location) {
         super(ID, vehicleManager, location);
+        this.timer = new Timer();
         rand = ThreadLocalRandom.current();
         dest = new Point2D(rand.nextDouble(0,MapInfo.MAP_WIDTH),
                 rand.nextDouble(MapInfo.UPPER_LEFT_PATROL_BOX.getY(),MapInfo.BOTTOM_RIGHT_PATROL_BOX.getY()));
@@ -74,13 +76,6 @@ public class PatrolVehicle extends Vehicle {
         };
         // schedules after every second.
         this.timer.schedule(task, 0, 17);
-    }
-
-
-    private void restartTimer() {
-        //this.timer.cancel();
-        this.timer = new Timer();
-        startVehicleTimer();
     }
 
     @Override

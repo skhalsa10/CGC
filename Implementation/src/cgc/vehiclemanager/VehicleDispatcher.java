@@ -41,8 +41,6 @@ public class VehicleDispatcher extends Thread implements Communicator {
         this.activeSouthCar = null;
         this.activeNorthCarAtPickup = false;
         this.activeSouthCarAtPickup = false;
-        this.southTimer = new Timer();
-        this.northTimer = new Timer();
 
         this.start();
     }
@@ -70,25 +68,24 @@ public class VehicleDispatcher extends Thread implements Communicator {
         // are less than 10, then this method is called and it
         // waits 60 seconds before dispatching a car.
         TimerTask task = new TimerTask() {
-            long countDown = 60;
             @Override
             public void run() {
-                countDown--;
-                if (countDown < 0) {
-                    Message readyToDispatch = new ReadyToDispatch(LocationStatus.SOUTH_PICKUP);
-                    messages.put(readyToDispatch);
-                    southTimer.cancel();
-                }
+                Message readyToDispatch = new ReadyToDispatch(LocationStatus.SOUTH_PICKUP);
+                messages.put(readyToDispatch);
+                southTimer.cancel();
+
                 System.out.println("SouthTimer is shutting down." + run);
+                System.out.println("Running [" +
+                        Thread.currentThread().getClass().getName() + "].");
             }
         };
-        // runs the task after each second.
-        this.southTimer.schedule(task, 0, 1000);
+        // runs after a min, counting down for 1 min.
+        this.southTimer.schedule(task, 60000, 60000);
     }
 
     private void resetSouthDispatcherTimer() {
         this.southTimer.cancel();
-        this.southTimer = new Timer();
+        //this.southTimer = new Timer();
         startSouthDispatcherTimer();
     }
 
@@ -96,25 +93,20 @@ public class VehicleDispatcher extends Thread implements Communicator {
         northTimer = new Timer();
         // waits 60 seconds before dispatching a car.
         TimerTask task = new TimerTask() {
-            long countDown = 60;
             @Override
             public void run() {
-                countDown--;
-                if (countDown < 0) {
-                    Message readyToDispatch = new ReadyToDispatch(LocationStatus.NORTH_PICKUP);
-                    messages.put(readyToDispatch);
-                    northTimer.cancel();
-                }
+                Message readyToDispatch = new ReadyToDispatch(LocationStatus.NORTH_PICKUP);
+                messages.put(readyToDispatch);
+                northTimer.cancel();
                 System.out.println("NorthTimer is shutting down." + run);
             }
         };
-        // runs the task after each second.
-        this.northTimer.schedule(task, 0, 1000);
+        this.northTimer.schedule(task, 60000, 60000);
     }
 
     private void resetNorthDispatcherTimer() {
         this.northTimer.cancel();
-        this.northTimer = new Timer();
+        //this.northTimer = new Timer();
         startNorthDispatcherTimer();
     }
 
@@ -122,8 +114,17 @@ public class VehicleDispatcher extends Thread implements Communicator {
         if (m instanceof ShutDown) {
             System.out.println("Dispatcher is shutting down.");
             this.run = false;
-            this.southTimer.cancel();
-            this.northTimer.cancel();
+            try {
+                this.southTimer.cancel();
+            } catch (NullPointerException e) {
+                System.out.println("No need to cancel timer, already cancelled.");
+            }
+            try {
+                this.northTimer.cancel();
+            } catch (NullPointerException e) {
+                System.out.println("No need to cancel timer, already cancelled.");
+            }
+
         }
         else if(m instanceof EnterEmergencyMode) {
             if(!this.emergencyMode) {
@@ -266,6 +267,17 @@ public class VehicleDispatcher extends Thread implements Communicator {
                         this.vehicleManager.sendMessage(dispatchCar);
 
                         activeNorthCar = null;
+
+                        // if the car reaches at the pickup and
+                        // there are so many tokens waiting, then we want to dispatch another car.
+                        if (northTokensIds.size() > 0) {
+                            Integer northCarId = this.northCarsIds.poll();
+                            if (northCarId != null) {
+                                activeNorthCar = northCarId;
+                                Message dispatchAnotherCar = new DispatchCarToPickup(activeNorthCar, LocationStatus.NORTH_PICKUP);
+                                this.vehicleManager.sendMessage(dispatchAnotherCar);
+                            }
+                        }
                     }
                     else {
                         activeNorthCarAtPickup = true;
@@ -289,6 +301,17 @@ public class VehicleDispatcher extends Thread implements Communicator {
                         this.vehicleManager.sendMessage(dispatchCar);
 
                         activeSouthCar = null;
+
+                        // if the car reaches at the pickup and
+                        // there are so many tokens waiting, then we want to dispatch another car.
+                        if (southTokensIds.size() > 0) {
+                            Integer southCarId = this.southCarsIds.poll();
+                            if (southCarId != null) {
+                                activeSouthCar = southCarId;
+                                Message dispatchAnotherCar = new DispatchCarToPickup(activeSouthCar, LocationStatus.SOUTH_PICKUP);
+                                this.vehicleManager.sendMessage(dispatchAnotherCar);
+                            }
+                        }
                     }
                     else {
                         activeSouthCarAtPickup = true;

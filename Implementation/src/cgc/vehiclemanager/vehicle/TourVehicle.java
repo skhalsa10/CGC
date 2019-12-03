@@ -47,6 +47,7 @@ public class TourVehicle extends Vehicle {
     // keep track when driving, when it arrives, empty the queue.
     private LinkedList<Integer> tokensInCar;
     private Point2D randomGarageDestination;
+    private Timer timer;
 
     public TourVehicle(int ID, VehicleManager vehicleManager, Point2D location) {
         super(ID, vehicleManager, location);
@@ -196,7 +197,11 @@ public class TourVehicle extends Vehicle {
         if (m instanceof ShutDown) {
             System.out.println("Tour Vehicle " + this.ID + " is shutting down.");
             this.run = false;
-            this.timer.cancel();
+            try {
+                this.timer.cancel();
+            } catch (NullPointerException e) {
+                System.out.println("No need to cancel timer, already cancelled.");
+            }
         }
         else if(m instanceof CGCRequestHealth) {
             Message updatedHealth = new UpdatedHealth(Entity.TOUR_VEHICLE, this.ID, this.healthStatus);
