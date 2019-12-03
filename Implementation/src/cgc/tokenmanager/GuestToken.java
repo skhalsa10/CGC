@@ -114,6 +114,7 @@ public class GuestToken extends Token
 
     @Override
     protected void startTokenTimer() {
+        timer = new Timer();
         TimerTask task = new TimerTask() {
         @Override
         public void run() {
@@ -146,16 +147,12 @@ public class GuestToken extends Token
                 isInEmergency=false;
             }
         }
-        else if (m instanceof CGCRequestHealth)
-        {
-
+        else if (m instanceof CGCRequestHealth) {
             tokenManager.sendMessage(new UpdatedHealth(Entity.GUEST_TOKEN,this.tokenID,healthStatus));
         }
-        else if(m instanceof CGCRequestLocation)
-        {
+        else if(m instanceof CGCRequestLocation) {
             tokenManager.sendMessage(new UpdatedLocation(Entity.GUEST_TOKEN,this.tokenID, this.location));
         }
-        //borrowed to try and get random movement going, honestly It's patchwork to get things working.
         else if (m instanceof MoveToken) {
             //ignore if driving
             if(isDriving || readyForPickup){
@@ -172,12 +169,16 @@ public class GuestToken extends Token
         else if(m instanceof TourCarArrivedAtDropOff){
             TourCarArrivedAtDropOff m2 = (TourCarArrivedAtDropOff)m;
             isDriving=false;
+            readyForPickup = false;
             if(m2.getDropOffLocation()==LocationStatus.NORTH_END){
                 currentArea = LocationStatus.NORTH_END;
                 location = MapInfo.NORTH_PICKUP_LOCATION;
                 tokenManager.sendMessage(new UpdatedLocation(Entity.GUEST_TOKEN,tokenID, location));
                 setRandomNorthDest();
+                System.out.println("WalkingDest is on north for guest : "+ walkDest);
                 viewingTRexTrigger+=counter;
+                //viewingTRexTrigger--;
+                System.out.println("trex trigger is " + viewingTRexTrigger);
                 this.startTokenTimer();
             }else{
                 currentArea = LocationStatus.SOUTH_END;
@@ -215,8 +216,8 @@ public class GuestToken extends Token
         // should explore the building before getting ready to leave to the north end
         if(currentArea == LocationStatus.SOUTH_END&& !readyToDeactivate){
             Point2D sp = MapInfo.SOUTH_PICKUP_LOCATION;
-
-            if((counter % 3309) ==0){
+            //TODO set this to 3309
+            if((counter % 9) ==0){
                 if(walkDest != sp){
                     walkDest = sp;
                     distance = location.distance(walkDest);
@@ -238,16 +239,15 @@ public class GuestToken extends Token
         if(currentArea == LocationStatus.NORTH_END){
             Point2D np = MapInfo.NORTH_PICKUP_LOCATION;
             //first check to see if we are done seeing the trex
-            if(counter %viewingTRexTrigger==0){
-                if(walkDest != np){
+            if(counter %viewingTRexTrigger==0) {
+                if (walkDest != np) {
                     walkDest = np;
                     distance = location.distance(walkDest);
                 }
             }
-
-            if(isCloseToLoc(np)){
+            if (isCloseToLoc(np)&&walkDest==np) {
                 readyForPickup = true;
-                tokenManager.sendMessage(new TokenReadyToLeave(this.tokenID,currentArea));
+                tokenManager.sendMessage(new TokenReadyToLeave(this.tokenID, currentArea));
                 timer.cancel();
                 return;
             }
@@ -267,7 +267,6 @@ public class GuestToken extends Token
            double xinc = (walkDest.getX()-location.getX())/distance;
            double yinc = (walkDest.getY()-location.getY())/distance;
            //System.out.println("distance is "+distance + " xinc "+xinc);
-           location = location.add(xinc,yinc);
            //lets see if we can deactivate the token
            if(isCloseToLoc(walkDest)) {
                if (readyToDeactivate) {
@@ -281,21 +280,38 @@ public class GuestToken extends Token
 
                }
            }
+           // we must move after all checks are performed to eliminate bug where token gets stuck at pickup location
+           location = location.add(xinc,yinc);
        }else if(currentArea==LocationStatus.NORTH_END){
-          double xinc = getNorthX();
-          double yinc = getNorthY();
-          location = location.add(xinc,yinc);
+//          double xinc = getNorthX();
+//          double yinc = getNorthY();
+           Point2D pinc = genPointInc();
+          location = location.add(pinc.getX(),pinc.getY());
        }else{
             System.out.println("Error in Move token for guest");
         }
 
 
+    }
 
+    private Point2D genPointInc() {
+        double xinc;
+        double yinc;
+        if(walkDest == MapInfo.NORTH_PICKUP_LOCATION){
+            yinc = (walkDest.getY()-location.getY())/distance;
+            xinc = getNorthX();
+
+        }else{
+            xinc = (walkDest.getX()-location.getX())/distance*3;
+            yinc = getNorthY();
+        }
+
+        return new Point2D(xinc,yinc);
     }
 
     private double getNorthY() {
-        double xinc = (location.getX()-walkDest.getX())/distance*3;
-        double yinc = (location.getY()-walkDest.getY())/distance;
+        double xinc = (walkDest.getX()-location.getX())/distance*3;
+        double yinc = (walkDest.getY()-location.getY())/distance;
         if(location.getX()+xinc<MapInfo.UPPER_RIGHT_TREX_PIT.getX()&& location.getX()+xinc>MapInfo.UPPER_LEFT_TREX_PIT.getX()){
             if(location.getY()+yinc<MapInfo.TREX_PIT_HEIGHT+10){
                 return 0;
@@ -305,8 +321,15 @@ public class GuestToken extends Token
     }
 
     private double getNorthX() {
-        return (location.getX()-walkDest.getX())/distance*3;
-
+        double xinc =(walkDest.getX()-location.getX())/distance*3;
+        double yinc = (walkDest.getY()-location.getY())/distance;
+        if(location.getY()+yinc<MapInfo.TREX_PIT_HEIGHT){
+            if(location.getX()+xinc<MapInfo.UPPER_RIGHT_TREX_PIT.getX()+5&&
+                    location.getX()+xinc>MapInfo.UPPER_LEFT_TREX_PIT.getX()-5){
+                return 0;
+            }
+        }
+        return xinc;
     }
 
     private boolean isCloseToLoc(Point2D np) {

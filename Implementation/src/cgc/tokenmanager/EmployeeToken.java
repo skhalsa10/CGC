@@ -43,9 +43,15 @@ public class EmployeeToken extends Token
     private boolean readyForPickup;
     private boolean isDriving;
 
-
-    public EmployeeToken(int ID, TokenManager tokenManager, Point2D GPSLocation)
-    {
+    /**
+     * this is the constructor for the Employee token. the employee should spawn at the south entrance
+     * it has a unique token ID and a reference to its generator the tokenManager.
+     * This implements Maintainable and Locatable so it can report its health and location
+     * @param ID
+     * @param tokenManager
+     * @param GPSLocation
+     */
+    public EmployeeToken(int ID, TokenManager tokenManager, Point2D GPSLocation) {
 
         super(ID, tokenManager);
         rand = new Random();
@@ -131,23 +137,19 @@ public class EmployeeToken extends Token
         else if(currentArea== LocationStatus.SOUTH_END && isWorkingNorth){
             //but only after some time has gone by
             Point2D sp =MapInfo.SOUTH_PICKUP_LOCATION;
-            //System.out.println("");
+            //TODO set this to 1806
             if(counter % 9 ==0){
-                //System.out.println("walkdest " + walkDest + " and SP IS "+sp);
                 if(walkDest != sp){
-                    //System.out.println("reeadyForPickup? " + readyForPickup);
                     walkDest = sp;
-                    //System.out.println("the employee dest was set to the pickup destination");
                 }
             }
             //if the walk dest is the pickup location and we are close enough to it
             //we should send tokenready message and cancel the timer
             if(walkDest == sp){
                 //check how close we are
-                //System.out.println("are We close to the pickup? "+ isCloseToLoc(sp));
-                //System.out.println("are We close to the walkdest? "+ isCloseToLoc(walkDest));
-                if(location.getX()<sp.getX()+1 &&location.getX()>sp.getX()-1 &&
-                location.getY()>sp.getY()-1&&location.getY()<sp.getY()+1){
+//                if(location.getX()<sp.getX()+1 &&location.getX()>sp.getX()-1 &&
+//                location.getY()>sp.getY()-1&&location.getY()<sp.getY()+1)
+                if(isCloseToLoc(sp)){
                     readyForPickup = true;
                     tokenManager.sendMessage(new TokenReadyToLeave(this.tokenID,currentArea));
                     timer.cancel();
@@ -258,7 +260,7 @@ public class EmployeeToken extends Token
             tokenManager.sendMessage(new UpdatedLocation(Entity.EMPLOYEE_TOKEN,tokenID, location));
         }
         else if(m instanceof TourCarArrivedAtDropOff){
-            System.out.println("employee Token" + tokenID +"received TourCarArrivedAtDropOff");
+            //System.out.println("employee Token" + tokenID +"received TourCarArrivedAtDropOff");
             TourCarArrivedAtDropOff m2 = (TourCarArrivedAtDropOff)m;
             isDriving=false;
             readyForPickup=false;
@@ -267,7 +269,7 @@ public class EmployeeToken extends Token
                 currentArea = LocationStatus.NORTH_END;
                 tokenManager.sendMessage(new UpdatedLocation(Entity.EMPLOYEE_TOKEN,tokenID, location));
                 setRandomNorthDest();
-                System.out.println("new north destination is: " + walkDest);
+                //System.out.println("new north destination is: " + walkDest);
                 this.startTokenTimer();
             }else{
                 location = MapInfo.SOUTH_PICKUP_LOCATION;

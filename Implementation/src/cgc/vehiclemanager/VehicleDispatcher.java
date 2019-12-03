@@ -65,6 +65,7 @@ public class VehicleDispatcher extends Thread implements Communicator {
     }
 
     private void startSouthDispatcherTimer() {
+        southTimer = new Timer();
         // when tour car arrives at pickup location and the tokens on pickup location
         // are less than 10, then this method is called and it
         // waits 60 seconds before dispatching a car.
@@ -92,6 +93,7 @@ public class VehicleDispatcher extends Thread implements Communicator {
     }
 
     private void startNorthDispatcherTimer() {
+        northTimer = new Timer();
         // waits 60 seconds before dispatching a car.
         TimerTask task = new TimerTask() {
             long countDown = 60;
