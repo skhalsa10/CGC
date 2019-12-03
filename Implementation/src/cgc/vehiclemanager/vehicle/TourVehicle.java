@@ -314,38 +314,44 @@ public class TourVehicle extends Vehicle {
         else if (m instanceof MoveCarToNorthDropOff) {
             //System.out.println("MoveCarToNorthDropOff has been received by car " + ID);
             // car's initial location is the South_PickUp_location when this message is called initially.
-            Point2D dest = MapInfo.NORTH_PICKUP_LOCATION;
+            if (!emergencyMode) {
+                Point2D dest = MapInfo.NORTH_PICKUP_LOCATION;
 
-            LinkedList<Integer> tokensInsideCar = this.tokensInCar;
+                LinkedList<Integer> tokensInsideCar = this.tokensInCar;
 
 
-            location = location.add((dest.getX()-location.getX())/DISTANCE*2, (dest.getY()-location.getY())/DISTANCE*2);
+                location = location.add((dest.getX() - location.getX()) / DISTANCE * 2, (dest.getY() - location.getY()) / DISTANCE * 2);
 
-            // close to north drop off location.
-            if(dest.getX()-1<location.getX() &&
-                    location.getX()<dest.getX()+1 &&
-                    dest.getY()-1<location.getY() &&
-                    location.getY()<dest.getY()+1) {
+                // close to north drop off location.
+                if (dest.getX() - 1 < location.getX() &&
+                        location.getX() < dest.getX() + 1 &&
+                        dest.getY() - 1 < location.getY() &&
+                        location.getY() < dest.getY() + 1) {
 
-                location = MapInfo.NORTH_PICKUP_LOCATION;
-                carEnd = LocationStatus.NORTH_END;
-                isDriving = false;
-                this.timer.cancel();
+                    location = MapInfo.NORTH_PICKUP_LOCATION;
+                    carEnd = LocationStatus.NORTH_END;
+                    isDriving = false;
+                    this.timer.cancel();
 
-                System.out.println("ABout to generate the TourCarArrivedAtDropOff with list of ids: " + tokensInsideCar);
-                Message carArrivedAtDropOff = new TourCarArrivedAtDropOff(this.ID,LocationStatus.NORTH_END, tokensInsideCar);
-                vehicleManager.sendMessage(carArrivedAtDropOff);
+                    System.out.println("ABout to generate the TourCarArrivedAtDropOff with list of ids: " + tokensInsideCar);
+                    Message carArrivedAtDropOff = new TourCarArrivedAtDropOff(this.ID, LocationStatus.NORTH_END, tokensInsideCar);
+                    vehicleManager.sendMessage(carArrivedAtDropOff);
 
-                // load of passengers (tokens) inside the car, need to remove member variable list here
-                // that's why stored inside the local list, so later i can send message with updatedDrivingLocation.
-                if (tokensInCar.size() > 0) {
-                    tokensInCar.clear();
+                    // load of passengers (tokens) inside the car, need to remove member variable list here
+                    // that's why stored inside the local list, so later i can send message with updatedDrivingLocation.
+                    if (tokensInCar.size() > 0) {
+                        tokensInCar.clear();
+                    }
                 }
-            }
 
-            // update driving location as the car moves to north dropoff with all the tokens in the car.
-            Message updatedDrivingLocation = new UpdatedDrivingLocation(this.ID, location, tokensInsideCar);
-            vehicleManager.sendMessage(updatedDrivingLocation);
+                // update driving location as the car moves to north dropoff with all the tokens in the car.
+                Message updatedDrivingLocation = new UpdatedDrivingLocation(this.ID, location, tokensInsideCar);
+                vehicleManager.sendMessage(updatedDrivingLocation);
+            }
+            else {
+                this.timer.cancel();
+                startDrivingToSouthDropOffTimer();
+            }
         }
         else if (m instanceof MoveCarToSouthDropOff) {
             // car's initial location is the NORTH_PICKUP_LOCATION when this message is called initially.
