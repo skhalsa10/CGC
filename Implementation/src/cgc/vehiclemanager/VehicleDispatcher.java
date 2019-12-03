@@ -127,6 +127,7 @@ public class VehicleDispatcher extends Thread implements Communicator {
         else if(m instanceof EnterEmergencyMode) {
             if(!this.emergencyMode) {
                 this.emergencyMode = true;
+                this.southTokensIds.clear();
             }
 
         }
