@@ -269,28 +269,35 @@ public class TourVehicle extends Vehicle {
         }
         else if (m instanceof MoveCarToSouthPickUp) {
             // the car's current location is at south garage.
-            Point2D dest = MapInfo.SOUTH_PICKUP_LOCATION;
+            if (!emergencyMode) {
+                Point2D dest = MapInfo.SOUTH_PICKUP_LOCATION;
 
-            location = location.add((dest.getX()-location.getX())/DISTANCE*2, (dest.getY()-location.getY())/DISTANCE*2);
+                location = location.add((dest.getX() - location.getX()) / DISTANCE * 2, (dest.getY() - location.getY()) / DISTANCE * 2);
 
-            if(dest.getX()-1<location.getX() &&
-                    location.getX()<dest.getX()+1 &&
-                    dest.getY()-1<location.getY() &&
-                    location.getY()<dest.getY()+1) {
+                if (dest.getX() - 1 < location.getX() &&
+                        location.getX() < dest.getX() + 1 &&
+                        dest.getY() - 1 < location.getY() &&
+                        location.getY() < dest.getY() + 1) {
 
-                location = MapInfo.SOUTH_PICKUP_LOCATION;
-                carEnd = LocationStatus.SOUTH_PICKUP;
-                isDriving = false;
-                this.timer.cancel();
+                    location = MapInfo.SOUTH_PICKUP_LOCATION;
+                    carEnd = LocationStatus.SOUTH_PICKUP;
+                    isDriving = false;
+                    this.timer.cancel();
 
-                Message carArrivedAtPickUp = new TourCarArrivedAtPickup(this.ID, LocationStatus.SOUTH_PICKUP);
-                vehicleManager.sendMessage(carArrivedAtPickUp);
+                    Message carArrivedAtPickUp = new TourCarArrivedAtPickup(this.ID, LocationStatus.SOUTH_PICKUP);
+                    vehicleManager.sendMessage(carArrivedAtPickUp);
+                }
+
+                // updated Driving location with empty tokens, no tokens yet since the car is going from garage
+                // to pickup location.
+                Message updatedDrivingLocation = new UpdatedDrivingLocation(this.ID, location, new LinkedList<>());
+                vehicleManager.sendMessage(updatedDrivingLocation);
             }
-
-            // updated Driving location with empty tokens, no tokens yet since the car is going from garage
-            // to pickup location.
-            Message updatedDrivingLocation = new UpdatedDrivingLocation(this.ID, location, new LinkedList<>());
-            vehicleManager.sendMessage(updatedDrivingLocation);
+            else {
+                this.timer.cancel();
+                this.randomGarageDestination = getRandomSouthGarageDestination();
+                startDrivingToSouthGarageTimer();
+            }
         }
         else if (m instanceof BeginDrivingToDropOff) {
             BeginDrivingToDropOff m2 = (BeginDrivingToDropOff) m;
