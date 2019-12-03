@@ -100,16 +100,18 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
     private Image trex;
     private Image kiosk;
     private Image patrol;
+    private Image tour;
 
 
 
     public CGCGUI(Stage primaryStage, CGCStation cgcStation) {
 
         //initialize non GUI stuff
-        isBasicRender = true;
+        isBasicRender = false;
         trex = new Image("file:./src/resources/trex2.png", MapInfo.TREX_PIT_WIDTH/6,0,true,true);
         kiosk = new Image("file:./src/resources/kiosk1.png", 30,0,true,true);
         patrol = new Image("file:./src/resources/patrol4.png", 20,0,true,true);
+        tour = new Image("file:./src/resources/tour1.png", 20,0,true,true);
 
         healthOverlayIsOn = false;
         isRunning = true;
@@ -624,6 +626,13 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         }
 
 
+        //DRAW employee tokens
+        for(Integer i:employeeLocations.keySet()){
+            gc.setFill(MapInfo.EMPLOYEE);
+            renderNodeAndHealth(i, employeeLocations, employeeHealth, Entity.EMPLOYEE_TOKEN);
+        }
+
+
         //DRAW TOUR VEHICLES
         //System.out.println("The Tour Vehicle Location: " + tourLocations.size());
         for(Integer i:tourLocations.keySet()){
@@ -636,12 +645,6 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         for(Integer i:patrolLocations.keySet()){
             gc.setFill(MapInfo.PATROLVEHICLE);
             renderNodeAndHealth(i, patrolLocations, patrolHealth, Entity.PATROL_VEHICLE);
-        }
-
-        //DRAW employee tokens
-        for(Integer i:employeeLocations.keySet()){
-            gc.setFill(MapInfo.EMPLOYEE);
-            renderNodeAndHealth(i, employeeLocations, employeeHealth, Entity.EMPLOYEE_TOKEN);
         }
 
         if(isInEmergency){
@@ -676,6 +679,18 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
                 case PATROL_VEHICLE:{
                     gc.drawImage(patrol,p.getX()-patrol.getWidth()/2,p.getY()-patrol.getHeight()/2);
                     break;
+                }
+                case EMPLOYEE_TOKEN:{
+                    gc.fillOval(p.getX(), p.getY(), 6, 6);
+                    break;
+                }
+                case GUEST_TOKEN:{
+                    gc.fillOval(p.getX(), p.getY(), 6, 6);
+                    break;
+                }
+                case TOUR_VEHICLE:{
+                    gc.drawImage(tour,p.getX()-patrol.getWidth()/2,p.getY()-patrol.getHeight()/2);
+
                 }
             }
         }
