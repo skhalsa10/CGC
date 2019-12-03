@@ -36,7 +36,6 @@ public class GuestToken extends Token
 {
 
     private  int viewingTRexTrigger;
-    //TODO there may also need to be a separate timer and timer task to trigger when a guest visitor is ready to leave exhibit
     private boolean isRunning;
     private boolean isInEmergency;
     private boolean readyToDeactivate;
@@ -175,10 +174,10 @@ public class GuestToken extends Token
                 location = MapInfo.NORTH_PICKUP_LOCATION;
                 tokenManager.sendMessage(new UpdatedLocation(Entity.GUEST_TOKEN,tokenID, location));
                 setRandomNorthDest();
-                System.out.println("WalkingDest is on north for guest : "+ walkDest);
+                //System.out.println("WalkingDest is on north for guest : "+ walkDest);
                 viewingTRexTrigger+=counter;
                 //viewingTRexTrigger--;
-                System.out.println("trex trigger is " + viewingTRexTrigger);
+                //System.out.println("trex trigger is " + viewingTRexTrigger);
                 this.startTokenTimer();
             }else{
                 currentArea = LocationStatus.SOUTH_END;
@@ -217,7 +216,7 @@ public class GuestToken extends Token
         if(currentArea == LocationStatus.SOUTH_END&& !readyToDeactivate){
             Point2D sp = MapInfo.SOUTH_PICKUP_LOCATION;
             //TODO set this to 3309
-            if((counter % 9) ==0){
+            if((counter % 3309) ==0){
                 if(walkDest != sp){
                     walkDest = sp;
                     distance = location.distance(walkDest);

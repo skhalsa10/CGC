@@ -137,8 +137,8 @@ public class EmployeeToken extends Token
         else if(currentArea== LocationStatus.SOUTH_END && isWorkingNorth){
             //but only after some time has gone by
             Point2D sp =MapInfo.SOUTH_PICKUP_LOCATION;
-            //TODO set this to 1806
-            if(counter % 9 ==0){
+            //TODO set this to be Randomly generated number
+            if(counter % 1809 ==0){
                 if(walkDest != sp){
                     walkDest = sp;
                 }

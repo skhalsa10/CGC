@@ -80,7 +80,7 @@ public class TokenManager extends Thread implements Communicator
     @Override
     public void run() {
         //create employee tokens
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 30; i++)
         {
             employeeTokens.put(tokenID,new EmployeeToken(tokenID, this, MapInfo.ENTRANCE));
             tokenID++;
