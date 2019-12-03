@@ -133,30 +133,44 @@ public class EmployeeToken extends Token
             //this was generated before we could cancel the timer;
             return;
         }
-        //if the employee is working the north end but at south it should walk to the pickup location
-        else if(currentArea== LocationStatus.SOUTH_END && isWorkingNorth){
-            //but only after some time has gone by
-            Point2D sp =MapInfo.SOUTH_PICKUP_LOCATION;
-            //TODO set this to be Randomly generated number
-            if(counter % 1809 ==0){
-                if(walkDest != sp){
-                    walkDest = sp;
+        if(!isInEmergency) {
+            //if the employee is working the north end but at south it should walk to the pickup location
+            if (currentArea == LocationStatus.SOUTH_END && isWorkingNorth) {
+                //but only after some time has gone by
+                Point2D sp = MapInfo.SOUTH_PICKUP_LOCATION;
+                //TODO set this to be Randomly generated number
+                if (counter % 1809 == 0) {
+                    if (walkDest != sp) {
+                        walkDest = sp;
+                    }
+                }
+                //if the walk dest is the pickup location and we are close enough to it
+                //we should send tokenready message and cancel the timer
+                if (walkDest == sp) {
+                    //check how close we are
+                    if (isCloseToLoc(sp)) {
+                        readyForPickup = true;
+                        tokenManager.sendMessage(new TokenReadyToLeave(this.tokenID, currentArea));
+                        timer.cancel();
+                        return;
+                    }
                 }
             }
+        }else {
+
             //if the walk dest is the pickup location and we are close enough to it
             //we should send tokenready message and cancel the timer
-            if(walkDest == sp){
+            if (walkDest == MapInfo.NORTH_PICKUP_LOCATION) {
                 //check how close we are
-//                if(location.getX()<sp.getX()+1 &&location.getX()>sp.getX()-1 &&
-//                location.getY()>sp.getY()-1&&location.getY()<sp.getY()+1)
-                if(isCloseToLoc(sp)){
+                if (isCloseToLoc(MapInfo.NORTH_PICKUP_LOCATION)) {
                     readyForPickup = true;
-                    tokenManager.sendMessage(new TokenReadyToLeave(this.tokenID,currentArea));
+                    tokenManager.sendMessage(new TokenReadyToLeave(this.tokenID, currentArea));
                     timer.cancel();
                     return;
                 }
             }
         }
+
         //lets finish walking now
         moveToken();
         tokenManager.sendMessage(new UpdatedLocation(Entity.EMPLOYEE_TOKEN,tokenID, location));
@@ -232,12 +246,25 @@ public class EmployeeToken extends Token
         else if (m instanceof EnterEmergencyMode) {
             if(!isInEmergency){
                 isInEmergency = true;
-                //TODO here we wmay need to do more
+                if(currentArea == LocationStatus.NORTH_END && !isDriving){
+                    walkDest = MapInfo.NORTH_PICKUP_LOCATION;
+                }
+                if(currentArea == LocationStatus.SOUTH_END&& walkDest==MapInfo.SOUTH_PICKUP_LOCATION){
+                    readyForPickup = false;
+                    setRandomSouthDest();
+                }
+
             }
         }
         else if (m instanceof ExitEmergencyMode) {
             if(isInEmergency){
                 isInEmergency=false;
+                System.out.println("employee is exiting emergency");
+                if(currentArea == LocationStatus.NORTH_END && isWorkingNorth && !isDriving){
+                    System.out.println("should pick a new location");
+                    readyForPickup = false;
+                    setRandomNorthDest();
+                }
             }
         }
         else if (m instanceof CGCRequestHealth) {
@@ -268,14 +295,20 @@ public class EmployeeToken extends Token
                 location = MapInfo.NORTH_PICKUP_LOCATION;
                 currentArea = LocationStatus.NORTH_END;
                 tokenManager.sendMessage(new UpdatedLocation(Entity.EMPLOYEE_TOKEN,tokenID, location));
-                setRandomNorthDest();
+                if(!isInEmergency) {
+                    setRandomNorthDest();
+                }
+                else{
+                    walkDest = MapInfo.NORTH_PICKUP_LOCATION;
+                }
                 //System.out.println("new north destination is: " + walkDest);
                 this.startTokenTimer();
             }else{
                 location = MapInfo.SOUTH_PICKUP_LOCATION;
                 currentArea = LocationStatus.SOUTH_END;
                 tokenManager.sendMessage(new UpdatedLocation(Entity.EMPLOYEE_TOKEN,tokenID, location));
-                //TODO something here
+                setRandomSouthDest();
+                this.startTokenTimer();
             }
         }
         else {
