@@ -70,8 +70,9 @@ public class ElectricFence extends Thread implements Maintainable, Communicator 
                 messages.put(outage);
             }
         };
-        // schedules electric fence outage after a min, start the initial outage after a minute.
-        this.timer.schedule(task, 60000, 60000);
+        // schedules electric fence outage after 7.5 mins (we have demo for 15 mins, so keep it half for presentation.)
+        // , start the initial outage after a minute.
+        this.timer.schedule(task, 450000, 450000);
     }
 
     private synchronized void processMessage(Message message) {
