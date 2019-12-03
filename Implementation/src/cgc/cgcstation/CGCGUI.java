@@ -421,6 +421,21 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
                 e.printStackTrace();
             }
         }
+        else if(m instanceof  DeactivateToken){
+            DeactivateToken m2 = (DeactivateToken)m;
+            switch (m2.getEntity()){
+                case GUEST_TOKEN:{
+                    guestLocations.remove(m2.getID());
+                    guestHealth.remove(m2.getID());
+                    break;
+                }
+                case EMPLOYEE_TOKEN:{
+                    employeeLocations.remove(m2.getID());
+                    employeeHealth.remove(m2.getID());
+                    break;
+                }
+            }
+        }
         else if(m instanceof ShutDown){
             System.out.println("GUI is Shutting down");
             isRunning = false;
