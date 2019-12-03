@@ -75,8 +75,6 @@ public class VehicleDispatcher extends Thread implements Communicator {
                 southTimer.cancel();
 
                 System.out.println("SouthTimer is shutting down." + run);
-                System.out.println("Running [" +
-                        Thread.currentThread().getClass().getName() + "].");
             }
         };
         // runs after a min, counting down for 1 min.
@@ -253,7 +251,11 @@ public class VehicleDispatcher extends Thread implements Communicator {
                 case NORTH_PICKUP:
                     if (northTokensIds.size() >= 10) {
                         activeNorthCarAtPickup = false;
-                        this.northTimer.cancel();
+                        try {
+                            this.northTimer.cancel();
+                        } catch (NullPointerException e) {
+                            System.out.println("No need to cancel timer, already cancelled.");
+                        }
 
                         LinkedList<Integer> tokensToBeAssigned = new LinkedList<>();
 
@@ -287,7 +289,11 @@ public class VehicleDispatcher extends Thread implements Communicator {
                 case SOUTH_PICKUP:
                     if (southTokensIds.size() >= 10) {
                         activeSouthCarAtPickup = false;
-                        this.southTimer.cancel();
+                        try {
+                            this.southTimer.cancel();
+                        } catch (NullPointerException e) {
+                            System.out.println("No need to cancel timer, already cancelled.");
+                        }
 
                         LinkedList<Integer> tokensToBeAssigned = new LinkedList<>();
 
