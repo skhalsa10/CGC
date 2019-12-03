@@ -148,7 +148,7 @@ public class EmployeeToken extends Token
                 //we should send tokenready message and cancel the timer
                 if (walkDest == sp) {
                     //check how close we are
-                    if (isCloseToLoc(sp)) {
+                    if (isCloseToLoc(sp) ) {
                         readyForPickup = true;
                         tokenManager.sendMessage(new TokenReadyToLeave(this.tokenID, currentArea));
                         timer.cancel();
@@ -250,7 +250,10 @@ public class EmployeeToken extends Token
                     walkDest = MapInfo.NORTH_PICKUP_LOCATION;
                 }
                 if(currentArea == LocationStatus.SOUTH_END&& walkDest==MapInfo.SOUTH_PICKUP_LOCATION){
-                    readyForPickup = false;
+                    if(readyForPickup) {
+                        readyForPickup = false;
+                        startTokenTimer();
+                    }
                     setRandomSouthDest();
                 }
 
@@ -263,6 +266,7 @@ public class EmployeeToken extends Token
                 if(currentArea == LocationStatus.NORTH_END && isWorkingNorth && !isDriving){
                     System.out.println("should pick a new location");
                     readyForPickup = false;
+
                     setRandomNorthDest();
                 }
             }
