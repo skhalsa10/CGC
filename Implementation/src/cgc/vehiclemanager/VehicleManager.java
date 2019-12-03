@@ -125,10 +125,10 @@ public class VehicleManager extends Thread implements Communicator {
         // incrementing by 2 to (inclusive) random bounds just so the random numbers dont end up at the
         // corner of the garage box and we can't see the car.
         Random randomBounds = new Random();
-        double xLeftBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getX() + 2;
-        double xRightBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getX() + MapInfo.GARAGE_WIDTH;
-        double yMinBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getY() + 2;
-        double yMaxBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getY() + MapInfo.GARAGE_HEIGHT;
+        double xLeftBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getX() + 5;
+        double xRightBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getX() + MapInfo.GARAGE_WIDTH - 5;
+        double yMinBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getY() + 5;
+        double yMaxBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getY() + MapInfo.GARAGE_HEIGHT - 5;
 
         // creating 10 cars at random locations inside the south garage.
         for (int id = 1; id < 11; id++) {
