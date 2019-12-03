@@ -6,6 +6,7 @@ import cgc.utils.messages.*;
 import cgc.vehiclemanager.VehicleManager;
 import javafx.geometry.Point2D;
 
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
@@ -45,17 +46,18 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class PatrolVehicle extends Vehicle {
     private Point2D dest;
-    private ThreadLocalRandom rand;
+    private Random rand;
     private boolean isRunning = true;
     private double distance;
     private boolean isInEmergency = false;
+    private Timer timer;
 
 
     public PatrolVehicle(int ID, VehicleManager vehicleManager, Point2D location) {
         super(ID, vehicleManager, location);
-        rand = ThreadLocalRandom.current();
-        dest = new Point2D(rand.nextDouble(0,MapInfo.MAP_WIDTH),
-                rand.nextDouble(MapInfo.UPPER_LEFT_PATROL_BOX.getY(),MapInfo.BOTTOM_RIGHT_PATROL_BOX.getY()));
+        this.timer = new Timer();
+        rand = new Random();
+        dest = genRandDest();
         distance= Math.sqrt(
                 ((dest.getX()-location.getX())*(dest.getX()-location.getX()))
                 + ((dest.getY()-location.getY())*(dest.getY()-location.getY())));
@@ -74,13 +76,6 @@ public class PatrolVehicle extends Vehicle {
         };
         // schedules after every second.
         this.timer.schedule(task, 0, 17);
-    }
-
-
-    private void restartTimer() {
-        //this.timer.cancel();
-        this.timer = new Timer();
-        startVehicleTimer();
     }
 
     @Override
@@ -140,7 +135,7 @@ public class PatrolVehicle extends Vehicle {
             this.isInEmergency = false;
         }
         else if(m instanceof ShutDown){
-            System.out.println("Patrol vehicle " + ID + "is shutting down");
+            System.out.println("Patrol vehicle " + ID + " is shutting down");
             isRunning = false;
             timer.cancel();
         }
@@ -165,11 +160,7 @@ public class PatrolVehicle extends Vehicle {
                 location.getY()<dest.getY()+1){
 
             //set a new random destination
-            dest = new Point2D(
-                    rand.nextDouble(0,MapInfo.MAP_WIDTH),
-                    rand.nextDouble(
-                            MapInfo.UPPER_LEFT_PATROL_BOX.getY(),
-                            MapInfo.BOTTOM_RIGHT_PATROL_BOX.getY()));
+            dest = genRandDest();
 
             //using pythagorean theorem to calculate distance
             distance= Math.sqrt(
@@ -187,5 +178,15 @@ public class PatrolVehicle extends Vehicle {
                         new Point2D(
                                 location.getX(),
                                 location.getY())));
+    }
+
+    private Point2D genRandDest() {
+        double xLeftBound = 0;
+        double xRightBound = MapInfo.MAP_WIDTH;
+        double yMinBound = MapInfo.UPPER_LEFT_PATROL_BOX.getY();
+        double yMaxBound = MapInfo.BOTTOM_RIGHT_PATROL_BOX.getY();
+
+        return new Point2D(xLeftBound + (xRightBound - xLeftBound) * rand.nextDouble(),
+                yMinBound + (yMaxBound - yMinBound) * rand.nextDouble());
     }
 }

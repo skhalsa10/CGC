@@ -81,7 +81,7 @@ public class CGCStation extends Thread implements Communicator {
                 processMessage(m);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            } 
         }
     }
 
@@ -103,7 +103,8 @@ public class CGCStation extends Thread implements Communicator {
             cgcgui.sendMessage(m);
         }
         else if(m instanceof CGCRequestHealth){
-            cgc.sendMessage(m);
+            System.out.println("CGC STATION WILL BE FORWARDING request for health");
+            cgc.sendMessage(new CGCRequestHealth());
         }
         else if(m instanceof CGCRequestLocation){
             cgc.sendMessage(m);
@@ -127,8 +128,17 @@ public class CGCStation extends Thread implements Communicator {
             }
 
         }
+        else if(m instanceof RequestFinanceInfo){
+            cgc.sendMessage(m);
+        }
+        else if(m instanceof SaleLog){
+            cgcgui.sendMessage(m);
+        }
+        else if(m instanceof UpdatedDrivingLocation){
+            cgcgui.sendMessage(m);
+        }
         else{
-            System.out.println("cant candle message: " + m);
+            System.out.println("Station cant candle message: " + m);
         }
 
     }

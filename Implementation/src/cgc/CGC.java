@@ -134,10 +134,6 @@ public class CGC extends Thread implements Communicator {
             // guest token is requested, forward it to tokenManager.
             this.tokenManager.sendMessage(m);
         }
-        else if (m instanceof TokenInfo) {
-            // forward token location, id to cgcstation.
-            this.station.sendMessage(m);
-        }
         // When cgcstation request health or location.
         else if (m instanceof CGCRequestHealth) {
             // sendMessage to all the managers to report their entities health.
@@ -159,6 +155,25 @@ public class CGC extends Thread implements Communicator {
         }
         else if (m instanceof UpdatedLocation) {
             this.station.sendMessage(m);
+        }
+        else if (m instanceof UpdatedDrivingLocation) {
+            this.tokenManager.sendMessage(m);
+            this.station.sendMessage(m);
+        }
+        else if (m instanceof TourCarArrivedAtDropOff) {
+            this.tokenManager.sendMessage(m);
+        }
+        else if (m instanceof DeactivateToken) {
+            this.station.sendMessage(m);
+        }
+        else if(m instanceof SaleLog){
+            station.sendMessage(m);
+        }
+        else if (m instanceof TokenReadyToLeave) {
+            this.vehicleManager.sendMessage(m);
+        }
+        else{
+            System.out.println("CGC cannot process Message: " + m);
         }
     }
 }

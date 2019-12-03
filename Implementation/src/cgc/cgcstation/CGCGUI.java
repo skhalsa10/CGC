@@ -1,6 +1,7 @@
 package cgc.cgcstation;
 
 import cgc.utils.Communicator;
+import cgc.utils.Entity;
 import cgc.utils.MapInfo;
 import cgc.utils.messages.*;
 import javafx.animation.AnimationTimer;
@@ -12,14 +13,17 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 
 
-import java.util.HashMap;
+import java.text.DecimalFormat;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
 
 public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
@@ -35,6 +39,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
     private boolean emergencyBorderOn=true;
     private boolean emergencyByGUI = false;
     private double emergencyFenceWidth = 0;
+    private boolean isBasicRender;
 
     //GUI stuff
     private Stage stage;
@@ -42,6 +47,22 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
     //main screen
     private Scene mainScene;
     private HBox mainRoot;
+
+    //finance screen
+    private Scene financeScene;
+    private VBox financeRoot;
+    private HBox finBtnBox;
+    private HBox titleBox;
+    private HBox columnTitles;
+    private Text financeTitle;
+    private ScrollPane financeScrollPane;
+    private VBox logBox;
+    private HBox totalBox;
+    private int childTokensSold;
+    private int adultTokensSold;
+    private int seniorTokensSold;
+    private double totalSales;
+
 
     //animated map
     private Canvas canvas;
@@ -56,57 +77,78 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
     private Button enterEmergency;
     private Button viewHealth;
     private Button viewFinances;
+    private Button viewMain;
+
 
     //State stuff
     private Point2D  TRexLoc;
     private boolean  TRexHealth = true;
-    private HashMap<Integer,Point2D> tourLocations;
-    private HashMap<Integer,Point2D> patrolLocations;
-    private HashMap<Integer,Point2D> employeeLocations;
-    private HashMap<Integer,Point2D> guestLocations;
-    private HashMap<Integer,Point2D> kioskLocations;
+    private ConcurrentHashMap<Integer,Point2D> tourLocations;
+    private ConcurrentHashMap<Integer,Point2D> patrolLocations;
+    private ConcurrentHashMap<Integer,Point2D> employeeLocations;
+    private ConcurrentHashMap<Integer,Point2D> guestLocations;
+    private ConcurrentHashMap<Integer,Point2D> kioskLocations;
 
-    private HashMap<Integer,Boolean> tourHealth;
-    private HashMap<Integer,Boolean> patrolHealth;
-    private HashMap<Integer,Boolean> employeeHealth;
-    private HashMap<Integer,Boolean> guestHealth;
-    private HashMap<Integer,Boolean> kioskHealth;
-    private boolean  elctricFenceHealth = true;
+    private ConcurrentHashMap<Integer,Boolean> tourHealth;
+    private ConcurrentHashMap<Integer,Boolean> patrolHealth;
+    private ConcurrentHashMap<Integer,Boolean> employeeHealth;
+    private ConcurrentHashMap<Integer,Boolean> guestHealth;
+    private ConcurrentHashMap<Integer,Boolean> kioskHealth;
+    private LinkedBlockingQueue<SaleLog> financeState;
 
+    //Images to render
+    private Image trex;
+    private Image kiosk;
+    private Image patrol;
+    private Image tour;
 
 
 
     public CGCGUI(Stage primaryStage, CGCStation cgcStation) {
+
+        //initialize non GUI stuff
+        isBasicRender = false;
+        trex = new Image("file:./src/resources/trex2.png", MapInfo.TREX_PIT_WIDTH/6,0,true,true);
+        kiosk = new Image("file:./src/resources/kiosk1.png", 30,0,true,true);
+        patrol = new Image("file:./src/resources/patrol4.png", 20,0,true,true);
+        tour = new Image("file:./src/resources/tour1.png", 20,0,true,true);
 
         healthOverlayIsOn = false;
         isRunning = true;
         isInEmergency = false;
         messageThread = new Thread(this);
         messages = new PriorityBlockingQueue<>();
+        financeState = new LinkedBlockingQueue<>();
         currentScreen = Screen.MAIN;
 
-        tourLocations = new HashMap<>();
-        patrolLocations = new HashMap<>();
-        employeeLocations = new HashMap<>();
-        guestLocations = new HashMap<>();
-        kioskLocations = new HashMap<>();
+        //state related stuff
+        tourLocations = new ConcurrentHashMap<>();
+        patrolLocations = new ConcurrentHashMap<>();
+        employeeLocations = new ConcurrentHashMap<>();
+        guestLocations = new ConcurrentHashMap<>();
+        kioskLocations = new ConcurrentHashMap<>();
 
-        tourHealth = new HashMap<>();
-        patrolHealth = new HashMap<>();
-        employeeHealth = new HashMap<>();
-        guestHealth = new HashMap<>();
-        kioskHealth = new HashMap<>();
+        tourHealth = new ConcurrentHashMap<>();
+        patrolHealth = new ConcurrentHashMap<>();
+        employeeHealth = new ConcurrentHashMap<>();
+        guestHealth = new ConcurrentHashMap<>();
+        kioskHealth = new ConcurrentHashMap<>();
 
-        //GUI
+        //GUI stuff
         this.stage = primaryStage;
         stage.setTitle("Cretaceous Gardens Controller");
+
 
         //init main stuff
         mainRoot = new HBox();
         mainRoot.setAlignment(Pos.CENTER);
         canvasContainer = new StackPane();
         canvas = new Canvas(MapInfo.MAP_WIDTH,MapInfo.MAP_HEIGHT);
+        canvas.maxWidth(MapInfo.MAP_WIDTH);
+        canvas.maxHeight(MapInfo.MAP_HEIGHT);
         gc = canvas.getGraphicsContext2D();
+
+
 
         //button stuff
         leftBPane = new VBox();
@@ -144,11 +186,21 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         viewHealth.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                cgcStation.sendMessage(new CGCRequestHealth());
                 healthOverlayIsOn = !healthOverlayIsOn;
             }
         });
         viewFinances = new Button("View\nFinances");
         viewFinances.getStyleClass().add("viewFinances-button");
+        viewFinances.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //cgcStation.sendMessage(new RequestFinanceInfo());
+                currentScreen = Screen.FINANCES;
+            }
+        });
+
+
         viewHealth.setMinWidth(200);
         viewFinances.setMinWidth(200);
         enterEmergency.setMinWidth(200);
@@ -162,6 +214,71 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         canvasContainer.getStyleClass().add("canvasContainer");
         mainRoot.getChildren().addAll(leftBPane,canvasContainer,rightBPane);
 
+        //initializethe Finance stuff
+        //layout stuff
+        financeRoot = new VBox();
+        titleBox = new HBox();
+        logBox = new VBox();
+        columnTitles = new HBox();
+        //init scroll pan and add the log box
+        financeScrollPane = new ScrollPane();
+        financeScrollPane.getStyleClass().add("financeScrollPane");
+        financeScrollPane.setContent(logBox);
+        logBox.minWidthProperty().bind(financeScrollPane.widthProperty());
+
+        //non gui related state needed for finance screen
+        childTokensSold = 0;
+        adultTokensSold = 0;
+        seniorTokensSold = 0;
+        totalSales = 0;
+
+        //totals box set up
+        totalBox = new HBox();
+
+        viewMain = new Button("<");
+        viewMain.getStyleClass().add("viewMain-button");
+        viewMain.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                cgcStation.sendMessage(new CGCRequestLocation());
+                currentScreen = Screen.MAIN;
+            }
+        });
+        finBtnBox = new HBox();
+        //Pane s3 = new Pane();
+        finBtnBox.getChildren().addAll(viewMain);
+        //finBtnBox.setHgrow(s3, Priority.ALWAYS);
+
+        financeTitle = new Text("Finances");
+        financeTitle.getStyleClass().add("financeTitle");
+        Pane s1 = new Pane();
+        Pane s2 = new Pane();
+        Pane s3 = new Pane();
+        Pane s4 = new Pane();
+        Text date=new Text("Date Purchased");
+        date.getStyleClass().add("log-box");
+        Text ticketType = new Text("Ticket Type");
+        ticketType.getStyleClass().add("log-box");
+        Text price = new Text("Ticket Price");
+        price.getStyleClass().add("log-box");
+
+        columnTitles.getChildren().addAll(s4,date,s1,ticketType,s2,price,s3);
+        columnTitles.setHgrow(s1, Priority.ALWAYS);
+        columnTitles.setHgrow(s2, Priority.ALWAYS);
+        columnTitles.setHgrow(s3, Priority.ALWAYS);
+        columnTitles.setHgrow(s4, Priority.ALWAYS);
+        columnTitles.setAlignment(Pos.BASELINE_CENTER);
+
+        Pane space1 = new Pane();
+        Pane space2 = new Pane();
+        titleBox.getChildren().addAll(space1, financeTitle,space2);
+        titleBox.setAlignment(Pos.TOP_CENTER);
+        titleBox.setHgrow(space1, Priority.ALWAYS);
+        titleBox.setHgrow(space2, Priority.ALWAYS);
+        financeRoot.getChildren().addAll(finBtnBox,titleBox, columnTitles, financeScrollPane,totalBox);
+        financeRoot.setVgrow(financeScrollPane,Priority.ALWAYS);
+
+
         //TESTING TODO REMOVE GOR GOLIVE
         TRexLoc = new Point2D(MapInfo.CENTER_TREX_PIT.getX(), MapInfo.CENTER_TREX_PIT.getY());
 
@@ -169,7 +286,12 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
 
         //create scene and set style sheet
         mainScene = new Scene(mainRoot, mainRoot.getMaxWidth(), MapInfo.MAP_HEIGHT-50);
+        financeScene = new Scene(financeRoot, mainRoot.getMaxWidth(), MapInfo.MAP_HEIGHT-50);
         mainScene.getStylesheets().add("cgc/cgcstation/GUI.css");
+        financeScene.getStylesheets().add("cgc/cgcstation/GUI.css");
+
+        stage.setMinWidth(MapInfo.MAP_WIDTH+400);
+        stage.setMinHeight(MapInfo.MAP_HEIGHT-50);
 
         //display the stage
         stage.setScene(mainScene);
@@ -221,6 +343,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
                     break;
                 }
                 case EMPLOYEE_TOKEN:{
+                    //System.out.println("employee token location registered");
                     employeeLocations.put(m2.getEntityID(), m2.getLoc());
                     break;
                 }
@@ -228,6 +351,10 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
                     patrolLocations.put(m2.getEntityID(), m2.getLoc());
                     break;
 
+                }
+                case KIOSK:{
+                    kioskLocations.put(m2.getEntityID(), m2.getLoc());
+                    break;
                 }
             }
         }
@@ -252,11 +379,34 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
                     break;
                 }
                 case PATROL_VEHICLE:{
+                    System.out.println("UPDATED PATROL HEALTH");
                     patrolHealth.put(m2.getEntityID(), m2.isHealthStatus());
                     break;
 
                 }
+                case KIOSK:{
+                    kioskHealth.put(m2.getEntityID(), m2.isHealthStatus());
+                    break;
+                }
             }
+        }else if (m instanceof UpdatedDrivingLocation){
+            UpdatedDrivingLocation m2 = (UpdatedDrivingLocation) m;
+
+            //System.out.println("the UpdatedDriving Location in GUI is " + m2.getCurrentCarLocation()+ "for car id " + m2.getCarId());
+            //System.out.println("...oh by the way the token list is " + m2.getTokenIds());
+            //need to update the car location as well as all the token in the list
+            tourLocations.put(m2.getCarId(),m2.getCurrentCarLocation());
+
+            for(Integer tokenId:m2.getTokenIds()){
+                if(guestLocations.get(tokenId) != null){
+                    guestLocations.put(tokenId,m2.getCurrentCarLocation());
+                }else if(employeeLocations.get(tokenId)!=null){
+                    employeeLocations.put(tokenId,m2.getCurrentCarLocation());
+                }else{
+                    System.out.println("ERROR CGCGUI processing UpdatedDrivingLocation");
+                }
+            }
+
         }
         else if(m instanceof EnterEmergencyMode){
             EnterEmergencyMode m2 = (EnterEmergencyMode) m;
@@ -264,9 +414,12 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
             //TODO MAKE SURE to do anythign else I need
             isInEmergency = true;
         }
-        else if(m instanceof UpdatedFinanceInfo){
-            UpdatedFinanceInfo m2 = (UpdatedFinanceInfo)m;
-            //TODO switch to finacne screen and display finance info
+        else if(m instanceof SaleLog){
+            try {
+                financeState.put((SaleLog)m);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         else if(m instanceof ShutDown){
             System.out.println("GUI is Shutting down");
@@ -277,6 +430,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
             System.out.println("Cant process this message sorry");
         }
     }
+
 
 
     /**
@@ -290,6 +444,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         if (now - lastUpdate >= 16_667_000) {
 
             if(currentScreen == Screen.FINANCES){
+                renderFinanceScreen();
 
             }else if(currentScreen == Screen.HEALTH) {
 
@@ -303,7 +458,87 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         }
     }
 
+    private void renderFinanceScreen() {
+        stage.setScene(financeScene);
+        SaleLog m;
+        if((m = financeState.poll())!=null){
+            buildItemizedList(m);
+            buildTotalBox();
+        }
+    }
+
+    /**
+     * when a Sale Log message comes in it will get parsed and a new row will be added to the scroll list
+     * total numbers also get incremented so the total box can be built
+     * @param loginfo
+     */
+    private void buildItemizedList(SaleLog loginfo) {
+        DecimalFormat format = new DecimalFormat("#,###.00");
+        HBox row = new HBox();
+        totalSales += loginfo.getAmount();
+        Text type = new Text();
+        //increment ticket counter and update type text
+        switch (loginfo.getTicketType()){
+            case CHILDREN:{
+                type.setText("Child");
+                childTokensSold++;
+                break;
+            }
+            case ADULT:{
+                type.setText(" Adult ");
+                adultTokensSold++;
+                break;
+            }
+            case SENIOR:{
+                type.setText("Senior");
+                seniorTokensSold++;
+                break;
+            }
+
+        }
+        type.getStyleClass().add("log-box");
+        Text date = new Text(loginfo.getPurchasedDate().toString());
+        date.getStyleClass().add("log-box");
+        Text amount = new Text("$"+format.format(loginfo.getAmount()));
+        amount.getStyleClass().add("log-box");
+
+        Pane s2 = new Pane();
+        Pane s6 = new Pane();
+        Pane s7 = new Pane();
+
+        row.getChildren().addAll(date,s2, type,s6, amount, s7);
+        row.setHgrow(s2,Priority.ALWAYS);
+        row.setHgrow(s6,Priority.ALWAYS);
+        row.setHgrow(s7,Priority.ALWAYS);
+        //row.setHgrow(amount,Priority.ALWAYS);
+        logBox.getChildren().add(row);
+
+    }
+
+    /**
+     * this build the horizontal box at the bottom of the screen
+     */
+    private void buildTotalBox() {
+        Text c = new Text("Total Tokens: Child - "+ childTokensSold+" , ");
+        Text a = new Text("Adult - "+adultTokensSold+" , ");
+        Text s = new Text("Senior - "+seniorTokensSold);
+        DecimalFormat format = new DecimalFormat("#,###,###.00");
+        Text t = new Text("Total Sales: $" + format.format(totalSales));
+        c.getStyleClass().add("Finance-Text");
+        a.getStyleClass().add("Finance-Text");
+        s.getStyleClass().add("Finance-Text");
+        t.getStyleClass().add("Finance-Text");
+        Pane spacer = new Pane();
+        //clear the box
+        totalBox.getChildren().clear();
+        //read with updated info
+        totalBox.getChildren().addAll(c,a,s, spacer,t);
+        totalBox.setHgrow(spacer,Priority.ALWAYS);
+    }
+
+
     private synchronized void renderMainScreen() {
+        stage.setScene(mainScene);
         //first thing we need to do is paint the background of the map
         gc.setFill(MapInfo.CANVASBACKGROUND);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -312,7 +547,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         gc.setStroke(MapInfo.ROADCOLOR);
         gc.setLineWidth(16);
         gc.strokeLine(MapInfo.ROAD_SOUTH.getX(), MapInfo.ROAD_SOUTH.getY(), MapInfo.ROAD_NORTH.getX(), MapInfo.ROAD_NORTH.getY());
-        gc.setStroke(Color.BLACK);
+        gc.setStroke(Color.WHITE);
         gc.setLineWidth(2);
         gc.strokeLine(MapInfo.ROAD_SOUTH.getX(), MapInfo.ROAD_SOUTH.getY(), MapInfo.ROAD_NORTH.getX(), MapInfo.ROAD_NORTH.getY());
 
@@ -340,10 +575,22 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         gc.fillRect(MapInfo.UPPER_LEFT_SOUTH_BULDING.getX(), MapInfo.UPPER_LEFT_SOUTH_BULDING.getY(),MapInfo.SOUTHBUILDING_WIDTH, MapInfo.SOUTHBUILDING_HEIGHT);
         gc.strokeRect(MapInfo.UPPER_LEFT_SOUTH_BULDING.getX(), MapInfo.UPPER_LEFT_SOUTH_BULDING.getY(),MapInfo.SOUTHBUILDING_WIDTH, MapInfo.SOUTHBUILDING_HEIGHT);
 
+        //draw both Garages
+        gc.setFill(MapInfo.GARAGEFILL);
+        //here we do south
+        gc.fillRect(MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getX(),MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getY(), MapInfo.GARAGE_WIDTH,MapInfo.GARAGE_HEIGHT);
+        //here we do north
+        gc.fillRect(MapInfo.UPPER_LEFT_TOURVEHICLE_NORTH_GARAGE.getX(),MapInfo.UPPER_LEFT_TOURVEHICLE_NORTH_GARAGE.getY(), MapInfo.GARAGE_WIDTH,MapInfo.GARAGE_HEIGHT);
 
         //DRAW TREX
         gc.setFill(MapInfo.TREX);
-        gc.fillOval(TRexLoc.getX(),TRexLoc.getY(),8,8);
+        if(isBasicRender){
+            gc.fillOval(TRexLoc.getX(),TRexLoc.getY(),8,8);
+        }
+        else{
+            gc.drawImage(trex,TRexLoc.getX()-trex.getWidth()/2,TRexLoc.getY()-trex.getHeight()/2);
+        }
+
         if(healthOverlayIsOn){
             if(TRexHealth) {
                 gc.setFill(Color.LIME);
@@ -355,39 +602,49 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         }
 
         //DRAW KIOSKS
-        gc.setFill(MapInfo.KIOSK);
-        for(Point2D p: kioskLocations.values()){
-            gc.fillRect(p.getX(),p.getY(),8,8);
-            //TODO add the health overlay
+        for(Integer i:kioskLocations.keySet()){
+            gc.setFill(MapInfo.KIOSK);
+            Point2D p = kioskLocations.get(i);
+            if(isBasicRender){
+                gc.fillRect(p.getX(),p.getY(),12,8);
+            }else {
+
+                gc.drawImage(kiosk, p.getX() - kiosk.getWidth() / 2, p.getY() - (kiosk.getHeight() - 8));
+            }
+            if(kioskHealth.get(i)!= null) {
+                renderHealth(kioskHealth.get(i), p.getX(), p.getY());
+            }else{
+                //System.out.println("cant render health for this node...");
+            }
         }
 
 
-//        tourLocations = new HashMap<>();
-        //DRAW TOUR VEHICLES
-        gc.setFill(MapInfo.TOURVEHICLE);
-        for(Point2D p: tourLocations.values()){
-            gc.fillOval(p.getX(),p.getY(),6,6);
-            //TODO add the health overlay
+        //Draw guest tokens
+        for(Integer i:guestLocations.keySet()){
+            gc.setFill(MapInfo.GUEST);
+            renderNodeAndHealth(i, guestLocations, guestHealth, Entity.GUEST_TOKEN);
         }
-//        patrolLocations = new HashMap<>();
-        //DRAW patrol VEHICLES
-        gc.setFill(MapInfo.PATROLVEHICLE);
-        for(Point2D p: patrolLocations.values()){
-            gc.fillOval(p.getX(),p.getY(),6,6);
-            //TODO add the health overlay
-        }
-//        employeeLocations = new HashMap<>();
+
+
         //DRAW employee tokens
-        gc.setFill(MapInfo.EMPLOYEE);
-        for(Point2D p: employeeLocations.values()){
-            gc.fillOval(p.getX(),p.getY(),6,6);
-            //TODO add the health overlay
+        for(Integer i:employeeLocations.keySet()){
+            gc.setFill(MapInfo.EMPLOYEE);
+            renderNodeAndHealth(i, employeeLocations, employeeHealth, Entity.EMPLOYEE_TOKEN);
         }
-//        guestLocations = new HashMap<>();
-        gc.setFill(MapInfo.GUEST);
-        for(Point2D p: guestLocations.values()){
-            gc.fillOval(p.getX(),p.getY(),6,6);
-            //TODO add the health overlay
+
+
+        //DRAW TOUR VEHICLES
+        //System.out.println("The Tour Vehicle Location: " + tourLocations.size());
+        for(Integer i:tourLocations.keySet()){
+            gc.setFill(MapInfo.TOURVEHICLE);
+            renderNodeAndHealth(i, tourLocations, tourHealth, Entity.TOUR_VEHICLE);
+        }
+
+
+//
+        for(Integer i:patrolLocations.keySet()){
+            gc.setFill(MapInfo.PATROLVEHICLE);
+            renderNodeAndHealth(i, patrolLocations, patrolHealth, Entity.PATROL_VEHICLE);
         }
 
         if(isInEmergency){
@@ -405,4 +662,62 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
 
 
     }
+
+    /**
+     * Helper function for renderMainScreen
+     * @param i
+     * @param locations
+     * @param health
+     * @param entity
+     */
+    private void renderNodeAndHealth(Integer i, ConcurrentHashMap<Integer, Point2D> locations, ConcurrentHashMap<Integer, Boolean> health, Entity entity) {
+        Point2D p = locations.get(i);
+        if(isBasicRender) {
+            gc.fillOval(p.getX(), p.getY(), 6, 6);
+        }else{
+            switch (entity){
+                case PATROL_VEHICLE:{
+                    gc.drawImage(patrol,p.getX()-patrol.getWidth()/2,p.getY()-patrol.getHeight()/2);
+                    break;
+                }
+                case EMPLOYEE_TOKEN:{
+                    gc.fillOval(p.getX(), p.getY(), 6, 6);
+                    break;
+                }
+                case GUEST_TOKEN:{
+                    gc.fillOval(p.getX(), p.getY(), 6, 6);
+                    break;
+                }
+                case TOUR_VEHICLE:{
+                    gc.drawImage(tour,p.getX()-patrol.getWidth()/2,p.getY()-patrol.getHeight()/2);
+
+                }
+            }
+        }
+        if(health.get(i)!= null) {
+            renderHealth(health.get(i), p.getX(), p.getY());
+        }else{
+            //System.out.println("cant render health for this node...");
+        }
+    }
+
+    /**
+     * helper function for renderMainScreen
+     * @param healthStatus
+     * @param x
+     * @param y
+     */
+    private void renderHealth(Boolean healthStatus, double x, double y) {
+        if(healthOverlayIsOn){
+
+            if(healthStatus) {
+                gc.setFill(Color.LIME);
+                gc.fillText("Healthy",x,y);
+            }else{
+                gc.setFill(Color.LIGHTSALMON);
+                gc.fillText("Not Healthy",x,y);
+            }
+        }
+    }
+
 }
