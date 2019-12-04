@@ -262,9 +262,7 @@ public class EmployeeToken extends Token
         else if (m instanceof ExitEmergencyMode) {
             if(isInEmergency){
                 isInEmergency=false;
-                System.out.println("employee is exiting emergency");
                 if(currentArea == LocationStatus.NORTH_END && isWorkingNorth && !isDriving){
-                    System.out.println("should pick a new location");
                     readyForPickup = false;
 
                     setRandomNorthDest();
