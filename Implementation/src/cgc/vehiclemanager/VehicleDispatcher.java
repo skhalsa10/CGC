@@ -128,6 +128,8 @@ public class VehicleDispatcher extends Thread implements Communicator {
             if(!this.emergencyMode) {
                 this.emergencyMode = true;
                 this.southTokensIds.clear();
+                activeSouthCar = null;
+                activeSouthCarAtPickup = false;
             }
 
         }
@@ -400,10 +402,16 @@ public class VehicleDispatcher extends Thread implements Communicator {
 
             switch (garageLocation) {
                 case NORTH_GARAGE:
-                    try {
-                        this.northCarsIds.put(m2.getCarId());
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    if (this.northCarsIds.size() == 0 && this.northTokensIds.size() > 0 && activeNorthCar == null) {
+                        Message dispatchCarToNorthPickUp = new DispatchCarToPickup(m2.getCarId(), LocationStatus.NORTH_PICKUP);
+                        vehicleManager.sendMessage(dispatchCarToNorthPickUp);
+                        activeNorthCar = m2.getCarId();
+                    } else {
+                        try {
+                            this.northCarsIds.put(m2.getCarId());
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                     break;
                 case SOUTH_GARAGE:
