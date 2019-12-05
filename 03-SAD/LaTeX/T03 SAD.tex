@@ -185,306 +185,359 @@ represent multiple instances, and virtual devices are have icons in their lower 
 % in case of an emergency. This will be able to report on its health by implementing the maintainable 
 % interface. It is very basic and the CGC can broker connections to it from CGC Stations.}
 %    \label{fig:GlobalAlarm}
-%\end{figure}  
+%\end{figure}
 
 \section{Component Specifications} \label{specs}
 \paragraph{} \textit{Here are the class specifications\footnote{Component specifications by Anas and Siri.} for objects 
-found in Section \ref{over}. The most important attributes and functions are given and where appropriate, any expected 
-preconditions, parameters, return values, and post conditions are included. Explanations are given for each component, but 
-it should be noted that helper functions are not shown, as they are entrusted with the programmer. Important fields and helper
-fields are treated analogously.}
+found in Section \ref{over}. The most important attributes and functions are given and where appropriate.}
 
 \subsection*{Cretaceous Gardens Controller}
-%%%%%% intro if necessary
-\begin{table}[H]
-\small
-\begin{tabularx}{\hsize}{|X|X|}
-    \hline
-    \rowcolor{cgcgrey}
-    \multicolumn{2}{|c|}{\textbf{CGC}} \\
-    \hline
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
-    \hline
-    \texttt{messages} & number of registered tokens. \\
-    \texttt{station} & boolean station status \\
-    \texttt{kioskManager} & number of active kiosks  \\
-    \texttt{vehicleManager} &  number of active cars\\
-    \texttt{surveillanceSystem} & things \\
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Functions}} \\
-    \hline
-    \texttt{logTransaction(transaction)} & $\rightarrow$ write to finance controller. \\
-    \texttt{queryFinanceState(SQLScript)} & $\rightarrow$ query financial data. \\
-    \texttt{queryHealthState(SQLScript)} & $\rightarrow$ query health data \\
-    \texttt{getAllGPSLocations()} & $\rightarrow$ get all current GPS locations. \\
-    \texttt{registerToken(tokenID) } & $\rightarrow$ register token. \\
-    \texttt{retireToken(tokenID)} & $\rightarrow$  remove token from registered list\\
-    \texttt{relayStream(cameraID,stationID)} & $\rightarrow$ relay video stream to station\\
-    \texttt{enterEmergencyMode()} & $\rightarrow$ enter emergency mode\\
-    \texttt{enterNormalMode()} & $\rightarrow$ enter normal mode\\
-    \texttt{activateCar()} & $\rightarrow$ activate new car from parking lot\\
-    \texttt{bridgeIntercom(carID,stationID)} & $\rightarrow$ open communication link\\
-    \texttt{connectToPA(stationID)} & $\rightarrow$ connects station to island speakers\\
-    \hline
-
-\end{tabularx}
-\end{table}
-
-
-\subsection{Vehicle Manager}
-%%%intro if necessary
-\begin{table}[H]
-\begin{tabularx}{\hsize}{|X|X|}
-    \hline
-    \rowcolor{vehiclered}
-    \multicolumn{2}{|c|}{\textbf{\texttt{Vehicle}}} \\
-    \hline
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
-    \hline
-    \textbf{isActivated} & Specifies if the car is activated \\
-    \textbf{isParked} & Specifies if the car is parked \\
-    \textbf{Position} & Specifies where is the car located \\
-    \textbf{Destiny} & Destiny where the car has to travel\\
-    \textbf{Passengers} & Number of passengers in the car\\
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Functions}} \\
-    \hline
-    \textbf{checkPosition()} & $\rightarrow$ Return the position of the car in the island \\
-    \textbf{checkIfParked()} & $\rightarrow$ Return if the car is parked \\
-    \textbf{isActivated()} & $\rightarrow$ Return if the car is activated \\
-    \textbf{activateCar()} & $\rightarrow$ Will activate the car \\
-	\textbf{desactivateCar()} & $\rightarrow$ Will desactivate the car  \\
-	\textbf{travelToDestiny()} & $\rightarrow$ Will start the trip to the destiny \\
-    \textbf{setDestiny()} & $\rightarrow$ Will set the destiny of the car\\
-	\textbf{ValidateToken()} & $\rightarrow$ Check if the token is valid \\
-	\textbf{lockDoors()} & $\rightarrow$ Will lock the doors of the car \\
-	\textbf{unlockDoors()} & $\rightarrow$ Will unlock the doors of the car \\
-	\textbf{passengerSit()} & $\rightarrow$ Will recognize that there is a passenger sit and has his belt on \\
-	\textbf{sendLocationToCGC()} & $\rightarrow$ Will send the location to GCG \\
-    \hline
-\end{tabularx}
-\end{table}
-
+%%%%%%% intro if necessary
 %\begin{table}[H]
 %\small
 %\begin{tabularx}{\hsize}{|X|X|}
 %    \hline
-%    \rowcolor{nicegreen}
-%    \multicolumn{2}{|c|}{\textbf{Maintainer Class*}} \\ 
+%    \rowcolor{cgcgrey}
+%    \multicolumn{2}{|c|}{\textbf{CGC}} \\
 %    \hline
 %    \hline
 %    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
 %    \hline
-%    \textbf{health status} & indicates the health of the appropriate sub-component system. \\
+%    \texttt{messages} & number of registered tokens. \\
+%    \texttt{station} & boolean station status \\
+%    \texttt{kioskManager} & number of active kiosks  \\
+%    \texttt{vehicleManager} &  number of active cars\\
+%    \texttt{surveillanceSystem} & things \\
 %    \hline
 %    \multicolumn{2}{|c|}{\textbf{Functions}} \\
 %    \hline
-%    \textbf{systemCheck()} & $\rightarrow$ performs checks on the system. \\
-%    \textbf{maintainanceMode()} & $\rightarrow$ goes into maintenance mode. \\
+%    \texttt{logTransaction(transaction)} & $\rightarrow$ write to finance controller. \\
+%    \texttt{queryFinanceState(SQLScript)} & $\rightarrow$ query financial data. \\
+%    \texttt{queryHealthState(SQLScript)} & $\rightarrow$ query health data \\
+%    \texttt{getAllGPSLocations()} & $\rightarrow$ get all current GPS locations. \\
+%    \texttt{registerToken(tokenID) } & $\rightarrow$ register token. \\
+%    \texttt{retireToken(tokenID)} & $\rightarrow$  remove token from registered list\\
+%    \texttt{relayStream(cameraID,stationID)} & $\rightarrow$ relay video stream to station\\
+%    \texttt{enterEmergencyMode()} & $\rightarrow$ enter emergency mode\\
+%    \texttt{enterNormalMode()} & $\rightarrow$ enter normal mode\\
+%    \texttt{activateCar()} & $\rightarrow$ activate new car from parking lot\\
+%    \texttt{bridgeIntercom(carID,stationID)} & $\rightarrow$ open communication link\\
+%    \texttt{connectToPA(stationID)} & $\rightarrow$ connects station to island speakers\\
 %    \hline
 %
 %\end{tabularx}
-%     * : {In order to be not repetitive in the sub-components, this class is shown once here and 
-%is representative of all the sub-components it belongs to.} \\
 %\end{table}
+%
+%
+%\subsection{Vehicle Manager}
+%%%%intro if necessary
+%\begin{table}[H]
+%\begin{tabularx}{\hsize}{|X|X|}
+%    \hline
+%    \rowcolor{vehiclered}
+%    \multicolumn{2}{|c|}{\textbf{\texttt{Vehicle}}} \\
+%    \hline
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+%    \hline
+%    \textbf{isActivated} & Specifies if the car is activated \\
+%    \textbf{isParked} & Specifies if the car is parked \\
+%    \textbf{Position} & Specifies where is the car located \\
+%    \textbf{Destiny} & Destiny where the car has to travel\\
+%    \textbf{Passengers} & Number of passengers in the car\\
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+%    \hline
+%    \textbf{checkPosition()} & $\rightarrow$ Return the position of the car in the island \\
+%    \textbf{checkIfParked()} & $\rightarrow$ Return if the car is parked \\
+%    \textbf{isActivated()} & $\rightarrow$ Return if the car is activated \\
+%    \textbf{activateCar()} & $\rightarrow$ Will activate the car \\
+%	\textbf{desactivateCar()} & $\rightarrow$ Will desactivate the car  \\
+%	\textbf{travelToDestiny()} & $\rightarrow$ Will start the trip to the destiny \\
+%    \textbf{setDestiny()} & $\rightarrow$ Will set the destiny of the car\\
+%	\textbf{ValidateToken()} & $\rightarrow$ Check if the token is valid \\
+%	\textbf{lockDoors()} & $\rightarrow$ Will lock the doors of the car \\
+%	\textbf{unlockDoors()} & $\rightarrow$ Will unlock the doors of the car \\
+%	\textbf{passengerSit()} & $\rightarrow$ Will recognize that there is a passenger sit and has his belt on \\
+%	\textbf{sendLocationToCGC()} & $\rightarrow$ Will send the location to GCG \\
+%    \hline
+%\end{tabularx}
+%\end{table}
+%
+%%\begin{table}[H]
+%%\small
+%%\begin{tabularx}{\hsize}{|X|X|}
+%%    \hline
+%%    \rowcolor{nicegreen}
+%%    \multicolumn{2}{|c|}{\textbf{Maintainer Class*}} \\ 
+%%    \hline
+%%    \hline
+%%    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+%%    \hline
+%%    \textbf{health status} & indicates the health of the appropriate sub-component system. \\
+%%    \hline
+%%    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+%%    \hline
+%%    \textbf{systemCheck()} & $\rightarrow$ performs checks on the system. \\
+%%    \textbf{maintainanceMode()} & $\rightarrow$ goes into maintenance mode. \\
+%%    \hline
+%%
+%%\end{tabularx}
+%%     * : {In order to be not repetitive in the sub-components, this class is shown once here and 
+%%is representative of all the sub-components it belongs to.} \\
+%%\end{table}
+%
+%\subsection{Surveillance System}
+%%% intro maybe
+%\begin{table}[H]
+%\small
+%\begin{tabularx}{\hsize}{|X|X|}
+%    \hline
+%    \rowcolor{bigbrotheryellow}
+%    \multicolumn{2}{|c|}{\textbf{\texttt{ElectricFence}}} \\ 
+%    \hline
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+%    \hline
+%    \textbf{currentMode} & indicates whether or not which mode is detected. \\
+%    \textbf{Electric Fence Sensor} &  object that senses any distortions in the fence.\\
+%    \textbf{Maintainer} &  object that checks for health status of the fence.\\
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+%    \hline
+%    \textbf{checkStatus()} & $\rightarrow$ checks the status of the fence. \\
+%    \textbf{switchMode(mode)} & $\rightarrow$ switches the mode based on the specification by CGC. \\
+%    \textbf{reportHealthToCGC()} & $\rightarrow$ reports the health of the fence. \\
+%    \hline
+%
+%\end{tabularx}
+%\end{table}
+%
+%
+%\begin{table}[H]
+%\begin{tabularx}{\hsize}{|X|X|}
+%    \hline
+%    \rowcolor{bigbrotheryellow}
+%    \multicolumn{2}{|c|}{\textbf{\texttt{ElectricFenceSensor}}} \\ 
+%    \hline
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+%    \hline
+%    \textbf{electric conductance} & senses electricity in the fence. \\
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+%    \hline
+%    \textbf{checkElectricConductance()} & $\rightarrow$ check possible distortions in the fence. \\
+%    \hline
+%\end{tabularx}
+%\end{table}
+%
+%\begin{table}[H]
+%\begin{tabularx}{\hsize}{|X|X|}
+%    \hline
+%    \rowcolor{bigbrotheryellow}
+%    \multicolumn{2}{|c|}{\textbf{\texttt{CameraNetwork}}} \\ 
+%    \hline
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+%    \hline
+%    \textbf{Camera} & software that is responsible for streaming video. \\
+%    \textbf{DVR} &  software that is responsible for storing/retain video.\\
+%    \textbf{Maintainer} &  object that checks for health status of the fence.\\
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+%    \hline
+%    \textbf{checkCameraStatus(cameraID)} & $\rightarrow$ checks the status of the camera. \\
+%    \textbf{deleteRecording(cameraID, date range)} & $\rightarrow$ delete the recording from a given camera from specified range. \\
+%    \textbf{activateRecording(cameraID)} & $\rightarrow$ begin recording the given camera. \\
+%    \textbf{monitor(cameraID)} & $\rightarrow$ view the associated camera. \\
+%    \textbf{reportOutage()} & $\rightarrow$ report for any possible camera outage upon CGC request. \\
+%    \hline
+%\end{tabularx}
+%\end{table}
+%
+%\begin{table}[H]
+%\begin{tabularx}{\hsize}{|X|X|}
+%    \hline
+%    \rowcolor{bigbrotheryellow}
+%    \multicolumn{2}{|c|}{\textbf{\texttt{Camera}}} \\ 
+%    \hline
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+%    \hline
+%    \textbf{cameraID} & The camera number. \\
+%    \textbf{status} & The camera status. \\
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+%    \hline
+%    \textbf{getID()} & $\rightarrow$ gives the id of the camera. \\
+%    \textbf{play()} & $\rightarrow$ starts streaming the video. \\
+%    \textbf{getStatus()} & $\rightarrow$ gives the status of the camera. \\
+%    \textbf{getStream()} & $\rightarrow$ view camera. \\
+%    \hline
+%
+%\end{tabularx}
+%\end{table}
+%
+%\begin{table}[H]
+%\begin{tabularx}{\hsize}{|X|X|}
+%    \hline
+%    \rowcolor{bigbrotheryellow}
+%    \multicolumn{2}{|c|}{\textbf{\texttt{DVR}}} \\ 
+%    \hline
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+%    \hline
+%    \textbf{streamRecord} & keeps track of video streams. \\
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+%    \hline
+%    \textbf{start(cameraID)} & $\rightarrow$ begin recording of the camera. \\
+%    \textbf{delete(cameraID, range)} & $\rightarrow$ delete video stream. \\
+%    \hline
+%
+%\end{tabularx}
+%\end{table}
+%
+%%checkHealth()
+%%reportBiometricsAlarm()
+%%syncLocation()
+%%injectDino()
+%\begin{table}[H]
+%\begin{tabularx}{\hsize}{|X|X|}
+%    \hline
+%    \rowcolor{bigbrotheryellow}
+%    \multicolumn{2}{|c|}{\textbf{T-Rex Monitor Class }} \\
+%    \hline
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+%    \hline
+%    \textbf{Tranquilizer} & the injection used in emergency state. \\
+%    \textbf{GPS} & to track location of the T-Rex. \\
+%    \textbf{Heart Rate Sensor} & to monitor health of the T-Rex. \\
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+%    \hline
+%    \textbf{checkHealth()} & $\rightarrow$ checks the heart rate and health of the T-Rex. \\
+%    \textbf{reportBiometricsAlarm()} & $\rightarrow$ reports behavior of the T-Rex. \\
+%    \textbf{syncLocation()} & $\rightarrow$ gives the location of the T-Rex. \\
+%    \textbf{injectDino()} & $\rightarrow$ inject tranquilizer in the emergency state. \\
+%    \hline
+%
+%\end{tabularx}
+%\end{table}
+%
+%\subsection{CGC Station}
+%\begin{table}[H]
+%\begin{tabularx}{\hsize}{|X|X|}
+%    \hline
+%    \rowcolor{stationorange}
+%    \multicolumn{2}{|c|}{\textbf{\texttt{CGCStation}}} \\
+%    \hline
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+%    \hline
+%    \textbf{currentScreen} & the active screen. \\
+%    \textbf{intercom} & the intercom to talk any relevant components. \\
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+%    \hline
+%    \textbf{startIntercom()} & $\rightarrow$ activate intercom to speak to any specific component. \\
+%    \textbf{syncEmergencyState(sqlScript)} & $\rightarrow$ queries for the state of emergency. \\
+%    \textbf{syncHealthState(sqlScript)} & $\rightarrow$ sync the status of all the components. \\
+%    \textbf{syncFinanceState(sqlScript)} & $\rightarrow$ queries finance and expenses information. \\
+%    \textbf{activateTranquilizer()} & $\rightarrow$ activates tranquilizer in emergency state.\\
+%    \hline
+%\end{tabularx}
+%\end{table}
+%
+%\subsection{Kiosk Manager}
+%\begin{table}[H]
+%\begin{tabularx}{\hsize}{|X|X|}
+%    \hline
+%    \rowcolor{kioskgreen}
+%    \multicolumn{2}{|c|}{\textbf{\texttt{PayKiosk}}} \\
+%    \hline
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
+%    \hline
+%    \textbf{Token} & The token for the visitor to get all perks of the park.  \\
+%    \textbf{TransactionID} & the id of the transaction. \\
+%    \textbf{MoneyType} & type of money requested upon registration. \\
+%    \hline
+%    \multicolumn{2}{|c|}{\textbf{Functions}} \\
+%    \hline
+%    \textbf{buildToken()} & $\rightarrow$  builds token and logs transaction.\\
+%    \textbf{displayPurchaseForm()} & $\rightarrow$ displays the registration form. \\
+%    \textbf{register(demographics)} & $\rightarrow$ registers the visitor based on the provided information. \\
+%    \textbf{requestMoney()} & $\rightarrow$ requests for money.\\
+%    \textbf{acceptMoney(moneyType)} & $\rightarrow$ accepts the appropriate money type. \\
+%    \textbf{dispense(money, receipt())} & $\rightarrow$ dispenses money with receipt. \\
+%    \textbf{activateToken(tokenID)} & $\rightarrow$ activates token. \\
+%    \textbf{dispenseToken(tokenID)} & $\rightarrow$ dispenses token. \\
+%    \hline
+%\end{tabularx}
+%\end{table}
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.75]{MainClasses1.png}}
+    \caption{\textbf{Uppermost Classes:} The \texttt{CGC} acts as a server for forwarding messages between components and
+    is the parent of the others. The \texttt{VehicleManager} deals with the coordination and tracking of all vehicles, the 
+    \texttt{CGCStation} is the component with which employees directly interact as it provides the visualization of the others, 
+    and the \texttt{SurveillanceSystem} manages cameras and the \texttt{TRexMonitor}.}
+    \label{fig:mainclasses}
+\end{figure}
 
-\subsection{Surveillance System}
-%% intro maybe
-\begin{table}[H]
-\small
-\begin{tabularx}{\hsize}{|X|X|}
-    \hline
-    \rowcolor{bigbrotheryellow}
-    \multicolumn{2}{|c|}{\textbf{\texttt{ElectricFence}}} \\ 
-    \hline
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
-    \hline
-    \textbf{currentMode} & indicates whether or not which mode is detected. \\
-    \textbf{Electric Fence Sensor} &  object that senses any distortions in the fence.\\
-    \textbf{Maintainer} &  object that checks for health status of the fence.\\
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Functions}} \\
-    \hline
-    \textbf{checkStatus()} & $\rightarrow$ checks the status of the fence. \\
-    \textbf{switchMode(mode)} & $\rightarrow$ switches the mode based on the specification by CGC. \\
-    \textbf{reportHealthToCGC()} & $\rightarrow$ reports the health of the fence. \\
-    \hline
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.8]{MainClasses2.png}}
+    \caption{\textbf{The Rest of Uppermost Classes:} The \texttt{ProtocolManager} manages the customization of protocols and maintains
+    a history of which protocols have been run by the system. This component is ultimately what delivers, via the \texttt{CGC}, instructions
+    on what to do in the case of an emergency. It is not implemented and its functionality is implicitly given to all components.}
+    \label{fig:mainclasses2}
+\end{figure}
 
-\end{tabularx}
-\end{table}
+\subsection{Vehicle Manager}
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.8]{VManager.png}}
+    \caption{\textbf{Vehicle Manager:} The \texttt{VehicleManager} makes use of a \texttt{Dispatcher} and many \texttt{Vehicle} objects
+    of which \texttt{PatrolVehicle} and \texttt{TourVehicle} are extensions.}
+    \label{fig:vmanager}
+\end{figure}
 
-
-\begin{table}[H]
-\begin{tabularx}{\hsize}{|X|X|}
-    \hline
-    \rowcolor{bigbrotheryellow}
-    \multicolumn{2}{|c|}{\textbf{\texttt{ElectricFenceSensor}}} \\ 
-    \hline
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
-    \hline
-    \textbf{electric conductance} & senses electricity in the fence. \\
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Functions}} \\
-    \hline
-    \textbf{checkElectricConductance()} & $\rightarrow$ check possible distortions in the fence. \\
-    \hline
-\end{tabularx}
-\end{table}
-
-\begin{table}[H]
-\begin{tabularx}{\hsize}{|X|X|}
-    \hline
-    \rowcolor{bigbrotheryellow}
-    \multicolumn{2}{|c|}{\textbf{\texttt{CameraNetwork}}} \\ 
-    \hline
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
-    \hline
-    \textbf{Camera} & software that is responsible for streaming video. \\
-    \textbf{DVR} &  software that is responsible for storing/retain video.\\
-    \textbf{Maintainer} &  object that checks for health status of the fence.\\
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Functions}} \\
-    \hline
-    \textbf{checkCameraStatus(cameraID)} & $\rightarrow$ checks the status of the camera. \\
-    \textbf{deleteRecording(cameraID, date range)} & $\rightarrow$ delete the recording from a given camera from specified range. \\
-    \textbf{activateRecording(cameraID)} & $\rightarrow$ begin recording the given camera. \\
-    \textbf{monitor(cameraID)} & $\rightarrow$ view the associated camera. \\
-    \textbf{reportOutage()} & $\rightarrow$ report for any possible camera outage upon CGC request. \\
-    \hline
-\end{tabularx}
-\end{table}
-
-\begin{table}[H]
-\begin{tabularx}{\hsize}{|X|X|}
-    \hline
-    \rowcolor{bigbrotheryellow}
-    \multicolumn{2}{|c|}{\textbf{\texttt{Camera}}} \\ 
-    \hline
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
-    \hline
-    \textbf{cameraID} & The camera number. \\
-    \textbf{status} & The camera status. \\
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Functions}} \\
-    \hline
-    \textbf{getID()} & $\rightarrow$ gives the id of the camera. \\
-    \textbf{play()} & $\rightarrow$ starts streaming the video. \\
-    \textbf{getStatus()} & $\rightarrow$ gives the status of the camera. \\
-    \textbf{getStream()} & $\rightarrow$ view camera. \\
-    \hline
-
-\end{tabularx}
-\end{table}
-
-\begin{table}[H]
-\begin{tabularx}{\hsize}{|X|X|}
-    \hline
-    \rowcolor{bigbrotheryellow}
-    \multicolumn{2}{|c|}{\textbf{\texttt{DVR}}} \\ 
-    \hline
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
-    \hline
-    \textbf{streamRecord} & keeps track of video streams. \\
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Functions}} \\
-    \hline
-    \textbf{start(cameraID)} & $\rightarrow$ begin recording of the camera. \\
-    \textbf{delete(cameraID, range)} & $\rightarrow$ delete video stream. \\
-    \hline
-
-\end{tabularx}
-\end{table}
-
-%checkHealth()
-%reportBiometricsAlarm()
-%syncLocation()
-%injectDino()
-\begin{table}[H]
-\begin{tabularx}{\hsize}{|X|X|}
-    \hline
-    \rowcolor{bigbrotheryellow}
-    \multicolumn{2}{|c|}{\textbf{T-Rex Monitor Class }} \\
-    \hline
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
-    \hline
-    \textbf{Tranquilizer} & the injection used in emergency state. \\
-    \textbf{GPS} & to track location of the T-Rex. \\
-    \textbf{Heart Rate Sensor} & to monitor health of the T-Rex. \\
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Functions}} \\
-    \hline
-    \textbf{checkHealth()} & $\rightarrow$ checks the heart rate and health of the T-Rex. \\
-    \textbf{reportBiometricsAlarm()} & $\rightarrow$ reports behavior of the T-Rex. \\
-    \textbf{syncLocation()} & $\rightarrow$ gives the location of the T-Rex. \\
-    \textbf{injectDino()} & $\rightarrow$ inject tranquilizer in the emergency state. \\
-    \hline
-
-\end{tabularx}
-\end{table}
 
 \subsection{CGC Station}
-\begin{table}[H]
-\begin{tabularx}{\hsize}{|X|X|}
-    \hline
-    \rowcolor{stationorange}
-    \multicolumn{2}{|c|}{\textbf{\texttt{CGCStation}}} \\
-    \hline
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
-    \hline
-    \textbf{currentScreen} & the active screen. \\
-    \textbf{intercom} & the intercom to talk any relevant components. \\
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Functions}} \\
-    \hline
-    \textbf{startIntercom()} & $\rightarrow$ activate intercom to speak to any specific component. \\
-    \textbf{syncEmergencyState(sqlScript)} & $\rightarrow$ queries for the state of emergency. \\
-    \textbf{syncHealthState(sqlScript)} & $\rightarrow$ sync the status of all the components. \\
-    \textbf{syncFinanceState(sqlScript)} & $\rightarrow$ queries finance and expenses information. \\
-    \textbf{activateTranquilizer()} & $\rightarrow$ activates tranquilizer in emergency state.\\
-    \hline
-\end{tabularx}
-\end{table}
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.8]{CStation.png}}
+    \caption{\textbf{CGC Station:} The \texttt{CGCStation} makes use of a \texttt{CGCGUI} and a \texttt{PASystem} object.
+    The first shows graphical representations of the system for an employee, and the second encapsulates the central 
+    communication module for the island.}
+    \label{fig:cstation}
+\end{figure}
 
-\subsection{Kiosk Manager}
-\begin{table}[H]
-\begin{tabularx}{\hsize}{|X|X|}
-    \hline
-    \rowcolor{kioskgreen}
-    \multicolumn{2}{|c|}{\textbf{\texttt{PayKiosk}}} \\
-    \hline
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Attributes}}      \\
-    \hline
-    \textbf{Token} & The token for the visitor to get all perks of the park.  \\
-    \textbf{TransactionID} & the id of the transaction. \\
-    \textbf{MoneyType} & type of money requested upon registration. \\
-    \hline
-    \multicolumn{2}{|c|}{\textbf{Functions}} \\
-    \hline
-    \textbf{buildToken()} & $\rightarrow$  builds token and logs transaction.\\
-    \textbf{displayPurchaseForm()} & $\rightarrow$ displays the registration form. \\
-    \textbf{register(demographics)} & $\rightarrow$ registers the visitor based on the provided information. \\
-    \textbf{requestMoney()} & $\rightarrow$ requests for money.\\
-    \textbf{acceptMoney(moneyType)} & $\rightarrow$ accepts the appropriate money type. \\
-    \textbf{dispense(money, receipt())} & $\rightarrow$ dispenses money with receipt. \\
-    \textbf{activateToken(tokenID)} & $\rightarrow$ activates token. \\
-    \textbf{dispenseToken(tokenID)} & $\rightarrow$ dispenses token. \\
-    \hline
-\end{tabularx}
-\end{table}
+\subsection{Surveillance System}
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.8]{SSystem.png}}
+    \caption{\textbf{Surveillance System:} The \texttt{SurveillanceSystem} makes use of a \texttt{TRexMonitor} and an 
+    \texttt{ElectricFence} object.}
+    \label{fig:ssystem}
+\end{figure}
 
 \subsection{Token Manager}
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.8]{TManager.png}}
+    \caption{\textbf{Token Manager:} The \texttt{TokenManager} makes use of \texttt{Token} objects
+    of which \texttt{GuestToken} and \texttt{EmployeeToken} are extensions.}
+    \label{fig:tmanager}
+\end{figure}
 
-\subsection{Protocol Manager}
+
+\subsection{Kiosk Manager}
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.8]{KManager.png}}
+    \caption{\textbf{Kiosk Manager:} The \texttt{} makes use of a \texttt{} and many \texttt{} objects
+    of which \texttt{} and \texttt{} are extensions.}
+    \label{fig:kmanager}
+\end{figure}
+
 
 \section{Sample Use Cases} \label{samp}
 \paragraph{} \textit{A broad overview of use cases begins this section and it is followed 
