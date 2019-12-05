@@ -37,7 +37,6 @@ public abstract class Vehicle extends Thread implements Maintainable, Communicat
     //The health will be simple in this version right now it has a boolean value of true or false
     protected boolean healthStatus;
     protected Point2D location;
-    protected Timer timer;
     protected PriorityBlockingQueue<Message> messages;
 
     public Vehicle(int ID, VehicleManager vehicleManager, Point2D location) {
@@ -46,7 +45,6 @@ public abstract class Vehicle extends Thread implements Maintainable, Communicat
         this.healthStatus = true;
         this.location = location;
         this.messages = new PriorityBlockingQueue<>();
-        this.timer = new Timer();
 
     }
 

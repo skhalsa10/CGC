@@ -18,6 +18,12 @@ public class Main extends Application {
     public void stop(){
         System.out.println("Main shutting down");
         cgc.sendMessage(new ShutDown());
+        try {
+            super.stop();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.exit(0);
     }
 
 
