@@ -77,8 +77,7 @@ public class TourVehicle extends Vehicle {
 
     @Override
     protected void startVehicleTimer() {
-        //TODO build the timer and timer task here.
-        // this can be used to update the location of the car over time
+        //TODO remove this from abstract class, not using this.
     }
 
     private void startDrivingToNorthPickupTimer() {

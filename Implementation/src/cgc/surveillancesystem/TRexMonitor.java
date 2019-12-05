@@ -58,7 +58,6 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
      */
     @Override
     public void run() {
-        // TODO: this will call processMessage accordingly.
         while (run) {
             try {
                 Message m = this.messages.take();
@@ -161,7 +160,6 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
      * send message to surveillance system.
      */
     private void reportHealth(boolean healthStatus) {
-        //TODO Send a message to the surveillanceSystem with health Status
         UpdatedHealth updatedHealth = new UpdatedHealth(Entity.TREX, 1, healthStatus);
         this.surveillanceSystem.sendMessage(updatedHealth);
     }
@@ -170,7 +168,6 @@ public class TRexMonitor extends Thread implements Maintainable, Locatable, Comm
      * send message to surveillanceSystem.
      */
     private void updateLocation(Point2D loc) {
-        //TODO send a message to the surveillance with updated location
         UpdatedLocation updatedLocation = new UpdatedLocation(Entity.TREX, 1, loc);
         this.surveillanceSystem.sendMessage(updatedLocation);
     }

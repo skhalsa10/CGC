@@ -140,7 +140,6 @@ public class EmployeeToken extends Token
             if (currentArea == LocationStatus.SOUTH_END && isWorkingNorth) {
                 //but only after some time has gone by
                 Point2D sp = MapInfo.SOUTH_PICKUP_LOCATION;
-                //TODO set this to be Randomly generated number
                 if (counter % whenToLeaveSouth == 0) {
                     if (walkDest != sp) {
                         walkDest = sp;

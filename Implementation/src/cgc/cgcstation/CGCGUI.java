@@ -224,6 +224,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         financeScrollPane = new ScrollPane();
         financeScrollPane.getStyleClass().add("financeScrollPane");
         financeScrollPane.setContent(logBox);
+        financeScrollPane.setMinWidth(MapInfo.MAP_WIDTH+400);
         logBox.minWidthProperty().bind(financeScrollPane.widthProperty());
 
         //non gui related state needed for finance screen
@@ -379,7 +380,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
                     break;
                 }
                 case PATROL_VEHICLE:{
-                    System.out.println("UPDATED PATROL HEALTH");
+                    //System.out.println("UPDATED PATROL HEALTH");
                     patrolHealth.put(m2.getEntityID(), m2.isHealthStatus());
                     break;
 
@@ -410,8 +411,7 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         }
         else if(m instanceof EnterEmergencyMode){
             EnterEmergencyMode m2 = (EnterEmergencyMode) m;
-            System.out.println("received enteremergencymode");
-            //TODO MAKE SURE to do anythign else I need
+            //System.out.println("received enteremergencymode");
             isInEmergency = true;
         }
         else if(m instanceof SaleLog){

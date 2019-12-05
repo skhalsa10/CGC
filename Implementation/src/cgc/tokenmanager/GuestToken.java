@@ -87,12 +87,9 @@ public class GuestToken extends Token
     }
 
     @Override
-    public void sendMessage(Message m)
-    {
-        //TODO place this message in messages queue
+    public void sendMessage(Message m) {
         messages.put(m);
     }
-
 
     @Override
     public void run() {

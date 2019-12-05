@@ -170,6 +170,11 @@ public class VehicleDispatcher extends Thread implements Communicator {
                         else {
                             //TODO: Edge case, what to do if the north garage has no car?
                             // Immediately dispatch the south car and remove.
+                            activeNorthCar = this.southCarsIds.poll();
+                            if (activeNorthCar != null) {
+                                Message dispatchToNorthPickUp = new DispatchCarToPickup(activeNorthCar, LocationStatus.NORTH_PICKUP);
+                                vehicleManager.sendMessage(dispatchToNorthPickUp);
+                            }
                         }
                     }
                     else if (activeNorthCarAtPickup) {
@@ -217,8 +222,13 @@ public class VehicleDispatcher extends Thread implements Communicator {
                             vehicleManager.sendMessage(dispatchToPickUp);
                         }
                         else {
-                            //TODO: Edge case, what to do if the north garage has no car?
-                            // Immediately dispatch the south car and remove.
+                            //TODO: Edge case, what to do if the south garage has no car?
+                            // Immediately dispatch the north car and remove.
+                            activeSouthCar = this.northCarsIds.poll();
+                            if (activeSouthCar != null) {
+                                Message dispatchToNorthPickUp = new DispatchCarToPickup(activeSouthCar, LocationStatus.SOUTH_PICKUP);
+                                vehicleManager.sendMessage(dispatchToNorthPickUp);
+                            }
                         }
                     }
                     else if (activeSouthCarAtPickup) {

@@ -51,7 +51,6 @@ public class ElectricFence extends Thread implements Maintainable, Communicator 
      * send message to surveillance system.
      */
     private void reportHealth(boolean healthStatus) {
-        //TODO Send a message to the surveillanceSystem with health Status
         UpdatedHealth updatedHealth = new UpdatedHealth(Entity.ELECTRIC_FENCE, 1, healthStatus);
         this.surveillanceSystem.sendMessage(updatedHealth);
     }
@@ -62,7 +61,6 @@ public class ElectricFence extends Thread implements Maintainable, Communicator 
     }
 
     private void startElectricFenceTimer() {
-        // TODO: use timer task with timer to electric fence outage (maybe after a min?)
         TimerTask task = new TimerTask() {
             @Override
             public void run() {

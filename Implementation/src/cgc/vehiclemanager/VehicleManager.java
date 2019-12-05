@@ -76,12 +76,6 @@ public class VehicleManager extends Thread implements Communicator {
     private boolean isInEmergency;
     private HashMap<Integer, PatrolVehicle> patrolCars;
     private HashMap<Integer, TourVehicle> tourCars;
-    //TODO must make a Data structure to keep track of vehicles
-    // if we only have X amount of cars it may need to keep track of the available and used cars
-    // is this done with the scheduler or dispatcher?
-
-    //TODO the other option is to have a VehicleFactor that can produce an unlimited amount of vehicles?
-
 
     public VehicleManager(CGC cgc) {
 

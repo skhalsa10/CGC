@@ -80,7 +80,6 @@ public final class MapInfo {
     public final static Point2D ROAD_NORTH_FOR_NORTH_TO_SOUTH = new Point2D(MAP_WIDTH/2-TREX_PIT_WIDTH/4,TREX_PIT_HEIGHT+30);
 
 
-    //TODO add linear coordinate for the path of te highway that goes from south to north
     //two points needed
 
     //TODO if there is a different high way being used from northside to south side those points should be identified below
