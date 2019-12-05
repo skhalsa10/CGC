@@ -23,10 +23,18 @@ public class VehicleDispatcher extends Thread implements Communicator {
     private LinkedBlockingQueue<Integer> southCarsIds;
     private LinkedBlockingQueue<Integer> northTokensIds;
     private LinkedBlockingQueue<Integer> southTokensIds;
+    //activeSouthcar represents car moving from south garage to south pickup
     private Integer activeSouthCar;
+    //represents an active car is currently at the south pickup
     private boolean activeSouthCarAtPickup;
+    //activeSouthcar represents car moving from North garage to North pickup
     private Integer activeNorthCar;
+    //represents an active car is currently at the Northpickup
     private boolean activeNorthCarAtPickup;
+    //represents car moving from North DropOff to North Garage
+    private Integer activeNorthDropOffCar;
+    //represents car moving from South DropOff to South Garage
+    private Integer activeSouthDropOffCar;
 
     public VehicleDispatcher(VehicleManager vehicleManager) {
         this.run = true;
@@ -39,6 +47,8 @@ public class VehicleDispatcher extends Thread implements Communicator {
         this.southTokensIds = new LinkedBlockingQueue<>();
         this.activeNorthCar = null;
         this.activeSouthCar = null;
+        this.activeNorthDropOffCar = null;
+        this.activeSouthDropOffCar = null;
         this.activeNorthCarAtPickup = false;
         this.activeSouthCarAtPickup = false;
 
@@ -128,8 +138,17 @@ public class VehicleDispatcher extends Thread implements Communicator {
             if(!this.emergencyMode) {
                 this.emergencyMode = true;
                 this.southTokensIds.clear();
-                activeSouthCar = null;
-                activeSouthCarAtPickup = false;
+                if(activeSouthCar!=null) {
+                    try {
+                        southTimer.cancel();
+                    }catch(NullPointerException e){
+                        System.out.println("no need to cancel a null timer");
+                    }
+                    DispatchCarToGarage m2 = new DispatchCarToGarage(activeSouthCar,LocationStatus.SOUTH_GARAGE);
+                    vehicleManager.sendMessage(m2);
+                    activeSouthCar = null;
+                    activeSouthCarAtPickup = false;
+                }
             }
 
         }
@@ -170,11 +189,35 @@ public class VehicleDispatcher extends Thread implements Communicator {
                         else {
                             //TODO: Edge case, what to do if the north garage has no car?
                             // Immediately dispatch the south car and remove.
-                            activeNorthCar = this.southCarsIds.poll();
-                            if (activeNorthCar != null) {
-                                Message dispatchToNorthPickUp = new DispatchCarToPickup(activeNorthCar, LocationStatus.NORTH_PICKUP);
-                                vehicleManager.sendMessage(dispatchToNorthPickUp);
+                            //this will make the ActiveNorthDropOff car turn back around
+                            System.out.println("activeNorthDropOffCar ID is "+ activeNorthDropOffCar);
+                            if(emergencyMode){
+                                if(activeNorthDropOffCar != null){
+                                    activeNorthCar = activeNorthDropOffCar;
+                                    Message dispatchToNorthPickUp = new DispatchCarToPickup(activeNorthCar, LocationStatus.NORTH_PICKUP);
+                                    vehicleManager.sendMessage(dispatchToNorthPickUp);
+                                    activeNorthDropOffCar = null;
+                                }else{
+                                    activeNorthCar = this.southCarsIds.poll();
+                                    if (activeNorthCar != null) {
+                                        Message dispatchToNorthPickUp = new DispatchCarToPickup(activeNorthCar, LocationStatus.NORTH_PICKUP);
+                                        vehicleManager.sendMessage(dispatchToNorthPickUp);
+                                    }
+                                }
                             }
+                            else{
+                                if(activeNorthDropOffCar == null){
+                                    activeNorthCar = this.southCarsIds.poll();
+                                    if (activeNorthCar != null) {
+                                        Message dispatchToNorthPickUp = new DispatchCarToPickup(activeNorthCar, LocationStatus.NORTH_PICKUP);
+                                        vehicleManager.sendMessage(dispatchToNorthPickUp);
+                                    }
+                                }
+                            }
+                            //we ignore the case where there IS an ActiveNorthDropOffCar which is driving
+                            // to the north garage AND we are NOT in emergencyMode
+                            //in this case we want to let the car drive to the garage before
+                            // it can turn around and go to the north pickup
                         }
                     }
                     else if (activeNorthCarAtPickup) {
@@ -224,10 +267,14 @@ public class VehicleDispatcher extends Thread implements Communicator {
                         else {
                             //TODO: Edge case, what to do if the south garage has no car?
                             // Immediately dispatch the north car and remove.
-                            activeSouthCar = this.northCarsIds.poll();
-                            if (activeSouthCar != null) {
-                                Message dispatchToNorthPickUp = new DispatchCarToPickup(activeSouthCar, LocationStatus.SOUTH_PICKUP);
-                                vehicleManager.sendMessage(dispatchToNorthPickUp);
+                            //there is no car in the south garage and there NO car driving to the south garage
+                            //but we have tokens ready to go to the north? we need to get a car from the north garage
+                            if(activeSouthDropOffCar == null && !emergencyMode){
+                                activeSouthCar = this.northCarsIds.poll();
+                                if (activeSouthCar != null) {
+                                    Message dispatchToSouthPickUp = new DispatchCarToPickup(activeSouthCar, LocationStatus.SOUTH_PICKUP);
+                                    vehicleManager.sendMessage(dispatchToSouthPickUp);
+                                }
                             }
                         }
                     }
@@ -291,7 +338,17 @@ public class VehicleDispatcher extends Thread implements Communicator {
                                 activeNorthCar = northCarId;
                                 Message dispatchAnotherCar = new DispatchCarToPickup(activeNorthCar, LocationStatus.NORTH_PICKUP);
                                 this.vehicleManager.sendMessage(dispatchAnotherCar);
+                            }else{
+                                northCarId = this.southCarsIds.poll();
+                                if(northCarId != null){
+                                    activeNorthCar = northCarId;
+                                    Message dispatchAnotherCar = new DispatchCarToPickup(activeNorthCar, LocationStatus.NORTH_PICKUP);
+                                    this.vehicleManager.sendMessage(dispatchAnotherCar);
+                                }else{
+                                    System.out.println("some error that should never happen");
+                                }
                             }
+
                         }
                     }
                     else {
@@ -315,7 +372,7 @@ public class VehicleDispatcher extends Thread implements Communicator {
                             Integer removedToken = this.southTokensIds.poll();
                             tokensToBeAssigned.add(removedToken);
                         }
-
+                        System.out.println("active south car driving to North Dropoff ID is "+ activeSouthCar);
                         Message dispatchCar = new DispatchCar(activeSouthCar, tokensToBeAssigned);
                         this.vehicleManager.sendMessage(dispatchCar);
 
@@ -397,10 +454,13 @@ public class VehicleDispatcher extends Thread implements Communicator {
 
             switch (dropOffLocation) {
                 case NORTH_END:
+                    activeNorthDropOffCar = m2.getCarId();
                     Message dispatchToNorthGarage = new DispatchCarToGarage(m2.getCarId(), LocationStatus.NORTH_GARAGE);
+
                     vehicleManager.sendMessage(dispatchToNorthGarage);
                     break;
                 case SOUTH_END:
+                    activeSouthDropOffCar = m2.getCarId();
                     Message dispatchToSouthGarage = new DispatchCarToGarage(m2.getCarId(), LocationStatus.SOUTH_GARAGE);
                     vehicleManager.sendMessage(dispatchToSouthGarage);
                     break;
@@ -412,6 +472,10 @@ public class VehicleDispatcher extends Thread implements Communicator {
 
             switch (garageLocation) {
                 case NORTH_GARAGE:
+                    //the tour car arrived at north garage but has not been registered yet
+                    //into the northCarIDs list and there as least one token waiting at the north pickup
+                    // there is currently no active car going to pickup the waiting token so
+                    //we need to send this car back to the north pickup
                     if (this.northCarsIds.size() == 0 && this.northTokensIds.size() > 0 && activeNorthCar == null) {
                         Message dispatchCarToNorthPickUp = new DispatchCarToPickup(m2.getCarId(), LocationStatus.NORTH_PICKUP);
                         vehicleManager.sendMessage(dispatchCarToNorthPickUp);
@@ -419,6 +483,7 @@ public class VehicleDispatcher extends Thread implements Communicator {
                     } else {
                         try {
                             this.northCarsIds.put(m2.getCarId());
+                            this.activeNorthDropOffCar = null;
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -427,6 +492,7 @@ public class VehicleDispatcher extends Thread implements Communicator {
                 case SOUTH_GARAGE:
                     try {
                         this.southCarsIds.put(m2.getCarId());
+                        this.activeSouthDropOffCar = null;
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

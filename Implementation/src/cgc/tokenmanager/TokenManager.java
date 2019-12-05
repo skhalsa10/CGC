@@ -166,8 +166,8 @@ public class TokenManager extends Thread implements Communicator
             // forward to all tokens
             TourCarArrivedAtDropOff m2 = (TourCarArrivedAtDropOff) m;
 
-            System.out.println("TokenManager Processed TourCarArrivedAtDropOff with tokens "+ m2.getTokensId());
-            System.out.println("at the location "+ m2.getDropOffLocation());
+            //System.out.println("TokenManager Processed TourCarArrivedAtDropOff with tokens "+ m2.getTokensId());
+            //System.out.println("at the location "+ m2.getDropOffLocation());
 
             for(Integer id:m2.getTokensId()){
                 if(guestTokens.get(id) != null){
@@ -183,7 +183,7 @@ public class TokenManager extends Thread implements Communicator
             cgc.sendMessage(m2);
         }
         else if(m instanceof TokenReadyToLeave){
-            System.out.println("Token Manager processing token ready for ID "+ ((TokenReadyToLeave) m).getTokenId());
+            //System.out.println("Token Manager processing token ready for ID "+ ((TokenReadyToLeave) m).getTokenId());
             cgc.sendMessage(m);
         }
         else{

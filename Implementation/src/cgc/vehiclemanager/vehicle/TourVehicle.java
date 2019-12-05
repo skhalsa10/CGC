@@ -229,14 +229,24 @@ public class TourVehicle extends Vehicle {
 
             switch (pickUpLocation) {
                 case NORTH_PICKUP:
-                    if (!isDriving) {
-                        isDriving = true;
+                    if(!emergencyMode) {
+                        if (!isDriving) {
+                            isDriving = true;
+                            startDrivingToNorthPickupTimer();
+                        }
+                    }else{
+                        timer.cancel();
                         startDrivingToNorthPickupTimer();
                     }
                     break;
                 case SOUTH_PICKUP:
-                    if (!isDriving) {
-                        isDriving = true;
+                    if(!emergencyMode) {
+                        if (!isDriving) {
+                            isDriving = true;
+                            startDrivingToSouthPickupTimer();
+                        }
+                    }else{
+                        timer.cancel();
                         startDrivingToSouthPickupTimer();
                     }
                     break;

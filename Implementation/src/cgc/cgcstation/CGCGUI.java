@@ -108,10 +108,10 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
 
         //initialize non GUI stuff
         isBasicRender = false;
-        trex = new Image("file:./src/resources/trex2.png", MapInfo.TREX_PIT_WIDTH/6,0,true,true);
-        kiosk = new Image("file:./src/resources/kiosk1.png", 30,0,true,true);
-        patrol = new Image("file:./src/resources/patrol4.png", 20,0,true,true);
-        tour = new Image("file:./src/resources/tour1.png", 20,0,true,true);
+        trex = new Image("file:./src/resources/trex1.png", MapInfo.TREX_PIT_WIDTH/10,0,true,true);
+        kiosk = new Image("file:./src/resources/kiosk1.png", 25,0,true,true);
+        patrol = new Image("file:./src/resources/patrol4.png", 25,0,true,true);
+        tour = new Image("file:./src/resources/tour1.png", 28,0,true,true);
 
         healthOverlayIsOn = false;
         isRunning = true;
@@ -610,10 +610,10 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         if(healthOverlayIsOn){
             if(TRexHealth) {
                 gc.setFill(Color.LIME);
-                gc.fillText("Healthy",TRexLoc.getX(),TRexLoc.getY());
+                gc.fillText("H",TRexLoc.getX(),TRexLoc.getY());
             }else{
                 gc.setFill(Color.LIGHTSALMON);
-                gc.fillText("Not Healthy",TRexLoc.getX(),TRexLoc.getY());
+                gc.fillText("NH",TRexLoc.getX(),TRexLoc.getY());
             }
         }
 
@@ -728,10 +728,10 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
 
             if(healthStatus) {
                 gc.setFill(Color.LIME);
-                gc.fillText("Healthy",x,y);
+                gc.fillText("H",x,y);
             }else{
                 gc.setFill(Color.LIGHTSALMON);
-                gc.fillText("Not Healthy",x,y);
+                gc.fillText("NH",x,y);
             }
         }
     }

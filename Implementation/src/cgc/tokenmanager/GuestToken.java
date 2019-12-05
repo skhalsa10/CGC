@@ -60,7 +60,7 @@ public class GuestToken extends Token
         this.doneViewingTRex = false;
         this.viewingTRexTrigger = rand.nextInt(8000)+3000;//we will add current counter to this
         //lets randomize when this token will leave the south end after spawned
-        this.whenToLeaveSouth = rand.nextInt(5000);
+        this.whenToLeaveSouth = rand.nextInt(5000)+1;
         this.currentArea = LocationStatus.SOUTH_END;
         this.readyForPickup=false;
         this.isDriving = false;

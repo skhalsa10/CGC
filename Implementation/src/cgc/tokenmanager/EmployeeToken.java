@@ -56,7 +56,7 @@ public class EmployeeToken extends Token
 
         super(ID, tokenManager);
         rand = new Random();
-        this.whenToLeaveSouth = rand.nextInt(1809);
+        this.whenToLeaveSouth = rand.nextInt(1809)+1;
         readyForPickup = false;
         isDriving = false;
         setRandomSouthDest();
