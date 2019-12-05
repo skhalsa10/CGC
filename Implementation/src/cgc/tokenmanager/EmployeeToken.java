@@ -42,6 +42,7 @@ public class EmployeeToken extends Token
     private Point2D walkDest;
     private boolean readyForPickup;
     private boolean isDriving;
+    private int whenToLeaveSouth;
 
     /**
      * this is the constructor for the Employee token. the employee should spawn at the south entrance
@@ -55,6 +56,7 @@ public class EmployeeToken extends Token
 
         super(ID, tokenManager);
         rand = new Random();
+        this.whenToLeaveSouth = rand.nextInt(1809);
         readyForPickup = false;
         isDriving = false;
         setRandomSouthDest();
@@ -139,7 +141,7 @@ public class EmployeeToken extends Token
                 //but only after some time has gone by
                 Point2D sp = MapInfo.SOUTH_PICKUP_LOCATION;
                 //TODO set this to be Randomly generated number
-                if (counter % 1809 == 0) {
+                if (counter % whenToLeaveSouth == 0) {
                     if (walkDest != sp) {
                         walkDest = sp;
                     }
