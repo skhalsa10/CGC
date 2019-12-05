@@ -2235,52 +2235,40 @@
          x="266.89499"
          id="tspan6687"
          sodipodi:role="line">TransactionLogger</tspan></text>
-    <g
-       id="g6705"
-       transform="translate(228.59999,342.89998)"
+    <text
+       id="text6701"
+       y="484.00134"
+       x="259.72885"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"
        inkscape:export-xdpi="300"
-       inkscape:export-ydpi="300">
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-         x="31.128862"
-         y="141.10135"
-         id="text6701"><tspan
-           id="tspan6691"
-           sodipodi:role="line"
-           x="31.128862"
-           y="141.10135"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332">running : boolean</tspan><tspan
-           id="tspan6693"
-           sodipodi:role="line"
-           x="31.128862"
-           y="146.56334"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332">emrgMode: boolean</tspan><tspan
-           id="tspan6695"
-           sodipodi:role="line"
-           x="31.128862"
-           y="152.02533"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332">messages: PriorityQueue</tspan><tspan
-           sodipodi:role="line"
-           x="31.128862"
-           y="157.48732"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
-           id="tspan6697">logger  : TransactionLogger</tspan><tspan
-           id="tspan6699"
-           sodipodi:role="line"
-           x="31.128862"
-           y="162.94931"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332">kiosks  : ArrayList&lt;Kiosk&gt;</tspan></text>
-      <path
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="m 25.4,131.89993 h 76.19999 v 38.10001 H 25.4 Z"
-         id="path6703"
-         inkscape:connector-curvature="0" />
-    </g>
+       inkscape:export-ydpi="300"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
+         y="484.00134"
+         x="259.72885"
+         sodipodi:role="line"
+         id="tspan6691">totalRevenue : Double</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
+         y="489.46332"
+         x="259.72885"
+         sodipodi:role="line"
+         id="tspan6693">monthlyRevenue: Double List</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
+         y="494.92532"
+         x="259.72885"
+         sodipodi:role="line"
+         id="tspan6699">typeTicketsSold: List</tspan></text>
+    <path
+       inkscape:connector-curvature="0"
+       id="path6703"
+       d="m 253.99999,474.79991 h 76.19999 V 500.2 h -76.19999 z"
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
     <path
        inkscape:connector-curvature="0"
        style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 253.99999,512.89998 H 330.2 v 25.40004 h -76.20001 z"
+       d="M 253.99999,500.19999 H 330.2 v 12.7 h -76.20001 z"
        id="path6707"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
@@ -2288,20 +2276,15 @@
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.19516802px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.262198"
        x="262.82022"
-       y="519.05084"
+       y="503.51956"
        id="text6713"
        transform="scale(0.99098471,1.0090973)"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          x="262.82022"
-         y="519.05084"
+         y="503.51956"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.19516802px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.262198"
-         id="tspan6709">sendMessage(Message): void</tspan><tspan
-         sodipodi:role="line"
-         x="262.82022"
-         y="524.46362"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.19516802px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.262198"
-         id="tspan6711">procMessage(Message): void</tspan></text>
+         id="tspan6711">registerSale(): void</tspan></text>
   </g>
 </svg>
