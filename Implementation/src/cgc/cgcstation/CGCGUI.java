@@ -562,9 +562,10 @@ public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
         gc.setStroke(MapInfo.ROADCOLOR);
         gc.setLineWidth(16);
         gc.strokeLine(MapInfo.ROAD_SOUTH.getX(), MapInfo.ROAD_SOUTH.getY(), MapInfo.ROAD_NORTH.getX(), MapInfo.ROAD_NORTH.getY());
-        gc.setStroke(Color.WHITE);
-        gc.setLineWidth(2);
-        gc.strokeLine(MapInfo.ROAD_SOUTH.getX(), MapInfo.ROAD_SOUTH.getY(), MapInfo.ROAD_NORTH.getX(), MapInfo.ROAD_NORTH.getY());
+        //for south to north
+        //gc.strokeLine(MapInfo.ROAD_SOUTH_FOR_SOUTH_TO_NORTH.getX(), MapInfo.ROAD_SOUTH_FOR_SOUTH_TO_NORTH.getY(), MapInfo.ROAD_NORTH_FOR_SOUTH_TO_NORTH.getX(), MapInfo.ROAD_NORTH_FOR_SOUTH_TO_NORTH.getY());
+        //for North to south
+        //gc.strokeLine(MapInfo.ROAD_SOUTH_FOR_NORTH_TO_SOUTH.getX(), MapInfo.ROAD_SOUTH_FOR_NORTH_TO_SOUTH.getY(), MapInfo.ROAD_NORTH_FOR_NORTH_TO_SOUTH.getX(), MapInfo.ROAD_NORTH_FOR_NORTH_TO_SOUTH.getY());
 
 
         //draw the trex pit

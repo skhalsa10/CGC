@@ -186,7 +186,7 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
                     this.cancel();
                     restartTimer();
                 }
-                System.out.println("tokenGenCounter is "+tokenGenCounter);
+                //System.out.println("tokenGenCounter is "+tokenGenCounter);
             }
         };
         // schedules the buy of a token after 1 minute.
