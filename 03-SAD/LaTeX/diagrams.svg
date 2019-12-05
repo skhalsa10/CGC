@@ -40,9 +40,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="397.16219"
-     inkscape:cy="570.53622"
+     inkscape:zoom="0.7"
+     inkscape:cx="640.9265"
+     inkscape:cy="456.14697"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -71,7 +71,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -95,7 +95,7 @@
            height="120"
            x="96"
            y="143.99998" /></flowRegion><flowPara
-         id="flowPara7890"></flowPara></flowRoot>    <text
+         id="flowPara7890" /></flowRoot>    <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="62.239338"
@@ -112,11 +112,6 @@
        d="m 25.4,55.699989 h 76.2 v 38.1 H 25.4 Z"
        id="rect7902" />
     <path
-       inkscape:connector-curvature="0"
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 25.4,93.799989 h 76.20001 V 112.84999 H 25.4 Z"
-       id="rect7904" />
-    <path
        style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 114.3,307.58336 h 76.2 v 76.20001 h -76.2 z"
        id="rect7910"
@@ -128,24 +123,24 @@
        inkscape:connector-curvature="0" />
     <path
        style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 114.3,157.29999 h 76.20004 v 38.1 H 114.3 Z"
+       d="m 114.3,131.89995 h 76.20004 v 38.1 H 114.3 Z"
        id="rect7906"
        inkscape:connector-curvature="0" />
     <path
        style="opacity:1;fill:#ffeca9;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 114.3,144.60008 h 76.20004 v 12.69991 H 114.3 Z"
+       d="m 114.3,119.20004 h 76.20004 v 12.69991 H 114.3 Z"
        id="rect7908"
        inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="125.53646"
-       y="151.98479"
+       y="126.58482"
        id="text7932"><tspan
          sodipodi:role="line"
          id="tspan7930"
          x="125.53646"
-         y="151.98479"
+         y="126.58482"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93888903px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332">SurveillanceSystem</tspan></text>
     <text
        id="text7936"
@@ -159,33 +154,23 @@
          id="tspan7934"
          sodipodi:role="line">ProtocolManager</tspan></text>
     <path
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 25.399998,396.48355 h 76.199992 v 76.20001 H 25.399998 Z"
-       id="rect7938"
-       inkscape:connector-curvature="0" />
-    <path
        style="opacity:1;fill:#f9d2de;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 25.399998,396.48355 h 76.199992 v 12.69991 H 25.399998 Z"
+       d="M 25.399998,195.40009 H 101.59999 V 208.1 H 25.399998 Z"
        id="rect7940"
        inkscape:connector-curvature="0" />
     <path
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 114.30001,396.48352 h 76.2 v 76.20001 h -76.2 z"
-       id="rect7942"
-       inkscape:connector-curvature="0" />
-    <path
        style="opacity:1;fill:#c7e8ac;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 114.30001,396.48352 h 76.2 v 12.69995 h -76.2 z"
+       d="m 114.30001,195.40006 h 76.2 v 12.69995 h -76.2 z"
        id="rect7944"
        inkscape:connector-curvature="0" />
     <text
        id="text7948"
-       y="403.86786"
+       y="202.78474"
        x="45.698505"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93888903px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
-         y="403.86786"
+         y="202.78474"
          x="45.698505"
          id="tspan7946"
          sodipodi:role="line">TokenManager</tspan></text>
@@ -193,12 +178,12 @@
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="134.67014"
-       y="403.86786"
+       y="202.78474"
        id="text7952"><tspan
          sodipodi:role="line"
          id="tspan7950"
          x="134.67014"
-         y="403.86786"
+         y="202.78474"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93888903px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332">KioskManager</tspan></text>
     <text
        id="text7956"
@@ -236,129 +221,59 @@
          x="31.12886"
          sodipodi:role="line"
          id="tspan8878">tManager: TokenManager</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:4.19516802px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.262198"
-       x="32.140514"
-       y="100.58278"
-       id="text7984"
-       transform="scale(0.99098471,1.0090973)"><tspan
-         sodipodi:role="line"
-         x="32.140514"
+    <g
+       id="g5131">
+      <path
+         id="rect7904"
+         d="m 25.4,93.799989 h 76.20001 V 112.84999 H 25.4 Z"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+      <text
+         transform="scale(0.99098471,1.0090973)"
+         id="text7984"
          y="100.58278"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.19516802px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.262198"
-         id="tspan8012">run()               : void</tspan><tspan
-         sodipodi:role="line"
          x="32.140514"
-         y="105.99553"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.19516802px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.262198"
-         id="tspan8010">procMessage(Message): void</tspan></text>
-    <path
-       inkscape:connector-curvature="0"
-       id="rect7868"
-       d="m 25.4,195.39994 h 76.19999 V 220.8 H 25.4 Z"
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-    <path
-       inkscape:connector-curvature="0"
-       id="rect7878"
-       d="m 25.4,144.59999 h 76.19999 v 12.69998 H 25.4 Z"
-       style="opacity:1;fill:#ffdba9;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-    <text
-       id="text7924"
-       y="152.4489"
-       x="48.682137"
-       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       xml:space="preserve"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93888903px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
-         y="152.4489"
-         x="48.682137"
-         id="tspan7922"
-         sodipodi:role="line">CGCStation</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="31.128862"
-       y="166.50136"
-       id="text8910"><tspan
-         id="tspan8892"
-         sodipodi:role="line"
-         x="31.128862"
-         y="166.50136"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332">running : boolean</tspan><tspan
-         id="tspan8906"
-         sodipodi:role="line"
-         x="31.128862"
-         y="171.96335"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332">emrgMode: boolean</tspan><tspan
-         id="tspan8908"
-         sodipodi:role="line"
-         x="31.128862"
-         y="177.42534"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332">messages: PriorityQueue</tspan><tspan
-         sodipodi:role="line"
-         x="31.128862"
-         y="182.88733"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
-         id="tspan8934">cgcgui  : CGCGUI</tspan><tspan
-         sodipodi:role="line"
-         x="31.128862"
-         y="188.34932"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
-         id="tspan8936">paSystem: PASystem</tspan></text>
-    <path
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 25.4,157.29993 h 76.19999 v 38.10001 H 25.4 Z"
-       id="path8938"
-       inkscape:connector-curvature="0" />
-    <text
-       id="text8950"
-       y="203.54306"
-       x="31.128862"
-       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       xml:space="preserve"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
-         y="203.54306"
-         x="31.128862"
-         sodipodi:role="line"
-         id="tspan8940">run(): void</tspan><tspan
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
-         y="209.00505"
-         x="31.128862"
-         sodipodi:role="line"
-         id="tspan8942">sendMessage(Message): void</tspan><tspan
-         id="tspan8948"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
-         y="214.46704"
-         x="31.128862"
-         sodipodi:role="line">procMessage(Message): void</tspan></text>
+         style="font-style:normal;font-weight:normal;font-size:4.19516802px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.262198"
+         xml:space="preserve"><tspan
+           id="tspan5117"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.19516802px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.262198"
+           y="100.58278"
+           x="32.140514"
+           sodipodi:role="line">sendMessage(Message): void</tspan><tspan
+           id="tspan5121"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.19516802px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.262198"
+           y="105.99553"
+           x="32.140514"
+           sodipodi:role="line">procMessage(Message): void</tspan></text>
+    </g>
     <text
        id="text9057"
-       y="166.50136"
+       y="141.10139"
        x="120.55801"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
-         y="166.50136"
+         y="141.10139"
          x="120.55801"
          sodipodi:role="line"
          id="tspan9047">running : boolean</tspan><tspan
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
-         y="171.96335"
+         y="146.56339"
          x="120.55801"
          sodipodi:role="line"
          id="tspan9049">emrgMode: boolean</tspan><tspan
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
-         y="177.42534"
+         y="152.02538"
          x="120.55801"
          sodipodi:role="line"
          id="tspan9051">messages: PriorityQueue</tspan><tspan
          id="tspan9053"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
-         y="182.88733"
+         y="157.48737"
          x="120.55801"
          sodipodi:role="line">tMonitor: TRexMonitor</tspan><tspan
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
-         y="188.34932"
+         y="162.94936"
          x="120.55801"
          sodipodi:role="line"
          id="tspan9084">elcFence: ElectricFence</tspan></text>
@@ -380,7 +295,7 @@
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93888903px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332">VehicleManager</tspan></text>
     <path
        style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 114.3,87.449984 h 76.20004 V 112.85002 H 114.3 Z"
+       d="m 114.3,93.799989 h 76.20004 V 112.85002 H 114.3 Z"
        id="path8956"
        inkscape:connector-curvature="0" />
     <text
@@ -412,54 +327,262 @@
     <path
        inkscape:connector-curvature="0"
        id="path8970"
-       d="m 114.3,55.699988 h 76.20004 V 87.449989 H 114.3 Z"
+       d="m 114.3,55.699989 h 76.20004 V 93.79999 H 114.3 Z"
        style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="120.02884"
-       y="96.12233"
+       x="119.39011"
+       y="101.88647"
        id="text8978"><tspan
-         id="tspan8972"
-         sodipodi:role="line"
-         x="120.02884"
-         y="96.12233"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332">run()               : void</tspan><tspan
          id="tspan8974"
          sodipodi:role="line"
-         x="120.02884"
-         y="101.58432"
+         x="119.39011"
+         y="101.88647"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332">sendMessage(Message): void</tspan><tspan
          sodipodi:role="line"
-         x="120.02884"
-         y="107.04631"
+         x="119.39011"
+         y="107.34846"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
          id="tspan8976">procMessage(Message): void</tspan></text>
     <path
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 114.3,195.39999 h 76.20004 v 25.40006 H 114.3 Z"
-       id="path9088"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       id="rect7878"
+       d="m 25.4,119.19999 h 76.19999 v 12.69998 H 25.4 Z"
+       style="opacity:1;fill:#ffdba9;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <text
-       xml:space="preserve"
+       id="text7924"
+       y="127.0489"
+       x="48.682137"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="120.02884"
-       y="203.54311"
-       id="text9096"><tspan
-         id="tspan9090"
-         sodipodi:role="line"
-         x="120.02884"
-         y="203.54311"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332">run(): void</tspan><tspan
-         id="tspan9092"
-         sodipodi:role="line"
-         x="120.02884"
-         y="209.0051"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332">sendMessage(Message): void</tspan><tspan
-         sodipodi:role="line"
-         x="120.02884"
-         y="214.46709"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
-         id="tspan9094">procMessage(Message): void</tspan></text>
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93888903px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
+         y="127.0489"
+         x="48.682137"
+         id="tspan7922"
+         sodipodi:role="line">CGCStation</tspan></text>
+    <g
+       id="g5224">
+      <text
+         id="text8910"
+         y="141.10135"
+         x="31.128862"
+         style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
+           y="141.10135"
+           x="31.128862"
+           sodipodi:role="line"
+           id="tspan8892">running : boolean</tspan><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
+           y="146.56334"
+           x="31.128862"
+           sodipodi:role="line"
+           id="tspan8906">emrgMode: boolean</tspan><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
+           y="152.02533"
+           x="31.128862"
+           sodipodi:role="line"
+           id="tspan8908">messages: PriorityQueue</tspan><tspan
+           id="tspan8934"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
+           y="157.48732"
+           x="31.128862"
+           sodipodi:role="line">cgcgui  : CGCGUI</tspan><tspan
+           id="tspan8936"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
+           y="162.94931"
+           x="31.128862"
+           sodipodi:role="line">paSystem: PASystem</tspan></text>
+      <path
+         inkscape:connector-curvature="0"
+         id="path8938"
+         d="m 25.4,131.89993 h 76.19999 v 38.10001 H 25.4 Z"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <g
+       id="g5141"
+       transform="translate(0,76.200011)">
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 25.4,93.799989 h 76.20001 V 112.84999 H 25.4 Z"
+         id="path5133" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:4.19516802px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.262198"
+         x="32.140514"
+         y="100.58278"
+         id="text5139"
+         transform="scale(0.99098471,1.0090973)"><tspan
+           sodipodi:role="line"
+           x="32.140514"
+           y="100.58278"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.19516802px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.262198"
+           id="tspan5135">sendMessage(Message): void</tspan><tspan
+           sodipodi:role="line"
+           x="32.140514"
+           y="105.99553"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.19516802px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.262198"
+           id="tspan5137">procMessage(Message): void</tspan></text>
+    </g>
+    <g
+       transform="translate(88.900004,76.200011)"
+       id="g5183">
+      <path
+         id="path5175"
+         d="m 25.4,93.799989 h 76.20001 V 112.84999 H 25.4 Z"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+      <text
+         transform="scale(0.99098471,1.0090973)"
+         id="text5181"
+         y="100.58278"
+         x="32.140514"
+         style="font-style:normal;font-weight:normal;font-size:4.19516802px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.262198"
+         xml:space="preserve"><tspan
+           id="tspan5177"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.19516802px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.262198"
+           y="100.58278"
+           x="32.140514"
+           sodipodi:role="line">sendMessage(Message): void</tspan><tspan
+           id="tspan5179"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.19516802px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.262198"
+           y="105.99553"
+           x="32.140514"
+           sodipodi:role="line">procMessage(Message): void</tspan></text>
+    </g>
+    <g
+       id="g5240"
+       transform="translate(0,76.200002)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         x="31.128862"
+         y="141.10135"
+         id="text5236"><tspan
+           id="tspan5226"
+           sodipodi:role="line"
+           x="31.128862"
+           y="141.10135"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332">running : boolean</tspan><tspan
+           id="tspan5228"
+           sodipodi:role="line"
+           x="31.128862"
+           y="146.56334"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332">emrgMode: boolean</tspan><tspan
+           id="tspan5230"
+           sodipodi:role="line"
+           x="31.128862"
+           y="152.02533"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332">messages: PriorityQueue</tspan><tspan
+           sodipodi:role="line"
+           x="31.128862"
+           y="157.48732"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
+           id="tspan5232">cgcgui  : CGCGUI</tspan><tspan
+           sodipodi:role="line"
+           x="31.128862"
+           y="162.94931"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
+           id="tspan5234">paSystem: PASystem</tspan></text>
+      <path
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 25.4,131.89993 h 76.19999 v 38.10001 H 25.4 Z"
+         id="path5238"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       transform="translate(0,152.40003)"
+       id="g5250">
+      <path
+         id="path5242"
+         d="m 25.4,93.799989 h 76.20001 V 112.84999 H 25.4 Z"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+      <text
+         transform="scale(0.99098471,1.0090973)"
+         id="text5248"
+         y="100.58278"
+         x="32.140514"
+         style="font-style:normal;font-weight:normal;font-size:4.19516802px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.262198"
+         xml:space="preserve"><tspan
+           id="tspan5244"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.19516802px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.262198"
+           y="100.58278"
+           x="32.140514"
+           sodipodi:role="line">sendMessage(Message): void</tspan><tspan
+           id="tspan5246"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.19516802px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.262198"
+           y="105.99553"
+           x="32.140514"
+           sodipodi:role="line">procMessage(Message): void</tspan></text>
+    </g>
+    <g
+       transform="translate(88.900002,76.200002)"
+       id="g5266">
+      <text
+         id="text5262"
+         y="141.10135"
+         x="31.128862"
+         style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
+           y="141.10135"
+           x="31.128862"
+           sodipodi:role="line"
+           id="tspan5252">running : boolean</tspan><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
+           y="146.56334"
+           x="31.128862"
+           sodipodi:role="line"
+           id="tspan5254">emrgMode: boolean</tspan><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
+           y="152.02533"
+           x="31.128862"
+           sodipodi:role="line"
+           id="tspan5256">messages: PriorityQueue</tspan><tspan
+           id="tspan5258"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
+           y="157.48732"
+           x="31.128862"
+           sodipodi:role="line">cgcgui  : CGCGUI</tspan><tspan
+           id="tspan5260"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.26458332"
+           y="162.94931"
+           x="31.128862"
+           sodipodi:role="line">paSystem: PASystem</tspan></text>
+      <path
+         inkscape:connector-curvature="0"
+         id="path5264"
+         d="m 25.4,131.89993 h 76.19999 v 38.10001 H 25.4 Z"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <g
+       id="g5276"
+       transform="translate(88.900002,152.40003)">
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 25.4,93.799989 h 76.20001 V 112.84999 H 25.4 Z"
+         id="path5268" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:4.19516802px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.262198"
+         x="32.140514"
+         y="100.58278"
+         id="text5274"
+         transform="scale(0.99098471,1.0090973)"><tspan
+           sodipodi:role="line"
+           x="32.140514"
+           y="100.58278"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.19516802px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.262198"
+           id="tspan5270">sendMessage(Message): void</tspan><tspan
+           sodipodi:role="line"
+           x="32.140514"
+           y="105.99553"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.19516802px;font-family:'Tlwg Typist';-inkscape-font-specification:'Tlwg Typist Bold';stroke-width:0.262198"
+           id="tspan5272">procMessage(Message): void</tspan></text>
+    </g>
   </g>
 </svg>
