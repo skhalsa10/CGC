@@ -36,6 +36,7 @@ public class GuestToken extends Token
 {
 
     private  int viewingTRexTrigger;
+    private int whenToLeaveSouth;
     private boolean isRunning;
     private boolean isInEmergency;
     private boolean readyToDeactivate;
@@ -52,13 +53,15 @@ public class GuestToken extends Token
     public GuestToken(int ID, TokenManager tokenManager, Point2D GPSLocation)
     {
         super(ID, tokenManager);
+        rand = new Random();
         this.isInEmergency=false;
         this.isRunning = true;
         this.readyToDeactivate = false;
         this.doneViewingTRex = false;
-        this.viewingTRexTrigger = 7200; //we will add current counter to this
+        this.viewingTRexTrigger = rand.nextInt(8000)+3000;//we will add current counter to this
+        //lets randomize when this token will leave the south end after spawned
+        this.whenToLeaveSouth = rand.nextInt(5000);
         this.currentArea = LocationStatus.SOUTH_END;
-        rand = new Random();
         this.readyForPickup=false;
         this.isDriving = false;
         this.location = GPSLocation;
@@ -258,8 +261,8 @@ public class GuestToken extends Token
             // should explore the building before getting ready to leave to the north end
             if (currentArea == LocationStatus.SOUTH_END && !readyToDeactivate) {
                 Point2D sp = MapInfo.SOUTH_PICKUP_LOCATION;
-                //TODO set this to 3309
-                if ((counter % 3309) == 0) {
+
+                if ((counter % whenToLeaveSouth) == 0) {
                     if (walkDest != sp) {
                         walkDest = sp;
                         distance = location.distance(walkDest);
