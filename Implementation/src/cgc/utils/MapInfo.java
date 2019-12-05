@@ -66,7 +66,7 @@ public final class MapInfo {
 
     //Tour Vehicle garage on north and south end, can calculate other 3 points from upper_left and garage dimensions.
     public final static Point2D UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE = new Point2D(MAP_WIDTH-GARAGE_WIDTH, MAP_HEIGHT-SOUTHBUILDING_HEIGHT-GARAGE_HEIGHT-10);
-    public final static Point2D UPPER_LEFT_TOURVEHICLE_NORTH_GARAGE = new Point2D(MAP_WIDTH-GARAGE_WIDTH, TREX_PIT_HEIGHT+30);
+    public final static Point2D UPPER_LEFT_TOURVEHICLE_NORTH_GARAGE = new Point2D(0, TREX_PIT_HEIGHT+30);
 
     //South BUILDING
     public final static Point2D UPPER_LEFT_SOUTH_BULDING = new Point2D((MAP_WIDTH-SOUTHBUILDING_WIDTH)/2,MAP_HEIGHT-SOUTHBUILDING_HEIGHT);
