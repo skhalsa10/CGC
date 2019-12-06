@@ -77,8 +77,7 @@ public class TourVehicle extends Vehicle {
 
     @Override
     protected void startVehicleTimer() {
-        //TODO build the timer and timer task here.
-        // this can be used to update the location of the car over time
+        //TODO remove this from abstract class, not using this.
     }
 
     private void startDrivingToNorthPickupTimer() {
@@ -163,10 +162,10 @@ public class TourVehicle extends Vehicle {
         // incrementing by 2 to (inclusive) random bounds just so the random numbers dont end up at the
         // corner of the garage box and we can't see the car.
         Random randomBounds = new Random();
-        double xLeftBound = MapInfo.UPPER_LEFT_TOURVEHICLE_NORTH_GARAGE.getX() + 2;
-        double xRightBound = MapInfo.UPPER_LEFT_TOURVEHICLE_NORTH_GARAGE.getX() + MapInfo.GARAGE_WIDTH;
-        double yMinBound = MapInfo.UPPER_LEFT_TOURVEHICLE_NORTH_GARAGE.getY() + 2;
-        double yMaxBound = MapInfo.UPPER_LEFT_TOURVEHICLE_NORTH_GARAGE.getY() + MapInfo.GARAGE_HEIGHT;
+        double xLeftBound = MapInfo.UPPER_LEFT_TOURVEHICLE_NORTH_GARAGE.getX() + 5;
+        double xRightBound = MapInfo.UPPER_LEFT_TOURVEHICLE_NORTH_GARAGE.getX() + MapInfo.GARAGE_WIDTH - 5;
+        double yMinBound = MapInfo.UPPER_LEFT_TOURVEHICLE_NORTH_GARAGE.getY() + 5;
+        double yMaxBound = MapInfo.UPPER_LEFT_TOURVEHICLE_NORTH_GARAGE.getY() + MapInfo.GARAGE_HEIGHT - 5;
 
         // random destination in north garage.
         return new Point2D(xLeftBound + (xRightBound - xLeftBound) * randomBounds.nextDouble(),
@@ -177,10 +176,10 @@ public class TourVehicle extends Vehicle {
         // incrementing by 2 to (inclusive) random bounds just so the random numbers dont end up at the
         // corner of the garage box and we can't see the car.
         Random randomBounds = new Random();
-        double xLeftBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getX() + 2;
-        double xRightBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getX() + MapInfo.GARAGE_WIDTH;
-        double yMinBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getY() + 2;
-        double yMaxBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getY() + MapInfo.GARAGE_HEIGHT;
+        double xLeftBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getX() + 5;
+        double xRightBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getX() + MapInfo.GARAGE_WIDTH - 5;
+        double yMinBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getY() + 5;
+        double yMaxBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getY() + MapInfo.GARAGE_HEIGHT - 5;
 
         // random destination in south garage.
         return new Point2D(xLeftBound + (xRightBound - xLeftBound) * randomBounds.nextDouble(),
@@ -230,14 +229,24 @@ public class TourVehicle extends Vehicle {
 
             switch (pickUpLocation) {
                 case NORTH_PICKUP:
-                    if (!isDriving) {
-                        isDriving = true;
+                    if(!emergencyMode) {
+                        if (!isDriving) {
+                            isDriving = true;
+                            startDrivingToNorthPickupTimer();
+                        }
+                    }else{
+                        timer.cancel();
                         startDrivingToNorthPickupTimer();
                     }
                     break;
                 case SOUTH_PICKUP:
-                    if (!isDriving) {
-                        isDriving = true;
+                    if(!emergencyMode) {
+                        if (!isDriving) {
+                            isDriving = true;
+                            startDrivingToSouthPickupTimer();
+                        }
+                    }else{
+                        timer.cancel();
                         startDrivingToSouthPickupTimer();
                     }
                     break;
@@ -269,28 +278,35 @@ public class TourVehicle extends Vehicle {
         }
         else if (m instanceof MoveCarToSouthPickUp) {
             // the car's current location is at south garage.
-            Point2D dest = MapInfo.SOUTH_PICKUP_LOCATION;
+            if (!emergencyMode) {
+                Point2D dest = MapInfo.SOUTH_PICKUP_LOCATION;
 
-            location = location.add((dest.getX()-location.getX())/DISTANCE*2, (dest.getY()-location.getY())/DISTANCE*2);
+                location = location.add((dest.getX() - location.getX()) / DISTANCE * 2, (dest.getY() - location.getY()) / DISTANCE * 2);
 
-            if(dest.getX()-1<location.getX() &&
-                    location.getX()<dest.getX()+1 &&
-                    dest.getY()-1<location.getY() &&
-                    location.getY()<dest.getY()+1) {
+                if (dest.getX() - 1 < location.getX() &&
+                        location.getX() < dest.getX() + 1 &&
+                        dest.getY() - 1 < location.getY() &&
+                        location.getY() < dest.getY() + 1) {
 
-                location = MapInfo.SOUTH_PICKUP_LOCATION;
-                carEnd = LocationStatus.SOUTH_PICKUP;
-                isDriving = false;
-                this.timer.cancel();
+                    location = MapInfo.SOUTH_PICKUP_LOCATION;
+                    carEnd = LocationStatus.SOUTH_PICKUP;
+                    isDriving = false;
+                    this.timer.cancel();
 
-                Message carArrivedAtPickUp = new TourCarArrivedAtPickup(this.ID, LocationStatus.SOUTH_PICKUP);
-                vehicleManager.sendMessage(carArrivedAtPickUp);
+                    Message carArrivedAtPickUp = new TourCarArrivedAtPickup(this.ID, LocationStatus.SOUTH_PICKUP);
+                    vehicleManager.sendMessage(carArrivedAtPickUp);
+                }
+
+                // updated Driving location with empty tokens, no tokens yet since the car is going from garage
+                // to pickup location.
+                Message updatedDrivingLocation = new UpdatedDrivingLocation(this.ID, location, new LinkedList<>());
+                vehicleManager.sendMessage(updatedDrivingLocation);
             }
-
-            // updated Driving location with empty tokens, no tokens yet since the car is going from garage
-            // to pickup location.
-            Message updatedDrivingLocation = new UpdatedDrivingLocation(this.ID, location, new LinkedList<>());
-            vehicleManager.sendMessage(updatedDrivingLocation);
+            else {
+                this.timer.cancel();
+                this.randomGarageDestination = getRandomSouthGarageDestination();
+                startDrivingToSouthGarageTimer();
+            }
         }
         else if (m instanceof BeginDrivingToDropOff) {
             BeginDrivingToDropOff m2 = (BeginDrivingToDropOff) m;
@@ -314,38 +330,44 @@ public class TourVehicle extends Vehicle {
         else if (m instanceof MoveCarToNorthDropOff) {
             //System.out.println("MoveCarToNorthDropOff has been received by car " + ID);
             // car's initial location is the South_PickUp_location when this message is called initially.
-            Point2D dest = MapInfo.NORTH_PICKUP_LOCATION;
+            if (!emergencyMode) {
+                Point2D dest = MapInfo.NORTH_PICKUP_LOCATION;
 
-            LinkedList<Integer> tokensInsideCar = this.tokensInCar;
+                LinkedList<Integer> tokensInsideCar = this.tokensInCar;
 
 
-            location = location.add((dest.getX()-location.getX())/DISTANCE*2, (dest.getY()-location.getY())/DISTANCE*2);
+                location = location.add((dest.getX() - location.getX()) / DISTANCE * 2, (dest.getY() - location.getY()) / DISTANCE * 2);
 
-            // close to north drop off location.
-            if(dest.getX()-1<location.getX() &&
-                    location.getX()<dest.getX()+1 &&
-                    dest.getY()-1<location.getY() &&
-                    location.getY()<dest.getY()+1) {
+                // close to north drop off location.
+                if (dest.getX() - 1 < location.getX() &&
+                        location.getX() < dest.getX() + 1 &&
+                        dest.getY() - 1 < location.getY() &&
+                        location.getY() < dest.getY() + 1) {
 
-                location = MapInfo.NORTH_PICKUP_LOCATION;
-                carEnd = LocationStatus.NORTH_END;
-                isDriving = false;
-                this.timer.cancel();
+                    location = MapInfo.NORTH_PICKUP_LOCATION;
+                    carEnd = LocationStatus.NORTH_END;
+                    isDriving = false;
+                    this.timer.cancel();
 
-                System.out.println("ABout to generate the TourCarArrivedAtDropOff with list of ids: " + tokensInsideCar);
-                Message carArrivedAtDropOff = new TourCarArrivedAtDropOff(this.ID,LocationStatus.NORTH_END, tokensInsideCar);
-                vehicleManager.sendMessage(carArrivedAtDropOff);
+                    System.out.println("ABout to generate the TourCarArrivedAtDropOff with list of ids: " + tokensInsideCar);
+                    Message carArrivedAtDropOff = new TourCarArrivedAtDropOff(this.ID, LocationStatus.NORTH_END, tokensInsideCar);
+                    vehicleManager.sendMessage(carArrivedAtDropOff);
 
-                // load of passengers (tokens) inside the car, need to remove member variable list here
-                // that's why stored inside the local list, so later i can send message with updatedDrivingLocation.
-                if (tokensInCar.size() > 0) {
-                    tokensInCar.clear();
+                    // load of passengers (tokens) inside the car, need to remove member variable list here
+                    // that's why stored inside the local list, so later i can send message with updatedDrivingLocation.
+                    if (tokensInCar.size() > 0) {
+                        tokensInCar.clear();
+                    }
                 }
-            }
 
-            // update driving location as the car moves to north dropoff with all the tokens in the car.
-            Message updatedDrivingLocation = new UpdatedDrivingLocation(this.ID, location, tokensInsideCar);
-            vehicleManager.sendMessage(updatedDrivingLocation);
+                // update driving location as the car moves to north dropoff with all the tokens in the car.
+                Message updatedDrivingLocation = new UpdatedDrivingLocation(this.ID, location, tokensInsideCar);
+                vehicleManager.sendMessage(updatedDrivingLocation);
+            }
+            else {
+                this.timer.cancel();
+                startDrivingToSouthDropOffTimer();
+            }
         }
         else if (m instanceof MoveCarToSouthDropOff) {
             // car's initial location is the NORTH_PICKUP_LOCATION when this message is called initially.

@@ -49,8 +49,8 @@ public final class MapInfo {
 
     //PICKUP LOCATIONS
     public final static Point2D GUEST_SPAWN_LOCATION = new Point2D(MAP_WIDTH/2,MAP_HEIGHT);
-    public final static Point2D SOUTH_PICKUP_LOCATION = new Point2D(MAP_WIDTH/2,MAP_HEIGHT-SOUTHBUILDING_HEIGHT-20);
-    public final static Point2D NORTH_PICKUP_LOCATION = new Point2D(MAP_WIDTH/2,TREX_PIT_HEIGHT+30);
+    public final static Point2D SOUTH_PICKUP_LOCATION = new Point2D(MAP_WIDTH/2,MAP_HEIGHT-SOUTHBUILDING_HEIGHT-6);
+    public final static Point2D NORTH_PICKUP_LOCATION = new Point2D(MAP_WIDTH/2,TREX_PIT_HEIGHT+20);
     public final static Point2D ENTRANCE = new Point2D(MAP_WIDTH/2,MAP_HEIGHT);
 
     //TREX STUFF
@@ -66,7 +66,7 @@ public final class MapInfo {
 
     //Tour Vehicle garage on north and south end, can calculate other 3 points from upper_left and garage dimensions.
     public final static Point2D UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE = new Point2D(MAP_WIDTH-GARAGE_WIDTH, MAP_HEIGHT-SOUTHBUILDING_HEIGHT-GARAGE_HEIGHT-10);
-    public final static Point2D UPPER_LEFT_TOURVEHICLE_NORTH_GARAGE = new Point2D(MAP_WIDTH-GARAGE_WIDTH, TREX_PIT_HEIGHT+30);
+    public final static Point2D UPPER_LEFT_TOURVEHICLE_NORTH_GARAGE = new Point2D(0, TREX_PIT_HEIGHT+30);
 
     //South BUILDING
     public final static Point2D UPPER_LEFT_SOUTH_BULDING = new Point2D((MAP_WIDTH-SOUTHBUILDING_WIDTH)/2,MAP_HEIGHT-SOUTHBUILDING_HEIGHT);
@@ -74,8 +74,12 @@ public final class MapInfo {
     //Vehicle path
     public final static Point2D ROAD_SOUTH = new Point2D(MAP_WIDTH/2,MAP_HEIGHT-SOUTHBUILDING_HEIGHT);
     public final static Point2D ROAD_NORTH = new Point2D(MAP_WIDTH/2,TREX_PIT_HEIGHT+30);
+    public final static Point2D ROAD_SOUTH_FOR_SOUTH_TO_NORTH = new Point2D(MAP_WIDTH/2+TREX_PIT_WIDTH/4,MAP_HEIGHT-SOUTHBUILDING_HEIGHT);
+    public final static Point2D ROAD_NORTH_FOR_SOUTH_TO_NORTH = new Point2D(MAP_WIDTH/2+TREX_PIT_WIDTH/4,TREX_PIT_HEIGHT+30);
+    public final static Point2D ROAD_SOUTH_FOR_NORTH_TO_SOUTH = new Point2D(MAP_WIDTH/2-TREX_PIT_WIDTH/4,MAP_HEIGHT-SOUTHBUILDING_HEIGHT);
+    public final static Point2D ROAD_NORTH_FOR_NORTH_TO_SOUTH = new Point2D(MAP_WIDTH/2-TREX_PIT_WIDTH/4,TREX_PIT_HEIGHT+30);
 
-    //TODO add linear coordinate for the path of te highway that goes from south to north
+
     //two points needed
 
     //TODO if there is a different high way being used from northside to south side those points should be identified below

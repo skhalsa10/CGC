@@ -19,7 +19,6 @@ public class TransactionLogger {
     //0: CHILDREN, 1: ADULT, 2: SENIOR
     private ArrayList<Integer> typeTicketsSold;
 
-    //TODO - minutesBenefits will calculate benefits per minute
     private ArrayList<Double> minutesBenefits;
     
     public TransactionLogger() {

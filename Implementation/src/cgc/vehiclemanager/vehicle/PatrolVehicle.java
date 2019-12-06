@@ -128,7 +128,6 @@ public class PatrolVehicle extends Vehicle {
 
         else if(m instanceof EnterEmergencyMode){
             this.isInEmergency = true;
-            //TODO should this do more in emergency mode?
         }
 
         else if(m instanceof ExitEmergencyMode){

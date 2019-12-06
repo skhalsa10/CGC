@@ -8,7 +8,6 @@ a pay kiosk.
 import javafx.geometry.Point2D;
 
 public class RequestToken implements Message {
-    // TODO: add appropriate properties associated with requesting token.
     private Point2D location;
 
     public RequestToken(Point2D location) {

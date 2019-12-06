@@ -76,12 +76,6 @@ public class VehicleManager extends Thread implements Communicator {
     private boolean isInEmergency;
     private HashMap<Integer, PatrolVehicle> patrolCars;
     private HashMap<Integer, TourVehicle> tourCars;
-    //TODO must make a Data structure to keep track of vehicles
-    // if we only have X amount of cars it may need to keep track of the available and used cars
-    // is this done with the scheduler or dispatcher?
-
-    //TODO the other option is to have a VehicleFactor that can produce an unlimited amount of vehicles?
-
 
     public VehicleManager(CGC cgc) {
 
@@ -125,10 +119,10 @@ public class VehicleManager extends Thread implements Communicator {
         // incrementing by 2 to (inclusive) random bounds just so the random numbers dont end up at the
         // corner of the garage box and we can't see the car.
         Random randomBounds = new Random();
-        double xLeftBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getX() + 2;
-        double xRightBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getX() + MapInfo.GARAGE_WIDTH;
-        double yMinBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getY() + 2;
-        double yMaxBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getY() + MapInfo.GARAGE_HEIGHT;
+        double xLeftBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getX() + 5;
+        double xRightBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getX() + MapInfo.GARAGE_WIDTH - 5;
+        double yMinBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getY() + 5;
+        double yMaxBound = MapInfo.UPPER_LEFT_TOURVEHICLE_SOUTH_GARAGE.getY() + MapInfo.GARAGE_HEIGHT - 5;
 
         // creating 10 cars at random locations inside the south garage.
         for (int id = 1; id < 11; id++) {
@@ -217,7 +211,7 @@ public class VehicleManager extends Thread implements Communicator {
             this.vehicleDispatcher.sendMessage(m);
         }
         else if (m instanceof TourCarArrivedAtDropOff) {
-            System.out.println("Vehicle Manager processed TourCarArrivedAtDropOff and it has I");
+            //System.out.println("Vehicle Manager processed TourCarArrivedAtDropOff and it has I");
             this.vehicleDispatcher.sendMessage(m);
             cgc.sendMessage(m);
         }

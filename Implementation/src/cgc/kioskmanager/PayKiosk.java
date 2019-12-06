@@ -40,6 +40,7 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
     private boolean healthStatus;
     private Point2D location;
     private boolean isInEmergencyMode;
+    private int tokenGenCounter=1000;
 
     
     //Ticket price .v1
@@ -180,9 +181,15 @@ public class PayKiosk extends Thread implements Communicator, Maintainable, Loca
             public void run() {
                 BuyTicket handleBuyTicket = new BuyTicket();
                 messages.put(handleBuyTicket);
+                if(tokenGenCounter<=60000){
+                    tokenGenCounter +=1000;
+                    this.cancel();
+                    restartTimer();
+                }
+                //System.out.println("tokenGenCounter is "+tokenGenCounter);
             }
         };
         // schedules the buy of a token after 1 minute.
-        this.timer.schedule(task, 100, 30000);
+        this.timer.schedule(task, tokenGenCounter, tokenGenCounter);
     }
 }
