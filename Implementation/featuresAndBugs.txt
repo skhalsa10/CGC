@@ -1,0 +1,61 @@
+
+
+DISPATCHER BUGS:
+1. dispatcher only sends a list of 3 tokens even though there is 5 waiting FIXED
+2. There is a case if a bunch of tokens get register as ready to leave that
+    car never gets dispatched from the garage this happens when a HUGE
+    line of tokens comes in and it goes into emergency mode.
+    after the active car leaves a new active car is never dispatched from garage.
+    Maybe need to check if there are tokens still in the queue
+    and redispatch a new car. FIXED
+
+TourVehicle Bugs:
+1.when this message is sent after arriving at North end with passangers
+TourCarArrivedAtDropOff it sends an empty list of tokens FIXED
+2. review line 335 in class fixed
+
+either Dispatcher or Tour
+Tour Car moves from North Garage to South Garage FIXED
+EMPLOYEE TOKEN
+Was not responding to to north end dropoff FIXED
+Guest Token BUGS:
+1. was not responding for ready to pickup at south end  FIXED
+2. Was Immediately asking to be picked up when they were dropped off at north end FIXED
+3. Guest is walking into the TREX pit when ready to leave FIXED
+4. Guest would get stuck walking to north pick up location when leaving FIXED
+PATROL Vehicle
+***1. switch ThreadLocalRandom to Random FIXED
+CGCGUI:
+1. Handle DeavtivateToken message FIXED
+2. add images for Tour Vehicles FIXED
+3. render tokens when basicrendor turned off. FIXED
+MAPINFO
+3. Review Garage location FIXED
+
+OPENS:
+
+Features to add:
+1. make two roads
+2. randomize token generation more COMPLETED
+3. randomize the time a guest waits at trex. COMPLETED
+4. change Patrol area
+5. Randomize when Guest and token leave each area random number as constructed. COMPLETED
+6. Place north Garage on the left of GUI COMPLETED
+7.change patrolcars picture to a helicopter?
+
+MAPINFO
+1. change southpickup location COMPLETED
+2. change north pickup location COMPLETED
+SystemBUGS:
+1. threads are still active after shutting down.
+DISPATCHER:
+1.there is a bug where tokens get stuck on the north End and dont get picked up.
+2. bug where dispatcher somehow dispatches multiple vehicles at south end and then the
+south end stops working alltogethor
+3. got the following:
+  Exception in thread "Thread-10" java.lang.NullPointerException
+  at cgc.vehiclemanager.VehicleDispatcher.processMessage(VehicleDispatcher.java:372)
+  at cgc.vehiclemanager.VehicleDispatcher.run(VehicleDispatcher.java:53)
+GuestToken:
+1. There is a bug where a guest gets stuck inside the TREX when they are viewing it from the inside
+    emergency mode is entered they walk towards pickup but then emergencymode exits FIXED
