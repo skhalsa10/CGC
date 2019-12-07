@@ -18,7 +18,7 @@ import java.util.concurrent.PriorityBlockingQueue;
  * The timer and timer task might place a message in the blocking queue to perform an action. the main threads run will loop using the
  * blocking queue this will make the thread wait efficiently without using a busy wait.
  *
- * @author Santi
+ * @author Anas
  * @version 1
  *
  *

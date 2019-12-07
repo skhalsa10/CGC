@@ -17,7 +17,7 @@ import java.util.concurrent.PriorityBlockingQueue;
  * it keeps track of active vehicles and forwards the appropriate messages to them.
  *
  * @version 1
- * @author Siri
+ * @author Siri and Anas
  *
  * Skeleton were written by Anas and Siri
  */
