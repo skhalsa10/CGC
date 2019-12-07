@@ -15,21 +15,12 @@ import java.util.TimerTask;
  * this token encapsulates the behavior os the Guest. in the real world it would just report data to the token
  * manager. but in this simulation it also simulates behavior over time..
  *
- * To simulate the behavior over time it will use a Timer and Timer task to generate location movement over
- * time.
+ * the guest is similar to the employee but it will view the TREX for awhile and then head back to the south end and deactivate
  *
- * This Token Must sendMessage() to the Token Manager with its updated healthstatus Every time it changes
+ * @version 1
+ * @author started by matt and finished by Siri
  *
- * This Token Must sendMessage() to the Token Manager with its updated Location EVERY time it changes
- *
- * The Token  may receive EmergencyMode message
- *    2. Put itself in emergency mode.
- *
- * The Token  may receive ExitEmergencyMode message
- *    2. it must exit emergency mode.
- *
- * The Token may receive a Shutdown Message from the Token Manager
- *
+ * Skeleton were written by Anas and Siri
  *
  */
 public class GuestToken extends Token

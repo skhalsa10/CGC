@@ -9,26 +9,12 @@ import java.util.concurrent.PriorityBlockingQueue;
 /**
  *  This Class will manage the communication with TRex Monitor, Electric Fence, and DVR.
  *
- * The SurveillanceSystem may receive a message from the CGC to report the Health of electric fence, TRexMonitor, and DVR
- *     1. SendMessage to all children's requesting health. Keep track of the updates.
- *     2. It will respond with a message back to cgc with the current health of all children's.
+ *  this is a manager like class that routes the messages to the appropriate location
  *
- * The SurveillanceSystem may receive a message from a cgc requesting location of T-Rex.
- *     1. SendMessage to TRexMonitor to get updated location.
- *     2. SendMessage back to cgc with TRex location.
+ * @version 1
+ * @author Anas
  *
- * The SurveillanceSystem may receive EmergencyMode message from cgc
- *    1. it needs to sendMessage to all children's.
- *    2. Put itself in emergency mode.
- *
- * The SurveillanceSystem may receive exit EmergencyMode message from cgc
- *    1. it needs to sendMessage to all children's.
- *    2. Put itself out of emergency mode.
- *
- * The SurveillanceSystem may receive message from electric fence of reporting down
- *    1. the SurveillanceSystem will sendMessage to cgc of reporting electric fence down.
- *    2. Then CGC will do appropriate stuff to go in emergency mode (not important for this class, cgc will take care of that).
- *
+ * Skeleton were written by Anas and Siri
  */
 public class SurveillanceSystem extends Thread implements Communicator {
 

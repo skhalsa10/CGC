@@ -21,6 +21,7 @@ import java.util.concurrent.PriorityBlockingQueue;
  * @author Anas
  * @version 1
  *
+ * Skeleton were written by Anas and Siri
  */
 public class CGC extends Thread implements Communicator {
 

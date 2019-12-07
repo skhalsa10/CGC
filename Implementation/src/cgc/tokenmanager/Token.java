@@ -9,6 +9,15 @@ import javafx.geometry.Point2D;
 import java.util.Timer;
 import java.util.concurrent.PriorityBlockingQueue;
 
+/**
+ * abstract class that the employee and Guest tokens extend.
+ * It enforces some properties and methods of what a token does
+ *
+ * @author Siri
+ * @version 1
+ *
+ * Skeleton were written by Anas and Siri
+ */
 public abstract class Token extends Thread implements Locatable, Maintainable, Communicator
 {
     protected int tokenID;

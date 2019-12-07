@@ -10,6 +10,11 @@ import java.util.Calendar;
  * Kiosk Manager. this will not need to run in it's own thread. the Kiosk manager
  * can control all aspects  of this class. This class will be left up to the maker of the Kiosk Manager
  * to build out. ALL finance related action should be done using this class.
+ *
+ * @author Santi
+ * @version 1
+ *
+ * Skeleton were written by Anas and Siri
  */
 public class TransactionLogger {
 

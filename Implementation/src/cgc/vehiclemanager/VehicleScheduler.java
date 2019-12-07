@@ -9,6 +9,10 @@ package cgc.vehiclemanager;
  *      2. make sure to implement the Interface Communicator
  *      3. And pass in a reference to the VehicleManager inside the Constructor
  *
+ *      Not implemented
+ *
+ * Skeleton were written by Anas and Siri
+ *
  */
 public class VehicleScheduler {
     public VehicleScheduler() {

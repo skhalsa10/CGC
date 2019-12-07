@@ -9,6 +9,15 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.PriorityBlockingQueue;
 
+/**
+ * This class will simulate the electric fence. It will randomly go
+ * offline after time hs expired and send the message to its manager above it.
+ *
+ * @author Anas
+ * @version 1
+ *
+ * Skeleton were written by Anas and Siri
+ */
 public class ElectricFence extends Thread implements Maintainable, Communicator {
 
     private SurveillanceSystem surveillanceSystem;

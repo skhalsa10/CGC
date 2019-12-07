@@ -4,7 +4,6 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 
-import java.net.PortUnreachableException;
 
 
 /**
@@ -13,6 +12,12 @@ import java.net.PortUnreachableException;
  * for example the TRexMonitor implementor will need to know the x and y coordinates of the TREX PIT
  * this can be extrapulated from the data below. the behavior logic of the location movement in the t-rex
  * will need this to make sure it never leaves the pit.
+ *
+ * This is a critical piece to the system. the whole application is build off of these constants.
+ *
+ * We can easily make changes here though quickly change the application.
+ *
+ * @author Anas and Siri
  *
  *
  *
@@ -74,6 +79,7 @@ public final class MapInfo {
     //Vehicle path
     public final static Point2D ROAD_SOUTH = new Point2D(MAP_WIDTH/2,MAP_HEIGHT-SOUTHBUILDING_HEIGHT);
     public final static Point2D ROAD_NORTH = new Point2D(MAP_WIDTH/2,TREX_PIT_HEIGHT+30);
+    //if we want two roads
     public final static Point2D ROAD_SOUTH_FOR_SOUTH_TO_NORTH = new Point2D(MAP_WIDTH/2+TREX_PIT_WIDTH/4,MAP_HEIGHT-SOUTHBUILDING_HEIGHT);
     public final static Point2D ROAD_NORTH_FOR_SOUTH_TO_NORTH = new Point2D(MAP_WIDTH/2+TREX_PIT_WIDTH/4,TREX_PIT_HEIGHT+30);
     public final static Point2D ROAD_SOUTH_FOR_NORTH_TO_SOUTH = new Point2D(MAP_WIDTH/2-TREX_PIT_WIDTH/4,MAP_HEIGHT-SOUTHBUILDING_HEIGHT);

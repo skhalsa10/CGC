@@ -10,32 +10,13 @@ import javafx.geometry.Point2D;
 import java.util.*;
 
 /**
- * this is a speciel extension of the Vehicle class the generates Tour related behavior.
- * for example this cars movemove may only move towards pickup locations and back and fourht on the main highway
+ * this Class encapsulates the behavior of the tour vehicle. It is capable of driving from location to location
+ * and it keeps track of the registered tokens inside the car.
  *
- * the Tour vehicle may receive a message from the Vehicle Manager to give it a destination
- *  1. set destination and behave accordingly
+ * @version 1
+ * @author Anas
  *
- * the Tour vehicle may receive a message from the Vehicle Manager to update it with it's location
- *  1. Send message to VehicleManager with updated location
- *
- * the Tour Vehicle may receive a message from the vehicle manager to update it with its current health status
- *  1. send message to vehicleManager with current healthstatus.
- *
- * the Tour vehicle may receive a message from the Vehicle Manager
- *
- * The Tour Vehicle may send a message to the Vehicle manager that it has arrived at destination
- *
- * The Tour vehicle may send a message to the Vehicle Manager that is ready to pick up at South/North
- *
- * The Tour Vehicle may receive message from VehicleManager EnterEmergencyMode
- *  1. it will respond by following emergency protocal behavior
- *
- * the Tour Vehicle May receive message from VehicleManager to ExitEmergencyMode
- *  1. respond accordingly
- *
- * The Tour Vehicle may receive a message from VehicleManager to ShutDown
- *  1. all threads will shut down gracefully.
+ * Skeleton were written by Anas and Siri
  */
 public class TourVehicle extends Vehicle {
 

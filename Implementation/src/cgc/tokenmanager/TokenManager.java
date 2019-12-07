@@ -5,56 +5,15 @@ import cgc.utils.Communicator;
 import cgc.utils.MapInfo;
 import cgc.utils.messages.*;
 
-import javafx.geometry.Point2D;
-
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.concurrent.PriorityBlockingQueue;
 
 /**
  *  This Class will manage the communication with all Token devices this includes Guests and
- *  Employees.
+ *  Employees. It is another pretty simple class it keeps track of all active tokens and forwards messages to them... thats it.
  *
- * The TokenManager may receive a message fro the CGC to spawn a new GuestToken
- *     1. The Token Manager must create a new token.
- * DONE
  *
- * The Token Manager may receive a message from a token with updated location
- *     1. it will respond by forwarding that location with tokenID to cgc.
- * DONE
- *
- * The Token Manager may receive updated health information from the token
- *     1. it must update its list of token health information.
- * DONE
- *
- * The Token Manager may sendMessage to token for updated health information
- * DONE
- *
- * The Token Manager may sendMessage to token requesting its location.
- * DONE
- *
- * The Token Manager may receive EmergencyMode message
- *    1. it needs to sendMessage to all active tokens.
- *    2. Put itself in emergency mode.
- * DONE
- *
- * The Token Manager may receive exit EmergencyMode message
- *    1. it needs to sendMessage to all active tokens.
- *    2. Put itself out of emergency mode.
- * DONE
- *
- * The Token Manager May receive a Shutdown Message from the CGC
- *      1. it will need to send a Shutdown Message to all active tokens
- *      2. it will then shut down gracefully itself.
- * DONE
- *
- * The Token Manager may receive a message from a guest token that it is Deactivated
- *      1. It must delete all information that is being stored for this token
- *
- * The Token Manager may receive a message from the CGC to report the Health of all the Tokens
- *      1. It will respond with a message with the current health of all tokens
- *  DONE
- *
+ * Skeleton were written by Anas and Siri
  */
 public class TokenManager extends Thread implements Communicator
 {

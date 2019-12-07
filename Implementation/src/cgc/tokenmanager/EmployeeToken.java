@@ -11,25 +11,16 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * this token encapsulates the behavior os the Employee. in the real world it would just report data to the token
- * manager. but in this simulation it also simulates behavior over time..
+ * this token encapsulates the behavior of the Employee. in the real world it would just report data to the token
+ * manager. but in this simulation it also simulates behavior over time.
  *
- * To simulate the behavior over time it will use a Timer and Timer task to generate location movement over
- * time.
+ * the employee will be spawned where it is randomly chosen to work on the north or south end of the island
+ * It will also randomize the timing the employee takes to decide to leave to the north end if it works on that end.
  *
- * This Token Must sendMessage() to the Token Manager with its updated healthstatus Every time it changes
+ * @version 1
+ * @author started by matt and finished by siri
  *
- * This Token Must sendMessage() to the Token Manager with its updated Location EVERY time it changes
- *
- * The Token  may receive EmergencyMode message
- *    2. Put itself in emergency mode.
- *
- * The Token  may receive ExitEmergencyMode message
- *    2. it must exit emergency mode.
- *
- * The Token may receive a Shutdown Message from the Token Manager
- *
- *
+ *Skeleton were written by Anas and Siri
  */
 public class EmployeeToken extends Token
 {

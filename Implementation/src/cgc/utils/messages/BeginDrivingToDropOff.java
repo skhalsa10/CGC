@@ -2,6 +2,10 @@ package cgc.utils.messages;
 
 import java.util.LinkedList;
 
+/**
+ * dispatcher sends this to tourVehicle to move towards the appropriate dropoff
+ * @author Anas
+ */
 public class BeginDrivingToDropOff implements Message {
 
     private LinkedList<Integer> tokensInCarId;

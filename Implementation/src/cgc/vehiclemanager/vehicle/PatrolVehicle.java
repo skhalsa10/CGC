@@ -9,39 +9,16 @@ import javafx.geometry.Point2D;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * The Patrol vehicle is a special version of the vehicle class that simulates the behavior of a patrol car and how it
- * might interact with the world.
+ * might interact with the world. The patrol car is extremely simple it literally picks a random point in the patrol area
+ * and drives to it.
  *
- * the Patrol vehicle may receive a message from the Vehicle Manager to give it a destination
- *  1. set destination and behave accordingly
- *  N/A
+ * @version 1
+ * @author Siri
  *
- * the Patrol vehicle may receive a message from the Vehicle Manager to update it with it's location
- *  1. Send message to VehicleManager with updated location
- *  DONE
- *
- * the Patrol Vehicle may receive a message from the vehicle manager to update it with its current health status
- *  1. send message to vehicleManager with current healthstatus.
- *  DONE
- *
- * The Patrol Vehicle may send a message to the Vehicle manager that it has arrived at destination
- *
- * The patrol vehicle may send message to vehicle manager that it is now beginning autonomouspatrol
- *
- *  * The Patrol Vehicle may receive message from VehicleManager EnterEmergencyMode
- *  *  1. it will respond by following emergency protocal behavior
- *  DONE
- *  *
- *  * the PatrolVehicle May receive message from VehicleManager to ExitEmergencyMode
- *  *  1. respond accordingly
- *  DONE
- *  *
- *  * The PatrolVehicle may receive a message from VehicleManager to ShutDown
- *  *  1. thread will shut down gracefully.
- *  DONE
+ * Skeleton were written by Anas and Siri
  *
  */
 public class PatrolVehicle extends Vehicle {

@@ -1,7 +1,9 @@
 package cgc.utils;
 
 /**
- * This implies this class can respond to the checkLocation() Message
+ * This ended up not being needed but would be critical for a real world application
+ *
+ * Skeleton were written by Anas and Siri
  */
 public interface Locatable {
 

@@ -1,5 +1,10 @@
 package cgc.utils.messages;
 
+/**
+ * produced by the elctric fence when it shuts down. The cgc turns this into an emergency mode message
+ * for the park to respond to
+ *
+ */
 public class ElectricFenceDown implements Message {
 
     public ElectricFenceDown() {

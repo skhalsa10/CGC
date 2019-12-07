@@ -10,6 +10,8 @@ import javafx.stage.Stage;
  *
  * @version 1
  * @author siri
+ *
+ * Skeleton were written by Anas and Siri
  */
 public class Main extends Application {
     private CGC cgc;

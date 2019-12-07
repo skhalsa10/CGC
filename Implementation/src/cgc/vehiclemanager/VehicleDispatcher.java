@@ -11,6 +11,16 @@ import java.util.TimerTask;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
 
+/**
+ * this is a HUGE class. It controls when to send a car to a location basically
+ * but the amount of logic involved is massive! it includes sepperate timers for the north and south end
+ * it also keeps track of the tour cars and their location or if they are driving to and from pickups
+ *
+ * @version 1
+ * @author Anas
+ *
+ * Skeleton were written by Anas and Siri
+ */
 public class VehicleDispatcher extends Thread implements Communicator {
 
     private boolean run;

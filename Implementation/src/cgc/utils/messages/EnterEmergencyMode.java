@@ -1,5 +1,8 @@
 package cgc.utils.messages;
 
+/**
+ * the park responds to this by going into emergency mode this message is sent to everything!
+ */
 public class EnterEmergencyMode implements Message {
 
     public EnterEmergencyMode() {

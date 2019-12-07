@@ -11,7 +11,13 @@ package cgc.utils.messages;
  * may respond by sending a message to the cgc with updated Location
  *
  * The Message interface needs to be comparable so that the priorityBlockingQueue can have the messages in order.
- */
+ *
+ * @author Siri
+ * @version 1
+ *
+ * Skeleton were written by Anas and Siri
+ *
+ * */
 public interface Message extends Comparable<Message> {
     long timeStamp = System.nanoTime();
 

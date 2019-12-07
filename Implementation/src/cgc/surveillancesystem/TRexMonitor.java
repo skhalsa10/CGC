@@ -18,10 +18,11 @@ import java.util.concurrent.PriorityBlockingQueue;
  * The timer and timer task might place a message in the blocking queue to perform an action. the main threads run will loop using the
  * blocking queue this will make the thread wait efficiently without using a busy wait.
  *
- * The TRexMonitor may receive EmergencyMode message from surveillance
- *     1. it will inject Dino, put itself in emergency mode.
- *     2. After injecting dino, the TRex Monitor will sendMessage back to SurveillanceSystem which then will send back
- *        message to cgc and cgc will update the gui appropriately.
+ * @author Santi
+ * @version 1
+ *
+ *
+ * Skeleton were written by Anas and Siri
  */
 public class TRexMonitor extends Thread implements Maintainable, Locatable, Communicator {
     private Point2D GPS;

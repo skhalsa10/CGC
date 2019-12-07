@@ -19,16 +19,11 @@ import java.util.concurrent.PriorityBlockingQueue;
  *
  * this class will use a Timer and Timer task to generate token sales
  *
+ * @version 1
+ * @author Santi
  *
- * Probable message to process
+ * Skeleton were written by Anas and Siri
  *
- * The Pay Kiosk may receive a request to check health from the Kiosk Manager
- *      1. The kiosk will send message to Kiosk manager with the  health status
- *
- * The Pay Kiosk may receive a message to shut down.
- *      1. it must shut down gracefully
- *
- * The Pay Kiosk MUST send message to the Kiosk Manager that a token was purchased from this kiosk
  */
 public class PayKiosk extends Thread implements Communicator, Maintainable, Locatable {
     private KioskManager kioskManager;
