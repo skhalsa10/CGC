@@ -4,6 +4,13 @@ import cgc.utils.messages.ShutDown;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * This class is an entry point for javafx
+ * it initialized the CGC as well.
+ *
+ * @version 1
+ * @author siri
+ */
 public class Main extends Application {
     private CGC cgc;
 

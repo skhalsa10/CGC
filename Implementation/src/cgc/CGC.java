@@ -18,30 +18,8 @@ import java.util.concurrent.PriorityBlockingQueue;
  * the CGCStation, KioskManager, TokenManager,and VehicleManager. It will also be able to send
  * messages to these classes ONLY.
  *
- * The CGC may Receive a message from the CGCStation to shutdown application
- *  1. Send shutdown Message ServeillanceSystem, CGCStation, KioskManager, VehicleManager, tokenManager DONE!
- *
- * The CGC may receive Message from ServeillanceSystem that electrical fence is down
- *  1. Will blast out EmergencyMode triggered to ServeillanceSystem, CGCStation, KioskManager, VehicleManager, tokenManager DONE!
- *
- * the CGCStation may request for finance info, then the CGC may send a message to KioskManager requesting Finacne info DONE!
- *
- * The CGC may receive message from Kiosk Manager with Updated Finance info DONE!
- *  1. this message will be forwarded to the CGCStation
- *
- * The CGC May receive a message from KioskManager requesting a new GuestToken to be Generated DONE!
- *  1. this message will be forwarded to the TokenManager
- *
- * The CGC may receive a message from tokenManager a Location with the TokenID DONE!
- *  1. will forward information to the CGCStation
- *
- * The CGC may send message to ServeillanceSystem, CGCStation, KioskManager, VehicleManager, tokenManager to EnterEmergencyMode DONE!
- *
- * The CGC may send message to ServeillanceSystem, KioskManager, VehicleManager, tokenManager to ExitEmergencyMode DONE!
- *
- * The CGC may send message to ServeillanceSystem, KioskManager, VehicleManager, tokenManager to report health. DONE!
- *
- * The CGC May send message to ServeillanceSystem TokenManager, and VehicleManager to get updated locations DONE!
+ * @author Anas
+ * @version 1
  *
  */
 public class CGC extends Thread implements Communicator {

@@ -19,13 +19,25 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 import java.text.DecimalFormat;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
 
+/**
+ * This is a GIANT class and controls all aspects of the GUI.
+ * it keeps a local cache of current state that it updates when it receives new messages from the CGCStation
+ *
+ * the animation is performed using the AnimationTimer this will run at 60 frames per second. and redraw the current
+ * cache of state.
+ *
+ * there is another thread that runs  and accepts messages that eventually manipulate the state rendered
+ *
+ * @author siri
+ * @version  1
+ *
+ */
 public class CGCGUI extends AnimationTimer implements Runnable, Communicator {
 
     private long lastUpdate = 0;

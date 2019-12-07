@@ -16,6 +16,9 @@ import static javax.sound.sampled.Clip.LOOP_CONTINUOUSLY;
  * the effect here is to change the music to an emergency protocol
  * with instructions oh what the guests should do.
  *
+ * @author siri
+ * @version 1
+ *
  */
 public class PASystem  {
 

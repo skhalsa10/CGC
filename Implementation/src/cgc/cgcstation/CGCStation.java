@@ -3,47 +3,17 @@ package cgc.cgcstation;
 import cgc.CGC;
 import cgc.utils.Communicator;
 import cgc.utils.messages.*;
-import javafx.geometry.Point2D;
 import javafx.stage.Stage;
 
-import java.awt.*;
+
 import java.util.concurrent.PriorityBlockingQueue;
 
 /**
- * THE CGCSTATION will maintain its own health and it must exist.
- * but it will never need to report outside the station
+ * The CGCStation will act as a logic switch for the Station related classes. this includes the
+ * GUI and the PASystem
  *
- *
- * the CGCStation will receive message from CGCGui to ShutdownCGC
- *  1. The CGCStation will sendMessage to CGC to ShutdownCGC
- *  DONE
- *
- * The CGCStation will receive Shutdown Message from CGC
- *  1. shutting down GUI
- *  2. Shutting down self
- *  DONE
- *
- * the CGCStation will receive message from CGC EnterEmergencyMode
- *  1. send EnterEmergencyMode to GUI and PASystem
- *  2. place itself in emergency mode
- *  DONE
- *
- * the CGCStation will receive message from GUI ExitEmergencyMode
- *  1. send ExitEmergencyMode to CGC and PASystem
- *  2. itself will exit emergency mode
- *  DONE
- *
- * The CGCStation will receive message from CGC with updated Finance Info
- *  1. Forward message to GUI
- *  DONE
- *
- * CGCStaion will receive message from CGC with Location w/ tokenID
- *  1. Forward message to GUI
- *  DONE
- *
- * CGCStation will send message to CGC for updated Health info
- * DONE
- *
+ * @author siri
+ * @version 1
  *
  */
 public class CGCStation extends Thread implements Communicator {
